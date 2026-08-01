@@ -94,14 +94,17 @@
   .deck-progress-track{flex:1; height:4px; background:var(--line); border-radius:2px; overflow:hidden;}
   .deck-progress-fill{height:100%; background:linear-gradient(90deg,var(--jade),var(--jade-deep)); width:0%; transition:width .4s;}
   .deck-sub{font-size:11.5px; color:var(--ink-soft); opacity:.65; text-align:center; margin-bottom:18px;}
-  .deck-stage{position:relative; width:100%; max-width:320px; height:380px; margin:0 auto;}
+  .deck-stage{position:relative; width:100%; max-width:320px; margin:0 auto;}
   .deck-card{
-    position:absolute; inset:0; background:var(--card-bg); border:1px solid var(--line);
+    position:relative; background:var(--card-bg); border:1px solid var(--line);
     border-radius:14px 14px 14px 3px; box-shadow:0 10px 28px -14px rgba(34,32,28,0.35);
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    padding:26px 22px; text-align:center; cursor:grab; user-select:none; touch-action:pan-y;
+    display:flex; flex-direction:column; max-height:64vh; overflow:hidden; user-select:none;
   }
-  .deck-card:active{cursor:grabbing;}
+  .deck-body{
+    flex:1; min-height:220px; overflow-y:auto; -webkit-overflow-scrolling:touch;
+    display:flex; flex-direction:column; align-items:center; justify-content:safe center;
+    padding:24px 20px; text-align:center; cursor:pointer;
+  }
   .deck-tianzige{
     width:76px; height:76px; margin:0 auto 14px; position:relative;
     border:1px solid var(--line); border-radius:6px;
@@ -118,32 +121,24 @@
     width:34px; height:34px; border-radius:50%; border:1.5px solid var(--line); background:rgba(255,255,255,0.5);
     color:var(--jade-deep); font-size:13px; cursor:pointer; margin:0 auto 6px;
   }
-  .deck-hint{font-size:11.5px; color:var(--ink-soft); opacity:.55; margin-top:auto;}
-  .deck-back{display:none; width:100%;}
-  .deck-card.flipped .deck-front-content{display:none;}
-  .deck-card.flipped .deck-back{display:block;}
-  .deck-back .meaning{font-family:'Noto Serif SC',serif; font-weight:700; font-size:18px; margin-bottom:10px;}
-  .deck-back dl{margin:0; font-size:12px; color:var(--ink-soft); line-height:1.85; text-align:left;}
-  .deck-back dt{font-weight:700; color:var(--ink); display:inline;}
-  .deck-back dd{display:inline; margin:0 0 0 4px;}
-  .deck-back .row{margin-bottom:3px;}
-  .deck-back .mistake{background:rgba(166,58,46,0.07); border-left:2px solid var(--seal); padding:6px 10px; margin-top:10px; border-radius:0 4px 4px 0; text-align:left; font-size:11.5px;}
-  .stamp-mark{
-    position:absolute; top:24px; font-family:'Zhi Mang Xing',cursive; font-size:34px;
-    border:3px solid; border-radius:8px; padding:2px 10px; opacity:0; transform:rotate(-14deg) scale(1.3);
-    transition:opacity .15s; pointer-events:none;
+  .deck-meaning-area{display:none; width:100%; margin-top:14px; padding-top:14px; border-top:1px dashed var(--line);}
+  .deck-card[data-stage="revealed"] .deck-meaning-area{display:block;}
+  .deck-meaning-area .meaning{font-family:'Noto Serif SC',serif; font-weight:700; font-size:18px; margin-bottom:10px;}
+  .deck-meaning-area dl{margin:0; font-size:12px; color:var(--ink-soft); line-height:1.85; text-align:left;}
+  .deck-meaning-area dt{font-weight:700; color:var(--ink); display:inline;}
+  .deck-meaning-area dd{display:inline; margin:0 0 0 4px;}
+  .deck-meaning-area .row{margin-bottom:3px;}
+  .deck-meaning-area .mistake{background:rgba(166,58,46,0.07); border-left:2px solid var(--seal); padding:6px 10px; margin-top:10px; border-radius:0 4px 4px 0; text-align:left; font-size:11.5px;}
+
+  .deck-footer{display:flex; border-top:1px solid var(--line); flex-shrink:0;}
+  .deck-foot-btn{
+    flex:1; border:none; background:none; padding:18px 8px; font-family:inherit;
+    font-size:15px; font-weight:700; cursor:pointer; transition:background .15s;
   }
-  .stamp-mark.know{right:20px; color:var(--jade); border-color:var(--jade);}
-  .stamp-mark.dontknow{left:20px; color:var(--seal); border-color:var(--seal);}
-  .deck-actions{display:flex; justify-content:center; gap:22px; margin-top:22px;}
-  .deck-btn{
-    width:54px; height:54px; border-radius:50%; border:1.5px solid var(--line); background:rgba(255,255,255,0.5);
-    font-size:20px; cursor:pointer; transition:transform .15s, border-color .2s;
-  }
-  .deck-btn:active{transform:scale(0.9);}
-  .deck-btn.no{color:var(--seal);} .deck-btn.no:hover{border-color:var(--seal);}
-  .deck-btn.yes{color:var(--jade-deep);} .deck-btn.yes:hover{border-color:var(--jade);}
-  .deck-tap-hint{text-align:center; font-size:11.5px; color:var(--ink-soft); opacity:.6; margin-top:10px;}
+  .deck-foot-btn:active{background:rgba(34,32,28,0.06);}
+  .deck-foot-btn.reveal{color:var(--ink-soft); border-right:1px solid var(--line);}
+  .deck-foot-btn.know{color:var(--jade-deep); border-right:1px solid var(--line);}
+  .deck-foot-btn.dontknow{color:var(--seal);}
   .deck-done{text-align:center; padding:60px 20px;}
   .deck-done .emoji{font-size:40px; margin-bottom:12px;}
   .deck-done p{font-size:14.5px; color:var(--ink-soft); margin-bottom:18px;}
@@ -186,7 +181,7 @@
 </head>
 <body>
 
-<header>
+<header id="appHeader">
   <div class="eyebrow">中国人と暮らす中国語500</div>
   <h1>語<span class="accent">階</span></h1>
   <p class="sub">全50課・500語。やった課は黒く印がつき、テストで「分からない」だった単語は自動でまとまって復習できます。</p>
@@ -230,8 +225,6 @@
         <div class="deck-progress-wrap"><span id="vocabCount"></span><div class="deck-progress-track"><div class="deck-progress-fill" id="vocabFill"></div></div></div>
         <div class="deck-sub" id="vocabSub"></div>
         <div class="deck-stage" id="vocabStage"></div>
-        <div class="deck-actions"><button class="deck-btn no" id="vocabNoBtn">✕</button><button class="deck-btn yes" id="vocabYesBtn">✓</button></div>
-        <p class="deck-tap-hint">タップで意味表示 ・ スワイプ or ボタンで判定</p>
       </section>
 
       <section class="panel" id="panel-examples"><div id="exampleList"></div></section>
@@ -241,8 +234,6 @@
         <div class="deck-progress-wrap"><span id="quizCount"></span><div class="deck-progress-track"><div class="deck-progress-fill" id="quizFill"></div></div></div>
         <div class="deck-sub" id="quizSub"></div>
         <div class="deck-stage" id="quizStage"></div>
-        <div class="deck-actions"><button class="deck-btn no" id="quizNoBtn">✕</button><button class="deck-btn yes" id="quizYesBtn">✓</button></div>
-        <p class="deck-tap-hint">意味がわかる=✓ ・ わからない=✕(苦手単語に自動保存)</p>
       </section>
     </div>
   </div>
@@ -255,8 +246,6 @@
       <div class="deck-progress-wrap"><span id="reviewCount"></span><div class="deck-progress-track"><div class="deck-progress-fill" id="reviewFill"></div></div></div>
       <div class="deck-sub" id="reviewSub2"></div>
       <div class="deck-stage" id="reviewStage"></div>
-      <div class="deck-actions"><button class="deck-btn no" id="reviewNoBtn">✕</button><button class="deck-btn yes" id="reviewYesBtn">✓</button></div>
-      <p class="deck-tap-hint">タップで意味表示 ・ 分かったら苦手リストから外れます</p>
     </div>
   </div>
 
@@ -409,7 +398,21 @@ let wordLookup = buildLookup();
 /* ===================== 永続ストレージ(localStorage版) ===================== */
 /* このファイルは自分でホスティングして使う用です。ブラウザのlocalStorageに保存するので、
    同じブラウザ・同じ端末で開く限り、閉じても進捗が残ります(他の端末とは同期しません)。 */
-let appState = { progress: {}, missCounts: {} }; // missCounts: {wordId: 分からない回数}
+/* 間隔反復(ライトナー式): review[wordId] = {box: 1〜5, due: "YYYY-MM-DD", misses: 累計間違えた回数}
+   知っている→箱を1つ上げて次に出す日を先延ばし。箱5で正解すると卒業(記録から削除)。
+   知らない→箱1に戻り、即日また出す。 */
+const INTERVAL_DAYS = {1:0, 2:1, 3:3, 4:7, 5:14};
+function todayStr(){
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+function addDaysStr(dateStr, days){
+  const d = new Date(dateStr + 'T00:00:00');
+  d.setDate(d.getDate() + days);
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
+let appState = { progress: {}, review: {} };
 const STORAGE_KEY = 'chinese500-app-state';
 async function loadState(){
   try{
@@ -417,12 +420,17 @@ async function loadState(){
     if(raw){
       const loaded = JSON.parse(raw);
       appState.progress = loaded.progress || {};
-      if(loaded.missCounts){
-        appState.missCounts = loaded.missCounts;
+      if(loaded.review){
+        appState.review = loaded.review;
+      } else if(loaded.missCounts){
+        // 旧形式(回数のみ)から移行:全て箱1・即日レビュー対象として引き継ぐ
+        appState.review = {};
+        Object.keys(loaded.missCounts).forEach(id=>{
+          appState.review[id] = { box:1, due: todayStr(), misses: loaded.missCounts[id] };
+        });
       } else if(loaded.missedPool){
-        // migrate old format (plain list) to counts, each starting at 1
-        appState.missCounts = {};
-        loaded.missedPool.forEach(id => appState.missCounts[id] = 1);
+        appState.review = {};
+        loaded.missedPool.forEach(id => { appState.review[id] = { box:1, due: todayStr(), misses:1 }; });
       }
     }
   }catch(e){
@@ -477,33 +485,29 @@ document.addEventListener('click', (e)=>{
 
 /* ===================== 汎用スワイプデッキ ===================== */
 function createDeck(opts){
-  const { stageEl, countEl, fillEl, subEl, yesBtn, noBtn, items, richBack, autoSpeak, onCommit, onComplete, emptyMessage } = opts;
+  const { stageEl, countEl, fillEl, subEl, items, richBack, autoSpeak, onCommit, onComplete, emptyMessage } = opts;
   const total = items.length;
   let queue = items.slice();
   let known = new Set();
-  let current = null;
 
-  function frontHTML(w){
+  function bodyHTML(w, revealed){
+    const meaningHTML = richBack
+      ? `<div class="meaning">${w.meaning}</div><dl>
+          <div class="row"><dt>品詞:</dt><dd>${w.pos}</dd></div>
+          <div class="row"><dt>使用場面:</dt><dd>${w.scene}</dd></div>
+          <div class="row"><dt>よく一緒に:</dt><dd>${w.collocate}</dd></div>
+          <div class="row"><dt>類義語:</dt><dd>${w.synonym}</dd></div>
+        </dl><div class="mistake">⚠ ${w.mistake}</div>`
+      : `<div class="meaning">${w.meaning}</div>`;
     return `
-      <div class="deck-front-content">
+      <div class="deck-body">
         ${w.missInfo ? `<div class="deck-src" style="color:var(--seal);">${w.missInfo}</div>` : (w.section ? `<div class="deck-src">第${w.section}課</div>` : '')}
         <div class="deck-tianzige"><span>${w.cn.slice(0,1)}</span></div>
         <div class="deck-hanzi">${w.cn}</div>
         <div class="deck-py">${w.py}</div>
         <button class="speak-btn deck-speak" data-text="${w.cn}" aria-label="発音を聞く">▶</button>
-        <div class="deck-hint">タップして意味を見る</div>
+        <div class="deck-meaning-area">${meaningHTML}</div>
       </div>`;
-  }
-  function backHTML(w){
-    if(richBack){
-      return `<div class="deck-back"><div class="meaning">${w.meaning}</div><dl>
-        <div class="row"><dt>品詞:</dt><dd>${w.pos}</dd></div>
-        <div class="row"><dt>使用場面:</dt><dd>${w.scene}</dd></div>
-        <div class="row"><dt>よく一緒に:</dt><dd>${w.collocate}</dd></div>
-        <div class="row"><dt>類義語:</dt><dd>${w.synonym}</dd></div>
-      </dl><div class="mistake">⚠ ${w.mistake}</div></div>`;
-    }
-    return `<div class="deck-back"><div class="meaning">${w.meaning}</div></div>`;
   }
 
   function render(){
@@ -513,14 +517,12 @@ function createDeck(opts){
 
     if(total === 0){
       subEl.textContent = '';
-      yesBtn.style.visibility = 'hidden'; noBtn.style.visibility = 'hidden';
       stageEl.innerHTML = `<div class="deck-done"><div class="emoji">✨</div><p>${emptyMessage || '対象の単語がありません。'}</p></div>`;
       return;
     }
 
     if(queue.length === 0){
       subEl.textContent = '';
-      yesBtn.style.visibility = 'hidden'; noBtn.style.visibility = 'hidden';
       stageEl.innerHTML = `<div class="deck-done"><div class="emoji">🎉</div><p>全部「分かる」になりました。</p>
         <button class="deck-restart" id="restartBtn">もう一度復習する</button></div>`;
       document.getElementById('restartBtn').addEventListener('click', ()=>{ queue = items.slice(); known = new Set(); render(); });
@@ -528,16 +530,37 @@ function createDeck(opts){
       return;
     }
 
-    yesBtn.style.visibility = 'visible'; noBtn.style.visibility = 'visible';
     subEl.textContent = `残り ${queue.length}枚(復習含む)`;
 
     const w = queue[0];
-    current = w;
     const card = document.createElement('div');
-    card.className = 'deck-card front';
-    card.innerHTML = frontHTML(w) + backHTML(w) + `<div class="stamp-mark know">会</div><div class="stamp-mark dontknow">再</div>`;
+    card.className = 'deck-card';
+    card.dataset.stage = 'question';
+    card.innerHTML = bodyHTML(w, false) +
+      `<div class="deck-footer">
+        <button class="deck-foot-btn reveal">意味確認</button>
+        <button class="deck-foot-btn dontknow">知らない</button>
+      </div>`;
     stageEl.appendChild(card);
-    attachDrag(card, w);
+
+    const body = card.querySelector('.deck-body');
+    const revealBtn = card.querySelector('.reveal');
+    const dontknowBtn = card.querySelector('.dontknow');
+
+    function reveal(){
+      card.dataset.stage = 'revealed';
+      revealBtn.textContent = '知っている';
+      revealBtn.classList.remove('reveal');
+      revealBtn.classList.add('know');
+      revealBtn.onclick = ()=> commit(w, true);
+    }
+    revealBtn.onclick = reveal;
+    body.addEventListener('click', (e)=>{
+      if(e.target.closest('.speak-btn')) return;
+      if(card.dataset.stage === 'question') reveal();
+    });
+    dontknowBtn.onclick = ()=> commit(w, false);
+
     if(autoSpeak) speak(w.cn, null);
   }
 
@@ -548,42 +571,6 @@ function createDeck(opts){
     render();
   }
 
-  function attachDrag(card, w){
-    let startX=0, startY=0, dx=0, dragging=false, moved=false;
-    card.addEventListener('click', (e)=>{
-      if(e.target.closest('.speak-btn')) return;
-      if(moved) return;
-      card.classList.toggle('flipped');
-    });
-    card.addEventListener('pointerdown', (e)=>{
-      if(e.target.closest('.speak-btn')) return;
-      dragging=true; moved=false; startX=e.clientX; startY=e.clientY; dx=0;
-      card.setPointerCapture(e.pointerId); card.style.transition='none';
-    });
-    card.addEventListener('pointermove', (e)=>{
-      if(!dragging) return;
-      dx = e.clientX-startX; const dy = e.clientY-startY;
-      if(Math.abs(dx)>6 || Math.abs(dy)>6) moved=true;
-      card.style.transform = `translate(${dx}px, ${dy*0.15}px) rotate(${dx/18}deg)`;
-      const know=card.querySelector('.stamp-mark.know'), dont=card.querySelector('.stamp-mark.dontknow');
-      if(dx>20){ know.style.opacity=Math.min(dx/80,1); dont.style.opacity=0; }
-      else if(dx<-20){ dont.style.opacity=Math.min(-dx/80,1); know.style.opacity=0; }
-      else { know.style.opacity=0; dont.style.opacity=0; }
-    });
-    function endDrag(){
-      if(!dragging) return; dragging=false;
-      card.style.transition='transform .3s cubic-bezier(.4,0,.2,1)';
-      const threshold=90;
-      if(dx>threshold){ card.style.transform=`translate(500px, ${dx*0.1}px) rotate(24deg)`; setTimeout(()=>commit(w,true),220); }
-      else if(dx<-threshold){ card.style.transform=`translate(-500px, ${-dx*0.1}px) rotate(-24deg)`; setTimeout(()=>commit(w,false),220); }
-      else { card.style.transform='translate(0,0) rotate(0deg)'; }
-    }
-    card.addEventListener('pointerup', endDrag);
-    card.addEventListener('pointercancel', endDrag);
-  }
-
-  yesBtn.onclick = ()=>{ if(current) commit(current, true); };
-  noBtn.onclick = ()=>{ if(current) commit(current, false); };
   render();
 }
 
@@ -654,8 +641,6 @@ function openSection(id){
     countEl: document.getElementById('vocabCount'),
     fillEl: document.getElementById('vocabFill'),
     subEl: document.getElementById('vocabSub'),
-    yesBtn: document.getElementById('vocabYesBtn'),
-    noBtn: document.getElementById('vocabNoBtn'),
     items: words, richBack: true, autoSpeak: false,
     onComplete: ()=>{ setProgress(id, 'vocab', true); }
   });
@@ -667,16 +652,15 @@ function openSection(id){
     countEl: document.getElementById('quizCount'),
     fillEl: document.getElementById('quizFill'),
     subEl: document.getElementById('quizSub'),
-    yesBtn: document.getElementById('quizYesBtn'),
-    noBtn: document.getElementById('quizNoBtn'),
     items: words, richBack: false, autoSpeak: false,
     onCommit: (w, isKnown)=>{
-      if(isKnown){
-        delete appState.missCounts[w.id];
-      } else {
-        appState.missCounts[w.id] = (appState.missCounts[w.id] || 0) + 1;
+      // テスト内で「✕」の後に一周して「✓」になっても記録は消さない。
+      // 卒業(記録から削除)するのは復習画面で箱5まで正解した時だけ。
+      if(!isKnown){
+        const prev = appState.review[w.id] || { box:1, due: todayStr(), misses:0 };
+        appState.review[w.id] = { box:1, due: todayStr(), misses: prev.misses + 1 };
+        saveState(); updateReviewBadge();
       }
-      saveState(); updateReviewBadge();
     },
     onComplete: ()=>{ setProgress(id, 'test', true); }
   });
@@ -718,54 +702,74 @@ function setProgress(id, key, val){
   saveState();
   renderHome();
 }
-function updateReviewBadge(){
-  const n = Object.keys(appState.missCounts).length;
-  document.getElementById('reviewSub').textContent = n>0 ? `${n}個の苦手単語があります` : '苦手単語はまだありません';
-  document.getElementById('reviewCard').classList.toggle('empty', n===0);
-}
-
-/* ===================== 復習画面(苦手ランキング上位から10個区切り) ===================== */
-function rankedMissedWords(){
-  if(!appState.missCounts) appState.missCounts = {};
+function dueReviewList(){
+  if(!appState.review) appState.review = {};
   wordLookup = buildLookup();
-  return Object.keys(appState.missCounts)
+  const today = todayStr();
+  const all = Object.keys(appState.review)
     .map(id => {
       const w = wordLookup[id];
       if(!w) return null;
-      const missCount = appState.missCounts[id];
-      const score = missCount * 3 + (w.freq || 3); // 間違えた回数を重視しつつ、重要度も加味
-      return Object.assign({}, w, {
-        missCount, score,
-        missInfo: `間違えた${missCount}回 ・ 重要度${'★'.repeat(w.freq||3)}${'☆'.repeat(5-(w.freq||3))}`
-      });
+      const r = appState.review[id];
+      return Object.assign({}, w, { box: r.box, due: r.due, misses: r.misses || 1 });
     })
-    .filter(Boolean)
-    .sort((a,b)=> b.score - a.score);
+    .filter(Boolean);
+  const due = all.filter(w => w.due <= today)
+    .sort((a,b)=> (a.box - b.box) || ((b.freq||3) - (a.freq||3)))
+    .map(w => Object.assign({}, w, {
+      missInfo: `Lv.${w.box}/5(卒業まで) ・ 重要度${'★'.repeat(w.freq||3)}${'☆'.repeat(5-(w.freq||3))}`
+    }));
+  return { all, due, today };
 }
 
+function updateReviewBadge(){
+  const { all, due } = dueReviewList();
+  const card = document.getElementById('reviewCard');
+  const sub = document.getElementById('reviewSub');
+  if(due.length > 0){
+    sub.textContent = `今日復習できる単語:${due.length}個`;
+    card.classList.remove('empty');
+  } else if(all.length > 0){
+    const nearest = all.map(w=>w.due).sort()[0];
+    sub.textContent = `今日の分はありません(次は${nearest})`;
+    card.classList.add('empty');
+  } else {
+    sub.textContent = '苦手単語はまだありません';
+    card.classList.add('empty');
+  }
+}
+
+/* ===================== 復習画面(今日が期限の単語だけを10個区切りで) ===================== */
 function openReview(){
-  const ranked = rankedMissedWords();
-  const chunk = ranked.slice(0,10);
+  const { due, all, today } = dueReviewList();
+  const chunk = due.slice(0,10);
+  const nearest = all.length>0 ? all.map(w=>w.due).sort().find(d=>d>today) : null;
   switchView('view-review');
   createDeck({
     stageEl: document.getElementById('reviewStage'),
     countEl: document.getElementById('reviewCount'),
     fillEl: document.getElementById('reviewFill'),
     subEl: document.getElementById('reviewSub2'),
-    yesBtn: document.getElementById('reviewYesBtn'),
-    noBtn: document.getElementById('reviewNoBtn'),
     items: chunk, richBack: true, autoSpeak: false,
-    emptyMessage: '苦手単語はありません。',
+    emptyMessage: all.length>0
+      ? `今日の分は終わりです。次は${nearest || '数日後'}に出てきます。`
+      : '苦手単語はありません。',
     onCommit: (w, isKnown)=>{
+      const prev = appState.review[w.id] || { box:1, due: today, misses:0 };
       if(isKnown){
-        delete appState.missCounts[w.id];
+        const newBox = prev.box + 1;
+        if(newBox > 5){
+          delete appState.review[w.id]; // 箱5で正解 → 卒業
+        } else {
+          appState.review[w.id] = { box:newBox, due: addDaysStr(today, INTERVAL_DAYS[newBox]), misses: prev.misses };
+        }
       } else {
-        appState.missCounts[w.id] = (appState.missCounts[w.id] || 0) + 1;
+        appState.review[w.id] = { box:1, due: today, misses: prev.misses + 1 };
       }
       saveState(); updateReviewBadge();
     },
     onComplete: ()=>{
-      if(Object.keys(appState.missCounts).length>0){ setTimeout(openReview, 300); } // 次のランキング上位10個へ
+      if(dueReviewList().due.length > 0){ setTimeout(openReview, 300); } // 今日の分の続きへ
     }
   });
 }
@@ -774,11 +778,12 @@ function openReview(){
 function switchView(id){
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
   document.getElementById(id).classList.add('active');
+  document.getElementById('appHeader').style.display = (id === 'view-home') ? '' : 'none';
 }
 document.getElementById('reviewCard').addEventListener('click', ()=>{
   openReview();
 });
-document.getElementById('backFromSection').addEventListener('click', ()=>switchView('view-home'));
+document.getElementById('backFromSection').addEventListener('click', ()=>{ renderHome(); switchView('view-home'); });
 document.getElementById('backFromReview').addEventListener('click', ()=>{ renderHome(); switchView('view-home'); });
 
 document.querySelectorAll('#secBody .tab-btn').forEach(btn=>{
