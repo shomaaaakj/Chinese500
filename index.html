@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中国人と暮らす中国語500</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700;900&family=Noto+Sans+SC:wght@400;500;700&family=Zhi+Mang+Xing&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#E7E6DC; --paper-deep:#DCDACD;
+    --ink:#22201C; --ink-soft:#55524A;
+    --jade:#3F6B5B; --jade-deep:#2C4B40;
+    --seal:#A63A2E; --gold:#9A7B3F;
+    --line:rgba(34,32,28,0.14);
+    --card-bg:linear-gradient(180deg, rgba(255,255,255,0.65), rgba(255,255,255,0.28));
+  }
+  *{box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(ellipse at 15% -10%, rgba(63,107,91,0.08), transparent 45%),
+      radial-gradient(ellipse at 100% 5%, rgba(166,58,46,0.06), transparent 40%),
+      var(--paper);
+    color:var(--ink); font-family:'Noto Sans SC', sans-serif;
+    min-height:100vh; -webkit-font-smoothing:antialiased; padding-bottom:60px;
+  }
+  @media (prefers-reduced-motion: reduce){ *{animation-duration:.001ms !important; transition-duration:.001ms !important;} }
+
+  header{max-width:760px; margin:0 auto; padding:36px 22px 14px; text-align:center;}
+  .eyebrow{font-size:11px; letter-spacing:.24em; color:var(--jade-deep); text-transform:uppercase; font-weight:700; margin-bottom:8px;}
+  h1{font-family:'Noto Serif SC',serif; font-weight:900; font-size:clamp(22px,5vw,30px); margin:0 0 6px;}
+  h1 .accent{color:var(--seal);}
+  .sub{font-size:13px; color:var(--ink-soft); max-width:460px; margin:0 auto; line-height:1.7;}
+
+  main{max-width:760px; margin:0 auto; padding:20px 22px 0;}
+  .view{display:none;}
+  .view.active{display:block; animation:fade .35s ease;}
+  @keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
+
+  /* ---- home ---- */
+  .review-card{
+    display:flex; align-items:center; gap:14px; padding:16px 18px; margin-bottom:26px;
+    background:var(--card-bg); border:1px solid var(--seal); border-radius:12px 12px 12px 3px; cursor:pointer;
+  }
+  .review-card.empty{border-color:var(--line); opacity:.7; cursor:default;}
+  .review-stamp{
+    width:44px; height:44px; border-radius:50%; border:2px solid var(--seal); color:var(--seal);
+    font-family:'Zhi Mang Xing',cursive; font-size:20px; display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .review-card.empty .review-stamp{border-color:var(--ink-soft); color:var(--ink-soft);}
+  .review-title{font-family:'Noto Serif SC',serif; font-weight:700; font-size:15px;}
+  .review-sub{font-size:12px; color:var(--ink-soft); margin-top:2px;}
+
+  .cat-block{margin-bottom:28px;}
+  .cat-title{font-family:'Noto Serif SC',serif; font-weight:700; font-size:14px; color:var(--gold); margin-bottom:6px; padding-left:2px;}
+  .sec-row{
+    display:flex; align-items:center; gap:12px; padding:11px 4px; border-bottom:1px solid var(--line); cursor:pointer;
+  }
+  .sec-row.locked{cursor:default; opacity:.45;}
+  .sec-dot{width:16px; height:16px; border-radius:50%; border:1.5px solid var(--jade); flex-shrink:0; background:transparent;}
+  .sec-dot.half{background:linear-gradient(90deg, var(--jade) 50%, transparent 50%);}
+  .sec-dot.done{background:var(--ink); border-color:var(--ink);}
+  .sec-dot.locked-dot{border-color:var(--ink-soft); border-style:dashed;}
+  .sec-num{font-size:11px; color:var(--ink-soft); width:20px; flex-shrink:0;}
+  .sec-title{flex:1; font-size:14px;}
+  .sec-tag{font-size:10.5px; color:var(--ink-soft); border:1px solid var(--line); border-radius:10px; padding:1px 8px;}
+  .sec-chevron{color:var(--ink-soft); opacity:.5; font-size:13px;}
+
+  .back-btn{
+    display:inline-flex; align-items:center; gap:6px; font-size:12.5px; color:var(--jade-deep);
+    background:none; border:none; cursor:pointer; padding:0 0 14px; font-family:inherit; font-weight:700;
+  }
+
+  /* ---- section detail ---- */
+  .sec-header{text-align:center; margin-bottom:14px;}
+  .sec-header .cat{font-size:11px; color:var(--gold); letter-spacing:.08em;}
+  .sec-header h2{font-family:'Noto Serif SC',serif; font-weight:900; font-size:24px; margin:2px 0 0;}
+
+  nav.tabs{display:flex; gap:6px; border-bottom:1px solid var(--line); margin-bottom:20px;}
+  nav.tabs button{
+    flex:1; background:none; border:none; padding:11px 4px; font-family:'Noto Sans SC',sans-serif;
+    font-size:13px; font-weight:700; color:var(--ink-soft); cursor:pointer;
+    border-bottom:2.5px solid transparent; transition:color .2s, border-color .2s;
+  }
+  nav.tabs button.active{color:var(--jade-deep); border-color:var(--seal);}
+  .panel{display:none;}
+  .panel.active{display:block;}
+
+  .locked-msg{text-align:center; padding:60px 20px; color:var(--ink-soft); font-size:13.5px; line-height:1.9;}
+
+  /* ---- deck ---- */
+  .deck-progress-wrap{display:flex; align-items:center; gap:10px; font-size:12.5px; color:var(--ink-soft); margin-bottom:6px;}
+  .deck-progress-track{flex:1; height:4px; background:var(--line); border-radius:2px; overflow:hidden;}
+  .deck-progress-fill{height:100%; background:linear-gradient(90deg,var(--jade),var(--jade-deep)); width:0%; transition:width .4s;}
+  .deck-sub{font-size:11.5px; color:var(--ink-soft); opacity:.65; text-align:center; margin-bottom:18px;}
+  .deck-stage{position:relative; width:100%; max-width:320px; height:380px; margin:0 auto;}
+  .deck-card{
+    position:absolute; inset:0; background:var(--card-bg); border:1px solid var(--line);
+    border-radius:14px 14px 14px 3px; box-shadow:0 10px 28px -14px rgba(34,32,28,0.35);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    padding:26px 22px; text-align:center; cursor:grab; user-select:none; touch-action:pan-y;
+  }
+  .deck-card:active{cursor:grabbing;}
+  .deck-tianzige{
+    width:76px; height:76px; margin:0 auto 14px; position:relative;
+    border:1px solid var(--line); border-radius:6px;
+    background:
+      linear-gradient(var(--line),var(--line)) center/1px 100% no-repeat,
+      linear-gradient(90deg,var(--line),var(--line)) center/100% 1px no-repeat;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .deck-tianzige span{font-family:'Noto Serif SC',serif; font-weight:700; font-size:36px; color:var(--ink);}
+  .deck-hanzi{font-family:'Noto Serif SC',serif; font-weight:700; font-size:22px; margin-bottom:4px;}
+  .deck-py{font-size:14px; color:var(--jade-deep); font-weight:600; margin-bottom:14px;}
+  .deck-src{font-size:10.5px; color:var(--gold); margin-bottom:6px;}
+  .deck-speak{
+    width:34px; height:34px; border-radius:50%; border:1.5px solid var(--line); background:rgba(255,255,255,0.5);
+    color:var(--jade-deep); font-size:13px; cursor:pointer; margin:0 auto 6px;
+  }
+  .deck-hint{font-size:11.5px; color:var(--ink-soft); opacity:.55; margin-top:auto;}
+  .deck-back{display:none; width:100%;}
+  .deck-card.flipped .deck-front-content{display:none;}
+  .deck-card.flipped .deck-back{display:block;}
+  .deck-back .meaning{font-family:'Noto Serif SC',serif; font-weight:700; font-size:18px; margin-bottom:10px;}
+  .deck-back dl{margin:0; font-size:12px; color:var(--ink-soft); line-height:1.85; text-align:left;}
+  .deck-back dt{font-weight:700; color:var(--ink); display:inline;}
+  .deck-back dd{display:inline; margin:0 0 0 4px;}
+  .deck-back .row{margin-bottom:3px;}
+  .deck-back .mistake{background:rgba(166,58,46,0.07); border-left:2px solid var(--seal); padding:6px 10px; margin-top:10px; border-radius:0 4px 4px 0; text-align:left; font-size:11.5px;}
+  .stamp-mark{
+    position:absolute; top:24px; font-family:'Zhi Mang Xing',cursive; font-size:34px;
+    border:3px solid; border-radius:8px; padding:2px 10px; opacity:0; transform:rotate(-14deg) scale(1.3);
+    transition:opacity .15s; pointer-events:none;
+  }
+  .stamp-mark.know{right:20px; color:var(--jade); border-color:var(--jade);}
+  .stamp-mark.dontknow{left:20px; color:var(--seal); border-color:var(--seal);}
+  .deck-actions{display:flex; justify-content:center; gap:22px; margin-top:22px;}
+  .deck-btn{
+    width:54px; height:54px; border-radius:50%; border:1.5px solid var(--line); background:rgba(255,255,255,0.5);
+    font-size:20px; cursor:pointer; transition:transform .15s, border-color .2s;
+  }
+  .deck-btn:active{transform:scale(0.9);}
+  .deck-btn.no{color:var(--seal);} .deck-btn.no:hover{border-color:var(--seal);}
+  .deck-btn.yes{color:var(--jade-deep);} .deck-btn.yes:hover{border-color:var(--jade);}
+  .deck-tap-hint{text-align:center; font-size:11.5px; color:var(--ink-soft); opacity:.6; margin-top:10px;}
+  .deck-done{text-align:center; padding:60px 20px;}
+  .deck-done .emoji{font-size:40px; margin-bottom:12px;}
+  .deck-done p{font-size:14.5px; color:var(--ink-soft); margin-bottom:18px;}
+  .deck-restart{
+    font-family:inherit; font-size:13px; padding:10px 20px; border-radius:8px;
+    border:1.5px solid var(--jade); color:var(--jade-deep); background:rgba(63,107,91,0.08); cursor:pointer;
+  }
+
+  /* ---- examples / dialogue ---- */
+  .ex-group{margin-bottom:22px;}
+  .ex-head{font-family:'Noto Serif SC',serif; font-weight:700; font-size:16px; margin-bottom:8px; display:flex; align-items:center; gap:8px;}
+  .ex-head .idx{font-size:11px; color:var(--gold); font-weight:700;}
+  .ex-item{padding:10px 0; border-bottom:1px solid var(--line);}
+  .ex-cn-row{display:flex; align-items:center; gap:8px;}
+  .ex-cn{font-size:15px; font-weight:500;}
+  .ex-py{font-size:12.5px; color:var(--jade-deep); margin-top:2px;}
+  .ex-jp{font-size:12.5px; color:var(--ink-soft); margin-top:2px;}
+  .dia-group{margin-bottom:24px; padding-bottom:18px; border-bottom:1px solid var(--line);}
+  .dia-title{font-family:'Noto Serif SC',serif; font-weight:700; font-size:14px; color:var(--gold); margin-bottom:10px;}
+  .bubble{max-width:82%; margin-bottom:10px; padding:9px 13px; border-radius:12px; font-size:13.5px;}
+  .bubble .cn-row{display:flex; align-items:center; gap:8px;}
+  .bubble .cn{font-weight:600; font-size:14.5px;}
+  .bubble .py{font-size:11.5px; color:var(--jade-deep); margin-top:2px;}
+  .bubble .jp{font-size:11.5px; color:var(--ink-soft); margin-top:2px;}
+  .bubble.A{background:rgba(63,107,91,0.10); border:1px solid rgba(63,107,91,0.25); border-bottom-left-radius:3px;}
+  .bubble.B{background:rgba(166,58,46,0.08); border:1px solid rgba(166,58,46,0.22); margin-left:auto; border-bottom-right-radius:3px;}
+
+  .speak-btn{
+    display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px; flex-shrink:0;
+    border-radius:50%; border:1.5px solid var(--line); background:rgba(255,255,255,0.4);
+    color:var(--jade-deep); cursor:pointer; font-size:12px; line-height:1;
+    transition:border-color .2s, background .2s, transform .15s;
+  }
+  .speak-btn:hover{border-color:var(--jade); background:rgba(63,107,91,0.1);}
+  .speak-btn:active{transform:scale(0.92);}
+  .speak-btn.playing{border-color:var(--seal); color:var(--seal); background:rgba(166,58,46,0.1);}
+  .no-voice-note{font-size:11px; color:var(--ink-soft); opacity:.6; text-align:center; margin-top:24px; display:none;}
+  footer{max-width:760px; margin:30px auto 0; padding:0 22px; text-align:center; font-size:12px; color:var(--ink-soft); opacity:.7; line-height:1.8;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">中国人と暮らす中国語500</div>
+  <h1>語<span class="accent">階</span></h1>
+  <p class="sub">全50課・500語。やった課は黒く印がつき、テストで「分からない」だった単語は自動でまとまって復習できます。</p>
+</header>
+
+<main>
+
+  <!-- HOME -->
+  <div class="view active" id="view-home">
+    <div class="review-card" id="reviewCard">
+      <div class="review-stamp">復</div>
+      <div>
+        <div class="review-title">苦手単語の復習</div>
+        <div class="review-sub" id="reviewSub">読み込み中…</div>
+      </div>
+    </div>
+    <div id="catList"></div>
+  </div>
+
+  <!-- SECTION DETAIL -->
+  <div class="view" id="view-section">
+    <button class="back-btn" id="backFromSection">← 課の一覧</button>
+    <div class="sec-header">
+      <div class="cat" id="secCat"></div>
+      <h2 id="secTitle"></h2>
+    </div>
+
+    <div id="secLocked" class="locked-msg" style="display:none;">
+      この課はまだ準備中です。<br>単語・例文・会話・テストは今後追加していきます。
+    </div>
+
+    <div id="secBody" style="display:none;">
+      <nav class="tabs">
+        <button class="tab-btn active" data-tab="vocab">単語カード</button>
+        <button class="tab-btn" data-tab="examples">例文</button>
+        <button class="tab-btn" data-tab="dialogue">会話</button>
+        <button class="tab-btn" data-tab="quiz">テスト</button>
+      </nav>
+
+      <section class="panel active" id="panel-vocab">
+        <div class="deck-progress-wrap"><span id="vocabCount"></span><div class="deck-progress-track"><div class="deck-progress-fill" id="vocabFill"></div></div></div>
+        <div class="deck-sub" id="vocabSub"></div>
+        <div class="deck-stage" id="vocabStage"></div>
+        <div class="deck-actions"><button class="deck-btn no" id="vocabNoBtn">✕</button><button class="deck-btn yes" id="vocabYesBtn">✓</button></div>
+        <p class="deck-tap-hint">タップで意味表示 ・ スワイプ or ボタンで判定</p>
+      </section>
+
+      <section class="panel" id="panel-examples"><div id="exampleList"></div></section>
+      <section class="panel" id="panel-dialogue"><div id="dialogueList"></div></section>
+
+      <section class="panel" id="panel-quiz">
+        <div class="deck-progress-wrap"><span id="quizCount"></span><div class="deck-progress-track"><div class="deck-progress-fill" id="quizFill"></div></div></div>
+        <div class="deck-sub" id="quizSub"></div>
+        <div class="deck-stage" id="quizStage"></div>
+        <div class="deck-actions"><button class="deck-btn no" id="quizNoBtn">✕</button><button class="deck-btn yes" id="quizYesBtn">✓</button></div>
+        <p class="deck-tap-hint">意味がわかる=✓ ・ わからない=✕(苦手単語に自動保存)</p>
+      </section>
+    </div>
+  </div>
+
+  <!-- REVIEW -->
+  <div class="view" id="view-review">
+    <button class="back-btn" id="backFromReview">← 課の一覧</button>
+    <div class="sec-header"><div class="cat">苦手単語だけを10個区切りで</div><h2>復習</h2></div>
+    <div id="reviewBody">
+      <div class="deck-progress-wrap"><span id="reviewCount"></span><div class="deck-progress-track"><div class="deck-progress-fill" id="reviewFill"></div></div></div>
+      <div class="deck-sub" id="reviewSub2"></div>
+      <div class="deck-stage" id="reviewStage"></div>
+      <div class="deck-actions"><button class="deck-btn no" id="reviewNoBtn">✕</button><button class="deck-btn yes" id="reviewYesBtn">✓</button></div>
+      <p class="deck-tap-hint">タップで意味表示 ・ 分かったら苦手リストから外れます</p>
+    </div>
+  </div>
+
+  <p class="no-voice-note" id="noVoiceNote">⚠ このブラウザには中国語の読み上げ音声が見つかりませんでした。他のブラウザ(Chrome推奨)でお試しください。</p>
+  <p class="no-voice-note" id="storageNote">⚠ このブラウザでは保存ができないようです(プライベートブラウズ中など)。今回だけは進捗が保存されない可能性があります。</p>
+</main>
+
+<footer>中国人と暮らす中国語500 プロジェクト ・ 進捗はこのブラウザに保存されます</footer>
+
+<script>
+/* ===================== セクション一覧(骨格) ===================== */
+const sectionsMeta = [
+  ...["起床","洗面所","朝食","家事","掃除","洗濯","お風呂","就寝","家族との会話","生活用品"].map((t,i)=>({id:i+1, cat:"毎日の生活", title:t})),
+  ...["食材","調味料","飲み物","調理","味","外食","コンビニ","スーパー","デリバリー","お酒"].map((t,i)=>({id:i+11, cat:"食事・料理", title:t})),
+  ...["家具","家電","部屋","収納","掃除用品","インテリア","修理","引っ越し","防災","ゴミ"].map((t,i)=>({id:i+21, cat:"家", title:t})),
+  ...["電車","バス","タクシー","道案内","駅","買い物","ドラッグストア","ATM","郵便局","宅配"].map((t,i)=>({id:i+31, cat:"外出・交通", title:t})),
+  ...["感情","褒める","心配する","喧嘩","仲直り","デート","家族紹介","子ども","お祝い","電話"].map((t,i)=>({id:i+41, cat:"恋人・家族", title:t})),
+];
+
+/* ===================== 中身データ(今は第1課のみ) ===================== */
+const sectionsData = {
+  1: {
+    words: [
+      {no:1, jp:"起きる(起床する)", cn:"起床", py:"qǐchuáng", pos:"動詞", scene:"朝、家族・同居人との会話", meaning:"起床する、起きる", collocate:"时间到了、该起床了", synonym:"起来", mistake:"ややフォーマルな響き。恋人同士のカジュアルな会話では「起来了吗?」の方が自然。"},
+      {no:2, jp:"目が覚める", cn:"醒", py:"xǐng", pos:"動詞", scene:"目が覚めた瞬間、まだベッドの中", meaning:"目が覚める(体を起こす動作は含まない)", collocate:"醒了、还没醒", synonym:"睡醒", mistake:"「醒」は意識が戻っただけ。体を起こす「起来」とは別の動作。"},
+      {no:3, jp:"おはよう", cn:"早", py:"zǎo", pos:"あいさつ", scene:"朝一番の軽いあいさつ", meaning:"おはよう(「早上好」の口語的な略)", collocate:"早上好、早安", synonym:"早上好", mistake:"教科書は「早上好」だが、同居生活では一言「早」で済ませることが非常に多い。"},
+      {no:4, jp:"目覚まし時計/アラーム", cn:"闹钟", py:"nàozhōng", pos:"名詞", scene:"目覚まし時計・スマホのアラーム", meaning:"目覚まし時計、アラーム", collocate:"定闹钟、闹钟响了", synonym:"铃", mistake:"スマホのアラームも「闹钟」でよい。外来語的に言おうとしなくてよい。"},
+      {no:5, jp:"起きる(体を起こす)", cn:"起来", py:"qǐlái", pos:"動詞", scene:"相手に起きるよう促す、自分が起きる", meaning:"起きる、起き上がる", collocate:"快起来、该起来了", synonym:"起床", mistake:"命令形「起来!」は強め。恋人には「该起来了」の方が柔らかい。"},
+      {no:6, jp:"眠い", cn:"困", py:"kùn", pos:"形容詞", scene:"眠くてまだ起きたくない時", meaning:"眠い", collocate:"好困、还很困", synonym:"没睡醒", mistake:"「困」=眠い、「累(lèi)」=疲れた。日本語の「だるい」につられて混同しやすい。"},
+      {no:7, jp:"ぐずぐず布団から出ない", cn:"赖床", py:"làichuáng", pos:"動詞", scene:"起きるべき時間なのに出たくない状態", meaning:"布団から出たがらない", collocate:"又赖床了、别赖床了", synonym:"睡懒觉", mistake:"「赖床」はベッドでぐずぐず、「睡懒觉」は寝坊そのもの。ニュアンスが違う。"},
+      {no:8, jp:"朝寝坊する", cn:"睡懒觉", py:"shuì lǎnjiào", pos:"動詞フレーズ", scene:"休日の朝の予定を話す時", meaning:"朝寝坊する、ゆっくり寝る", collocate:"周末睡懒觉", synonym:"赖床", mistake:"ネガティブだけでなく、休日に「ゆっくり寝る」というポジティブな文脈でもよく使う。"},
+      {no:9, jp:"元気がある", cn:"精神", py:"jīngshen", pos:"形容詞(軽声)", scene:"起きた後、元気があるか聞く/答える", meaning:"元気がある、はつらつとしている", collocate:"有精神、看起来很精神", synonym:"—", mistake:"名詞「精神(jīngshén)」と同じ漢字だが声調と品詞が違う(形容詞は軽声)。"},
+      {no:10, jp:"伸びをする", cn:"伸懒腰", py:"shēn lǎnyāo", pos:"動詞フレーズ", scene:"起きた直後に体を伸ばす動作", meaning:"伸びをする、体を伸ばす", collocate:"伸个懒腰", synonym:"—(固定表現)", mistake:"離合詞的に使われ「伸了个懒腰」のように間に量詞が入る点に注意。"},
+    ],
+    examples: [
+      [1,"你几点起床?","nǐ jǐ diǎn qǐchuáng?","何時に起きるの?"],[1,"我每天七点起床。","wǒ měitiān qī diǎn qǐchuáng.","私は毎日7時に起きます。"],
+      [2,"你醒了吗?","nǐ xǐng le ma?","目は覚めた?"],[2,"我刚醒,还没起来。","wǒ gāng xǐng, hái méi qǐlái.","さっき目が覚めたけど、まだ起きてない。"],
+      [3,"早!睡得好吗?","zǎo! shuì de hǎo ma?","おはよう!よく眠れた?"],[3,"早,今天天气真好。","zǎo, jīntiān tiānqì zhēn hǎo.","おはよう、今日はいい天気だね。"],
+      [4,"我的闹钟没响。","wǒ de nàozhōng méi xiǎng.","私のアラームが鳴らなかった。"],[4,"帮我定一个七点的闹钟。","bāng wǒ dìng yí ge qī diǎn de nàozhōng.","7時のアラームをセットして。"],
+      [5,"快起来,要迟到了!","kuài qǐlái, yào chídào le!","早く起きて、遅刻するよ!"],[5,"我马上就起来。","wǒ mǎshàng jiù qǐlái.","すぐ起きるよ。"],
+      [6,"我好困,再让我睡五分钟。","wǒ hǎo kùn, zài ràng wǒ shuì wǔ fēnzhōng.","眠すぎる、あと5分だけ寝かせて。"],[6,"你是不是还很困?","nǐ shì bu shì hái hěn kùn?","まだ眠いんじゃない?"],
+      [7,"你又赖床了。","nǐ yòu làichuáng le.","また布団から出ないんだね。"],[7,"别赖床了,快起来。","bié làichuáng le, kuài qǐlái.","ぐずぐずしないで、早く起きて。"],
+      [8,"周末我想睡懒觉。","zhōumò wǒ xiǎng shuì lǎnjiào.","週末はゆっくり寝たい。"],[8,"今天不上班,可以睡懒觉。","jīntiān bú shàngbān, kěyǐ shuì lǎnjiào.","今日は仕事休みだから、寝坊していいよ。"],
+      [9,"你今天看起来很有精神。","nǐ jīntiān kànqǐlái hěn yǒu jīngshen.","今日は元気そうだね。"],[9,"睡够了就有精神。","shuì gòu le jiù yǒu jīngshen.","ちゃんと寝れば元気になるよ。"],
+      [10,"她起床后伸了个懒腰。","tā qǐchuáng hòu shēn le ge lǎnyāo.","彼女は起きた後、伸びをした。"],[10,"伸个懒腰,清醒一下。","shēn ge lǎnyāo, qīngxǐng yíxià.","伸びをして、頭をすっきりさせよう。"],
+    ],
+    dialogues: [
+      [1,[["A","你几点起床?","nǐ jǐ diǎn qǐchuáng?","何時に起きるの?"],["B","我一般七点起床,你呢?","wǒ yìbān qī diǎn qǐchuáng, nǐ ne?","私はだいたい7時に起きるよ、あなたは?"],["A","我比你早,六点半。","wǒ bǐ nǐ zǎo, liù diǎn bàn.","私はあなたより早くて6時半。"]]],
+      [2,[["A","醒了吗?","xǐng le ma?","目は覚めた?"],["B","醒了,但还不想起来。","xǐng le, dàn hái bù xiǎng qǐlái.","目は覚めたけど、まだ起きたくない。"]]],
+      [3,[["A","早!","zǎo!","おはよう!"],["B","早,昨晚睡得怎么样?","zǎo, zuówǎn shuì de zěnmeyàng?","おはよう、昨夜はよく眠れた?"],["A","还不错,你呢?","hái búcuò, nǐ ne?","まあまあかな、あなたは?"]]],
+      [4,[["A","闹钟响了,该起床了。","nàozhōng xiǎng le, gāi qǐchuáng le.","アラーム鳴ったよ、起きる時間だ。"],["B","再让我睡五分钟。","zài ràng wǒ shuì wǔ fēnzhōng.","あと5分だけ寝かせて。"]]],
+      [5,[["A","快起来,八点了!","kuài qǐlái, bā diǎn le!","早く起きて、8時だよ!"],["B","啊?这么晚了!我马上起来。","a? zhème wǎn le! wǒ mǎshàng qǐlái.","え?もうそんな時間!すぐ起きる。"]]],
+      [6,[["A","你怎么了?","nǐ zěnme le?","どうしたの?"],["B","没事,就是好困。","méishì, jiùshì hǎo kùn.","なんでもない、ただ眠いだけ。"]]],
+      [7,[["A","都八点半了,别赖床了。","dōu bā diǎn bàn le, bié làichuáng le.","もう8時半だよ、ぐずぐずしないで。"],["B","好啦好啦,我起来了。","hǎo la hǎo la, wǒ qǐlái le.","はいはい、起きるよ。"]]],
+      [8,[["A","明天不上班,想干嘛?","míngtiān bú shàngbān, xiǎng gànmá?","明日休みだけど、何したい?"],["B","我想睡懒觉,谁都别吵我。","wǒ xiǎng shuì lǎnjiào, shéi dōu bié chǎo wǒ.","寝坊したいから、誰にも起こしてほしくない。"]]],
+      [9,[["A","你今天很有精神啊。","nǐ jīntiān hěn yǒu jīngshen a.","今日は元気だね。"],["B","因为昨晚睡得早。","yīnwèi zuówǎn shuì de zǎo.","昨夜早く寝たからね。"]]],
+      [10,[["A","刚起床就伸懒腰,舒服吗?","gāng qǐchuáng jiù shēn lǎnyāo, shūfu ma?","起きてすぐ伸びするの、気持ちいい?"],["B","超舒服,整个人都清醒了。","chāo shūfu, zhěnggè rén dōu qīngxǐng le.","すごく気持ちいい、頭がすっきりする。"]]],
+    ]
+  },
+  2: {
+    words: [
+      {no:1, jp:"洗面所/トイレ", cn:"洗手间", py:"xǐshǒujiān", pos:"名詞", scene:"場所を尋ねる、使用中か確認する", meaning:"洗面所、トイレ", collocate:"洗手间在哪、洗手间有人吗", synonym:"卫生间(公共施設寄りの響き)", mistake:"家庭内では「洗手间」が一般的。日本語の「トイレ」と「洗面所」を中国語では区別しないことが多い点に注意。"},
+      {no:2, jp:"歯を磨く", cn:"刷牙", py:"shuā yá", pos:"動詞フレーズ", scene:"朝晩の歯磨き", meaning:"歯を磨く", collocate:"刷牙洗脸、去刷牙", synonym:"—", mistake:"離合詞なので過去のことを言う時は「刷了牙」のように間に助詞が入る。"},
+      {no:3, jp:"顔を洗う", cn:"洗脸", py:"xǐ liǎn", pos:"動詞フレーズ", scene:"朝晩の洗顔", meaning:"顔を洗う", collocate:"洗脸刷牙、洗个脸", synonym:"—", mistake:"「洗个脸」のように量詞「个」を挟むとカジュアルで自然な言い方になる。"},
+      {no:4, jp:"歯ブラシ", cn:"牙刷", py:"yáshuā", pos:"名詞", scene:"歯ブラシを取って/忘れた等", meaning:"歯ブラシ", collocate:"我的牙刷、新牙刷", synonym:"—", mistake:"「牙(歯)+刷(ブラシ)」の組み合わせと覚えると他の「刷」複合語も理解しやすい。"},
+      {no:5, jp:"歯磨き粉", cn:"牙膏", py:"yágāo", pos:"名詞", scene:"歯磨き粉がない/貸してほしい時", meaning:"歯磨き粉", collocate:"挤牙膏、牙膏没了", synonym:"—", mistake:"「挤牙膏(歯磨き粉を絞り出す)」という動詞とのセットでよく使われる。"},
+      {no:6, jp:"タオル", cn:"毛巾", py:"máojīn", pos:"名詞", scene:"顔を拭くタオルを取る/共有か聞く", meaning:"タオル", collocate:"擦毛巾、我的毛巾", synonym:"浴巾(バスタオル、大きい方)", mistake:"「毛巾」は洗面用の小さめタオル、「浴巾」はお風呂上がり用の大きいバスタオル。日本語はどちらも「タオル」でまとめがち。"},
+      {no:7, jp:"手を洗う", cn:"洗手", py:"xǐ shǒu", pos:"動詞フレーズ", scene:"食事前やトイレの後などに手を洗う", meaning:"手を洗う", collocate:"去洗手、洗手液", synonym:"—", mistake:"「洗手液(ハンドソープ)」など関連語とセットで覚えると実用的。"},
+      {no:8, jp:"鏡", cn:"镜子", py:"jìngzi", pos:"名詞", scene:"鏡を見る、身だしなみを整える", meaning:"鏡", collocate:"照镜子、镜子脏了", synonym:"—", mistake:"「照镜子(鏡を見る)」というコロケーションを覚えておくと会話で使いやすい。"},
+      {no:9, jp:"あなたの番だよ", cn:"该你了", py:"gāi nǐ le", pos:"フレーズ", scene:"洗面所の順番待ち、共用スペースの交代", meaning:"あなたの番だよ", collocate:"轮到你了(同義)", synonym:"轮到你了", mistake:"「该」は本来〜すべき、の意味だが、ここでは順番の意味。硬く訳しがちだが実際はとても軽い日常表現。"},
+      {no:10, jp:"身支度を済ませる", cn:"洗漱", py:"xǐshù", pos:"動詞", scene:"朝晩の洗顔・歯磨きなどをまとめて指す時", meaning:"洗面・歯磨きなど身支度を済ませる", collocate:"洗漱完了、去洗漱", synonym:"洗脸刷牙(個別に言う場合)", mistake:"「洗脸」「刷牙」を一つずつ言わず「洗漱」とまとめると簡潔で自然。ただしややフォーマルな響きもある。"},
+    ],
+    examples: [
+      [1,"洗手间在哪儿?","xǐshǒujiān zài nǎr?","洗面所はどこ?"],[1,"洗手间有人吗?","xǐshǒujiān yǒu rén ma?","洗面所は誰か使ってる?"],
+      [2,"你刷牙了吗?","nǐ shuā yá le ma?","歯磨きした?"],[2,"我先去刷牙。","wǒ xiān qù shuā yá.","先に歯磨きしてくる。"],
+      [3,"起床后先洗脸。","qǐchuáng hòu xiān xǐ liǎn.","起きたらまず顔を洗う。"],[3,"我去洗个脸就好。","wǒ qù xǐ ge liǎn jiù hǎo.","ちょっと顔洗ってくるね。"],
+      [4,"我的牙刷是蓝色的。","wǒ de yáshuā shì lánsè de.","私の歯ブラシは青いやつ。"],[4,"帮我拿一下牙刷。","bāng wǒ ná yíxià yáshuā.","歯ブラシ取って。"],
+      [5,"牙膏快用完了。","yágāo kuài yòng wán le.","歯磨き粉がもうすぐなくなる。"],[5,"可以帮我挤牙膏吗?","kěyǐ bāng wǒ jǐ yágāo ma?","歯磨き粉を絞ってくれる?"],
+      [6,"这条毛巾是你的吗?","zhè tiáo máojīn shì nǐ de ma?","このタオルはあなたの?"],[6,"用完毛巾要挂好。","yòng wán máojīn yào guà hǎo.","タオルを使ったらちゃんと掛けてね。"],
+      [7,"吃饭前要洗手。","chīfàn qián yào xǐ shǒu.","ご飯の前は手を洗おうね。"],[7,"我去洗个手。","wǒ qù xǐ ge shǒu.","ちょっと手洗ってくる。"],
+      [8,"镜子有点脏了。","jìngzi yǒudiǎn zāng le.","鏡がちょっと汚れてる。"],[8,"你在照镜子干嘛?","nǐ zài zhào jìngzi gànmá?","鏡見て何してるの?"],
+      [9,"我洗完了,该你了。","wǒ xǐ wán le, gāi nǐ le.","私終わったよ、あなたの番。"],[9,"该你了,别磨蹭了。","gāi nǐ le, bié móceng le.","あなたの番だよ、ぐずぐずしないで。"],
+      [10,"洗漱完就去吃早饭。","xǐshù wán jiù qù chī zǎofàn.","身支度が終わったら朝ごはん食べに行こう。"],[10,"你洗漱完了没?","nǐ xǐshù wán le méi?","身支度もう終わった?"],
+    ],
+    dialogues: [
+      [1,[["A","洗手间有人吗?","xǐshǒujiān yǒu rén ma?","洗面所誰か使ってる?"],["B","没有,你去吧。","méiyǒu, nǐ qù ba.","いないよ、使っていいよ。"]]],
+      [2,[["A","你刷牙了吗?","nǐ shuā yá le ma?","歯磨きした?"],["B","还没,马上去刷。","hái méi, mǎshàng qù shuā.","まだ、すぐ磨くよ。"]]],
+      [3,[["A","起床后先洗脸吧。","qǐchuáng hòu xiān xǐ liǎn ba.","起きたらまず顔洗おう。"],["B","好,我马上去。","hǎo, wǒ mǎshàng qù.","うん、すぐ行く。"]]],
+      [4,[["A","这是你的牙刷吗?","zhè shì nǐ de yáshuā ma?","これあなたの歯ブラシ?"],["B","对,谢谢你帮我找到。","duì, xièxie nǐ bāng wǒ zhǎodào.","うん、見つけてくれてありがとう。"]]],
+      [5,[["A","牙膏没了,你有新的吗?","yágāo méi le, nǐ yǒu xīn de ma?","歯磨き粉ないんだけど、新しいのある?"],["B","有,柜子里还有一支。","yǒu, guìzi lǐ hái yǒu yì zhī.","あるよ、棚にもう1本あるはず。"]]],
+      [6,[["A","我的毛巾去哪儿了?","wǒ de máojīn qù nǎr le?","私のタオルどこ行った?"],["B","好像还在洗手间。","hǎoxiàng hái zài xǐshǒujiān.","たぶんまだ洗面所にあるよ。"]]],
+      [7,[["A","吃饭了,先去洗手。","chīfàn le, xiān qù xǐ shǒu.","ご飯できたよ、先に手を洗って。"],["B","好,马上来。","hǎo, mǎshàng lái.","はい、すぐ行く。"]]],
+      [8,[["A","镜子上都是水,看不清。","jìngzi shàng dōu shì shuǐ, kàn bu qīng.","鏡が水だらけでよく見えない。"],["B","我帮你擦一下。","wǒ bāng nǐ cā yíxià.","拭いてあげるよ。"]]],
+      [9,[["A","我洗漱完了,该你了。","wǒ xǐshù wán le, gāi nǐ le.","身支度終わったよ、あなたの番。"],["B","好,我这就去。","hǎo, wǒ zhè jiù qù.","うん、今行く。"]]],
+      [10,[["A","你洗漱完了没?","nǐ xǐshù wán le méi?","身支度もう終わった?"],["B","快了,再等我两分钟。","kuài le, zài děng wǒ liǎng fēnzhōng.","もうすぐ、あと2分待って。"]]],
+    ]
+  }
+};
+
+/* word id lookup: "sectionId-no" -> word (merged with cn/py for display) */
+function buildLookup(){
+  const map = {};
+  Object.keys(sectionsData).forEach(sid=>{
+    sectionsData[sid].words.forEach(w=>{
+      map[`${sid}-${w.no}`] = Object.assign({}, w, {id:`${sid}-${w.no}`, section:Number(sid)});
+    });
+  });
+  return map;
+}
+let wordLookup = buildLookup();
+
+/* ===================== 永続ストレージ(localStorage版) ===================== */
+/* このファイルは自分でホスティングして使う用です。ブラウザのlocalStorageに保存するので、
+   同じブラウザ・同じ端末で開く限り、閉じても進捗が残ります(他の端末とは同期しません)。 */
+let appState = { progress: {}, missedPool: [] }; // progress: {sid:{vocab:bool,test:bool}}
+const STORAGE_KEY = 'chinese500-app-state';
+
+async function loadState(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(raw) appState = JSON.parse(raw);
+  }catch(e){
+    console.warn('load failed', e);
+  }
+}
+
+let saveTimer = null;
+function saveState(){
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(()=>{
+    try{
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+    }catch(e){
+      console.warn('save failed', e);
+      showStorageNotice();
+    }
+  }, 300);
+}
+
+function showStorageNotice(){
+  const el = document.getElementById('storageNote');
+  if(el) el.style.display = 'block';
+}
+let zhVoice = null;
+function pickVoice(){
+  const voices = window.speechSynthesis ? window.speechSynthesis.getVoices() : [];
+  zhVoice = voices.find(v => v.lang === 'zh-CN') || voices.find(v => v.lang && v.lang.startsWith('zh')) || null;
+  if(!zhVoice && voices.length) document.getElementById('noVoiceNote').style.display = 'block';
+}
+if('speechSynthesis' in window){ pickVoice(); window.speechSynthesis.onvoiceschanged = pickVoice; }
+else{ document.getElementById('noVoiceNote').style.display = 'block'; }
+function speak(text, btn){
+  if(!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'zh-CN'; if(zhVoice) u.voice = zhVoice; u.rate = 0.85;
+  if(btn){
+    document.querySelectorAll('.speak-btn.playing').forEach(b=>b.classList.remove('playing'));
+    btn.classList.add('playing');
+    u.onend = ()=> btn.classList.remove('playing');
+    u.onerror = ()=> btn.classList.remove('playing');
+  }
+  window.speechSynthesis.speak(u);
+}
+document.addEventListener('click', (e)=>{
+  const btn = e.target.closest('.speak-btn');
+  if(!btn) return;
+  e.stopPropagation();
+  speak(btn.dataset.text, btn);
+});
+
+/* ===================== 汎用スワイプデッキ ===================== */
+function createDeck(opts){
+  const { stageEl, countEl, fillEl, subEl, yesBtn, noBtn, items, richBack, autoSpeak, onCommit, onComplete, emptyMessage } = opts;
+  const total = items.length;
+  let queue = items.slice();
+  let known = new Set();
+  let current = null;
+
+  function frontHTML(w){
+    return `
+      <div class="deck-front-content">
+        ${w.section ? `<div class="deck-src">第${w.section}課</div>` : ''}
+        <div class="deck-tianzige"><span>${w.cn.slice(0,1)}</span></div>
+        <div class="deck-hanzi">${w.cn}</div>
+        <div class="deck-py">${w.py}</div>
+        <button class="speak-btn deck-speak" data-text="${w.cn}" aria-label="発音を聞く">▶</button>
+        <div class="deck-hint">タップして意味を見る</div>
+      </div>`;
+  }
+  function backHTML(w){
+    if(richBack){
+      return `<div class="deck-back"><div class="meaning">${w.meaning}</div><dl>
+        <div class="row"><dt>品詞:</dt><dd>${w.pos}</dd></div>
+        <div class="row"><dt>使用場面:</dt><dd>${w.scene}</dd></div>
+        <div class="row"><dt>よく一緒に:</dt><dd>${w.collocate}</dd></div>
+        <div class="row"><dt>類義語:</dt><dd>${w.synonym}</dd></div>
+      </dl><div class="mistake">⚠ ${w.mistake}</div></div>`;
+    }
+    return `<div class="deck-back"><div class="meaning">${w.meaning}</div></div>`;
+  }
+
+  function render(){
+    stageEl.innerHTML = '';
+    countEl.textContent = `分かる: ${known.size} / ${total}`;
+    fillEl.style.width = (total ? known.size/total*100 : 0) + '%';
+
+    if(total === 0){
+      subEl.textContent = '';
+      yesBtn.style.visibility = 'hidden'; noBtn.style.visibility = 'hidden';
+      stageEl.innerHTML = `<div class="deck-done"><div class="emoji">✨</div><p>${emptyMessage || '対象の単語がありません。'}</p></div>`;
+      return;
+    }
+
+    if(queue.length === 0){
+      subEl.textContent = '';
+      yesBtn.style.visibility = 'hidden'; noBtn.style.visibility = 'hidden';
+      stageEl.innerHTML = `<div class="deck-done"><div class="emoji">🎉</div><p>全部「分かる」になりました。</p>
+        <button class="deck-restart" id="restartBtn">もう一度復習する</button></div>`;
+      document.getElementById('restartBtn').addEventListener('click', ()=>{ queue = items.slice(); known = new Set(); render(); });
+      if(onComplete) onComplete();
+      return;
+    }
+
+    yesBtn.style.visibility = 'visible'; noBtn.style.visibility = 'visible';
+    subEl.textContent = `残り ${queue.length}枚(復習含む)`;
+
+    const w = queue[0];
+    current = w;
+    const card = document.createElement('div');
+    card.className = 'deck-card front';
+    card.innerHTML = frontHTML(w) + backHTML(w) + `<div class="stamp-mark know">会</div><div class="stamp-mark dontknow">再</div>`;
+    stageEl.appendChild(card);
+    attachDrag(card, w);
+    if(autoSpeak) speak(w.cn, null);
+  }
+
+  function commit(w, isKnown){
+    queue.shift();
+    if(isKnown){ known.add(w.id || w.no); } else { queue.push(w); }
+    if(onCommit) onCommit(w, isKnown);
+    render();
+  }
+
+  function attachDrag(card, w){
+    let startX=0, startY=0, dx=0, dragging=false, moved=false;
+    card.addEventListener('click', (e)=>{
+      if(e.target.closest('.speak-btn')) return;
+      if(moved) return;
+      card.classList.toggle('flipped');
+    });
+    card.addEventListener('pointerdown', (e)=>{
+      if(e.target.closest('.speak-btn')) return;
+      dragging=true; moved=false; startX=e.clientX; startY=e.clientY; dx=0;
+      card.setPointerCapture(e.pointerId); card.style.transition='none';
+    });
+    card.addEventListener('pointermove', (e)=>{
+      if(!dragging) return;
+      dx = e.clientX-startX; const dy = e.clientY-startY;
+      if(Math.abs(dx)>6 || Math.abs(dy)>6) moved=true;
+      card.style.transform = `translate(${dx}px, ${dy*0.15}px) rotate(${dx/18}deg)`;
+      const know=card.querySelector('.stamp-mark.know'), dont=card.querySelector('.stamp-mark.dontknow');
+      if(dx>20){ know.style.opacity=Math.min(dx/80,1); dont.style.opacity=0; }
+      else if(dx<-20){ dont.style.opacity=Math.min(-dx/80,1); know.style.opacity=0; }
+      else { know.style.opacity=0; dont.style.opacity=0; }
+    });
+    function endDrag(){
+      if(!dragging) return; dragging=false;
+      card.style.transition='transform .3s cubic-bezier(.4,0,.2,1)';
+      const threshold=90;
+      if(dx>threshold){ card.style.transform=`translate(500px, ${dx*0.1}px) rotate(24deg)`; setTimeout(()=>commit(w,true),220); }
+      else if(dx<-threshold){ card.style.transform=`translate(-500px, ${-dx*0.1}px) rotate(-24deg)`; setTimeout(()=>commit(w,false),220); }
+      else { card.style.transform='translate(0,0) rotate(0deg)'; }
+    }
+    card.addEventListener('pointerup', endDrag);
+    card.addEventListener('pointercancel', endDrag);
+  }
+
+  yesBtn.onclick = ()=>{ if(current) commit(current, true); };
+  noBtn.onclick = ()=>{ if(current) commit(current, false); };
+  render();
+}
+
+/* auto-speak on advance for a given stage (used for section vocab deck) */
+function hookAutoSpeakOnAdvance(stageEl){
+  const observer = new MutationObserver(()=>{
+    const hanzi = stageEl.querySelector('.deck-hanzi');
+    if(hanzi) speak(hanzi.textContent, null);
+  });
+  observer.observe(stageEl, {childList:true});
+}
+
+/* ===================== ホーム画面描画 ===================== */
+function renderHome(){
+  const catList = document.getElementById('catList');
+  catList.innerHTML = '';
+  const cats = [...new Set(sectionsMeta.map(s=>s.cat))];
+  cats.forEach(cat=>{
+    const block = document.createElement('div');
+    block.className = 'cat-block';
+    const rows = sectionsMeta.filter(s=>s.cat===cat).map(s=>{
+      const has = !!sectionsData[s.id];
+      const prog = appState.progress[s.id] || {};
+      let dotClass = 'sec-dot';
+      if(!has) dotClass += ' locked-dot';
+      else if(prog.vocab && prog.test) dotClass += ' done';
+      else if(prog.vocab || prog.test) dotClass += ' half';
+      return `<div class="sec-row ${has?'':'locked'}" data-id="${s.id}">
+        <div class="${dotClass}"></div>
+        <span class="sec-num">${s.id}</span>
+        <span class="sec-title">${s.title}</span>
+        ${has ? '<span class="sec-chevron">›</span>' : '<span class="sec-tag">準備中</span>'}
+      </div>`;
+    }).join('');
+    block.innerHTML = `<div class="cat-title">${cat}</div>${rows}`;
+    catList.appendChild(block);
+  });
+  catList.querySelectorAll('.sec-row:not(.locked)').forEach(row=>{
+    row.addEventListener('click', ()=> openSection(Number(row.dataset.id)));
+  });
+
+  const n = appState.missedPool.length;
+  document.getElementById('reviewSub').textContent = n>0 ? `${n}個の苦手単語があります` : '苦手単語はまだありません';
+  document.getElementById('reviewCard').classList.toggle('empty', n===0);
+}
+
+/* ===================== 課の詳細画面 ===================== */
+function openSection(id){
+  const meta = sectionsMeta.find(s=>s.id===id);
+  const data = sectionsData[id];
+  document.getElementById('secCat').textContent = `${meta.cat} ・ 第${id}課`;
+  document.getElementById('secTitle').textContent = meta.title;
+  switchView('view-section');
+
+  if(!data){
+    document.getElementById('secLocked').style.display = 'block';
+    document.getElementById('secBody').style.display = 'none';
+    return;
+  }
+  document.getElementById('secLocked').style.display = 'none';
+  document.getElementById('secBody').style.display = 'block';
+
+  const words = data.words.map(w => Object.assign({}, w, {id:`${id}-${w.no}`, section:id}));
+
+  // vocab deck
+  createDeck({
+    stageEl: document.getElementById('vocabStage'),
+    countEl: document.getElementById('vocabCount'),
+    fillEl: document.getElementById('vocabFill'),
+    subEl: document.getElementById('vocabSub'),
+    yesBtn: document.getElementById('vocabYesBtn'),
+    noBtn: document.getElementById('vocabNoBtn'),
+    items: words, richBack: true, autoSpeak: false,
+    onComplete: ()=>{ setProgress(id, 'vocab', true); }
+  });
+  hookAutoSpeakOnAdvance(document.getElementById('vocabStage'));
+
+  // quiz deck -> feeds missed pool
+  createDeck({
+    stageEl: document.getElementById('quizStage'),
+    countEl: document.getElementById('quizCount'),
+    fillEl: document.getElementById('quizFill'),
+    subEl: document.getElementById('quizSub'),
+    yesBtn: document.getElementById('quizYesBtn'),
+    noBtn: document.getElementById('quizNoBtn'),
+    items: words, richBack: false, autoSpeak: false,
+    onCommit: (w, isKnown)=>{
+      const pool = new Set(appState.missedPool);
+      if(isKnown) pool.delete(w.id); else pool.add(w.id);
+      appState.missedPool = [...pool];
+      saveState(); updateReviewBadge();
+    },
+    onComplete: ()=>{ setProgress(id, 'test', true); }
+  });
+
+  // examples
+  const exampleList = document.getElementById('exampleList');
+  exampleList.innerHTML = '';
+  data.words.forEach(w=>{
+    const group = document.createElement('div');
+    group.className = 'ex-group';
+    const its = data.examples.filter(e=>e[0]===w.no);
+    group.innerHTML = `<div class="ex-head"><span class="idx">${w.no}</span>${w.cn} <span style="font-size:12px;color:var(--ink-soft);font-weight:400;">(${w.jp})</span></div>` +
+      its.map(e=>`<div class="ex-item"><div class="ex-cn-row"><div class="ex-cn">${e[1]}</div><button class="speak-btn" data-text="${e[1]}" aria-label="発音を聞く">▶</button></div><div class="ex-py">${e[2]}</div><div class="ex-jp">${e[3]}</div></div>`).join('');
+    exampleList.appendChild(group);
+  });
+
+  // dialogue
+  const dialogueList = document.getElementById('dialogueList');
+  dialogueList.innerHTML = '';
+  data.dialogues.forEach(([no, lines])=>{
+    const w = data.words.find(x=>x.no===no);
+    const group = document.createElement('div');
+    group.className = 'dia-group';
+    group.innerHTML = `<div class="dia-title">${no}. ${w.cn}(${w.jp})</div>` +
+      lines.map(l=>`<div class="bubble ${l[0]}"><div class="cn-row"><div class="cn">${l[1]}</div><button class="speak-btn" data-text="${l[1]}" aria-label="発音を聞く">▶</button></div><div class="py">${l[2]}</div><div class="jp">${l[3]}</div></div>`).join('');
+    dialogueList.appendChild(group);
+  });
+
+  // reset to vocab tab
+  document.querySelectorAll('#secBody .tab-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelector('#secBody .tab-btn[data-tab="vocab"]').classList.add('active');
+  document.querySelectorAll('#secBody .panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel-vocab').classList.add('active');
+}
+
+function setProgress(id, key, val){
+  if(!appState.progress[id]) appState.progress[id] = {};
+  appState.progress[id][key] = val;
+  saveState();
+  renderHome();
+}
+function updateReviewBadge(){
+  document.getElementById('reviewSub').textContent = appState.missedPool.length>0 ? `${appState.missedPool.length}個の苦手単語があります` : '苦手単語はまだありません';
+  document.getElementById('reviewCard').classList.toggle('empty', appState.missedPool.length===0);
+}
+
+/* ===================== 復習画面(10個区切り) ===================== */
+function openReview(){
+  wordLookup = buildLookup();
+  const chunk = appState.missedPool.slice(0,10).map(id=>wordLookup[id]).filter(Boolean);
+  switchView('view-review');
+  createDeck({
+    stageEl: document.getElementById('reviewStage'),
+    countEl: document.getElementById('reviewCount'),
+    fillEl: document.getElementById('reviewFill'),
+    subEl: document.getElementById('reviewSub2'),
+    yesBtn: document.getElementById('reviewYesBtn'),
+    noBtn: document.getElementById('reviewNoBtn'),
+    items: chunk, richBack: true, autoSpeak: false,
+    emptyMessage: '苦手単語はありません。',
+    onCommit: (w, isKnown)=>{
+      if(isKnown){
+        appState.missedPool = appState.missedPool.filter(id=>id!==w.id);
+        saveState(); updateReviewBadge();
+      }
+    },
+    onComplete: ()=>{
+      if(appState.missedPool.length>0){ setTimeout(openReview, 300); } // load next chunk of 10
+    }
+  });
+}
+
+/* ===================== 画面切り替え ===================== */
+function switchView(id){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+document.getElementById('reviewCard').addEventListener('click', ()=>{
+  if(appState.missedPool.length>0) openReview();
+});
+document.getElementById('backFromSection').addEventListener('click', ()=>switchView('view-home'));
+document.getElementById('backFromReview').addEventListener('click', ()=>{ renderHome(); switchView('view-home'); });
+
+document.querySelectorAll('#secBody .tab-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('#secBody .tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('#secBody .panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-'+btn.dataset.tab).classList.add('active');
+  });
+});
+
+/* ===================== 起動 ===================== */
+(async function init(){
+  await loadState();
+  renderHome();
+})();
+</script>
+</body>
+</html>
