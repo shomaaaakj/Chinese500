@@ -50,6 +50,11 @@
   .goal-fill{height:100%; background:linear-gradient(90deg,var(--jade),var(--jade-deep)); width:0%; transition:width .6s;}
   .goal-note{font-size:11.5px; color:var(--ink-soft); line-height:1.7; margin:0;}
 
+  .special-header{
+    font-family:'Noto Serif SC',serif; font-weight:700; font-size:14.5px; color:var(--seal);
+    margin:22px 0 10px; padding-top:14px; border-top:1px dashed var(--line);
+  }
+  .special-note{font-size:11.5px; color:var(--ink-soft); margin:-4px 0 14px; line-height:1.7;}
   .level-block{margin-bottom:14px; border:1px solid var(--line); border-radius:12px 12px 12px 3px; overflow:hidden;}
   .level-head{
     display:flex; align-items:center; gap:10px; padding:13px 16px; cursor:pointer;
@@ -233,6 +238,7 @@
       <p class="goal-note">日常生活の基礎に約500語、仕事や込み入った話にも対応するには2000語前後が一つの節目とされます。このアプリでは500語を1レベルとして積み上げていきます。</p>
     </div>
     <div id="levelList"></div>
+    <div id="specialSection"></div>
     <div class="review-card" id="reviewCard">
       <div class="review-stamp">復</div>
       <div>
@@ -299,33 +305,33 @@
 <script>
 /* ===================== セクション一覧(骨格) ===================== */
 const sectionsMeta = [
-  {id:61, cat:"相槌・リアクション", title:"相槌①:驚き・同意", level:1},
-  {id:62, cat:"相槌・リアクション", title:"相槌②:了解・その他", level:1},
+  {id:901, cat:"相槌・リアクション", title:"相槌①:驚き・同意", level:"special"},
+  {id:902, cat:"相槌・リアクション", title:"相槌②:了解・その他", level:"special"},
   ...["起床","洗面所","朝食","家事","掃除","洗濯","お風呂","就寝","家族との会話","生活用品"].map((t,i)=>({id:i+1, cat:"毎日の生活", title:t, level:1})),
   ...["食材","調味料","飲み物","調理","味","外食","コンビニ","スーパー","デリバリー","お酒"].map((t,i)=>({id:i+11, cat:"食事・料理", title:t, level:1})),
   ...["家具","家電","部屋","収納","掃除用品","インテリア","修理","引っ越し","防災","ゴミ"].map((t,i)=>({id:i+21, cat:"家", title:t, level:1})),
   ...["電車","バス","タクシー","道案内","駅","買い物","ドラッグストア","ATM","郵便局","宅配"].map((t,i)=>({id:i+31, cat:"外出・交通", title:t, level:1})),
   ...["感情","褒める","心配する","喧嘩","仲直り","デート","家族紹介","子ども","お祝い","電話"].map((t,i)=>({id:i+41, cat:"恋人・家族", title:t, level:1})),
-  {id:91, cat:"特別:里帰り(義実家との再会〜別れ)", title:"到着・出迎え", level:1},
-  {id:92, cat:"特別:里帰り(義実家との再会〜別れ)", title:"再会のあいさつ", level:1},
-  {id:93, cat:"特別:里帰り(義実家との再会〜別れ)", title:"手土産を渡す", level:1},
-  {id:94, cat:"特別:里帰り(義実家との再会〜別れ)", title:"家族を紹介する", level:1},
-  {id:95, cat:"特別:里帰り(義実家との再会〜別れ)", title:"食事の場で", level:1},
-  {id:96, cat:"特別:里帰り(義実家との再会〜別れ)", title:"褒める・気遣う", level:1},
-  {id:97, cat:"特別:里帰り(義実家との再会〜別れ)", title:"子供と話す", level:1},
-  {id:98, cat:"特別:里帰り(義実家との再会〜別れ)", title:"手伝う・気配り", level:1},
-  {id:99, cat:"特別:里帰り(義実家との再会〜別れ)", title:"写真・思い出", level:1},
-  {id:100, cat:"特別:里帰り(義実家との再会〜別れ)", title:"別れ・見送り", level:1},
-  ...["症状を伝える","受付","診察","薬局","検査","歯科","眼科","救急","保険","体調管理"].map((t,i)=>({id:i+101, cat:"病院・健康", title:t, level:2})),
-  ...["居留許可","銀行口座開設","携帯電話契約","インターネット契約","住民登録","ビザ関連","交通系ICカード","保険加入","賃貸更新","公共料金"].map((t,i)=>({id:i+111, cat:"行政手続き・生活基盤", title:t, level:2})),
-  ...["微信の基本","微信支付","支付宝","ミニプログラム","翻訳アプリ","配車アプリ深掘り","SNS","写真動画共有","パスワード管理","カスタマーサポート"].map((t,i)=>({id:i+121, cat:"スマホ・デジタル生活", title:t, level:2})),
-  ...["自己紹介","趣味を話す","誘う・誘われる","断る","天気の話","世間話","意見を言う","褒め合う","別れの挨拶","SNSでのやり取り"].map((t,i)=>({id:i+131, cat:"社交・友人関係", title:t, level:2})),
-  ...["道に迷った","物をなくした","盗難","事故","警察","大使館","詐欺に注意","クレーム","問題を説明する","助けを求める"].map((t,i)=>({id:i+141, cat:"緊急・トラブル対応", title:t, level:2})),
-  ...["图书馆(図書館)","博物馆(博物館)","公园(公園)","体育馆(体育館)","电影院(映画館)","广场(広場)","寺庙(お寺)","学校","公司(会社)","游泳池(プール)"].map((t,i)=>({id:i+151, cat:"場所・施設", title:t, level:3})),
-  ...["上面(上)","下面(下)","里面(中)","外面(外)","前面(前)","后面(後ろ)","左边(左)","右边(右)","中间(真ん中)","旁边(そば)"].map((t,i)=>({id:i+161, cat:"方向・位置", title:t, level:3})),
-  ...["眼镜(メガネ)","雨伞(傘)","钱包(財布)","手表(腕時計)","书包(リュック)","充电宝(モバイルバッテリー)","耳机(イヤホン)","笔(ペン)","本子(ノート)","剪刀(はさみ)"].map((t,i)=>({id:i+171, cat:"日用品・小物", title:t, level:3})),
-  ...["个(個)","只(匹)","张(枚)","件(着)","双(足・対)","杯(杯)","碗(杯・碗)","瓶(本)","包(袋)","辆(台)"].map((t,i)=>({id:i+181, cat:"数字・量詞", title:t, level:3})),
-  ...["晴天(晴れ)","阴天(曇り)","下雨(雨が降る)","下雪(雪が降る)","刮风(風が吹く)","彩虹(虹)","温度(気温)","四季(四季)","天气预报(天気予報)","潮湿(湿気が多い)"].map((t,i)=>({id:i+191, cat:"天気・自然", title:t, level:3})),
+  {id:911, cat:"特別:里帰り(義実家との再会〜別れ)", title:"到着・出迎え", level:"special"},
+  {id:912, cat:"特別:里帰り(義実家との再会〜別れ)", title:"再会のあいさつ", level:"special"},
+  {id:913, cat:"特別:里帰り(義実家との再会〜別れ)", title:"手土産を渡す", level:"special"},
+  {id:914, cat:"特別:里帰り(義実家との再会〜別れ)", title:"家族を紹介する", level:"special"},
+  {id:915, cat:"特別:里帰り(義実家との再会〜別れ)", title:"食事の場で", level:"special"},
+  {id:916, cat:"特別:里帰り(義実家との再会〜別れ)", title:"褒める・気遣う", level:"special"},
+  {id:917, cat:"特別:里帰り(義実家との再会〜別れ)", title:"子供と話す", level:"special"},
+  {id:918, cat:"特別:里帰り(義実家との再会〜別れ)", title:"手伝う・気配り", level:"special"},
+  {id:919, cat:"特別:里帰り(義実家との再会〜別れ)", title:"写真・思い出", level:"special"},
+  {id:920, cat:"特別:里帰り(義実家との再会〜別れ)", title:"別れ・見送り", level:"special"},
+  ...["症状を伝える","受付","診察","薬局","検査","歯科","眼科","救急","保険","体調管理"].map((t,i)=>({id:i+51, cat:"病院・健康", title:t, level:2})),
+  ...["居留許可","銀行口座開設","携帯電話契約","インターネット契約","住民登録","ビザ関連","交通系ICカード","保険加入","賃貸更新","公共料金"].map((t,i)=>({id:i+61, cat:"行政手続き・生活基盤", title:t, level:2})),
+  ...["微信の基本","微信支付","支付宝","ミニプログラム","翻訳アプリ","配車アプリ深掘り","SNS","写真動画共有","パスワード管理","カスタマーサポート"].map((t,i)=>({id:i+71, cat:"スマホ・デジタル生活", title:t, level:2})),
+  ...["自己紹介","趣味を話す","誘う・誘われる","断る","天気の話","世間話","意見を言う","褒め合う","別れの挨拶","SNSでのやり取り"].map((t,i)=>({id:i+81, cat:"社交・友人関係", title:t, level:2})),
+  ...["道に迷った","物をなくした","盗難","事故","警察","大使館","詐欺に注意","クレーム","問題を説明する","助けを求める"].map((t,i)=>({id:i+91, cat:"緊急・トラブル対応", title:t, level:2})),
+  ...["图书馆(図書館)","博物馆(博物館)","公园(公園)","体育馆(体育館)","电影院(映画館)","广场(広場)","寺庙(お寺)","学校","公司(会社)","游泳池(プール)"].map((t,i)=>({id:i+101, cat:"場所・施設", title:t, level:3})),
+  ...["上面(上)","下面(下)","里面(中)","外面(外)","前面(前)","后面(後ろ)","左边(左)","右边(右)","中间(真ん中)","旁边(そば)"].map((t,i)=>({id:i+111, cat:"方向・位置", title:t, level:3})),
+  ...["眼镜(メガネ)","雨伞(傘)","钱包(財布)","手表(腕時計)","书包(リュック)","充电宝(モバイルバッテリー)","耳机(イヤホン)","笔(ペン)","本子(ノート)","剪刀(はさみ)"].map((t,i)=>({id:i+121, cat:"日用品・小物", title:t, level:3})),
+  ...["个(個)","只(匹)","张(枚)","件(着)","双(足・対)","杯(杯)","碗(杯・碗)","瓶(本)","包(袋)","辆(台)"].map((t,i)=>({id:i+131, cat:"数字・量詞", title:t, level:3})),
+  ...["晴天(晴れ)","阴天(曇り)","下雨(雨が降る)","下雪(雪が降る)","刮风(風が吹く)","彩虹(虹)","温度(気温)","四季(四季)","天气预报(天気予報)","潮湿(湿気が多い)"].map((t,i)=>({id:i+141, cat:"天気・自然", title:t, level:3})),
 ];
 
 /* ===================== レベル構成 ===================== */
@@ -335,7 +341,7 @@ const sectionsMeta = [
 const TARGET_TOTAL_WORDS = 2000;
 const WORDS_PER_LEVEL = 500;
 const levelsMeta = [
-  {id:1, title:"レベル1:生活基盤", desc:"衣食住・日常生活の基本(全50課)+特別セクション「里帰り」", words:500, done:true},
+  {id:1, title:"レベル1:生活基盤", desc:"衣食住・日常生活の基本(全50課)", words:500, done:true},
   {id:2, title:"レベル2:生活の実務", desc:"病院・行政手続き・スマホ決済・友人関係・緊急対応(全50課、仕事関連は含まない)", words:500, done:false},
   {id:3, title:"レベル3:身の回りの物・場所・方向", desc:"施設名・位置関係・日用品・量詞・天気(全50課)", words:500, done:false},
   {id:4, title:"レベル4", desc:"準備中(次の500語)", words:500, done:false},
@@ -1981,7 +1987,7 @@ const sectionsData = {
     ]
   }
 ,
-  91: {
+  911: {
     words: [
       {no:1, jp:"着いた", cn:"到了", py:"dào le", pos:"状態フレーズ", freq:5, scene:"義実家訪問の場面", meaning:"着いた", collocate:"—", synonym:"—", mistake:"「到」+「了」で到着の変化を表す最も基本的な言い方。"},
       {no:2, jp:"疲れた?", cn:"累吗", py:"lèi ma", pos:"フレーズ", freq:5, scene:"義実家訪問の場面", meaning:"疲れた?", collocate:"—", synonym:"—", mistake:"長旅の後にかける気遣いの一言。"},
@@ -2008,7 +2014,7 @@ const sectionsData = {
     ],
     dialogues: []
   },
-  92: {
+  912: {
     words: [
       {no:1, jp:"こんにちは", cn:"您好", py:"nín hǎo", pos:"挨拶", freq:5, scene:"義実家訪問の場面", meaning:"こんにちは", collocate:"—", synonym:"—", mistake:"「你好」の丁寧形。目上の人への挨拶に使う。"},
       {no:2, jp:"初めまして", cn:"初次见面", py:"chūcì jiànmiàn", pos:"フレーズ", freq:5, scene:"義実家訪問の場面", meaning:"初めまして", collocate:"—", synonym:"—", mistake:"初対面の挨拶の定番。"},
@@ -2035,7 +2041,7 @@ const sectionsData = {
     ],
     dialogues: []
   },
-  93: {
+  913: {
     words: [
       {no:1, jp:"贈り物", cn:"礼物", py:"lǐwù", pos:"名詞", freq:5, scene:"義実家訪問の場面", meaning:"贈り物", collocate:"—", synonym:"—", mistake:"「带礼物(お土産を持ってくる)」のようによく使う。"},
       {no:2, jp:"ほんの気持ちです", cn:"一点心意", py:"yìdiǎn xīnyì", pos:"フレーズ", freq:5, scene:"義実家訪問の場面", meaning:"ほんの気持ちです", collocate:"—", synonym:"—", mistake:"贈り物を渡す時の謙遜の定番フレーズ。"},
@@ -2062,7 +2068,7 @@ const sectionsData = {
     ],
     dialogues: []
   },
-  94: {
+  914: {
     words: [
       {no:1, jp:"これが私の父です", cn:"这是我爸爸", py:"zhè shì wǒ bàba", pos:"フレーズ", freq:5, scene:"義実家訪問の場面", meaning:"これが私の父です", collocate:"—", synonym:"—", mistake:"家族紹介の基本パターン「这是我+続柄」。"},
       {no:2, jp:"これが私の母です", cn:"这是我妈妈", py:"zhè shì wǒ māma", pos:"フレーズ", freq:5, scene:"義実家訪問の場面", meaning:"これが私の母です", collocate:"—", synonym:"—", mistake:"「这是我爸爸」と同じパターンの応用。"},
@@ -2089,7 +2095,7 @@ const sectionsData = {
     ],
     dialogues: []
   },
-  95: {
+  915: {
     words: [
       {no:1, jp:"どうぞお座りください", cn:"请坐", py:"qǐng zuò", pos:"フレーズ", freq:5, scene:"義実家訪問の場面", meaning:"どうぞお座りください", collocate:"—", synonym:"—", mistake:"食卓に案内する時の基本フレーズ。"},
       {no:2, jp:"箸をつける", cn:"动筷子", py:"dòng kuàizi", pos:"フレーズ", freq:5, scene:"義実家訪問の場面", meaning:"箸をつける", collocate:"—", synonym:"—", mistake:"「大家动筷子吧(みなさん食べ始めましょう)」のように使う。"},
@@ -2116,7 +2122,7 @@ const sectionsData = {
     ],
     dialogues: []
   },
-  96: {
+  916: {
     words: [
       {no:1, jp:"お元気ですか", cn:"身体好吗", py:"shēntǐ hǎo ma", pos:"フレーズ", freq:5, scene:"義実家訪問の場面", meaning:"お元気ですか", collocate:"—", synonym:"—", mistake:"健康を気遣う定番の挨拶表現。"},
       {no:2, jp:"顔色いいですね", cn:"气色不错", py:"qìsè búcuò", pos:"フレーズ", freq:5, scene:"義実家訪問の場面", meaning:"顔色いいですね", collocate:"—", synonym:"—", mistake:"相手の健康状態を褒める一言。"},
@@ -2143,7 +2149,7 @@ const sectionsData = {
     ],
     dialogues: []
   },
-  97: {
+  917: {
     words: [
       {no:1, jp:"坊や、お嬢ちゃん", cn:"小朋友", py:"xiǎopéngyǒu", pos:"名詞", freq:5, scene:"義実家訪問の場面", meaning:"坊や、お嬢ちゃん", collocate:"—", synonym:"—", mistake:"子供への呼びかけとして定番の言い方。"},
       {no:2, jp:"何歳ですか", cn:"几岁了", py:"jǐ suì le", pos:"フレーズ", freq:5, scene:"義実家訪問の場面", meaning:"何歳ですか", collocate:"—", synonym:"—", mistake:"子供の年齢を尋ねる際の基本表現。"},
@@ -2170,7 +2176,7 @@ const sectionsData = {
     ],
     dialogues: []
   },
-  98: {
+  918: {
     words: [
       {no:1, jp:"私が手伝います", cn:"我来帮忙", py:"wǒ lái bāngmáng", pos:"フレーズ", freq:5, scene:"義実家訪問の場面", meaning:"私が手伝います", collocate:"—", synonym:"—", mistake:"第4課の「帮忙」の応用。進んで手伝う申し出の定番。"},
       {no:2, jp:"手伝いは必要ですか", cn:"需要帮忙吗", py:"xūyào bāngmáng ma", pos:"フレーズ", freq:5, scene:"義実家訪問の場面", meaning:"手伝いは必要ですか", collocate:"—", synonym:"—", mistake:"相手に手伝いを申し出る時の丁寧な聞き方。"},
@@ -2197,7 +2203,7 @@ const sectionsData = {
     ],
     dialogues: []
   },
-  99: {
+  919: {
     words: [
       {no:1, jp:"写真を撮る", cn:"拍照", py:"pāizhào", pos:"動詞フレーズ", freq:5, scene:"義実家訪問の場面", meaning:"写真を撮る", collocate:"—", synonym:"—", mistake:"「拍一张照(1枚撮ろう)」のようによく使う。"},
       {no:2, jp:"集合写真", cn:"合影", py:"héyǐng", pos:"名詞", freq:5, scene:"義実家訪問の場面", meaning:"集合写真", collocate:"—", synonym:"—", mistake:"「一起合影吧(一緒に写真撮ろう)」のように使う。"},
@@ -2224,7 +2230,7 @@ const sectionsData = {
     ],
     dialogues: []
   },
-  100: {
+  920: {
     words: [
       {no:1, jp:"そろそろ帰る時間です", cn:"该走了", py:"gāi zǒu le", pos:"フレーズ", freq:5, scene:"義実家訪問の場面", meaning:"そろそろ帰る時間です", collocate:"—", synonym:"—", mistake:"別れ際の切り出しに使う基本フレーズ。"},
       {no:2, jp:"名残惜しいです", cn:"舍不得", py:"shěbude", pos:"フレーズ", freq:5, scene:"義実家訪問の場面", meaning:"名残惜しいです", collocate:"—", synonym:"—", mistake:"別れを惜しむ気持ちを伝える定番表現。"},
@@ -2975,7 +2981,7 @@ const sectionsData = {
     ]
   }
 ,
-  61: {
+  901: {
     words: [
       {no:1, jp:"うん、そう", cn:"嗯", py:"ń", pos:"感嘆詞", freq:5, scene:"会話中の基本の相槌", meaning:"うん、そう", collocate:"嗯,好的、嗯嗯", synonym:"—", mistake:"声調は文脈で変わることがあるが、まず「ń(第2声)」で覚えておけば通じる。最も基本的な相槌。"},
       {no:2, jp:"へえ、そうなんだ", cn:"哦", py:"ó", pos:"感嘆詞", freq:5, scene:"新しい情報を受け止める時の相槌", meaning:"へえ、そうなんだ", collocate:"哦,是这样啊", synonym:"—", mistake:"単独で使うと素っ気なく聞こえることもあるので、後に一言足すとより自然。"},
@@ -3023,7 +3029,7 @@ const sectionsData = {
       [10,[["A","今天路上特别堵。","jīntiān lùshang tèbié dǔ.","今日道すごく渋滞してた。"],["B","怪不得你迟到了。","guài bu dé nǐ chídào le.","道理で遅刻したんだね。"]]],
     ]
   },
-  62: {
+  902: {
     words: [
       {no:1, jp:"はい、わかりました", cn:"好的", py:"hǎo de", pos:"フレーズ", freq:5, scene:"依頼や提案に応じる基本の相槌", meaning:"はい、わかりました", collocate:"好的,没问题", synonym:"—", mistake:"「好」だけでも通じるが、「好的」の方が丁寧で幅広い場面に使える。"},
       {no:2, jp:"分かりました", cn:"明白了", py:"míngbai le", pos:"フレーズ", freq:5, scene:"説明を理解したことを伝える相槌", meaning:"分かりました", collocate:"我明白了、明白了吗", synonym:"—", mistake:"「懂了」と似ているが、「明白」の方が「納得して理解した」というニュアンスが強い。"},
@@ -3465,6 +3471,44 @@ function renderHome(){
       row.addEventListener('click', ()=> openSection(Number(row.dataset.id)));
     });
   });
+
+  // ---- special materials (independent of level numbering) ----
+  const specialEl = document.getElementById('specialSection');
+  specialEl.innerHTML = '';
+  const specialCats = [...new Set(sectionsMeta.filter(s=>s.level==='special').map(s=>s.cat))];
+  if(specialCats.length){
+    const header = document.createElement('div');
+    header.className = 'special-header';
+    header.textContent = '特別教材(レベルの番号とは別枠のボーナスコンテンツ)';
+    specialEl.appendChild(header);
+    const note = document.createElement('p');
+    note.className = 'special-note';
+    note.textContent = '通常のレベル進行とは独立して、いつでも追加・利用できます。';
+    specialEl.appendChild(note);
+    specialCats.forEach(cat=>{
+      const catBlock = document.createElement('div');
+      catBlock.className = 'cat-block';
+      const rows = sectionsMeta.filter(s=>s.cat===cat).map(s=>{
+        const has = !!sectionsData[s.id];
+        const prog = appState.progress[s.id] || {};
+        let dotClass = 'sec-dot';
+        if(!has) dotClass += ' locked-dot';
+        else if(prog.vocab && prog.test) dotClass += ' done';
+        else if(prog.vocab || prog.test) dotClass += ' half';
+        return `<div class="sec-row ${has?'':'locked'}" data-id="${s.id}">
+          <div class="${dotClass}"></div>
+          <span class="sec-num">${s.id}</span>
+          <span class="sec-title">${s.title}</span>
+          ${has ? '<span class="sec-chevron">›</span>' : '<span class="sec-tag">準備中</span>'}
+        </div>`;
+      }).join('');
+      catBlock.innerHTML = `<div class="cat-title">${cat}</div>${rows}`;
+      specialEl.appendChild(catBlock);
+    });
+    specialEl.querySelectorAll('.sec-row:not(.locked)').forEach(row=>{
+      row.addEventListener('click', ()=> openSection(Number(row.dataset.id)));
+    });
+  }
 
   // expand/collapse level bodies on tap
   levelListEl.querySelectorAll('.level-head').forEach(head=>{
