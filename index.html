@@ -33,7 +33,7 @@
   h1 .accent{color:var(--seal);}
   .sub{font-size:13px; color:var(--ink-soft); max-width:460px; margin:0 auto; line-height:1.7;}
 
-  main{max-width:760px; margin:0 auto; padding:20px 22px 0;}
+  main{max-width:760px; margin:0 auto; padding:14px 22px 0;}
   .view{display:none;}
   .view.active{display:block; animation:fade .35s ease;}
   @keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
@@ -47,13 +47,27 @@
   .goal-label{font-size:12px; color:var(--ink-soft); font-weight:600;}
   .goal-count{font-size:13px; color:var(--jade-deep); font-weight:700; white-space:nowrap;}
   .goal-track{height:6px; background:var(--line); border-radius:3px; overflow:hidden; margin-bottom:10px;}
+  .speed-row{
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+    margin:10px 0 14px; font-size:12px; color:var(--ink-soft); flex-wrap:wrap;
+  }
+  .speed-opts{display:flex; gap:6px;}
+  .speed-btn{
+    padding:5px 12px; border-radius:14px; border:1px solid var(--line); background:rgba(255,255,255,0.5);
+    color:var(--ink-soft); font-family:inherit; font-size:12px; font-weight:700; cursor:pointer;
+  }
+  .speed-btn.active{color:var(--jade-deep); border-color:var(--jade-deep); background:rgba(63,107,91,0.1);}
   .goal-fill{height:100%; background:linear-gradient(90deg,var(--jade),var(--jade-deep)); width:0%; transition:width .6s;}
   .goal-note{font-size:11.5px; color:var(--ink-soft); line-height:1.7; margin:0;}
 
   .special-header{
     font-family:'Noto Serif SC',serif; font-weight:700; font-size:14.5px; color:var(--seal);
     margin:22px 0 10px; padding-top:14px; border-top:1px dashed var(--line);
+    display:flex; align-items:center; justify-content:space-between; cursor:pointer;
   }
+  .special-caret{font-size:12px; color:var(--ink-soft); transition:transform .2s; flex-shrink:0;}
+  .special-header.collapsed .special-caret{transform:rotate(-90deg);}
+  .special-body.hidden{display:none;}
   .special-note{font-size:11.5px; color:var(--ink-soft); margin:-4px 0 14px; line-height:1.7;}
   .level-block{margin-bottom:14px; border:1px solid var(--line); border-radius:12px 12px 12px 3px; overflow:hidden;}
   .level-head{
@@ -72,6 +86,7 @@
   .level-tag{margin-left:auto; font-size:10.5px; color:var(--ink-soft); border:1px solid var(--line); border-radius:10px; padding:2px 9px; flex-shrink:0;}
   .level-body{padding:4px 16px 12px;}
   .level-body.hidden{display:none;}
+  .review-card{
     display:flex; align-items:center; gap:14px; padding:16px 18px; margin-bottom:26px;
     background:var(--card-bg); border:1px solid var(--seal); border-radius:12px 12px 12px 3px; cursor:pointer;
   }
@@ -101,15 +116,16 @@
 
   .back-btn{
     display:inline-flex; align-items:center; gap:6px; font-size:12.5px; color:var(--jade-deep);
-    background:none; border:none; cursor:pointer; padding:0 0 14px; font-family:inherit; font-weight:700;
+    background:none; border:none; cursor:pointer; padding:0; font-family:inherit; font-weight:700;
   }
+  .sec-nav-row{display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;}
 
   /* ---- section detail ---- */
-  .sec-header{text-align:center; margin-bottom:14px;}
+  .sec-header{text-align:center; margin-bottom:8px;}
   .sec-header .cat{font-size:11px; color:var(--gold); letter-spacing:.08em;}
   .sec-header h2{font-family:'Noto Serif SC',serif; font-weight:900; font-size:24px; margin:2px 0 0;}
 
-  nav.tabs{display:flex; gap:6px; border-bottom:1px solid var(--line); margin-bottom:20px;}
+  nav.tabs{display:flex; gap:6px; border-bottom:1px solid var(--line); margin-bottom:12px;}
   nav.tabs button{
     flex:1; background:none; border:none; padding:11px 4px; font-family:'Noto Sans SC',sans-serif;
     font-size:13px; font-weight:700; color:var(--ink-soft); cursor:pointer;
@@ -125,7 +141,7 @@
   .deck-progress-wrap{display:flex; align-items:center; gap:10px; font-size:12.5px; color:var(--ink-soft); margin-bottom:6px;}
   .deck-progress-track{flex:1; height:4px; background:var(--line); border-radius:2px; overflow:hidden;}
   .deck-progress-fill{height:100%; background:linear-gradient(90deg,var(--jade),var(--jade-deep)); width:0%; transition:width .4s;}
-  .deck-sub{font-size:11.5px; color:var(--ink-soft); opacity:.65; text-align:center; margin-bottom:18px;}
+  .deck-sub{font-size:11.5px; color:var(--ink-soft); opacity:.65; text-align:center; margin-bottom:12px;}
   .deck-stage{position:relative; width:100%; max-width:320px; margin:0 auto;}
   .deck-card{
     position:relative; background:var(--card-bg); border:1px solid var(--line);
@@ -164,15 +180,21 @@
   .deck-meaning-area .row{margin-bottom:3px;}
   .deck-meaning-area .mistake{background:rgba(166,58,46,0.07); border-left:2px solid var(--seal); padding:6px 10px; margin-top:10px; border-radius:0 4px 4px 0; text-align:left; font-size:11.5px;}
 
+  .next-sec-btn{
+    padding:6px 14px; border-radius:20px;
+    border:1px solid var(--line); background:rgba(255,255,255,0.5); color:var(--jade-deep);
+    font-family:inherit; font-size:12.5px; font-weight:700; cursor:pointer;
+  }
+  .next-sec-btn:active{background:rgba(63,107,91,0.1);}
   .deck-footer{display:flex; border-top:1px solid var(--line); flex-shrink:0;}
   .deck-foot-btn{
     flex:1; border:none; background:none; padding:18px 8px; font-family:inherit;
     font-size:15px; font-weight:700; cursor:pointer; transition:background .15s;
   }
   .deck-foot-btn:active{background:rgba(34,32,28,0.06);}
-  .deck-foot-btn.reveal{color:var(--ink-soft); border-right:1px solid var(--line);}
-  .deck-foot-btn.know{color:var(--jade-deep); border-right:1px solid var(--line);}
-  .deck-foot-btn.dontknow{color:var(--seal);}
+  .deck-foot-btn.reveal{color:var(--ink-soft);}
+  .deck-foot-btn.know{color:var(--jade-deep);}
+  .deck-foot-btn.dontknow{color:var(--seal); border-right:1px solid var(--line);}
   .deck-foot-btn.next{color:var(--jade-deep);}
   .deck-result{margin-top:14px; font-weight:700; font-size:13px; padding:8px 14px; border-radius:8px; display:inline-block;}
   .deck-result.ok{color:var(--jade-deep); background:rgba(63,107,91,0.1);}
@@ -229,6 +251,13 @@
 
   <!-- HOME -->
   <div class="view active" id="view-home">
+    <div class="review-card" id="reviewCard">
+      <div class="review-stamp">復</div>
+      <div>
+        <div class="review-title">苦手単語の復習</div>
+        <div class="review-sub" id="reviewSub">読み込み中…</div>
+      </div>
+    </div>
     <div class="goal-card" id="goalCard">
       <div class="goal-head">
         <span class="goal-label">中国での生活に必要な語彙の目安</span>
@@ -237,20 +266,24 @@
       <div class="goal-track"><div class="goal-fill" id="goalFill"></div></div>
       <p class="goal-note">日常生活の基礎に約500語、仕事や込み入った話にも対応するには2000語前後が一つの節目とされます。このアプリでは500語を1レベルとして積み上げていきます。</p>
     </div>
-    <div id="levelList"></div>
-    <div id="specialSection"></div>
-    <div class="review-card" id="reviewCard">
-      <div class="review-stamp">復</div>
-      <div>
-        <div class="review-title">苦手単語の復習</div>
-        <div class="review-sub" id="reviewSub">読み込み中…</div>
+    <div class="speed-row" id="speedRow">
+      <span class="speed-label">読み上げ速度</span>
+      <div class="speed-opts">
+        <button class="speed-btn" data-rate="0.65">ゆっくり</button>
+        <button class="speed-btn" data-rate="0.78">やや遅め</button>
+        <button class="speed-btn" data-rate="0.9">標準</button>
       </div>
     </div>
+    <div id="levelList"></div>
+    <div id="specialSection"></div>
   </div>
 
   <!-- SECTION DETAIL -->
   <div class="view" id="view-section">
-    <button class="back-btn" id="backFromSection">← 課の一覧</button>
+    <div class="sec-nav-row">
+      <button class="back-btn" id="backFromSection">← 課の一覧</button>
+      <button class="next-sec-btn" id="nextSectionBtn" style="display:none;">次の課へ ›</button>
+    </div>
     <div class="sec-header">
       <div class="cat" id="secCat"></div>
       <h2 id="secTitle"></h2>
@@ -359,7 +392,7 @@ const levelsMeta = [
   {id:1, title:"レベル1:生活基盤", desc:"衣食住・日常生活の基本(全50課)", words:500, done:true},
   {id:2, title:"レベル2:生活の実務", desc:"病院・行政手続き・スマホ決済・友人関係・緊急対応(全50課、仕事関連は含まない)", words:500, done:true},
   {id:3, title:"レベル3:身の回りの物・場所・方向", desc:"施設名・位置関係・日用品・数字量詞・天気自然(全50課)", words:500, done:true},
-  {id:4, title:"レベル4:生活の彩り", desc:"空港・年中行事・趣味・ご近所付き合い・グルメ(全50課、仕事関連は含まない)", words:500, done:false},
+  {id:4, title:"レベル4:生活の彩り", desc:"空港・年中行事・趣味・ご近所付き合い・グルメ(全50課、仕事関連は含まない)", words:500, done:true},
 ];
 
 /* ===================== 中身データ(今は第1課のみ) ===================== */
@@ -9068,6 +9101,1693 @@ const sectionsData = {
       [10,[["A","为什么要回礼?","wèishénme yào huílǐ?","なんでお返ししないといけないの?"],["B","中国人讲究礼尚往来。","zhōngguórén jiǎngjiu lǐshàngwǎnglái.","中国人は礼には礼で応えることを重んじるからだよ。"]]],
     ]
   }
+,
+  172: {
+    words: [
+      {no:1, jp:"撮影する、写真撮影", cn:"摄影", py:"shèyǐng", pos:"動詞/名詞", freq:5, scene:"写真撮影趣味の話", meaning:"撮影する、写真撮影", collocate:"喜欢摄影、摄影技巧", synonym:"—", mistake:"摄(撮る)+影(影、映像)の組み合わせ。"},
+      {no:2, jp:"構図", cn:"构图", py:"gòutú", pos:"名詞", freq:4, scene:"写真の構図について話す", meaning:"構図", collocate:"构图不错、学习构图", synonym:"—", mistake:"构(構成する)+图(図)の組み合わせ。"},
+      {no:3, jp:"フィルター", cn:"滤镜", py:"lǜjìng", pos:"名詞", freq:4, scene:"第128課で既出、写真加工の文脈で再登場", meaning:"フィルター", collocate:"加滤镜、选滤镜", synonym:"—", mistake:"これまでも頻出。"},
+      {no:4, jp:"後処理、レタッチ", cn:"后期", py:"hòuqī", pos:"名詞", freq:4, scene:"写真の編集作業について話す", meaning:"後処理、レタッチ", collocate:"后期处理、做后期", synonym:"—", mistake:"后(後の)+期(段階)の組み合わせ、撮影後の加工作業を指す。"},
+      {no:5, jp:"写真展", cn:"摄影展", py:"shèyǐngzhǎn", pos:"名詞", freq:3, scene:"写真展を見に行く話", meaning:"写真展", collocate:"去摄影展、参加摄影展", synonym:"—", mistake:"摄影(写真撮影)+展(展覧会)の組み合わせ。"},
+      {no:6, jp:"風景写真", cn:"风光摄影", py:"fēngguāng shèyǐng", pos:"名詞フレーズ", freq:3, scene:"風景を撮る写真ジャンルの話", meaning:"風景写真", collocate:"拍风光摄影、风光摄影作品", synonym:"—", mistake:"风光(風景)+摄影(撮影)の組み合わせ。"},
+      {no:7, jp:"人物写真", cn:"人像摄影", py:"rénxiàng shèyǐng", pos:"名詞フレーズ", freq:3, scene:"人物を撮る写真ジャンルの話", meaning:"人物写真", collocate:"拍人像摄影、人像摄影技巧", synonym:"—", mistake:"人像(人物像)+摄影(撮影)の組み合わせ。"},
+      {no:8, jp:"カメラレンズ", cn:"相机镜头", py:"xiàngjī jìngtóu", pos:"名詞フレーズ", freq:4, scene:"第126課「相机」の応用、レンズについての話", meaning:"カメラレンズ", collocate:"换镜头、镜头很贵", synonym:"—", mistake:"相机(カメラ)+镜头(レンズ)の組み合わせ。"},
+      {no:9, jp:"写真愛好家", cn:"摄影爱好者", py:"shèyǐng àihàozhě", pos:"名詞フレーズ", freq:4, scene:"趣味として写真を撮る人の話", meaning:"写真愛好家", collocate:"摄影爱好者、成为摄影爱好者", synonym:"—", mistake:"摄影(撮影)+爱好者(愛好家)の組み合わせ。"},
+      {no:10, jp:"スポットで記念撮影する", cn:"打卡拍照", py:"dǎkǎ pāizhào", pos:"動詞フレーズ", freq:5, scene:"観光地などで写真を撮る若者言葉", meaning:"スポットで記念撮影する", collocate:"网红打卡拍照、去打卡拍照", synonym:"—", mistake:"打卡(タイムカードを押す→訪問記録を残す)+拍照(写真を撮る)の組み合わせ、SNS時代の若者言葉。"},
+    ],
+    examples: [
+      [1,"我喜欢摄影。","wǒ xǐhuan shèyǐng.","写真撮影が好きです。"],
+      [1,"学习一些摄影技巧。","xuéxí yìxiē shèyǐng jìqiǎo.","写真撮影のテクニックをいくつか学びます。"],
+      [2,"这张照片构图不错。","zhè zhāng zhàopiàn gòutú búcuò.","この写真構図いいですね。"],
+      [2,"学习一下构图方法。","xuéxí yíxià gòutú fāngfǎ.","構図の方法を学んでみよう。"],
+      [3,"加个滤镜吧。","jiā ge lǜjìng ba.","フィルター加えようよ。"],
+      [3,"选个好看的滤镜。","xuǎn ge hǎokàn de lǜjìng.","かわいいフィルター選んでね。"],
+      [4,"需要做后期处理。","xūyào zuò hòuqī chǔlǐ.","後処理をする必要があります。"],
+      [4,"后期花了很长时间。","hòuqī huā le hěn cháng shíjiān.","後処理にすごく時間がかかりました。"],
+      [5,"我们去看摄影展吧。","wǒmen qù kàn shèyǐngzhǎn ba.","写真展を見に行きましょう。"],
+      [5,"摄影展作品很精彩。","shèyǐngzhǎn zuòpǐn hěn jīngcǎi.","写真展の作品すごく見応えがあります。"],
+      [6,"我喜欢风光摄影。","wǒ xǐhuan fēngguāng shèyǐng.","風景写真が好きです。"],
+      [6,"这是风光摄影作品。","zhè shì fēngguāng shèyǐng zuòpǐn.","これは風景写真作品です。"],
+      [7,"他专注人像摄影。","tā zhuānzhù rénxiàng shèyǐng.","彼は人物写真に専念しています。"],
+      [7,"人像摄影技巧很重要。","rénxiàng shèyǐng jìqiǎo hěn zhòngyào.","人物写真のテクニックはとても重要です。"],
+      [8,"换个相机镜头吧。","huàn ge xiàngjī jìngtóu ba.","カメラレンズを変えましょう。"],
+      [8,"这个镜头很贵。","zhège jìngtóu hěn guì.","このレンズすごく高いです。"],
+      [9,"我是摄影爱好者。","wǒ shì shèyǐng àihàozhě.","私は写真愛好家です。"],
+      [9,"越来越多人成为摄影爱好者。","yuèláiyuè duō rén chéngwéi shèyǐng àihàozhě.","ますます多くの人が写真愛好家になっています。"],
+      [10,"我们去打卡拍照吧。","wǒmen qù dǎkǎ pāizhào ba.","スポットで記念撮影しに行きましょう。"],
+      [10,"这里是网红打卡地。","zhèlǐ shì wǎnghóng dǎkǎ dì.","ここは人気の撮影スポットです。"],
+    ],
+    dialogues: [
+      [1,[["A","你有什么爱好?","nǐ yǒu shénme àihào?","趣味何かある?"],["B","我喜欢摄影。","wǒ xǐhuan shèyǐng.","写真撮影が好きだよ。"]]],
+      [2,[["A","这张照片怎么样?","zhè zhāng zhàopiàn zěnmeyàng?","この写真どう?"],["B","构图很好,光线也不错。","gòutú hěn hǎo, guāngxiàn yě búcuò.","構図すごくいいし、光の入り方もいいね。"]]],
+      [3,[["A","要加滤镜吗?","yào jiā lǜjìng ma?","フィルター加える?"],["B","加一个复古滤镜吧。","jiā yí ge fùgǔ lǜjìng ba.","レトロなフィルター加えよう。"]]],
+      [4,[["A","照片需要修图吗?","zhàopiàn xūyào xiūtú ma?","写真編集必要?"],["B","需要做点后期。","xūyào zuò diǎn hòuqī.","ちょっと後処理必要だね。"]]],
+      [5,[["A","周末去哪里?","zhōumò qù nǎlǐ?","週末どこ行く?"],["B","去看摄影展。","qù kàn shèyǐngzhǎn.","写真展見に行くよ。"]]],
+      [6,[["A","你喜欢拍什么?","nǐ xǐhuan pāi shénme?","何撮るの好き?"],["B","主要拍风光摄影。","zhǔyào pāi fēngguāng shèyǐng.","主に風景写真撮ってるよ。"]]],
+      [7,[["A","你拍人像吗?","nǐ pāi rénxiàng ma?","人物写真撮る?"],["B","拍,人像摄影很有挑战性。","pāi, rénxiàng shèyǐng hěn yǒu tiǎozhànxìng.","撮るよ、人物写真すごくチャレンジングだから。"]]],
+      [8,[["A","换新镜头了吗?","huàn xīn jìngtóu le ma?","新しいレンズに変えた?"],["B","换了,拍出来效果更好。","huàn le, pāi chūlái xiàoguǒ gèng hǎo.","変えたよ、撮った仕上がりがもっといいよ。"]]],
+      [9,[["A","你是专业摄影师吗?","nǐ shì zhuānyè shèyǐngshī ma?","プロのカメラマンなの?"],["B","不是,只是摄影爱好者。","bú shì, zhǐshì shèyǐng àihàozhě.","違うよ、ただの写真愛好家だよ。"]]],
+      [10,[["A","这里适合拍照吗?","zhèlǐ shìhé pāizhào ma?","ここ写真撮るのに向いてる?"],["B","很适合,是热门打卡地。","hěn shìhé, shì rèmén dǎkǎ dì.","すごく向いてるよ、人気の撮影スポットだから。"]]],
+    ]
+  },
+  173: {
+    words: [
+      {no:1, jp:"コンサート", cn:"演唱会", py:"yǎnchànghuì", pos:"名詞", freq:5, scene:"歌手のライブコンサートについて話す", meaning:"コンサート", collocate:"去演唱会、演唱会门票", synonym:"—", mistake:"演唱(歌唱する)+会(会)の組み合わせ。"},
+      {no:2, jp:"歌手", cn:"歌手", py:"gēshǒu", pos:"名詞", freq:5, scene:"好きな歌手について話す", meaning:"歌手", collocate:"喜欢的歌手、歌手专辑", synonym:"—", mistake:"歌(歌)+手(手、〜をする人)の組み合わせ。"},
+      {no:3, jp:"アルバム", cn:"专辑", py:"zhuānjí", pos:"名詞", freq:5, scene:"音楽アルバムについて話す", meaning:"アルバム", collocate:"新专辑、买专辑", synonym:"—", mistake:"专(専門の)+辑(集める)の組み合わせ。"},
+      {no:4, jp:"歌詞", cn:"歌词", py:"gēcí", pos:"名詞", freq:5, scene:"歌詞の内容について話す", meaning:"歌詞", collocate:"歌词很好、看歌词", synonym:"—", mistake:"歌(歌)+词(言葉)の組み合わせ。"},
+      {no:5, jp:"メロディー", cn:"旋律", py:"xuánlǜ", pos:"名詞", freq:4, scene:"曲の旋律について話す", meaning:"メロディー", collocate:"旋律很好听、熟悉的旋律", synonym:"—", mistake:"旋(回る)+律(リズム)の組み合わせ。"},
+      {no:6, jp:"ライブ会場", cn:"live现场", py:"live xiànchǎng", pos:"名詞フレーズ", freq:4, scene:"ライブの現場での話", meaning:"ライブ会場", collocate:"live现场很棒、去live现场", synonym:"—", mistake:"英語のlive+现场(現場)の組み合わせ、若者言葉。"},
+      {no:7, jp:"ファン", cn:"粉丝", py:"fěnsī", pos:"名詞", freq:5, scene:"第127課で既出、音楽ファンの文脈で再登場", meaning:"ファン", collocate:"歌手的粉丝、忠实粉丝", synonym:"—", mistake:"アーティストのファンを指す音訳語。"},
+      {no:8, jp:"新曲を宣伝する", cn:"打歌", py:"dǎgē", pos:"動詞フレーズ", freq:3, scene:"新曲プロモーション活動の話", meaning:"新曲を宣伝する", collocate:"去打歌、打歌舞台", synonym:"—", mistake:"打(行う)+歌(歌)の組み合わせ、K-POP文化から来た表現。"},
+      {no:9, jp:"ライブ配信", cn:"live直播", py:"live zhíbō", pos:"名詞フレーズ", freq:4, scene:"オンラインでのライブ配信の話", meaning:"ライブ配信", collocate:"看live直播、live直播门票", synonym:"—", mistake:"第127課「直播」の応用。"},
+      {no:10, jp:"音楽フェス", cn:"音乐节", py:"yīnyuèjié", pos:"名詞", freq:5, scene:"野外音楽フェスティバルについて話す", meaning:"音楽フェス", collocate:"去音乐节、音乐节阵容", synonym:"—", mistake:"音乐(音楽)+节(祭り)の組み合わせ。"},
+    ],
+    examples: [
+      [1,"我们去看演唱会吧。","wǒmen qù kàn yǎnchànghuì ba.","コンサートを見に行きましょう。"],
+      [1,"演唱会门票很难买。","yǎnchànghuì ménpiào hěn nán mǎi.","コンサートのチケットすごく取りにくいです。"],
+      [2,"我最喜欢的歌手是他。","wǒ zuì xǐhuan de gēshǒu shì tā.","私が一番好きな歌手は彼です。"],
+      [2,"这个歌手很有实力。","zhège gēshǒu hěn yǒu shílì.","この歌手すごく実力があります。"],
+      [3,"新专辑发行了。","xīn zhuānjí fāxíng le.","新アルバムが発売されました。"],
+      [3,"我买了他的专辑。","wǒ mǎi le tā de zhuānjí.","彼のアルバムを買いました。"],
+      [4,"这首歌歌词很好。","zhè shǒu gē gēcí hěn hǎo.","この曲の歌詞すごくいいです。"],
+      [4,"看看歌词是什么意思。","kànkan gēcí shì shénme yìsi.","歌詞がどんな意味か見てみよう。"],
+      [5,"这首歌旋律很好听。","zhè shǒu gē xuánlǜ hěn hǎotīng.","この曲のメロディーすごく素敵です。"],
+      [5,"熟悉的旋律响起了。","shúxī de xuánlǜ xiǎngqǐ le.","聞き慣れたメロディーが流れ始めました。"],
+      [6,"live现场气氛很棒。","live xiànchǎng qìfēn hěn bàng.","ライブ会場の雰囲気すごくいいです。"],
+      [6,"第一次去live现场。","dì yī cì qù live xiànchǎng.","初めてライブ会場に行きます。"],
+      [7,"我是他的粉丝。","wǒ shì tā de fěnsī.","私は彼のファンです。"],
+      [7,"粉丝数量很多。","fěnsī shùliàng hěn duō.","ファンの数がすごく多いです。"],
+      [8,"他去打歌了。","tā qù dǎgē le.","彼は新曲プロモーションに行きました。"],
+      [8,"打歌舞台很精彩。","dǎgē wǔtái hěn jīngcǎi.","新曲プロモーションステージすごく見応えがあります。"],
+      [9,"看live直播吧。","kàn live zhíbō ba.","ライブ配信を見ましょう。"],
+      [9,"live直播门票多少钱?","live zhíbō ménpiào duōshao qián?","ライブ配信のチケットいくらですか?"],
+      [10,"我们去音乐节吧。","wǒmen qù yīnyuèjié ba.","音楽フェスに行きましょう。"],
+      [10,"音乐节阵容很豪华。","yīnyuèjié zhènróng hěn háohuá.","音楽フェスのラインナップすごく豪華です。"],
+    ],
+    dialogues: [
+      [1,[["A","周末去看演唱会吗?","zhōumò qù kàn yǎnchànghuì ma?","週末コンサート見に行く?"],["B","去,票已经买好了。","qù, piào yǐjīng mǎi hǎo le.","行くよ、チケットもう買ってあるし。"]]],
+      [2,[["A","你喜欢什么歌手?","nǐ xǐhuan shénme gēshǒu?","どんな歌手好き?"],["B","我喜欢周杰伦。","wǒ xǐhuan Zhōu Jiélún.","ジェイ・チョウが好き。"]]],
+      [3,[["A","他出新专辑了吗?","tā chū xīn zhuānjí le ma?","彼新アルバム出した?"],["B","出了,昨天刚发行。","chū le, zuótiān gāng fāxíng.","出したよ、昨日発売されたばかり。"]]],
+      [4,[["A","这首歌歌词什么意思?","zhè shǒu gē gēcí shénme yìsi?","この曲の歌詞どんな意味?"],["B","说的是青春和梦想。","shuō de shì qīngchūn hé mèngxiǎng.","青春と夢について歌ってるんだ。"]]],
+      [5,[["A","这首歌旋律好听吗?","zhè shǒu gē xuánlǜ hǎotīng ma?","この曲のメロディー素敵?"],["B","很好听,一直单曲循环。","hěn hǎotīng, yìzhí dāngqǔ xúnhuán.","すごく素敵だよ、ずっとリピートしてる。"]]],
+      [6,[["A","live现场感觉怎么样?","live xiànchǎng gǎnjué zěnmeyàng?","ライブ会場の感じどう?"],["B","超级棒,气氛很好。","chāojí bàng, qìfēn hěn hǎo.","超いいよ、雰囲気すごくいい。"]]],
+      [7,[["A","你是他的粉丝吗?","nǐ shì tā de fěnsī ma?","彼のファンなの?"],["B","是,追了很多年了。","shì, zhuī le hěn duō nián le.","うん、何年も追ってるよ。"]]],
+      [8,[["A","他今天要打歌吗?","tā jīntiān yào dǎgē ma?","彼今日新曲プロモーションあるの?"],["B","是的,今晚有舞台。","shì de, jīnwǎn yǒu wǔtái.","うん、今夜ステージあるよ。"]]],
+      [9,[["A","能看live直播吗?","néng kàn live zhíbō ma?","ライブ配信見れる?"],["B","可以,买票就能看。","kěyǐ, mǎi piào jiù néng kàn.","見れるよ、チケット買えば見れる。"]]],
+      [10,[["A","今年音乐节去吗?","jīnnián yīnyuèjié qù ma?","今年音楽フェス行く?"],["B","去,阵容特别好。","qù, zhènróng tèbié hǎo.","行くよ、ラインナップすごくいいから。"]]],
+    ]
+  },
+  174: {
+    words: [
+      {no:1, jp:"小説", cn:"小说", py:"xiǎoshuō", pos:"名詞", freq:5, scene:"小説について話す", meaning:"小説", collocate:"看小说、写小说", synonym:"—", mistake:"小(小さい)+说(語り)の組み合わせ。"},
+      {no:2, jp:"エッセイ", cn:"散文", py:"sǎnwén", pos:"名詞", freq:4, scene:"随筆・エッセイについて話す", meaning:"エッセイ", collocate:"读散文、散文集", synonym:"—", mistake:"散(散らばった)+文(文章)の組み合わせ、自由な形式の文章。"},
+      {no:3, jp:"雑誌", cn:"杂志", py:"zázhì", pos:"名詞", freq:5, scene:"雑誌について話す", meaning:"雑誌", collocate:"买杂志、订阅杂志", synonym:"—", mistake:"杂(雑多な)+志(記録)の組み合わせ。"},
+      {no:4, jp:"書店", cn:"书店", py:"shūdiàn", pos:"名詞", freq:5, scene:"本を買う場所の話", meaning:"書店", collocate:"去书店、独立书店", synonym:"—", mistake:"书(本)+店(店)の組み合わせ。"},
+      {no:5, jp:"図書館で借りて読む", cn:"图书馆借阅", py:"túshūguǎn jièyuè", pos:"動詞フレーズ", freq:4, scene:"第101課「图书馆」の応用、借りる行為の話", meaning:"図書館で借りて読む", collocate:"去图书馆借阅、借阅证", synonym:"—", mistake:"图书馆(図書館)+借阅(借りて読む)の組み合わせ。"},
+      {no:6, jp:"ベストセラー", cn:"畅销书", py:"chàngxiāoshū", pos:"名詞", freq:4, scene:"人気の本について話す", meaning:"ベストセラー", collocate:"畅销书排行榜、这本是畅销书", synonym:"—", mistake:"畅销(よく売れる)+书(本)の組み合わせ。"},
+      {no:7, jp:"著者", cn:"作者", py:"zuòzhě", pos:"名詞", freq:5, scene:"本の作者について話す", meaning:"著者", collocate:"这本书的作者、喜欢的作者", synonym:"—", mistake:"作(作る)+者(人)の組み合わせ。"},
+      {no:8, jp:"ストーリー、筋書き", cn:"情节", py:"qíngjié", pos:"名詞", freq:5, scene:"小説の展開について話す", meaning:"ストーリー、筋書き", collocate:"情节精彩、情节复杂", synonym:"—", mistake:"情(状況)+节(節目)の組み合わせ。"},
+      {no:9, jp:"おすすめ本リスト", cn:"推荐书单", py:"tuījiàn shūdān", pos:"名詞フレーズ", freq:4, scene:"本を勧め合う話", meaning:"おすすめ本リスト", collocate:"分享推荐书单、看推荐书单", synonym:"—", mistake:"第16課「推荐」の応用、「书单(本のリスト)」との組み合わせ。"},
+      {no:10, jp:"読書感想", cn:"读后感", py:"dúhòugǎn", pos:"名詞", freq:4, scene:"読んだ本の感想について話す", meaning:"読書感想", collocate:"写读后感、分享读后感", synonym:"—", mistake:"读后(読んだ後)+感(感想)の組み合わせ。"},
+    ],
+    examples: [
+      [1,"我在看小说。","wǒ zài kàn xiǎoshuō.","小説を読んでいます。"],
+      [1,"这本小说很好看。","zhè běn xiǎoshuō hěn hǎokàn.","この小説すごく面白いです。"],
+      [2,"我喜欢读散文。","wǒ xǐhuan dú sǎnwén.","エッセイを読むのが好きです。"],
+      [2,"这本散文集很棒。","zhè běn sǎnwénjí hěn bàng.","このエッセイ集すごく素晴らしいです。"],
+      [3,"买了本杂志。","mǎi le běn zázhì.","雑誌を1冊買いました。"],
+      [3,"订阅了这本杂志。","dìngyuè le zhè běn zázhì.","この雑誌を定期購読しています。"],
+      [4,"我们去书店看看吧。","wǒmen qù shūdiàn kànkan ba.","書店に見に行きましょう。"],
+      [4,"附近有家独立书店。","fùjìn yǒu jiā dúlì shūdiàn.","近くに独立系書店があります。"],
+      [5,"去图书馆借阅吧。","qù túshūguǎn jièyuè ba.","図書館で借りに行きましょう。"],
+      [5,"办了图书馆借阅证。","bàn le túshūguǎn jièyuèzhèng.","図書館の貸出カードを作りました。"],
+      [6,"这是本畅销书。","zhè shì běn chàngxiāoshū.","これはベストセラーです。"],
+      [6,"查看畅销书排行榜。","chákàn chàngxiāoshū páihángbǎng.","ベストセラーランキングを見てみて。"],
+      [7,"这本书的作者是谁?","zhè běn shū de zuòzhě shì shéi?","この本の作者は誰ですか?"],
+      [7,"我喜欢这个作者。","wǒ xǐhuan zhège zuòzhě.","この作者好きです。"],
+      [8,"情节很精彩。","qíngjié hěn jīngcǎi.","ストーリーすごく見応えがあります。"],
+      [8,"情节有点复杂。","qíngjié yǒudiǎn fùzá.","ストーリーがちょっと複雑です。"],
+      [9,"分享一下推荐书单。","fēnxiǎng yíxià tuījiàn shūdān.","おすすめ本リストをシェアしてみて。"],
+      [9,"看看这个推荐书单。","kànkan zhège tuījiàn shūdān.","このおすすめ本リスト見てみて。"],
+      [10,"写了篇读后感。","xiě le piān dúhòugǎn.","読書感想文を1つ書きました。"],
+      [10,"分享我的读后感。","fēnxiǎng wǒ de dúhòugǎn.","私の読書感想をシェアします。"],
+    ],
+    dialogues: [
+      [1,[["A","最近在看什么?","zuìjìn zài kàn shénme?","最近何読んでる?"],["B","在看一本小说。","zài kàn yì běn xiǎoshuō.","小説を1冊読んでるよ。"]]],
+      [2,[["A","你喜欢散文吗?","nǐ xǐhuan sǎnwén ma?","エッセイ好き?"],["B","喜欢,很放松。","xǐhuan, hěn fàngsōng.","好きだよ、すごくリラックスできる。"]]],
+      [3,[["A","买了什么杂志?","mǎi le shénme zázhì?","何の雑誌買ったの?"],["B","买了一本时尚杂志。","mǎi le yì běn shíshàng zázhì.","ファッション雑誌1冊買ったよ。"]]],
+      [4,[["A","周末去哪里?","zhōumò qù nǎlǐ?","週末どこ行く?"],["B","去书店逛逛。","qù shūdiàn guàngguang.","書店ぶらぶらしに行くよ。"]]],
+      [5,[["A","怎么免费看书?","zěnme miǎnfèi kàn shū?","どうやったら無料で本読める?"],["B","去图书馆借阅就行。","qù túshūguǎn jièyuè jiù xíng.","図書館で借りればいいよ。"]]],
+      [6,[["A","这本书怎么样?","zhè běn shū zěnmeyàng?","この本どう?"],["B","是本畅销书,很受欢迎。","shì běn chàngxiāoshū, hěn shòu huānyíng.","ベストセラーだよ、すごく人気だし。"]]],
+      [7,[["A","你喜欢哪个作者?","nǐ xǐhuan nǎge zuòzhě?","どの作者好き?"],["B","我喜欢村上春树。","wǒ xǐhuan Cūnshàng Chūnshù.","村上春樹が好き。"]]],
+      [8,[["A","这本书情节怎么样?","zhè běn shū qíngjié zěnmeyàng?","この本のストーリーどう?"],["B","情节很精彩,推荐看。","qíngjié hěn jīngcǎi, tuījiàn kàn.","ストーリーすごく面白いよ、おすすめ。"]]],
+      [9,[["A","有什么好书推荐吗?","yǒu shénme hǎo shū tuījiàn ma?","何かいい本おすすめある?"],["B","我有个推荐书单,发给你。","wǒ yǒu ge tuījiàn shūdān, fā gěi nǐ.","おすすめ本リストあるよ、送るね。"]]],
+      [10,[["A","看完写读后感了吗?","kàn wán xiě dúhòugǎn le ma?","読み終わって感想書いた?"],["B","写了,分享给你看看。","xiě le, fēnxiǎng gěi nǐ kànkan.","書いたよ、シェアして見せるね。"]]],
+    ]
+  },
+  175: {
+    words: [
+      {no:1, jp:"ボードゲーム", cn:"桌游", py:"zhuōyóu", pos:"名詞", freq:5, scene:"第126課で既出、桌游店との関連で再登場", meaning:"ボードゲーム", collocate:"玩桌游、桌游聚会", synonym:"—", mistake:"桌(テーブル)+游(ゲーム)の組み合わせ。"},
+      {no:2, jp:"トランプ", cn:"扑克牌", py:"pūkèpái", pos:"名詞", freq:5, scene:"カードゲームの道具について話す", meaning:"トランプ", collocate:"一副扑克牌、玩扑克牌", synonym:"—", mistake:"扑克(ポーカー、トランプ)+牌(カード)の組み合わせ。"},
+      {no:3, jp:"麻雀", cn:"麻将", py:"májiàng", pos:"名詞", freq:5, scene:"中国で人気のゲームについて話す", meaning:"麻雀", collocate:"打麻将、麻将馆", synonym:"—", mistake:"中国の伝統的なゲーム、日常会話で非常によく話題になる。"},
+      {no:4, jp:"中国将棋", cn:"象棋", py:"xiàngqí", pos:"名詞", freq:4, scene:"中国将棋について話す", meaning:"中国将棋", collocate:"下象棋、象棋比赛", synonym:"—", mistake:"象(象)+棋(将棋、碁)の組み合わせ、中国伝統のボードゲーム。"},
+      {no:5, jp:"囲碁", cn:"围棋", py:"wéiqí", pos:"名詞", freq:4, scene:"囲碁について話す", meaning:"囲碁", collocate:"下围棋、围棋高手", synonym:"—", mistake:"围(囲む)+棋(碁)の組み合わせ。"},
+      {no:6, jp:"ゲームのルール", cn:"游戏规则", py:"yóuxì guīzé", pos:"名詞フレーズ", freq:5, scene:"ゲームのルールを説明する話", meaning:"ゲームのルール", collocate:"解释游戏规则、不懂游戏规则", synonym:"—", mistake:"游戏(ゲーム)+规则(規則)の組み合わせ。"},
+      {no:7, jp:"チームを組む", cn:"组队", py:"zǔduì", pos:"動詞", freq:5, scene:"ゲームでチームを作る話", meaning:"チームを組む", collocate:"组队玩、找人组队", synonym:"—", mistake:"组(組む)+队(チーム)の組み合わせ。"},
+      {no:8, jp:"勝ち負け", cn:"输赢", py:"shūyíng", pos:"名詞", freq:4, scene:"ゲームの結果について話す", meaning:"勝ち負け", collocate:"不在乎输赢、输赢很重要", synonym:"—", mistake:"输(負ける)+赢(勝つ)の組み合わせ。"},
+      {no:9, jp:"ゲームの一局", cn:"游戏局", py:"yóuxìjú", pos:"名詞", freq:3, scene:"ゲームのラウンドについて話す", meaning:"ゲームの一局", collocate:"再来一局、这局游戏", synonym:"—", mistake:"游戏(ゲーム)+局(局、ラウンド)の組み合わせ。"},
+      {no:10, jp:"初心者向けチュートリアル", cn:"新手教学", py:"xīnshǒu jiàoxué", pos:"名詞フレーズ", freq:4, scene:"ゲームを初めてやる人への説明の話", meaning:"初心者向けチュートリアル", collocate:"新手教学、看新手教学", synonym:"—", mistake:"新手(初心者)+教学(教える)の組み合わせ。"},
+    ],
+    examples: [
+      [1,"我们一起玩桌游吧。","wǒmen yìqǐ wán zhuōyóu ba.","一緒にボードゲームしましょう。"],
+      [1,"桌游聚会很有趣。","zhuōyóu jùhuì hěn yǒuqù.","ボードゲーム会すごく楽しいです。"],
+      [2,"我们打扑克牌吧。","wǒmen dǎ pūkèpái ba.","トランプしましょう。"],
+      [2,"带一副扑克牌。","dài yí fù pūkèpái.","トランプ1組持ってきて。"],
+      [3,"我们去打麻将吧。","wǒmen qù dǎ májiàng ba.","麻雀しに行きましょう。"],
+      [3,"附近有麻将馆。","fùjìn yǒu májiàng guǎn.","近くに麻雀店があります。"],
+      [4,"我们下象棋吧。","wǒmen xià xiàngqí ba.","中国将棋しましょう。"],
+      [4,"他象棋下得很好。","tā xiàngqí xià de hěn hǎo.","彼は中国将棋がすごくうまいです。"],
+      [5,"我们下围棋吧。","wǒmen xià wéiqí ba.","囲碁しましょう。"],
+      [5,"他是围棋高手。","tā shì wéiqí gāoshǒu.","彼は囲碁の達人です。"],
+      [6,"先解释一下游戏规则。","xiān jiěshì yíxià yóuxì guīzé.","まずゲームのルールを説明します。"],
+      [6,"我不懂游戏规则。","wǒ bù dǒng yóuxì guīzé.","ゲームのルールが分かりません。"],
+      [7,"我们组队玩吧。","wǒmen zǔduì wán ba.","チーム組んで遊びましょう。"],
+      [7,"找人组队打游戏。","zhǎo rén zǔduì dǎ yóuxì.","チームを組む人を探してゲームしよう。"],
+      [8,"不在乎输赢。","bú zàihu shūyíng.","勝ち負けは気にしません。"],
+      [8,"输赢不重要,开心就好。","shūyíng bú zhòngyào, kāixīn jiù hǎo.","勝ち負けは重要じゃなくて、楽しければいいです。"],
+      [9,"再来一局吧。","zài lái yì jú ba.","もう1局しましょう。"],
+      [9,"这局游戏很精彩。","zhè jú yóuxì hěn jīngcǎi.","この1局のゲームすごく見応えがあります。"],
+      [10,"先看看新手教学。","xiān kànkan xīnshǒu jiàoxué.","まず初心者向けチュートリアルを見てみましょう。"],
+      [10,"新手教学很详细。","xīnshǒu jiàoxué hěn xiángxì.","初心者向けチュートリアルすごく詳しいです。"],
+    ],
+    dialogues: [
+      [1,[["A","周末想玩桌游吗?","zhōumò xiǎng wán zhuōyóu ma?","週末ボードゲームしたい?"],["B","好啊,叫上朋友们。","hǎo a, jiào shàng péngyoumen.","いいね、友達も誘おう。"]]],
+      [2,[["A","带扑克牌了吗?","dài pūkèpái le ma?","トランプ持ってきた?"],["B","带了,我们玩几局。","dài le, wǒmen wán jǐ jú.","持ってきたよ、何局かしよう。"]]],
+      [3,[["A","春节打麻将吗?","chūnjié dǎ májiàng ma?","春節麻雀する?"],["B","打,是我们家的传统。","dǎ, shì wǒmen jiā de chuántǒng.","するよ、うちの伝統だから。"]]],
+      [4,[["A","你会下象棋吗?","nǐ huì xià xiàngqí ma?","中国将棋できる?"],["B","会一点,不算厉害。","huì yìdiǎn, bú suàn lìhai.","少しできるよ、すごいってほどじゃないけど。"]]],
+      [5,[["A","围棋好学吗?","wéiqí hǎo xué ma?","囲碁習いやすい?"],["B","入门容易,精通难。","rùmén róngyì, jīngtōng nán.","入門は簡単だけど、極めるのは難しいよ。"]]],
+      [6,[["A","能讲讲游戏规则吗?","néng jiǎngjiang yóuxì guīzé ma?","ゲームのルール説明してもらえる?"],["B","可以,我给你讲讲。","kěyǐ, wǒ gěi nǐ jiǎngjiang.","いいよ、説明するね。"]]],
+      [7,[["A","要不要组队?","yào bu yào zǔduì?","チーム組む?"],["B","好啊,一起组队打。","hǎo a, yìqǐ zǔduì dǎ.","いいね、一緒にチーム組もう。"]]],
+      [8,[["A","输了会生气吗?","shū le huì shēngqì ma?","負けたら怒る?"],["B","不会,不在乎输赢。","bú huì, bú zàihu shūyíng.","怒らないよ、勝ち負け気にしないから。"]]],
+      [9,[["A","还要再玩一局吗?","hái yào zài wán yì jú ma?","もう1局する?"],["B","好啊,再来一局。","hǎo a, zài lái yì jú.","いいね、もう1局やろう。"]]],
+      [10,[["A","第一次玩不懂怎么办?","dì yī cì wán bù dǒng zěnme bàn?","初めてやって分からないどうしよう?"],["B","看看新手教学就明白了。","kànkan xīnshǒu jiàoxué jiù míngbai le.","初心者向けチュートリアル見れば分かるよ。"]]],
+    ]
+  }
+,
+  171: {
+    words: [
+      {no:1, jp:"旅行ガイド、攻略情報", cn:"旅游攻略", py:"lǚyóu gōnglüè", pos:"名詞", freq:5, scene:"旅行前に調べる情報の話", meaning:"旅行ガイド、攻略情報", collocate:"看旅游攻略、写旅游攻略", synonym:"—", mistake:"旅游(旅行)+攻略(攻略する、対策情報)の組み合わせ、ネット上の旅行情報記事を指す頻出語。"},
+      {no:2, jp:"旅程を立てる", cn:"制定行程", py:"zhìdìng xíngchéng", pos:"動詞フレーズ", freq:5, scene:"旅行の計画を練る話", meaning:"旅程を立てる", collocate:"提前制定行程、制定详细行程", synonym:"—", mistake:"制定(策定する)+行程(旅程)の組み合わせ。"},
+      {no:3, jp:"個人旅行", cn:"自由行", py:"zìyóuxíng", pos:"名詞", freq:5, scene:"自分で手配する旅行スタイルの話", meaning:"個人旅行", collocate:"选择自由行、自由行更自由", synonym:"—", mistake:"自由(自由な)+行(旅行)の組み合わせ、「跟团游」の対義語。"},
+      {no:4, jp:"パッケージツアー", cn:"跟团游", py:"gēntuányóu", pos:"名詞", freq:5, scene:"添乗員付きツアーの話", meaning:"パッケージツアー", collocate:"参加跟团游、跟团游省心", synonym:"—", mistake:"跟团(団体について行く)+游(旅行)の組み合わせ。"},
+      {no:5, jp:"目的地", cn:"目的地", py:"mùdìdì", pos:"名詞", freq:5, scene:"旅行先を決める話", meaning:"目的地", collocate:"选择目的地、目的地是哪里", synonym:"—", mistake:"目的(目的)+地(地)の組み合わせ。"},
+      {no:6, jp:"旅行会社", cn:"旅行社", py:"lǚxíngshè", pos:"名詞", freq:5, scene:"旅行を手配する会社の話", meaning:"旅行会社", collocate:"找旅行社、旅行社推荐", synonym:"—", mistake:"旅行(旅行)+社(会社)の組み合わせ。"},
+      {no:7, jp:"旅程スケジュール", cn:"行程安排", py:"xíngchéng ānpái", pos:"名詞フレーズ", freq:5, scene:"旅行日程の詳細について話す", meaning:"旅程スケジュール", collocate:"确定行程安排、行程安排很满", synonym:"—", mistake:"行程(旅程)+安排(スケジュール)の組み合わせ。"},
+      {no:8, jp:"荷造りする", cn:"打包行李", py:"dǎbāo xínglǐ", pos:"動詞フレーズ", freq:5, scene:"出発前の荷物の準備の話", meaning:"荷造りする", collocate:"开始打包行李、打包行李清单", synonym:"—", mistake:"打包(パッキングする)+行李(荷物)の組み合わせ。"},
+      {no:9, jp:"旅行保険", cn:"旅行保险", py:"lǚxíng bǎoxiǎn", pos:"名詞", freq:4, scene:"旅行中のトラブルに備える保険の話", meaning:"旅行保険", collocate:"买旅行保险、旅行保险很重要", synonym:"—", mistake:"旅行(旅行)+保险(保険)の組み合わせ。"},
+      {no:10, jp:"ホテルを予約する", cn:"预订酒店", py:"yùdìng jiǔdiàn", pos:"動詞フレーズ", freq:5, scene:"宿泊先を手配する話", meaning:"ホテルを予約する", collocate:"提前预订酒店、在网上预订酒店", synonym:"—", mistake:"第108課「预订」の応用、旅行計画の基本作業。"},
+    ],
+    examples: [
+      [1,"看看旅游攻略吧。","kànkan lǚyóu gōnglüè ba.","旅行ガイドを見てみよう。"],
+      [1,"写了篇旅游攻略。","xiě le piān lǚyóu gōnglüè.","旅行攻略記事を1本書きました。"],
+      [2,"提前制定行程。","tíqián zhìdìng xíngchéng.","事前に旅程を立てます。"],
+      [2,"制定了详细的行程。","zhìdìng le xiángxì de xíngchéng.","詳細な旅程を立てました。"],
+      [3,"我们选择自由行吧。","wǒmen xuǎnzé zìyóuxíng ba.","個人旅行にしましょう。"],
+      [3,"自由行更自由。","zìyóuxíng gèng zìyóu.","個人旅行の方が自由です。"],
+      [4,"参加跟团游吧。","cānjiā gēntuányóu ba.","パッケージツアーに参加しましょう。"],
+      [4,"跟团游比较省心。","gēntuányóu bǐjiào shěngxīn.","パッケージツアーは比較的手間がかかりません。"],
+      [5,"目的地是哪里?","mùdìdì shì nǎlǐ?","目的地はどこですか?"],
+      [5,"选择一个目的地吧。","xuǎnzé yí ge mùdìdì ba.","目的地を1つ選びましょう。"],
+      [6,"找家旅行社吧。","zhǎo jiā lǚxíngshè ba.","旅行会社を探しましょう。"],
+      [6,"旅行社推荐了几个线路。","lǚxíngshè tuījiàn le jǐ ge xiànlù.","旅行会社がいくつかのルートを勧めてくれました。"],
+      [7,"确定一下行程安排。","quèdìng yíxià xíngchéng ānpái.","旅程スケジュールを確定してみて。"],
+      [7,"行程安排很满。","xíngchéng ānpái hěn mǎn.","旅程スケジュールすごく詰まっています。"],
+      [8,"开始打包行李吧。","kāishǐ dǎbāo xínglǐ ba.","荷造りを始めましょう。"],
+      [8,"列个打包行李清单。","liè ge dǎbāo xínglǐ qīngdān.","荷造りリストを作りましょう。"],
+      [9,"买份旅行保险吧。","mǎi fèn lǚxíng bǎoxiǎn ba.","旅行保険を1つ買いましょう。"],
+      [9,"旅行保险很重要。","lǚxíng bǎoxiǎn hěn zhòngyào.","旅行保険はとても重要です。"],
+      [10,"提前预订酒店吧。","tíqián yùdìng jiǔdiàn ba.","事前にホテルを予約しましょう。"],
+      [10,"在网上预订酒店。","zài wǎngshàng yùdìng jiǔdiàn.","ネットでホテルを予約します。"],
+    ],
+    dialogues: [
+      [1,[["A","去哪里看旅游攻略?","qù nǎlǐ kàn lǚyóu gōnglüè?","どこで旅行ガイド見れる?"],["B","网上有很多,可以搜一下。","wǎngshàng yǒu hěn duō, kěyǐ sōu yíxià.","ネットにたくさんあるよ、検索してみて。"]]],
+      [2,[["A","什么时候制定行程?","shénme shíhou zhìdìng xíngchéng?","いつ旅程立てる?"],["B","出发前一周就制定好了。","chūfā qián yì zhōu jiù zhìdìng hǎo le.","出発1週間前にはもう立てておくよ。"]]],
+      [3,[["A","这次是自由行吗?","zhè cì shì zìyóuxíng ma?","今回個人旅行?"],["B","是,我们自己安排。","shì, wǒmen zìjǐ ānpái.","うん、自分たちで手配するよ。"]]],
+      [4,[["A","要不要跟团游?","yào bu yào gēntuányóu?","パッケージツアーにする?"],["B","跟团游比较省心,考虑一下。","gēntuányóu bǐjiào shěngxīn, kǎolǜ yíxià.","パッケージツアーは楽だから、考えてみるね。"]]],
+      [5,[["A","目的地定了吗?","mùdìdì dìng le ma?","目的地決まった?"],["B","定了,去云南。","dìng le, qù yúnnán.","決まったよ、雲南に行くよ。"]]],
+      [6,[["A","找旅行社帮忙吗?","zhǎo lǚxíngshè bāngmáng ma?","旅行会社に手伝ってもらう?"],["B","找了,他们很专业。","zhǎo le, tāmen hěn zhuānyè.","頼んだよ、すごく専門的だから。"]]],
+      [7,[["A","行程安排紧张吗?","xíngchéng ānpái jǐnzhāng ma?","旅程スケジュールぎっしり?"],["B","有点紧张,但很充实。","yǒudiǎn jǐnzhāng, dàn hěn chōngshí.","ちょっとぎっしりだけど、充実してるよ。"]]],
+      [8,[["A","打包行李了吗?","dǎbāo xínglǐ le ma?","荷造りした?"],["B","还没,今晚开始打包。","hái méi, jīnwǎn kāishǐ dǎbāo.","まだ、今夜から荷造り始めるよ。"]]],
+      [9,[["A","需要买旅行保险吗?","xūyào mǎi lǚxíng bǎoxiǎn ma?","旅行保険買う必要ある?"],["B","建议买一份,以防万一。","jiànyì mǎi yí fèn, yǐfáng wànyī.","念のため1つ買っておくのお勧めだよ。"]]],
+      [10,[["A","酒店预订好了吗?","jiǔdiàn yùdìng hǎo le ma?","ホテル予約できた?"],["B","预订好了,位置很方便。","yùdìng hǎo le, wèizhi hěn fāngbiàn.","予約できたよ、立地すごく便利だし。"]]],
+    ]
+  }
+,
+  176: {
+    words: [
+      {no:1, jp:"試合", cn:"比赛", py:"bǐsài", pos:"名詞", freq:5, scene:"スポーツの試合について話す", meaning:"試合", collocate:"看比赛、比赛结果", synonym:"—", mistake:"これまでも頻出、基本のスポーツ語。"},
+      {no:2, jp:"サッカー(球技)ファン", cn:"球迷", py:"qiúmí", pos:"名詞", freq:5, scene:"球技ファンについて話す", meaning:"サッカー(球技)ファン", collocate:"忠实球迷、球迷加油", synonym:"—", mistake:"球(ボール)+迷(ファン)の組み合わせ。"},
+      {no:3, jp:"ホーム(本拠地)", cn:"主场", py:"zhǔchǎng", pos:"名詞", freq:4, scene:"ホームゲームについて話す", meaning:"ホーム(本拠地)", collocate:"主场比赛、主场优势", synonym:"—", mistake:"主(主な)+场(会場)の組み合わせ。"},
+      {no:4, jp:"アウェー", cn:"客场", py:"kèchǎng", pos:"名詞", freq:4, scene:"アウェーゲームについて話す", meaning:"アウェー", collocate:"客场比赛、客场作战", synonym:"—", mistake:"「主场」の反対語。"},
+      {no:5, jp:"応援する", cn:"加油", py:"jiāyóu", pos:"動詞フレーズ", freq:5, scene:"選手やチームを応援する話", meaning:"応援する", collocate:"为球队加油、加油打气", synonym:"—", mistake:"これまでも頻出、スポーツ観戦の文脈でも定番。"},
+      {no:6, jp:"試合の生中継", cn:"直播比赛", py:"zhíbō bǐsài", pos:"名詞フレーズ", freq:5, scene:"試合をライブで見る話", meaning:"試合の生中継", collocate:"看直播比赛、直播比赛信号", synonym:"—", mistake:"第127課「直播」の応用。"},
+      {no:7, jp:"試合日程", cn:"赛程", py:"sàichéng", pos:"名詞", freq:4, scene:"試合のスケジュールについて話す", meaning:"試合日程", collocate:"查看赛程、赛程安排", synonym:"—", mistake:"赛(試合)+程(日程)の組み合わせ。"},
+      {no:8, jp:"チーム", cn:"球队", py:"qiúduì", pos:"名詞", freq:5, scene:"球技のチームについて話す", meaning:"チーム", collocate:"喜欢的球队、球队阵容", synonym:"—", mistake:"球(ボール)+队(チーム)の組み合わせ。"},
+      {no:9, jp:"チャンピオン、優勝", cn:"冠军", py:"guànjūn", pos:"名詞", freq:5, scene:"優勝について話す", meaning:"チャンピオン、優勝", collocate:"获得冠军、冠军奖杯", synonym:"—", mistake:"冠(頂点)+军(勝者)の組み合わせ。"},
+      {no:10, jp:"控え選手、補欠", cn:"替补", py:"tìbǔ", pos:"名詞", freq:4, scene:"控え選手の起用について話す", meaning:"控え選手、補欠", collocate:"替补队员、换替补", synonym:"—", mistake:"替(代わる)+补(補う)の組み合わせ。"},
+    ],
+    examples: [
+      [1,"我们去看比赛吧。","wǒmen qù kàn bǐsài ba.","試合を見に行きましょう。"],
+      [1,"比赛结果怎么样?","bǐsài jiéguǒ zěnmeyàng?","試合結果どうでしたか?"],
+      [2,"我是他们的球迷。","wǒ shì tāmen de qiúmí.","私は彼らのファンです。"],
+      [2,"球迷都很热情。","qiúmí dōu hěn rèqíng.","ファンはみんなすごく熱心です。"],
+      [3,"今天是主场比赛。","jīntiān shì zhǔchǎng bǐsài.","今日はホームゲームです。"],
+      [3,"主场作战有优势。","zhǔchǎng zuòzhàn yǒu yōushì.","ホームでの試合には有利さがあります。"],
+      [4,"明天是客场比赛。","míngtiān shì kèchǎng bǐsài.","明日はアウェーゲームです。"],
+      [4,"客场作战不容易。","kèchǎng zuòzhàn bù róngyì.","アウェーでの試合は簡単じゃないです。"],
+      [5,"大家一起加油吧。","dàjiā yìqǐ jiāyóu ba.","みんなで応援しましょう。"],
+      [5,"为球队加油打气。","wèi qiúduì jiāyóu dǎqì.","チームを応援して励まします。"],
+      [6,"我们看直播比赛吧。","wǒmen kàn zhíbō bǐsài ba.","試合の生中継を見ましょう。"],
+      [6,"直播比赛信号不太好。","zhíbō bǐsài xìnhào bú tài hǎo.","試合生中継の電波あんまりよくないです。"],
+      [7,"查看一下赛程。","chákàn yíxià sàichéng.","試合日程を確認してみて。"],
+      [7,"赛程安排出来了。","sàichéng ānpái chūlái le.","試合日程が発表されました。"],
+      [8,"我喜欢这支球队。","wǒ xǐhuan zhè zhī qiúduì.","このチーム好きです。"],
+      [8,"球队阵容很强。","qiúduì zhènróng hěn qiáng.","チームのラインナップすごく強いです。"],
+      [9,"他们获得了冠军。","tāmen huòdé le guànjūn.","彼らは優勝しました。"],
+      [9,"捧起了冠军奖杯。","pěngqǐ le guànjūn jiǎngbēi.","優勝トロフィーを掲げました。"],
+      [10,"他是替补队员。","tā shì tìbǔ duìyuán.","彼は控え選手です。"],
+      [10,"教练换了替补上场。","jiàoliàn huàn le tìbǔ shàngchǎng.","コーチが控え選手に交代させました。"],
+    ],
+    dialogues: [
+      [1,[["A","今晚去看比赛吗?","jīnwǎn qù kàn bǐsài ma?","今夜試合見に行く?"],["B","去,已经买好票了。","qù, yǐjīng mǎi hǎo piào le.","行くよ、もうチケット買ってあるし。"]]],
+      [2,[["A","你是哪个队的球迷?","nǐ shì nǎge duì de qiúmí?","どのチームのファン?"],["B","我是皇马球迷。","wǒ shì huángmǎ qiúmí.","レアル・マドリードファンだよ。"]]],
+      [3,[["A","今天是主场吗?","jīntiān shì zhǔchǎng ma?","今日ホーム?"],["B","是,主场氛围很好。","shì, zhǔchǎng fēnwéi hěn hǎo.","うん、ホームの雰囲気すごくいいよ。"]]],
+      [4,[["A","客场比赛难赢吗?","kèchǎng bǐsài nán yíng ma?","アウェーの試合勝つの難しい?"],["B","相对难一些。","xiāngduì nán yìxiē.","比較的難しいね。"]]],
+      [5,[["A","一起为球队加油吧。","yìqǐ wèi qiúduì jiāyóu ba.","一緒にチーム応援しよう。"],["B","好,大家一起喊。","hǎo, dàjiā yìqǐ hǎn.","うん、みんなで一緒に声出そう。"]]],
+      [6,[["A","能看直播比赛吗?","néng kàn zhíbō bǐsài ma?","試合の生中継見れる?"],["B","可以,电视台会转播。","kěyǐ, diànshìtái huì zhuǎnbō.","見れるよ、テレビ局が中継するから。"]]],
+      [7,[["A","下一场比赛是什么时候?","xià yì chǎng bǐsài shì shénme shíhou?","次の試合いつ?"],["B","看一下赛程就知道了。","kàn yíxià sàichéng jiù zhīdào le.","試合日程見れば分かるよ。"]]],
+      [8,[["A","你支持哪支球队?","nǐ zhīchí nǎ zhī qiúduì?","どのチーム応援してるの?"],["B","我支持巴萨。","wǒ zhīchí bāsà.","バルセロナ応援してるよ。"]]],
+      [9,[["A","他们能拿冠军吗?","tāmen néng ná guànjūn ma?","彼ら優勝できる?"],["B","实力很强,有希望。","shílì hěn qiáng, yǒu xīwàng.","実力すごく強いから、可能性あるよ。"]]],
+      [10,[["A","主力受伤了怎么办?","zhǔlì shòushāng le zěnme bàn?","主力選手怪我したらどうする?"],["B","换替补上场吧。","huàn tìbǔ shàngchǎng ba.","控え選手に交代させよう。"]]],
+    ]
+  },
+  177: {
+    words: [
+      {no:1, jp:"歌う", cn:"唱歌", py:"chànggē", pos:"動詞", freq:5, scene:"第29課で既出、カラオケの文脈で再登場", meaning:"歌う", collocate:"去唱歌、唱歌好听", synonym:"—", mistake:"これまでも頻出の基本動詞。"},
+      {no:2, jp:"個室(カラオケボックスの部屋)", cn:"包厢", py:"bāoxiāng", pos:"名詞", freq:5, scene:"第103課「KTV包厢」の応用、部屋そのものの話", meaning:"個室(カラオケボックスの部屋)", collocate:"一间包厢、包厢价格", synonym:"—", mistake:"包(囲む、専用の)+厢(部屋)の組み合わせ。"},
+      {no:3, jp:"曲をリクエストする", cn:"点歌", py:"diǎngē", pos:"動詞", freq:5, scene:"カラオケで歌う曲を選ぶ話", meaning:"曲をリクエストする", collocate:"用平板点歌、点歌系统", synonym:"—", mistake:"点(選ぶ)+歌(歌)の組み合わせ、第14課「点菜」と同じ構造。"},
+      {no:4, jp:"マイク", cn:"麦克风", py:"màikèfēng", pos:"名詞", freq:5, scene:"歌う道具について話す", meaning:"マイク", collocate:"拿麦克风、麦克风没电了", synonym:"—", mistake:"英語microphoneの音訳。"},
+      {no:5, jp:"合唱する", cn:"合唱", py:"héchàng", pos:"動詞", freq:4, scene:"みんなで一緒に歌う話", meaning:"合唱する", collocate:"一起合唱、合唱这首歌", synonym:"—", mistake:"合(合わせる)+唱(歌う)の組み合わせ。"},
+      {no:6, jp:"歌のリスト、プレイリスト", cn:"歌单", py:"gēdān", pos:"名詞", freq:5, scene:"歌うつもりの曲のリストの話", meaning:"歌のリスト、プレイリスト", collocate:"添加到歌单、歌单排队", synonym:"—", mistake:"歌(歌)+单(リスト)の組み合わせ。"},
+      {no:7, jp:"追加料金を払う、延長料金を払う", cn:"续费", py:"xùfèi", pos:"動詞", freq:4, scene:"カラオケの時間を延長する話", meaning:"追加料金を払う、延長料金を払う", collocate:"续费两小时、需要续费", synonym:"—", mistake:"续(続ける)+费(料金)の組み合わせ。"},
+      {no:8, jp:"カラオケアプリ", cn:"K歌软件", py:"K gē ruǎnjiàn", pos:"名詞フレーズ", freq:3, scene:"スマホでカラオケを楽しむアプリの話", meaning:"カラオケアプリ", collocate:"用K歌软件、K歌软件录歌", synonym:"—", mistake:"K歌(カラオケを歌う)+软件(アプリ)の組み合わせ、Kは「KTV」から来た若者言葉。"},
+      {no:9, jp:"伴奏、バックミュージック", cn:"伴奏", py:"bànzòu", pos:"名詞", freq:4, scene:"歌の伴奏について話す", meaning:"伴奏、バックミュージック", collocate:"伴奏音乐、去掉伴奏", synonym:"—", mistake:"伴(伴う)+奏(演奏)の組み合わせ。"},
+      {no:10, jp:"声が裏返る、音程を外す", cn:"破音", py:"pòyīn", pos:"動詞フレーズ", freq:3, scene:"高音が出せず声が乱れる話", meaning:"声が裏返る、音程を外す", collocate:"唱破音了、容易破音", synonym:"—", mistake:"破(壊れる)+音(音)の組み合わせ、カラオケでよく使われるカジュアルな表現。"},
+    ],
+    examples: [
+      [1,"我们去唱歌吧。","wǒmen qù chànggē ba.","カラオケに行きましょう。"],
+      [1,"他唱歌很好听。","tā chànggē hěn hǎotīng.","彼は歌がすごく上手です。"],
+      [2,"订一间包厢吧。","dìng yì jiān bāoxiāng ba.","個室を1つ予約しましょう。"],
+      [2,"包厢价格是多少?","bāoxiāng jiàgé shì duōshao?","個室の料金はいくらですか?"],
+      [3,"我来点歌吧。","wǒ lái diǎngē ba.","私が曲をリクエストします。"],
+      [3,"用平板点歌很方便。","yòng píngbǎn diǎngē hěn fāngbiàn.","タブレットで曲をリクエストするのすごく便利です。"],
+      [4,"把麦克风给我。","bǎ màikèfēng gěi wǒ.","マイクを私にください。"],
+      [4,"麦克风没电了。","màikèfēng méi diàn le.","マイクの電池切れました。"],
+      [5,"我们一起合唱吧。","wǒmen yìqǐ héchàng ba.","一緒に合唱しましょう。"],
+      [5,"合唱这首歌很好听。","héchàng zhè shǒu gē hěn hǎotīng.","この曲を合唱するとすごくいいです。"],
+      [6,"加到歌单里吧。","jiā dào gēdān lǐ ba.","プレイリストに加えましょう。"],
+      [6,"歌单排了很多首。","gēdān pái le hěn duō shǒu.","プレイリストにたくさんの曲が入っています。"],
+      [7,"需要续费吗?","xūyào xùfèi ma?","追加料金必要ですか?"],
+      [7,"续费两小时吧。","xùfèi liǎng xiǎoshí ba.","2時間分延長料金払いましょう。"],
+      [8,"用K歌软件练习吧。","yòng K gē ruǎnjiàn liànxí ba.","カラオケアプリで練習しましょう。"],
+      [8,"K歌软件可以录歌。","K gē ruǎnjiàn kěyǐ lùgē.","カラオケアプリで歌を録音できます。"],
+      [9,"去掉伴奏试试。","qùdiào bànzòu shìshi.","伴奏を消して試してみて。"],
+      [9,"伴奏音乐很好听。","bànzòu yīnyuè hěn hǎotīng.","伴奏音楽すごくいいですね。"],
+      [10,"唱破音了。","chàng pòyīn le.","声が裏返っちゃいました。"],
+      [10,"高音容易破音。","gāoyīn róngyì pòyīn.","高音は声が裏返りやすいです。"],
+    ],
+    dialogues: [
+      [1,[["A","周末去唱歌吗?","zhōumò qù chànggē ma?","週末カラオケ行く?"],["B","去,好久没唱了。","qù, hǎojiǔ méi chàng le.","行くよ、久しぶりに歌ってないから。"]]],
+      [2,[["A","订几个人的包厢?","dìng jǐ ge rén de bāoxiāng?","何人用の個室予約する?"],["B","订个六人的吧。","dìng ge liù rén de ba.","6人用にしよう。"]]],
+      [3,[["A","谁先点歌?","shéi xiān diǎngē?","誰が先に曲リクエストする?"],["B","我先点一首吧。","wǒ xiān diǎn yì shǒu ba.","私が先に1曲入れるね。"]]],
+      [4,[["A","麦克风怎么没声音?","màikèfēng zěnme méi shēngyīn?","マイクなんで音出ないの?"],["B","可能没电了,换一个。","kěnéng méi diàn le, huàn yí ge.","電池切れかも、交換しよう。"]]],
+      [5,[["A","这首歌大家一起唱吧。","zhè shǒu gē dàjiā yìqǐ chàng ba.","この曲みんなで一緒に歌おう。"],["B","好,一起合唱。","hǎo, yìqǐ héchàng.","うん、一緒に合唱しよう。"]]],
+      [6,[["A","歌单还有多少首?","gēdān hái yǒu duōshao shǒu?","プレイリストあと何曲?"],["B","还有五首左右。","hái yǒu wǔ shǒu zuǒyòu.","あと5曲くらいだよ。"]]],
+      [7,[["A","时间到了怎么办?","shíjiān dào le zěnme bàn?","時間になったらどうする?"],["B","续费两小时吧。","xùfèi liǎng xiǎoshí ba.","2時間延長しよう。"]]],
+      [8,[["A","平时怎么练歌?","píngshí zěnme liàn gē?","普段どう歌の練習するの?"],["B","用K歌软件练习。","yòng K gē ruǎnjiàn liànxí.","カラオケアプリで練習してるよ。"]]],
+      [9,[["A","能听清伴奏吗?","néng tīng qīng bànzòu ma?","伴奏はっきり聞こえる?"],["B","能,伴奏很清楚。","néng, bànzòu hěn qīngchu.","聞こえるよ、伴奏すごくはっきりしてる。"]]],
+      [10,[["A","高音唱不上去怎么办?","gāoyīn chàng bu shàngqù zěnme bàn?","高音出せないどうしよう?"],["B","别硬唱,容易破音。","bié yìng chàng, róngyì pòyīn.","無理に歌わないで、声裏返りやすいから。"]]],
+    ]
+  },
+  178: {
+    words: [
+      {no:1, jp:"キャンプする", cn:"露营", py:"lùyíng", pos:"動詞", freq:5, scene:"第150課で既出、活動としての再登場", meaning:"キャンプする", collocate:"去露营、露营装备", synonym:"—", mistake:"これまでも頻出。"},
+      {no:2, jp:"テント", cn:"帐篷", py:"zhàngpeng", pos:"名詞", freq:5, scene:"キャンプの宿泊道具について話す", meaning:"テント", collocate:"搭帐篷、一顶帐篷", synonym:"—", mistake:"帐(幕)+篷(覆い)の組み合わせ。"},
+      {no:3, jp:"キャンプファイヤー", cn:"篝火", py:"gōuhuǒ", pos:"名詞", freq:4, scene:"夜のたき火について話す", meaning:"キャンプファイヤー", collocate:"点篝火、围着篝火", synonym:"—", mistake:"篝(かがり火)+火(火)の組み合わせ。"},
+      {no:4, jp:"寝袋", cn:"睡袋", py:"shuìdài", pos:"名詞", freq:5, scene:"キャンプでの寝具について話す", meaning:"寝袋", collocate:"带睡袋、睡袋保暖", synonym:"—", mistake:"睡(寝る)+袋(袋)の組み合わせ。"},
+      {no:5, jp:"野外で自炊する", cn:"野炊", py:"yěchuī", pos:"動詞", freq:4, scene:"キャンプで料理する話", meaning:"野外で自炊する", collocate:"去野炊、野炊工具", synonym:"—", mistake:"野(野外)+炊(炊事する)の組み合わせ。"},
+      {no:6, jp:"トレッキングポール", cn:"登山杖", py:"dēngshānzhàng", pos:"名詞", freq:4, scene:"登山道具について話す", meaning:"トレッキングポール", collocate:"用登山杖、一对登山杖", synonym:"—", mistake:"登山(登山する)+杖(杖)の組み合わせ。"},
+      {no:7, jp:"グランドシート、マット", cn:"防潮垫", py:"fángcháodiàn", pos:"名詞", freq:4, scene:"地面の湿気対策の道具について話す", meaning:"グランドシート、マット", collocate:"铺防潮垫、一张防潮垫", synonym:"—", mistake:"防潮(湿気を防ぐ)+垫(敷物)の組み合わせ。"},
+      {no:8, jp:"ヘッドライト", cn:"头灯", py:"tóudēng", pos:"名詞", freq:4, scene:"夜間のキャンプ用照明について話す", meaning:"ヘッドライト", collocate:"戴头灯、头灯照明", synonym:"—", mistake:"头(頭)+灯(灯り)の組み合わせ。"},
+      {no:9, jp:"サバイバル技術", cn:"野外求生", py:"yěwài qiúshēng", pos:"名詞フレーズ", freq:3, scene:"野外での生存技術について話す", meaning:"サバイバル技術", collocate:"学野外求生、野外求生技能", synonym:"—", mistake:"野外(野外)+求生(生きることを求める)の組み合わせ。"},
+      {no:10, jp:"キャンプ場", cn:"露营地", py:"lùyíngdì", pos:"名詞", freq:4, scene:"キャンプをする場所について話す", meaning:"キャンプ場", collocate:"找露营地、露营地设施", synonym:"—", mistake:"露营(キャンプする)+地(場所)の組み合わせ。"},
+    ],
+    examples: [
+      [1,"我们去露营吧。","wǒmen qù lùyíng ba.","キャンプに行きましょう。"],
+      [1,"露营需要准备装备。","lùyíng xūyào zhǔnbèi zhuāngbèi.","キャンプには装備の準備が必要です。"],
+      [2,"搭好帐篷了。","dā hǎo zhàngpeng le.","テント張り終わりました。"],
+      [2,"带了一顶帐篷。","dài le yì dǐng zhàngpeng.","テント1つ持ってきました。"],
+      [3,"我们点篝火吧。","wǒmen diǎn gōuhuǒ ba.","キャンプファイヤーをしましょう。"],
+      [3,"围着篝火聊天。","wéi zhe gōuhuǒ liáotiān.","キャンプファイヤーを囲んでおしゃべりします。"],
+      [4,"带上睡袋吧。","dài shàng shuìdài ba.","寝袋持っていきましょう。"],
+      [4,"这个睡袋很保暖。","zhège shuìdài hěn bǎonuǎn.","この寝袋すごく暖かいです。"],
+      [5,"我们去野炊吧。","wǒmen qù yěchuī ba.","野外で自炊しに行きましょう。"],
+      [5,"准备野炊工具。","zhǔnbèi yěchuī gōngjù.","野外炊事の道具を準備します。"],
+      [6,"用登山杖比较省力。","yòng dēngshānzhàng bǐjiào shěnglì.","トレッキングポール使う方が力を節約できます。"],
+      [6,"带一对登山杖吧。","dài yí duì dēngshānzhàng ba.","トレッキングポール1対持っていきましょう。"],
+      [7,"铺一张防潮垫。","pū yì zhāng fángcháodiàn.","グランドシートを1枚敷いてください。"],
+      [7,"防潮垫很实用。","fángcháodiàn hěn shíyòng.","グランドシートすごく実用的です。"],
+      [8,"戴上头灯吧。","dài shàng tóudēng ba.","ヘッドライトつけましょう。"],
+      [8,"头灯照明很亮。","tóudēng zhàomíng hěn liàng.","ヘッドライトの明かりすごく明るいです。"],
+      [9,"学一些野外求生技能。","xué yìxiē yěwài qiúshēng jìnéng.","サバイバル技術をいくつか学びます。"],
+      [9,"野外求生很重要。","yěwài qiúshēng hěn zhòngyào.","サバイバル技術はとても重要です。"],
+      [10,"找个露营地吧。","zhǎo ge lùyíngdì ba.","キャンプ場を探しましょう。"],
+      [10,"这个露营地设施很好。","zhège lùyíngdì shèshī hěn hǎo.","このキャンプ場の設備すごくいいです。"],
+    ],
+    dialogues: [
+      [1,[["A","周末去露营吗?","zhōumò qù lùyíng ma?","週末キャンプ行く?"],["B","去,已经准备好装备了。","qù, yǐjīng zhǔnbèi hǎo zhuāngbèi le.","行くよ、もう装備準備できてる。"]]],
+      [2,[["A","帐篷怎么搭?","zhàngpeng zěnme dā?","テントどう張るの?"],["B","我教你,很简单。","wǒ jiāo nǐ, hěn jiǎndān.","教えるよ、すごく簡単だから。"]]],
+      [3,[["A","晚上做什么?","wǎnshang zuò shénme?","夜何する?"],["B","点篝火聊天吧。","diǎn gōuhuǒ liáotiān ba.","キャンプファイヤーしておしゃべりしよう。"]]],
+      [4,[["A","睡袋够暖和吗?","shuìdài gòu nuǎnhuo ma?","寝袋十分暖かい?"],["B","够,零下也没问题。","gòu, língxià yě méi wèntí.","十分だよ、氷点下でも問題ないよ。"]]],
+      [5,[["A","晚饭怎么解决?","wǎnfàn zěnme jiějué?","夕食どうする?"],["B","我们去野炊吧。","wǒmen qù yěchuī ba.","野外で自炊しに行こう。"]]],
+      [6,[["A","爬山累吗?","páshān lèi ma?","山登り疲れる?"],["B","用登山杖会轻松点。","yòng dēngshānzhàng huì qīngsōng diǎn.","トレッキングポール使えば少し楽になるよ。"]]],
+      [7,[["A","地上潮湿怎么办?","dìshàng cháoshī zěnme bàn?","地面湿ってるどうしよう?"],["B","铺个防潮垫。","pū ge fángcháodiàn.","グランドシート敷こう。"]]],
+      [8,[["A","晚上黑怎么走路?","wǎnshang hēi zěnme zǒulù?","夜暗いのにどう歩く?"],["B","戴上头灯就行。","dài shàng tóudēng jiù xíng.","ヘッドライトつければいいよ。"]]],
+      [9,[["A","需要学什么技能?","xūyào xué shénme jìnéng?","何のスキル学ぶ必要ある?"],["B","学点野外求生知识。","xué diǎn yěwài qiúshēng zhīshi.","サバイバルの知識を少し学ぼう。"]]],
+      [10,[["A","去哪里露营?","qù nǎlǐ lùyíng?","どこでキャンプする?"],["B","找个不错的露营地。","zhǎo ge búcuò de lùyíngdì.","いいキャンプ場探そう。"]]],
+    ]
+  },
+  179: {
+    words: [
+      {no:1, jp:"ペット", cn:"宠物", py:"chǒngwù", pos:"名詞", freq:5, scene:"これまでも頻出、正式な単語として定着", meaning:"ペット", collocate:"养宠物、宠物用品", synonym:"—", mistake:"宠(かわいがる)+物(物)の組み合わせ。"},
+      {no:2, jp:"猫", cn:"猫", py:"māo", pos:"名詞", freq:5, scene:"第138課で既出、飼育の文脈で再登場", meaning:"猫", collocate:"养猫、猫粮", synonym:"—", mistake:"これまでも頻出。"},
+      {no:3, jp:"犬", cn:"狗", py:"gǒu", pos:"名詞", freq:5, scene:"犬の飼育について話す", meaning:"犬", collocate:"养狗、狗粮", synonym:"—", mistake:"これまでも頻出。"},
+      {no:4, jp:"餌をやる", cn:"喂食", py:"wèishí", pos:"動詞", freq:5, scene:"ペットに食事を与える話", meaning:"餌をやる", collocate:"按时喂食、喂食时间", synonym:"—", mistake:"喂(食べさせる)+食(食べ物)の組み合わせ。"},
+      {no:5, jp:"犬の散歩をする", cn:"遛狗", py:"liù gǒu", pos:"動詞フレーズ", freq:5, scene:"犬を連れて散歩する話", meaning:"犬の散歩をする", collocate:"去遛狗、每天遛狗", synonym:"—", mistake:"遛(ぶらぶら歩かせる)+狗(犬)の組み合わせ。"},
+      {no:6, jp:"動物病院", cn:"宠物医院", py:"chǒngwù yīyuàn", pos:"名詞", freq:4, scene:"第109課で既出、通院の文脈で再登場", meaning:"動物病院", collocate:"去宠物医院、宠物医院看病", synonym:"—", mistake:"これまでも頻出。"},
+      {no:7, jp:"ペットのトリミング", cn:"宠物美容", py:"chǒngwù měiróng", pos:"名詞フレーズ", freq:4, scene:"ペットの毛のお手入れについて話す", meaning:"ペットのトリミング", collocate:"做宠物美容、宠物美容店", synonym:"—", mistake:"宠物(ペット)+美容(美容)の組み合わせ。"},
+      {no:8, jp:"里親になる、引き取る", cn:"领养", py:"lǐngyǎng", pos:"動詞", freq:5, scene:"保護動物を引き取る話", meaning:"里親になる、引き取る", collocate:"领养宠物、领养代替购买", synonym:"—", mistake:"领(受け取る)+养(育てる)の組み合わせ。"},
+      {no:9, jp:"去勢・避妊手術をする", cn:"绝育", py:"juéyù", pos:"動詞", freq:4, scene:"ペットの繁殖制限手術について話す", meaning:"去勢・避妊手術をする", collocate:"给宠物绝育、绝育手术", synonym:"—", mistake:"绝(絶つ)+育(生育)の組み合わせ。"},
+      {no:10, jp:"ペット用品", cn:"宠物用品", py:"chǒngwù yòngpǐn", pos:"名詞フレーズ", freq:5, scene:"ペットのための道具や商品について話す", meaning:"ペット用品", collocate:"买宠物用品、宠物用品店", synonym:"—", mistake:"宠物(ペット)+用品(用品)の組み合わせ。"},
+    ],
+    examples: [
+      [1,"我家养了宠物。","wǒ jiā yǎng le chǒngwù.","うちはペットを飼っています。"],
+      [1,"宠物用品很贵。","chǒngwù yòngpǐn hěn guì.","ペット用品すごく高いです。"],
+      [2,"我家养了一只猫。","wǒ jiā yǎng le yì zhī māo.","うちは猫を1匹飼っています。"],
+      [2,"给猫买猫粮吧。","gěi māo mǎi māoliáng ba.","猫にキャットフードを買いましょう。"],
+      [3,"我家养了一只狗。","wǒ jiā yǎng le yì zhī gǒu.","うちは犬を1匹飼っています。"],
+      [3,"狗粮吃完了。","gǒuliáng chī wán le.","ドッグフード食べ切りました。"],
+      [4,"记得按时喂食。","jìde ànshí wèishí.","時間通りに餌をやるの忘れないでね。"],
+      [4,"喂食时间到了。","wèishí shíjiān dào le.","餌の時間になりました。"],
+      [5,"我去遛狗了。","wǒ qù liù gǒu le.","犬の散歩に行きます。"],
+      [5,"每天都要遛狗。","měitiān dōu yào liù gǒu.","毎日犬の散歩をしないといけません。"],
+      [6,"带猫去宠物医院。","dài māo qù chǒngwù yīyuàn.","猫を動物病院に連れて行きます。"],
+      [6,"宠物医院很专业。","chǒngwù yīyuàn hěn zhuānyè.","動物病院すごく専門的です。"],
+      [7,"带狗去做宠物美容。","dài gǒu qù zuò chǒngwù měiróng.","犬をトリミングに連れて行きます。"],
+      [7,"附近有宠物美容店。","fùjìn yǒu chǒngwù měiróng diàn.","近くにペットトリミング店があります。"],
+      [8,"我们领养了一只猫。","wǒmen lǐngyǎng le yì zhī māo.","私たちは猫を1匹引き取りました。"],
+      [8,"领养代替购买。","lǐngyǎng dàitì gòumǎi.","購入する代わりに引き取りましょう。"],
+      [9,"给宠物做了绝育。","gěi chǒngwù zuò le juéyù.","ペットに避妊去勢手術をしました。"],
+      [9,"绝育手术很安全。","juéyù shǒushù hěn ānquán.","避妊去勢手術はすごく安全です。"],
+      [10,"买点宠物用品吧。","mǎi diǎn chǒngwù yòngpǐn ba.","ペット用品をいくつか買いましょう。"],
+      [10,"宠物用品店在哪里?","chǒngwù yòngpǐn diàn zài nǎlǐ?","ペット用品店どこですか?"],
+    ],
+    dialogues: [
+      [1,[["A","你家养宠物吗?","nǐ jiā yǎng chǒngwù ma?","家でペット飼ってる?"],["B","养了,一猫一狗。","yǎng le, yì māo yì gǒu.","飼ってるよ、猫と犬1匹ずつ。"]]],
+      [2,[["A","猫多大了?","māo duō dà le?","猫何歳?"],["B","两岁了,很活泼。","liǎng suì le, hěn huópo.","2歳だよ、すごく活発なんだ。"]]],
+      [3,[["A","狗听话吗?","gǒu tīnghuà ma?","犬は言うこと聞く?"],["B","很听话,训练过。","hěn tīnghuà, xùnliàn guò.","すごく聞くよ、しつけしたから。"]]],
+      [4,[["A","每天喂几次?","měitiān wèi jǐ cì?","毎日何回餌あげるの?"],["B","一天喂两次。","yìtiān wèi liǎng cì.","1日2回あげてるよ。"]]],
+      [5,[["A","每天遛狗吗?","měitiān liù gǒu ma?","毎日犬の散歩する?"],["B","是,早晚各一次。","shì, zǎowǎn gè yí cì.","うん、朝と晩1回ずつ。"]]],
+      [6,[["A","猫生病了怎么办?","māo shēngbìng le zěnme bàn?","猫が病気になったらどうする?"],["B","带去宠物医院看看。","dài qù chǒngwù yīyuàn kànkan.","動物病院に連れていって診てもらうよ。"]]],
+      [7,[["A","多久做一次美容?","duōjiǔ zuò yí cì měiróng?","どれくらいの頻度でトリミングする?"],["B","大概一个月一次。","dàgài yí ge yuè yí cì.","だいたい月1回だよ。"]]],
+      [8,[["A","宠物是买的吗?","chǒngwù shì mǎi de ma?","ペット買ったの?"],["B","不是,是领养的。","bú shì, shì lǐngyǎng de.","違うよ、引き取ったんだ。"]]],
+      [9,[["A","要给宠物绝育吗?","yào gěi chǒngwù juéyù ma?","ペットに避妊去勢手術する?"],["B","建议做,对健康好。","jiànyì zuò, duì jiànkāng hǎo.","した方がいいよ、健康にいいから。"]]],
+      [10,[["A","去哪里买宠物用品?","qù nǎlǐ mǎi chǒngwù yòngpǐn?","どこでペット用品買う?"],["B","网上或者宠物店都行。","wǎngshàng huòzhě chǒngwùdiàn dōu xíng.","ネットでもペットショップでもいいよ。"]]],
+    ]
+  },
+  180: {
+    words: [
+      {no:1, jp:"手工芸", cn:"手工艺", py:"shǒugōngyì", pos:"名詞", freq:5, scene:"手作りの工芸について話す", meaning:"手工芸", collocate:"学手工艺、手工艺品", synonym:"—", mistake:"手工(手作業)+艺(技芸)の組み合わせ。"},
+      {no:2, jp:"編み物をする", cn:"编织", py:"biānzhī", pos:"動詞", freq:5, scene:"編み物の趣味について話す", meaning:"編み物をする", collocate:"学编织、编织毛衣", synonym:"—", mistake:"编(編む)+织(織る)の組み合わせ。"},
+      {no:3, jp:"裁縫をする", cn:"缝纫", py:"féngrèn", pos:"動詞", freq:4, scene:"縫い物について話す", meaning:"裁縫をする", collocate:"学缝纫、缝纫机", synonym:"—", mistake:"缝(縫う)+纫(糸を通す)の組み合わせ。"},
+      {no:4, jp:"木工", cn:"木工", py:"mùgōng", pos:"名詞", freq:4, scene:"木工作業について話す", meaning:"木工", collocate:"学木工、木工作品", synonym:"—", mistake:"木(木)+工(工作)の組み合わせ。"},
+      {no:5, jp:"粘土", cn:"黏土", py:"niántǔ", pos:"名詞", freq:4, scene:"粘土細工について話す", meaning:"粘土", collocate:"用黏土、黏土手作", synonym:"—", mistake:"黏(粘る)+土(土)の組み合わせ。"},
+      {no:6, jp:"材料キット", cn:"材料包", py:"cáiliàobāo", pos:"名詞", freq:4, scene:"手作り用の材料セットについて話す", meaning:"材料キット", collocate:"买材料包、材料包很齐全", synonym:"—", mistake:"材料(材料)+包(パック)の組み合わせ。"},
+      {no:7, jp:"チュートリアル", cn:"教程", py:"jiàochéng", pos:"名詞", freq:5, scene:"作り方の手順を説明する動画や記事の話", meaning:"チュートリアル", collocate:"看教程、跟着教程做", synonym:"第170課「新手教学」(より初心者向けのニュアンス)", mistake:"教(教える)+程(過程、手順)の組み合わせ。"},
+      {no:8, jp:"完成品", cn:"成品", py:"chéngpǐn", pos:"名詞", freq:5, scene:"出来上がった作品について話す", meaning:"完成品", collocate:"成品很漂亮、看看成品", synonym:"—", mistake:"成(完成する)+品(製品)の組み合わせ。"},
+      {no:9, jp:"手作り教室", cn:"手作课", py:"shǒuzuòkè", pos:"名詞", freq:3, scene:"手作りを教わる講座について話す", meaning:"手作り教室", collocate:"上手作课、报名手作课", synonym:"—", mistake:"手作(手作り)+课(授業)の組み合わせ。"},
+      {no:10, jp:"工具箱", cn:"工具箱", py:"gōngjùxiāng", pos:"名詞", freq:5, scene:"第130課で既出、DIY道具の文脈で再登場", meaning:"工具箱", collocate:"打开工具箱、买个工具箱", synonym:"—", mistake:"これまでも頻出。"},
+    ],
+    examples: [
+      [1,"我喜欢手工艺。","wǒ xǐhuan shǒugōngyì.","手工芸が好きです。"],
+      [1,"这是手工艺品。","zhè shì shǒugōngyìpǐn.","これは手工芸品です。"],
+      [2,"我在学编织。","wǒ zài xué biānzhī.","編み物を習っています。"],
+      [2,"编织一件毛衣。","biānzhī yí jiàn máoyī.","セーターを1着編みます。"],
+      [3,"我在学缝纫。","wǒ zài xué féngrèn.","裁縫を習っています。"],
+      [3,"用缝纫机做衣服。","yòng féngrènjī zuò yīfu.","ミシンで服を作ります。"],
+      [4,"他喜欢木工。","tā xǐhuan mùgōng.","彼は木工が好きです。"],
+      [4,"这个木工作品很精致。","zhège mùgōng zuòpǐn hěn jīngzhì.","この木工作品すごく精巧です。"],
+      [5,"用黏土做个小人吧。","yòng niántǔ zuò ge xiǎorén ba.","粘土で人形を作りましょう。"],
+      [5,"黏土手作很有趣。","niántǔ shǒuzuò hěn yǒuqù.","粘土の手作りすごく面白いです。"],
+      [6,"买个材料包吧。","mǎi ge cáiliàobāo ba.","材料キットを買いましょう。"],
+      [6,"材料包很齐全。","cáiliàobāo hěn qíquán.","材料キットすごく揃っています。"],
+      [7,"看看教程吧。","kànkan jiàochéng ba.","チュートリアルを見てみましょう。"],
+      [7,"跟着教程做就行。","gēn zhe jiàochéng zuò jiù xíng.","チュートリアルに沿って作ればいいです。"],
+      [8,"成品很漂亮。","chéngpǐn hěn piàoliang.","完成品すごくきれいです。"],
+      [8,"看看成品效果。","kànkan chéngpǐn xiàoguǒ.","完成品の仕上がりを見てみて。"],
+      [9,"我们去上手作课吧。","wǒmen qù shàng shǒuzuòkè ba.","手作り教室に行きましょう。"],
+      [9,"报名了一个手作课。","bàomíng le yí ge shǒuzuòkè.","手作り教室に申し込みました。"],
+      [10,"打开工具箱看看。","dǎkāi gōngjùxiāng kànkan.","工具箱を開けて見てみて。"],
+      [10,"买个新工具箱吧。","mǎi ge xīn gōngjùxiāng ba.","新しい工具箱を買いましょう。"],
+    ],
+    dialogues: [
+      [1,[["A","你喜欢什么手工艺?","nǐ xǐhuan shénme shǒugōngyì?","どんな手工芸好き?"],["B","我喜欢编织和刺绣。","wǒ xǐhuan biānzhī hé cìxiù.","編み物と刺繍が好きだよ。"]]],
+      [2,[["A","编织难学吗?","biānzhī nán xué ma?","編み物習うの難しい?"],["B","入门不难,多练就好。","rùmén bù nán, duō liàn jiù hǎo.","入門は難しくないよ、たくさん練習すればいい。"]]],
+      [3,[["A","你会用缝纫机吗?","nǐ huì yòng féngrènjī ma?","ミシン使える?"],["B","会一点,还在学。","huì yìdiǎn, hái zài xué.","少しできるよ、まだ勉強中。"]]],
+      [4,[["A","木工需要什么工具?","mùgōng xūyào shénme gōngjù?","木工に何の道具必要?"],["B","需要锯子和刨子等。","xūyào jùzi hé bàozi děng.","のことかんななどが必要だよ。"]]],
+      [5,[["A","黏土怎么保存?","niántǔ zěnme bǎocún?","粘土どう保存するの?"],["B","密封好放阴凉处。","mìfēng hǎo fàng yīnliáng chù.","しっかり密封して涼しい場所に置くんだよ。"]]],
+      [6,[["A","第一次做需要什么?","dì yī cì zuò xūyào shénme?","初めて作るのに何必要?"],["B","买个材料包就够了。","mǎi ge cáiliàobāo jiù gòu le.","材料キット1つ買えば十分だよ。"]]],
+      [7,[["A","不会做怎么办?","bú huì zuò zěnme bàn?","作り方分からないどうしよう?"],["B","看看教程就明白了。","kànkan jiàochéng jiù míngbai le.","チュートリアル見れば分かるよ。"]]],
+      [8,[["A","成品满意吗?","chéngpǐn mǎnyì ma?","完成品満足?"],["B","很满意,超出预期。","hěn mǎnyì, chāochū yùqī.","すごく満足だよ、期待以上だった。"]]],
+      [9,[["A","哪里能学手工?","nǎlǐ néng xué shǒugōng?","どこで手作り習える?"],["B","可以报名手作课。","kěyǐ bàomíng shǒuzuòkè.","手作り教室に申し込めるよ。"]]],
+      [10,[["A","工具都齐全吗?","gōngjù dōu qíquán ma?","道具全部揃ってる?"],["B","齐全,都在工具箱里。","qíquán, dōu zài gōngjùxiāng lǐ.","揃ってるよ、全部工具箱の中だよ。"]]],
+    ]
+  }
+,
+  181: {
+    words: [
+      {no:1, jp:"隣人", cn:"邻居", py:"línjū", pos:"名詞", freq:5, scene:"近所の人について話す", meaning:"隣人", collocate:"好邻居、隔壁邻居", synonym:"—", mistake:"これまでも頻出、正式な単語として定着。"},
+      {no:2, jp:"挨拶する", cn:"打招呼", py:"dǎ zhāohu", pos:"動詞フレーズ", freq:5, scene:"近所の人とすれ違って挨拶する話", meaning:"挨拶する", collocate:"互相打招呼、见面打招呼", synonym:"—", mistake:"打(する)+招呼(挨拶)の組み合わせ。"},
+      {no:3, jp:"近所の家に遊びに行く", cn:"串门", py:"chuànmén", pos:"動詞", freq:4, scene:"気軽に隣人宅を訪ねる習慣の話", meaning:"近所の家に遊びに行く", collocate:"去邻居家串门、常来串门", synonym:"—", mistake:"串(渡り歩く)+门(門、家)の組み合わせ、中国の伝統的な近所付き合いの習慣。"},
+      {no:4, jp:"互いに助け合う", cn:"互相帮忙", py:"hùxiāng bāngmáng", pos:"フレーズ", freq:5, scene:"近所同士で助け合う話", meaning:"互いに助け合う", collocate:"邻居互相帮忙、互相帮忙照看", synonym:"—", mistake:"互相(お互いに)+帮忙(手伝う)の組み合わせ。"},
+      {no:5, jp:"おかずを届ける", cn:"送菜", py:"sòng cài", pos:"動詞フレーズ", freq:3, scene:"作りすぎた料理を近所に配る習慣の話", meaning:"おかずを届ける", collocate:"给邻居送菜、邻居送来的菜", synonym:"—", mistake:"送(届ける)+菜(料理)の組み合わせ、近所付き合いの温かい習慣。"},
+      {no:6, jp:"近所付き合い、隣人関係", cn:"邻里关系", py:"línlǐ guānxi", pos:"名詞フレーズ", freq:5, scene:"近所との関係について話す", meaning:"近所付き合い、隣人関係", collocate:"邻里关系好、维护邻里关系", synonym:"—", mistake:"邻里(近所)+关系(関係)の組み合わせ。"},
+      {no:7, jp:"引っ越しの挨拶", cn:"搬家问候", py:"bānjiā wènhòu", pos:"動詞フレーズ", freq:3, scene:"新しく越してきた際の挨拶の話", meaning:"引っ越しの挨拶", collocate:"去搬家问候、新邻居搬家问候", synonym:"—", mistake:"搬家(引っ越す)+问候(挨拶する)の組み合わせ。"},
+      {no:8, jp:"物を借りる", cn:"借东西", py:"jiè dōngxi", pos:"動詞フレーズ", freq:5, scene:"近所の人から物を借りる話", meaning:"物を借りる", collocate:"向邻居借东西、借东西要还", synonym:"—", mistake:"借(借りる)+东西(物)の組み合わせ。"},
+      {no:9, jp:"見守る、面倒を見る", cn:"照看", py:"zhàokàn", pos:"動詞", freq:4, scene:"留守中の家やペットを近所に頼む話", meaning:"見守る、面倒を見る", collocate:"帮忙照看、照看孩子", synonym:"—", mistake:"照(照らす、世話する)+看(見る)の組み合わせ。"},
+      {no:10, jp:"仲良く付き合う", cn:"相处融洽", py:"xiāngchǔ róngqià", pos:"フレーズ", freq:4, scene:"近所関係が良好であることを話す", meaning:"仲良く付き合う", collocate:"邻里相处融洽、相处得很融洽", synonym:"—", mistake:"相处(付き合う)+融洽(打ち解けている)の組み合わせ。"},
+    ],
+    examples: [
+      [1,"我的邻居人很好。","wǒ de línjū rén hěn hǎo.","私の隣人はすごくいい人です。"],
+      [1,"隔壁邻居很热情。","gébì línjū hěn rèqíng.","お隣さんすごく親切です。"],
+      [2,"见面要打招呼。","jiànmiàn yào dǎ zhāohu.","会ったら挨拶しないとね。"],
+      [2,"邻居互相打招呼。","línjū hùxiāng dǎ zhāohu.","近所同士挨拶し合います。"],
+      [3,"常去邻居家串门。","cháng qù línjū jiā chuànmén.","よく近所の家に遊びに行きます。"],
+      [3,"欢迎常来串门。","huānyíng cháng lái chuànmén.","いつでも遊びに来てくださいね。"],
+      [4,"邻居之间互相帮忙。","línjū zhījiān hùxiāng bāngmáng.","隣人同士お互いに助け合います。"],
+      [4,"互相帮忙照看孩子。","hùxiāng bāngmáng zhàokàn háizi.","お互いに助け合って子供の面倒を見ます。"],
+      [5,"给邻居送菜。","gěi línjū sòng cài.","隣人におかずを届けます。"],
+      [5,"邻居送来了菜。","línjū sòng lái le cài.","隣人がおかずを届けてくれました。"],
+      [6,"邻里关系很融洽。","línlǐ guānxi hěn róngqià.","近所付き合いすごく円満です。"],
+      [6,"要维护好邻里关系。","yào wéihù hǎo línlǐ guānxi.","近所付き合いをしっかり保たないとね。"],
+      [7,"我们去搬家问候一下。","wǒmen qù bānjiā wènhòu yíxià.","引っ越しの挨拶をしに行きましょう。"],
+      [7,"新邻居来搬家问候了。","xīn línjū lái bānjiā wènhòu le.","新しい隣人が引っ越しの挨拶に来ました。"],
+      [8,"向邻居借东西。","xiàng línjū jiè dōngxi.","隣人から物を借ります。"],
+      [8,"借东西要记得还。","jiè dōngxi yào jìde huán.","借りた物は返すの忘れないでね。"],
+      [9,"帮忙照看一下。","bāngmáng zhàokàn yíxià.","ちょっと見守るのを手伝ってください。"],
+      [9,"请邻居照看孩子。","qǐng línjū zhàokàn háizi.","隣人に子供の面倒を頼みます。"],
+      [10,"邻里相处融洽。","línlǐ xiāngchǔ róngqià.","近所同士仲良く付き合っています。"],
+      [10,"大家相处得很融洽。","dàjiā xiāngchǔ de hěn róngqià.","みんな仲良く打ち解けています。"],
+    ],
+    dialogues: [
+      [1,[["A","你的邻居怎么样?","nǐ de línjū zěnmeyàng?","あなたの隣人どう?"],["B","人很好,经常互相帮忙。","rén hěn hǎo, jīngcháng hùxiāng bāngmáng.","いい人だよ、よくお互いに助け合ってる。"]]],
+      [2,[["A","见到邻居要怎么做?","jiàndào línjū yào zěnme zuò?","隣人に会ったらどうすればいい?"],["B","打个招呼就行。","dǎ ge zhāohu jiù xíng.","挨拶すればいいよ。"]]],
+      [3,[["A","平时常串门吗?","píngshí cháng chuànmén ma?","普段よく遊びに行く?"],["B","常去,关系挺好的。","cháng qù, guānxi tǐng hǎo de.","よく行くよ、関係結構いいから。"]]],
+      [4,[["A","遇到困难怎么办?","yùdào kùnnan zěnme bàn?","困ったことがあったらどうする?"],["B","邻居会互相帮忙的。","línjū huì hùxiāng bāngmáng de.","隣人同士お互いに助け合うよ。"]]],
+      [5,[["A","做多了菜怎么办?","zuò duō le cài zěnme bàn?","料理作りすぎたらどうする?"],["B","可以给邻居送菜。","kěyǐ gěi línjū sòng cài.","隣人におかず届けられるよ。"]]],
+      [6,[["A","邻里关系重要吗?","línlǐ guānxi zhòngyào ma?","近所付き合い重要?"],["B","很重要,能互相照应。","hěn zhòngyào, néng hùxiāng zhàoyìng.","すごく重要だよ、お互い気にかけ合えるし。"]]],
+      [7,[["A","新搬来要做什么?","xīn bān lái yào zuò shénme?","新しく引っ越してきたら何する?"],["B","最好去搬家问候一下。","zuìhǎo qù bānjiā wènhòu yíxià.","引っ越しの挨拶しに行くのがいいよ。"]]],
+      [8,[["A","能借点调料吗?","néng jiè diǎn tiáoliào ma?","調味料ちょっと借りれる?"],["B","可以,去邻居家借东西。","kěyǐ, qù línjū jiā jiè dōngxi.","できるよ、隣人の家に借りに行こう。"]]],
+      [9,[["A","出差谁照看家里?","chūchāi shéi zhàokàn jiā lǐ?","出張中誰が家見てくれるの?"],["B","请邻居帮忙照看。","qǐng línjū bāngmáng zhàokàn.","隣人に見守ってもらうよう頼むよ。"]]],
+      [10,[["A","和邻居处得怎么样?","hé línjū chǔ de zěnmeyàng?","隣人とどう付き合ってる?"],["B","相处融洽,像一家人。","xiāngchǔ róngqià, xiàng yì jiā rén.","仲良く付き合ってるよ、家族みたいに。"]]],
+    ]
+  },
+  182: {
+    words: [
+      {no:1, jp:"マンション管理会社", cn:"物业", py:"wùyè", pos:"名詞", freq:5, scene:"第40課で既出、管理業務の文脈で再登場", meaning:"マンション管理会社", collocate:"联系物业、物业公司", synonym:"—", mistake:"これまでも頻出。"},
+      {no:2, jp:"管理費", cn:"物业费", py:"wùyèfèi", pos:"名詞", freq:5, scene:"第120課で既出、支払いの文脈で再登場", meaning:"管理費", collocate:"交物业费、物业费标准", synonym:"—", mistake:"これまでも頻出。"},
+      {no:3, jp:"管理会社のマネージャー", cn:"物业经理", py:"wùyè jīnglǐ", pos:"名詞", freq:4, scene:"管理会社の責任者について話す", meaning:"管理会社のマネージャー", collocate:"找物业经理、物业经理处理", synonym:"—", mistake:"物业(管理会社)+经理(マネージャー)の組み合わせ。"},
+      {no:4, jp:"修理申請", cn:"维修申请", py:"wéixiū shēnqǐng", pos:"名詞フレーズ", freq:5, scene:"設備故障の修理を依頼する話", meaning:"修理申請", collocate:"提交维修申请、维修申请表", synonym:"—", mistake:"维修(修理する)+申请(申請する)の組み合わせ。"},
+      {no:5, jp:"故障を報告する", cn:"报修", py:"bàoxiū", pos:"動詞", freq:5, scene:"設備の不具合を連絡する話", meaning:"故障を報告する", collocate:"打电话报修、报修电话", synonym:"—", mistake:"报(報告する)+修(修理する)の組み合わせ。"},
+      {no:6, jp:"警備員", cn:"保安", py:"bǎo'ān", pos:"名詞", freq:5, scene:"マンションの警備スタッフについて話す", meaning:"警備員", collocate:"小区保安、保安巡逻", synonym:"—", mistake:"保(守る)+安(安全)の組み合わせ。"},
+      {no:7, jp:"清掃員", cn:"清洁工", py:"qīngjiégōng", pos:"名詞", freq:4, scene:"共用部の清掃スタッフについて話す", meaning:"清掃員", collocate:"小区清洁工、清洁工打扫", synonym:"—", mistake:"清洁(清潔にする)+工(作業員)の組み合わせ。"},
+      {no:8, jp:"緑化", cn:"绿化", py:"lǜhuà", pos:"名詞", freq:4, scene:"マンションの植栽管理について話す", meaning:"緑化", collocate:"小区绿化、绿化维护", synonym:"—", mistake:"绿(緑)+化(〜化する)の組み合わせ。"},
+      {no:9, jp:"掲示板", cn:"公告栏", py:"gōnggàolán", pos:"名詞", freq:5, scene:"マンション内の告知板について話す", meaning:"掲示板", collocate:"看公告栏、贴在公告栏", synonym:"—", mistake:"公告(公告)+栏(欄、掲示板)の組み合わせ。"},
+      {no:10, jp:"管理会社のサービス", cn:"物业服务", py:"wùyè fúwù", pos:"名詞フレーズ", freq:5, scene:"マンション管理サービスの内容について話す", meaning:"管理会社のサービス", collocate:"物业服务好、物业服务范围", synonym:"—", mistake:"物业(管理会社)+服务(サービス)の組み合わせ。"},
+    ],
+    examples: [
+      [1,"联系一下物业。","liánxì yíxià wùyè.","管理会社に連絡してみて。"],
+      [1,"物业公司电话是多少?","wùyè gōngsī diànhuà shì duōshao?","管理会社の電話番号は何番ですか?"],
+      [2,"交物业费了吗?","jiāo wùyèfèi le ma?","管理費払いましたか?"],
+      [2,"物业费标准是多少?","wùyèfèi biāozhǔn shì duōshao?","管理費の基準はいくらですか?"],
+      [3,"找物业经理反映吧。","zhǎo wùyè jīnglǐ fǎnyìng ba.","管理会社のマネージャーに伝えてみましょう。"],
+      [3,"物业经理很负责。","wùyè jīnglǐ hěn fùzé.","管理会社のマネージャーすごく責任感があります。"],
+      [4,"提交一份维修申请。","tíjiāo yí fèn wéixiū shēnqǐng.","修理申請を1件提出します。"],
+      [4,"填写维修申请表。","tiánxiě wéixiū shēnqǐngbiǎo.","修理申請書に記入します。"],
+      [5,"打电话报修吧。","dǎ diànhuà bàoxiū ba.","電話して故障を報告しましょう。"],
+      [5,"报修电话是多少?","bàoxiū diànhuà shì duōshao?","故障報告の電話番号は何番ですか?"],
+      [6,"小区有保安巡逻。","xiǎoqū yǒu bǎo'ān xúnluó.","団地に警備員の巡回があります。"],
+      [6,"保安很负责。","bǎo'ān hěn fùzé.","警備員すごく責任感があります。"],
+      [7,"清洁工在打扫。","qīngjiégōng zài dǎsǎo.","清掃員が掃除しています。"],
+      [7,"感谢清洁工的辛苦。","gǎnxiè qīngjiégōng de xīnkǔ.","清掃員の労を感謝します。"],
+      [8,"小区绿化很好。","xiǎoqū lǜhuà hěn hǎo.","団地の緑化すごくいいです。"],
+      [8,"定期维护绿化。","dìngqī wéihù lǜhuà.","定期的に緑化を維持管理します。"],
+      [9,"看看公告栏吧。","kànkan gōnggàolán ba.","掲示板を見てみましょう。"],
+      [9,"贴在公告栏上了。","tiē zài gōnggàolán shàng le.","掲示板に貼りました。"],
+      [10,"物业服务怎么样?","wùyè fúwù zěnmeyàng?","管理会社のサービスどうですか?"],
+      [10,"物业服务范围包括什么?","wùyè fúwù fànwéi bāokuò shénme?","管理会社のサービス範囲には何が含まれますか?"],
+    ],
+    dialogues: [
+      [1,[["A","电梯坏了怎么办?","diàntī huài le zěnme bàn?","エレベーター壊れたらどうする?"],["B","联系一下物业吧。","liánxì yíxià wùyè ba.","管理会社に連絡しよう。"]]],
+      [2,[["A","今年物业费交了吗?","jīnnián wùyèfèi jiāo le ma?","今年の管理費払った?"],["B","交了,交了一年的。","jiāo le, jiāo le yì nián de.","払ったよ、1年分払った。"]]],
+      [3,[["A","问题没解决怎么办?","wèntí méi jiějué zěnme bàn?","問題解決してないどうしよう?"],["B","去找物业经理反映一下。","qù zhǎo wùyè jīnglǐ fǎnyìng yíxià.","管理会社のマネージャーに伝えに行こう。"]]],
+      [4,[["A","水管漏水了。","shuǐguǎn lòushuǐ le.","水道管から水漏れしてる。"],["B","提交维修申请吧。","tíjiāo wéixiū shēnqǐng ba.","修理申請を提出しよう。"]]],
+      [5,[["A","怎么联系维修?","zěnme liánxì wéixiū?","修理どう連絡する?"],["B","打电话报修就行。","dǎ diànhuà bàoxiū jiù xíng.","電話して故障報告すればいいよ。"]]],
+      [6,[["A","小区安全吗?","xiǎoqū ānquán ma?","団地安全?"],["B","挺安全的,有保安巡逻。","tǐng ānquán de, yǒu bǎo'ān xúnluó.","結構安全だよ、警備員の巡回もあるし。"]]],
+      [7,[["A","楼道谁负责打扫?","lóudào shéi fùzé dǎsǎo?","廊下誰が掃除担当?"],["B","有清洁工每天打扫。","yǒu qīngjiégōng měitiān dǎsǎo.","清掃員が毎日掃除してるよ。"]]],
+      [8,[["A","小区环境怎么样?","xiǎoqū huánjìng zěnmeyàng?","団地の環境どう?"],["B","绿化很好,很漂亮。","lǜhuà hěn hǎo, hěn piàoliang.","緑化すごくいいよ、きれいだし。"]]],
+      [9,[["A","哪里能看通知?","nǎlǐ néng kàn tōngzhī?","どこで通知見れる?"],["B","去看看公告栏。","qù kànkan gōnggàolán.","掲示板見に行ってみて。"]]],
+      [10,[["A","物业服务好吗?","wùyè fúwù hǎo ma?","管理会社のサービスいい?"],["B","还不错,响应挺快的。","hái búcuò, xiǎngyìng tǐng kuài de.","なかなかいいよ、対応結構早いし。"]]],
+    ]
+  },
+  183: {
+    words: [
+      {no:1, jp:"通知", cn:"通知", py:"tōngzhī", pos:"名詞", freq:5, scene:"これまでも頻出、正式な単語として定着", meaning:"通知", collocate:"发通知、看通知", synonym:"—", mistake:"これまでも頻出。"},
+      {no:2, jp:"公告", cn:"公告", py:"gōnggào", pos:"名詞", freq:5, scene:"公式なお知らせについて話す", meaning:"公告", collocate:"发布公告、看公告", synonym:"—", mistake:"公(公の)+告(告げる)の組み合わせ。"},
+      {no:3, jp:"貼り出す", cn:"张贴", py:"zhāngtiē", pos:"動詞", freq:4, scene:"掲示物を貼る話", meaning:"貼り出す", collocate:"张贴通知、张贴在门口", synonym:"—", mistake:"张(広げる)+贴(貼る)の組み合わせ。"},
+      {no:4, jp:"住民グループチャット", cn:"业主群", py:"yèzhǔqún", pos:"名詞", freq:5, scene:"マンション住民のオンライングループについて話す", meaning:"住民グループチャット", collocate:"加入业主群、业主群通知", synonym:"—", mistake:"业主(所有者、住民)+群(グループ)の組み合わせ。"},
+      {no:5, jp:"WeChatグループ", cn:"微信群", py:"wēixìnqún", pos:"名詞", freq:5, scene:"第121課「群聊」の応用、マンション文脈で再登場", meaning:"WeChatグループ", collocate:"建微信群、微信群里通知", synonym:"—", mistake:"微信(WeChat)+群(グループ)の組み合わせ。"},
+      {no:6, jp:"断水のお知らせ", cn:"停水通知", py:"tíngshuǐ tōngzhī", pos:"名詞フレーズ", freq:4, scene:"水道が止まる予告について話す", meaning:"断水のお知らせ", collocate:"发布停水通知、看到停水通知", synonym:"—", mistake:"停水(断水する)+通知(通知)の組み合わせ。"},
+      {no:7, jp:"停電のお知らせ", cn:"停电通知", py:"tíngdiàn tōngzhī", pos:"名詞フレーズ", freq:4, scene:"電気が止まる予告について話す", meaning:"停電のお知らせ", collocate:"发布停电通知、停电通知时间", synonym:"—", mistake:"停电(停電する)+通知(通知)の組み合わせ。"},
+      {no:8, jp:"修理のお知らせ", cn:"维修通知", py:"wéixiū tōngzhī", pos:"名詞フレーズ", freq:4, scene:"第182課「维修」の応用、工事予告の話", meaning:"修理のお知らせ", collocate:"发布维修通知、维修通知内容", synonym:"—", mistake:"维修(修理する)+通知(通知)の組み合わせ。"},
+      {no:9, jp:"心温まる注意書き", cn:"温馨提示", py:"wēnxīn tíshì", pos:"フレーズ", freq:4, scene:"柔らかい言い回しの注意書きについて話す", meaning:"心温まる注意書き", collocate:"温馨提示、写个温馨提示", synonym:"—", mistake:"温馨(心温まる)+提示(お知らせ)の組み合わせ、中国語特有の柔らかい注意喚起表現。"},
+      {no:10, jp:"公示板", cn:"公示栏", py:"gōngshìlán", pos:"名詞", freq:4, scene:"第182課「公告栏」とほぼ同義、より公式な掲示板の話", meaning:"公示板", collocate:"公示栏内容、看公示栏", synonym:"公告栏(ほぼ同じ意味)", mistake:"公示(公示する)+栏(欄、掲示板)の組み合わせ。"},
+    ],
+    examples: [
+      [1,"发了一条通知。","fā le yì tiáo tōngzhī.","通知を1件出しました。"],
+      [1,"看到通知了吗?","kàndào tōngzhī le ma?","通知見ましたか?"],
+      [2,"发布了一个公告。","fābù le yí ge gōnggào.","公告を1件発表しました。"],
+      [2,"看看公告内容。","kànkan gōnggào nèiróng.","公告の内容を見てみて。"],
+      [3,"张贴一下通知。","zhāngtiē yíxià tōngzhī.","通知を貼り出してください。"],
+      [3,"张贴在门口了。","zhāngtiē zài ménkǒu le.","玄関口に貼り出しました。"],
+      [4,"加入业主群吧。","jiārù yèzhǔqún ba.","住民グループに参加しましょう。"],
+      [4,"业主群里发通知了。","yèzhǔqún lǐ fā tōngzhī le.","住民グループで通知が来ました。"],
+      [5,"建了一个微信群。","jiàn le yí ge wēixìnqún.","WeChatグループを1つ作りました。"],
+      [5,"微信群里通知一下。","wēixìnqún lǐ tōngzhī yíxià.","WeChatグループでお知らせします。"],
+      [6,"发布了停水通知。","fābù le tíngshuǐ tōngzhī.","断水のお知らせが発表されました。"],
+      [6,"看到停水通知了吗?","kàndào tíngshuǐ tōngzhī le ma?","断水のお知らせ見ましたか?"],
+      [7,"发布了停电通知。","fābù le tíngdiàn tōngzhī.","停電のお知らせが発表されました。"],
+      [7,"停电通知时间是几点?","tíngdiàn tōngzhī shíjiān shì jǐ diǎn?","停電のお知らせの時間は何時ですか?"],
+      [8,"发布了维修通知。","fābù le wéixiū tōngzhī.","修理のお知らせが発表されました。"],
+      [8,"维修通知内容是什么?","wéixiū tōngzhī nèiróng shì shénme?","修理のお知らせの内容は何ですか?"],
+      [9,"写了个温馨提示。","xiě le ge wēnxīn tíshì.","心温まる注意書きを書きました。"],
+      [9,"看看这个温馨提示。","kànkan zhège wēnxīn tíshì.","この注意書きを見てみて。"],
+      [10,"看看公示栏内容。","kànkan gōngshìlán nèiróng.","公示板の内容を見てみて。"],
+      [10,"公示栏在一楼。","gōngshìlán zài yī lóu.","公示板は1階にあります。"],
+    ],
+    dialogues: [
+      [1,[["A","有什么通知吗?","yǒu shénme tōngzhī ma?","何か通知ある?"],["B","有,楼道里贴了一张。","yǒu, lóudào lǐ tiē le yì zhāng.","あるよ、廊下に1枚貼ってあるよ。"]]],
+      [2,[["A","看到最新公告了吗?","kàndào zuìxīn gōnggào le ma?","最新の公告見た?"],["B","看到了,是关于停车的。","kàndào le, shì guānyú tíngchē de.","見たよ、駐車についてのだよ。"]]],
+      [3,[["A","通知怎么发布?","tōngzhī zěnme fābù?","通知どう発表するの?"],["B","张贴在公告栏就行。","zhāngtiē zài gōnggàolán jiù xíng.","掲示板に貼り出せばいいよ。"]]],
+      [4,[["A","怎么获取小区消息?","zěnme huòqǔ xiǎoqū xiāoxi?","団地の情報どう入手する?"],["B","加入业主群就行。","jiārù yèzhǔqún jiù xíng.","住民グループに参加すればいいよ。"]]],
+      [5,[["A","业主群怎么加入?","yèzhǔqún zěnme jiārù?","住民グループどう入れるの?"],["B","找物业帮忙拉你进群。","zhǎo wùyè bāngmáng lā nǐ jìn qún.","管理会社にグループに入れてもらうよう頼んで。"]]],
+      [6,[["A","停水通知看到了吗?","tíngshuǐ tōngzhī kàndào le ma?","断水のお知らせ見た?"],["B","看到了,明天上午停水。","kàndào le, míngtiān shàngwǔ tíngshuǐ.","見たよ、明日午前中断水だって。"]]],
+      [7,[["A","什么时候停电?","shénme shíhou tíngdiàn?","いつ停電?"],["B","停电通知说下午两点。","tíngdiàn tōngzhī shuō xiàwǔ liǎng diǎn.","停電のお知らせによると午後2時だって。"]]],
+      [8,[["A","维修通知说什么?","wéixiū tōngzhī shuō shénme?","修理のお知らせ何て言ってる?"],["B","说下周检修电梯。","shuō xiàzhōu jiǎnxiū diàntī.","来週エレベーター点検するって。"]]],
+      [9,[["A","公告栏上写了什么?","gōnggàolán shàng xiě le shénme?","掲示板に何書いてある?"],["B","是个温馨提示,提醒大家防火。","shì ge wēnxīn tíshì, tíxǐng dàjiā fánghuǒ.","心温まる注意書きだよ、火の用心を呼びかけてる。"]]],
+      [10,[["A","公示栏在哪里?","gōngshìlán zài nǎlǐ?","公示板どこ?"],["B","在小区门口。","zài xiǎoqū ménkǒu.","団地の入口にあるよ。"]]],
+    ]
+  },
+  184: {
+    words: [
+      {no:1, jp:"住民総会", cn:"业主大会", py:"yèzhǔ dàhuì", pos:"名詞フレーズ", freq:4, scene:"マンション所有者の総会について話す", meaning:"住民総会", collocate:"召开业主大会、参加业主大会", synonym:"—", mistake:"业主(所有者)+大会(総会)の組み合わせ。"},
+      {no:2, jp:"住民委員会", cn:"居委会", py:"jūwěihuì", pos:"名詞", freq:5, scene:"地域の行政組織について話す", meaning:"住民委員会", collocate:"去居委会、居委会通知", synonym:"—", mistake:"「居民委员会」の略、中国の基層行政組織。"},
+      {no:3, jp:"地域イベント", cn:"社区活动", py:"shèqū huódòng", pos:"名詞フレーズ", freq:5, scene:"第115課「社区」の応用、コミュニティ活動の話", meaning:"地域イベント", collocate:"参加社区活动、社区活动通知", synonym:"—", mistake:"社区(コミュニティ)+活动(活動)の組み合わせ。"},
+      {no:4, jp:"ボランティア", cn:"志愿者", py:"zhìyuànzhě", pos:"名詞", freq:5, scene:"地域のボランティア活動について話す", meaning:"ボランティア", collocate:"当志愿者、志愿者活动", synonym:"—", mistake:"志愿(志願する)+者(人)の組み合わせ。"},
+      {no:5, jp:"隣人祭り", cn:"邻里节", py:"línlǐjié", pos:"名詞", freq:3, scene:"近所付き合いを促進するイベントについて話す", meaning:"隣人祭り", collocate:"举办邻里节、参加邻里节", synonym:"—", mistake:"邻里(近所)+节(祭り)の組み合わせ、近年地域コミュニティ促進のために開かれるイベント。"},
+      {no:6, jp:"広場ダンス", cn:"广场舞", py:"guǎngchǎngwǔ", pos:"名詞", freq:5, scene:"第106課で既出、地域活動の文脈で再登場", meaning:"広場ダンス", collocate:"跳广场舞、广场舞队", synonym:"—", mistake:"これまでも頻出。"},
+      {no:7, jp:"コミュニティのお知らせ", cn:"社区通知", py:"shèqū tōngzhī", pos:"名詞フレーズ", freq:4, scene:"地域からのお知らせについて話す", meaning:"コミュニティのお知らせ", collocate:"收到社区通知、社区通知内容", synonym:"—", mistake:"社区(コミュニティ)+通知(通知)の組み合わせ。"},
+      {no:8, jp:"住民代表", cn:"居民代表", py:"jūmín dàibiǎo", pos:"名詞フレーズ", freq:4, scene:"地域を代表する住民について話す", meaning:"住民代表", collocate:"选出居民代表、居民代表大会", synonym:"—", mistake:"居民(住民)+代表(代表)の組み合わせ。"},
+      {no:9, jp:"投票で決める", cn:"投票表决", py:"tóupiào biǎojué", pos:"動詞フレーズ", freq:4, scene:"住民の意思決定方法について話す", meaning:"投票で決める", collocate:"进行投票表决、投票表决结果", synonym:"—", mistake:"投票(投票する)+表决(採決する)の組み合わせ。"},
+      {no:10, jp:"コミュニティセンター", cn:"社区中心", py:"shèqū zhōngxīn", pos:"名詞フレーズ", freq:4, scene:"第101課で既出、地域活動拠点の文脈で再登場", meaning:"コミュニティセンター", collocate:"去社区中心、社区中心活动", synonym:"—", mistake:"これまでも頻出。"},
+    ],
+    examples: [
+      [1,"参加业主大会吧。","cānjiā yèzhǔ dàhuì ba.","住民総会に参加しましょう。"],
+      [1,"业主大会几点召开?","yèzhǔ dàhuì jǐ diǎn zhàokāi?","住民総会は何時に開かれますか?"],
+      [2,"去居委会问问吧。","qù jūwěihuì wènwen ba.","住民委員会に聞いてみましょう。"],
+      [2,"居委会发了通知。","jūwěihuì fā le tōngzhī.","住民委員会が通知を出しました。"],
+      [3,"参加社区活动吧。","cānjiā shèqū huódòng ba.","地域イベントに参加しましょう。"],
+      [3,"社区活动很丰富。","shèqū huódòng hěn fēngfù.","地域イベントすごく充実しています。"],
+      [4,"我想当志愿者。","wǒ xiǎng dāng zhìyuànzhě.","ボランティアになりたいです。"],
+      [4,"志愿者活动很有意义。","zhìyuànzhě huódòng hěn yǒu yìyì.","ボランティア活動すごく意義深いです。"],
+      [5,"参加邻里节吧。","cānjiā línlǐjié ba.","隣人祭りに参加しましょう。"],
+      [5,"社区举办了邻里节。","shèqū jǔbàn le línlǐjié.","コミュニティが隣人祭りを開催しました。"],
+      [6,"广场上有人跳广场舞。","guǎngchǎng shàng yǒu rén tiào guǎngchǎngwǔ.","広場で広場ダンスを踊っている人がいます。"],
+      [6,"加入广场舞队吧。","jiārù guǎngchǎngwǔ duì ba.","広場ダンスチームに加わりましょう。"],
+      [7,"收到社区通知了。","shōu dào shèqū tōngzhī le.","コミュニティのお知らせを受け取りました。"],
+      [7,"社区通知内容是什么?","shèqū tōngzhī nèiróng shì shénme?","コミュニティのお知らせの内容は何ですか?"],
+      [8,"选出居民代表吧。","xuǎn chū jūmín dàibiǎo ba.","住民代表を選出しましょう。"],
+      [8,"居民代表大会开始了。","jūmín dàibiǎo dàhuì kāishǐ le.","住民代表大会が始まりました。"],
+      [9,"进行投票表决吧。","jìnxíng tóupiào biǎojué ba.","投票で決めましょう。"],
+      [9,"投票表决结果出来了。","tóupiào biǎojué jiéguǒ chūlái le.","投票結果が出ました。"],
+      [10,"去社区中心看看吧。","qù shèqū zhōngxīn kànkan ba.","コミュニティセンターに見に行きましょう。"],
+      [10,"社区中心有活动。","shèqū zhōngxīn yǒu huódòng.","コミュニティセンターでイベントがあります。"],
+    ],
+    dialogues: [
+      [1,[["A","业主大会什么时候开?","yèzhǔ dàhuì shénme shíhou kāi?","住民総会いつ開かれる?"],["B","这周六下午。","zhè zhōu liù xiàwǔ.","今週土曜日の午後だよ。"]]],
+      [2,[["A","有问题去哪里反映?","yǒu wèntí qù nǎlǐ fǎnyìng?","問題あったらどこに伝える?"],["B","去居委会反映。","qù jūwěihuì fǎnyìng.","住民委員会に伝えに行こう。"]]],
+      [3,[["A","社区有什么活动?","shèqū yǒu shénme huódòng?","地域で何かイベントある?"],["B","有很多,可以去看看。","yǒu hěn duō, kěyǐ qù kànkan.","たくさんあるよ、見に行ってみたら。"]]],
+      [4,[["A","怎么当志愿者?","zěnme dāng zhìyuànzhě?","どうやってボランティアになるの?"],["B","去居委会报名就行。","qù jūwěihuì bàomíng jiù xíng.","住民委員会で申し込めばいいよ。"]]],
+      [5,[["A","邻里节做什么?","línlǐjié zuò shénme?","隣人祭り何するの?"],["B","大家一起联欢,很热闹。","dàjiā yìqǐ liánhuān, hěn rènao.","みんなで交流会するよ、すごく賑やかだよ。"]]],
+      [6,[["A","附近有跳广场舞的吗?","fùjìn yǒu tiào guǎngchǎngwǔ de ma?","近くに広場ダンスしてる人いる?"],["B","有,晚上广场上很多。","yǒu, wǎnshang guǎngchǎng shàng hěn duō.","いるよ、夜広場にたくさんいるよ。"]]],
+      [7,[["A","收到社区通知了吗?","shōu dào shèqū tōngzhī le ma?","コミュニティのお知らせ受け取った?"],["B","收到了,是关于疫苗接种的。","shōu dào le, shì guānyú yìmiáo jiēzhòng de.","受け取ったよ、ワクチン接種についてだった。"]]],
+      [8,[["A","谁是居民代表?","shéi shì jūmín dàibiǎo?","誰が住民代表なの?"],["B","是三楼的王阿姨。","shì sān lóu de wáng āyí.","3階の王おばさんだよ。"]]],
+      [9,[["A","这个方案怎么决定?","zhège fāng'àn zěnme juédìng?","この案どう決めるの?"],["B","大家投票表决吧。","dàjiā tóupiào biǎojué ba.","みんなで投票して決めよう。"]]],
+      [10,[["A","社区中心在哪里?","shèqū zhōngxīn zài nǎlǐ?","コミュニティセンターどこ?"],["B","在小区大门附近。","zài xiǎoqū dàmén fùjìn.","団地の正門近くだよ。"]]],
+    ]
+  },
+  185: {
+    words: [
+      {no:1, jp:"巡回する", cn:"巡逻", py:"xúnluó", pos:"動詞", freq:5, scene:"第129課で既出、地域防犯の文脈で再登場", meaning:"巡回する", collocate:"保安巡逻、定期巡逻", synonym:"—", mistake:"これまでも頻出。"},
+      {no:2, jp:"監視カメラ、監視する", cn:"监控", py:"jiānkòng", pos:"名詞/動詞", freq:5, scene:"第129課「监控摄像头」の応用、単独の単語として", meaning:"監視カメラ、監視する", collocate:"安装监控、监控录像", synonym:"—", mistake:"これまでも頻出。"},
+      {no:3, jp:"オートロック、入館管理", cn:"门禁", py:"ménjìn", pos:"名詞", freq:5, scene:"建物の出入り管理について話す", meaning:"オートロック、入館管理", collocate:"门禁系统、刷门禁卡", synonym:"—", mistake:"门(門)+禁(制限する)の組み合わせ。"},
+      {no:4, jp:"警備員詰所", cn:"保安亭", py:"bǎo'āntíng", pos:"名詞", freq:4, scene:"警備員が常駐する小屋について話す", meaning:"警備員詰所", collocate:"门口的保安亭、去保安亭", synonym:"—", mistake:"保安(警備員)+亭(あずまや、詰所)の組み合わせ。"},
+      {no:5, jp:"不審者", cn:"可疑人员", py:"kěyí rényuán", pos:"名詞フレーズ", freq:4, scene:"怪しい人物について話す", meaning:"不審者", collocate:"发现可疑人员、报告可疑人员", synonym:"—", mistake:"可疑(疑わしい)+人员(人員)の組み合わせ。"},
+      {no:6, jp:"警報器", cn:"报警器", py:"bàojǐngqì", pos:"名詞", freq:4, scene:"第129課で既出、防犯設備の文脈で再登場", meaning:"警報器", collocate:"安装报警器、报警器响了", synonym:"—", mistake:"これまでも頻出。"},
+      {no:7, jp:"隣人同士の見守り活動", cn:"邻里守望", py:"línlǐ shǒuwàng", pos:"名詞フレーズ", freq:3, scene:"近隣住民同士が協力する防犯活動の話", meaning:"隣人同士の見守り活動", collocate:"邻里守望活动、开展邻里守望", synonym:"—", mistake:"邻里(近所)+守望(見守る)の組み合わせ。"},
+      {no:8, jp:"安全上のリスク", cn:"安全隐患", py:"ānquán yǐnhuàn", pos:"名詞フレーズ", freq:4, scene:"潜在的な危険について話す", meaning:"安全上のリスク", collocate:"排查安全隐患、消除安全隐患", synonym:"—", mistake:"安全(安全)+隐患(潜在的な危険)の組み合わせ。"},
+      {no:9, jp:"夜間パトロール", cn:"夜间巡查", py:"yèjiān xúnchá", pos:"動詞フレーズ", freq:4, scene:"夜間の見回り活動について話す", meaning:"夜間パトロール", collocate:"进行夜间巡查、夜间巡查队", synonym:"—", mistake:"夜间(夜間)+巡查(巡回検査する)の組み合わせ。"},
+      {no:10, jp:"出入り記録をする", cn:"出入登记", py:"chūrù dēngjì", pos:"動詞フレーズ", freq:4, scene:"訪問者の記録を取る話", meaning:"出入り記録をする", collocate:"进行出入登记、访客出入登记", synonym:"—", mistake:"出入(出入り)+登记(登録する)の組み合わせ。"},
+    ],
+    examples: [
+      [1,"保安每天巡逻。","bǎo'ān měitiān xúnluó.","警備員は毎日巡回しています。"],
+      [1,"定期巡逻很重要。","dìngqī xúnluó hěn zhòngyào.","定期巡回はとても重要です。"],
+      [2,"小区安装了监控。","xiǎoqū ānzhuāng le jiānkòng.","団地に監視カメラを設置しました。"],
+      [2,"查看一下监控录像。","chákàn yíxià jiānkòng lùxiàng.","監視カメラ映像を確認してみて。"],
+      [3,"需要刷门禁卡。","xūyào shuā ménjìnkǎ.","オートロックカードをかざす必要があります。"],
+      [3,"门禁系统坏了。","ménjìn xìtǒng huài le.","オートロックシステムが壊れました。"],
+      [4,"门口有保安亭。","ménkǒu yǒu bǎo'āntíng.","入口に警備員詰所があります。"],
+      [4,"去保安亭问问。","qù bǎo'āntíng wènwen.","警備員詰所に聞いてみて。"],
+      [5,"发现可疑人员。","fāxiàn kěyí rényuán.","不審者を発見しました。"],
+      [5,"报告可疑人员给保安。","bàogào kěyí rényuán gěi bǎo'ān.","不審者を警備員に報告します。"],
+      [6,"安装了报警器。","ānzhuāng le bàojǐngqì.","警報器を設置しました。"],
+      [6,"报警器响了。","bàojǐngqì xiǎng le.","警報器が鳴りました。"],
+      [7,"开展邻里守望活动。","kāizhǎn línlǐ shǒuwàng huódòng.","隣人同士の見守り活動を展開します。"],
+      [7,"邻里守望能预防犯罪。","línlǐ shǒuwàng néng yùfáng fànzuì.","隣人同士の見守りは犯罪を予防できます。"],
+      [8,"排查安全隐患。","páichá ānquán yǐnhuàn.","安全上のリスクを点検します。"],
+      [8,"消除安全隐患。","xiāochú ānquán yǐnhuàn.","安全上のリスクを取り除きます。"],
+      [9,"进行夜间巡查。","jìnxíng yèjiān xúnchá.","夜間パトロールを行います。"],
+      [9,"夜间巡查队很负责。","yèjiān xúnchá duì hěn fùzé.","夜間パトロール隊すごく責任感があります。"],
+      [10,"需要出入登记。","xūyào chūrù dēngjì.","出入り記録をする必要があります。"],
+      [10,"访客要出入登记。","fǎngkè yào chūrù dēngjì.","訪問者は出入り記録をしないといけません。"],
+    ],
+    dialogues: [
+      [1,[["A","小区安全吗?","xiǎoqū ānquán ma?","団地安全?"],["B","挺安全的,保安经常巡逻。","tǐng ānquán de, bǎo'ān jīngcháng xúnluó.","結構安全だよ、警備員がよく巡回してるし。"]]],
+      [2,[["A","能查监控吗?","néng chá jiānkòng ma?","監視カメラ確認できる?"],["B","可以,去物业申请调取。","kěyǐ, qù wùyè shēnqǐng diàoqǔ.","できるよ、管理会社に取り出し申請しに行って。"]]],
+      [3,[["A","进小区要刷卡吗?","jìn xiǎoqū yào shuākǎ ma?","団地入るのにカードかざす必要ある?"],["B","要,有门禁系统。","yào, yǒu ménjìn xìtǒng.","必要だよ、オートロックシステムあるから。"]]],
+      [4,[["A","找保安在哪里?","zhǎo bǎo'ān zài nǎlǐ?","警備員探すのどこ?"],["B","门口有个保安亭。","ménkǒu yǒu ge bǎo'āntíng.","入口に警備員詰所があるよ。"]]],
+      [5,[["A","看到陌生人徘徊怎么办?","kàndào mòshēngrén páihuái zěnme bàn?","知らない人がうろついてるのを見たらどうする?"],["B","报告给保安,可能是可疑人员。","bàogào gěi bǎo'ān, kěnéng shì kěyí rényuán.","警備員に報告しよう、不審者かもしれない。"]]],
+      [6,[["A","家里安装报警器了吗?","jiā lǐ ānzhuāng bàojǐngqì le ma?","家に警報器つけた?"],["B","装了,更安心。","zhuāng le, gèng ānxīn.","つけたよ、もっと安心できる。"]]],
+      [7,[["A","什么是邻里守望?","shénme shì línlǐ shǒuwàng?","隣人同士の見守りって何?"],["B","就是邻居互相留意安全。","jiùshì línjū hùxiāng liúyì ānquán.","隣人同士お互いに安全に気をつけ合うことだよ。"]]],
+      [8,[["A","发现了什么隐患?","fāxiàn le shénme yǐnhuàn?","何かリスク見つかった?"],["B","楼道堆放杂物,是安全隐患。","lóudào duīfàng záwù, shì ānquán yǐnhuàn.","廊下に物が積み上げられてる、安全上のリスクだね。"]]],
+      [9,[["A","晚上安全吗?","wǎnshang ānquán ma?","夜安全?"],["B","有夜间巡查,比较安全。","yǒu yèjiān xúnchá, bǐjiào ānquán.","夜間パトロールがあって、比較的安全だよ。"]]],
+      [10,[["A","访客怎么进小区?","fǎngkè zěnme jìn xiǎoqū?","訪問者どう団地に入る?"],["B","需要出入登记。","xūyào chūrù dēngjì.","出入り記録が必要だよ。"]]],
+    ]
+  }
+,
+  186: {
+    words: [
+      {no:1, jp:"騒音", cn:"噪音", py:"zàoyīn", pos:"名詞", freq:5, scene:"騒音全般について話す", meaning:"騒音", collocate:"噪音很大、忍受噪音", synonym:"—", mistake:"噪(騒がしい)+音(音)の組み合わせ。"},
+      {no:2, jp:"リフォームの騒音", cn:"装修噪音", py:"zhuāngxiū zàoyīn", pos:"名詞フレーズ", freq:5, scene:"改装工事による騒音の話", meaning:"リフォームの騒音", collocate:"装修噪音扰民、忍受装修噪音", synonym:"—", mistake:"装修(内装する)+噪音(騒音)の組み合わせ。"},
+      {no:3, jp:"深夜の近隣迷惑", cn:"深夜扰民", py:"shēnyè rǎomín", pos:"フレーズ", freq:4, scene:"夜遅くに近所迷惑をかける話", meaning:"深夜の近隣迷惑", collocate:"深夜扰民行为、禁止深夜扰民", synonym:"—", mistake:"深夜(深夜)+扰民(住民を騒がせる)の組み合わせ。"},
+      {no:4, jp:"防音", cn:"隔音", py:"géyīn", pos:"名詞/動詞", freq:5, scene:"防音対策について話す", meaning:"防音", collocate:"隔音效果、做好隔音", synonym:"—", mistake:"隔(隔てる)+音(音)の組み合わせ。"},
+      {no:5, jp:"騒音を訴える", cn:"投诉噪音", py:"tóusù zàoyīn", pos:"動詞フレーズ", freq:5, scene:"第30課「投诉」の応用、騒音への苦情の話", meaning:"騒音を訴える", collocate:"去投诉噪音、投诉噪音电话", synonym:"—", mistake:"投诉(苦情を言う)+噪音(騒音)の組み合わせ。"},
+      {no:6, jp:"騒音による近隣迷惑", cn:"噪音扰民", py:"zàoyīn rǎomín", pos:"フレーズ", freq:5, scene:"騒音問題全般について話す", meaning:"騒音による近隣迷惑", collocate:"噪音扰民严重、举报噪音扰民", synonym:"—", mistake:"噪音(騒音)+扰民(住民を騒がせる)の組み合わせ。"},
+      {no:7, jp:"静かにすべき時間帯", cn:"宁静时段", py:"níngjìng shíduàn", pos:"名詞フレーズ", freq:4, scene:"騒音を控えるべき時間について話す", meaning:"静かにすべき時間帯", collocate:"宁静时段规定、遵守宁静时段", synonym:"—", mistake:"宁静(静かな)+时段(時間帯)の組み合わせ。"},
+      {no:8, jp:"壁を叩いて注意する", cn:"敲墙提醒", py:"qiāo qiáng tíxǐng", pos:"動詞フレーズ", freq:3, scene:"隣室に音の大きさを知らせる方法の話", meaning:"壁を叩いて注意する", collocate:"敲墙提醒邻居、被敲墙提醒", synonym:"—", mistake:"敲墙(壁を叩く)+提醒(注意する)の組み合わせ、カジュアルな近隣間の意思表示。"},
+      {no:9, jp:"話し合いで解決する", cn:"协商解决", py:"xiéshāng jiějué", pos:"フレーズ", freq:5, scene:"第148課で既出、騒音トラブルの解決方法の話", meaning:"話し合いで解決する", collocate:"双方协商解决、协商解决问题", synonym:"—", mistake:"これまでも頻出。"},
+      {no:10, jp:"騒音基準", cn:"噪音标准", py:"zàoyīn biāozhǔn", pos:"名詞フレーズ", freq:4, scene:"法律や規定で定められた音量基準について話す", meaning:"騒音基準", collocate:"超过噪音标准、噪音标准是多少", synonym:"—", mistake:"噪音(騒音)+标准(基準)の組み合わせ。"},
+    ],
+    examples: [
+      [1,"楼上噪音很大。","lóushàng zàoyīn hěn dà.","上の階の騒音すごく大きいです。"],
+      [1,"忍受不了这个噪音。","rěnshòu bu liǎo zhège zàoyīn.","この騒音我慢できません。"],
+      [2,"装修噪音扰民。","zhuāngxiū zàoyīn rǎomín.","リフォームの騒音が近所迷惑になっています。"],
+      [2,"装修噪音要注意时间。","zhuāngxiū zàoyīn yào zhùyì shíjiān.","リフォームの騒音は時間帯に気をつけないとね。"],
+      [3,"深夜扰民要投诉。","shēnyè rǎomín yào tóusù.","深夜の迷惑行為は訴えないとね。"],
+      [3,"禁止深夜扰民。","jìnzhǐ shēnyè rǎomín.","深夜の近隣迷惑は禁止されています。"],
+      [4,"这个房子隔音不好。","zhège fángzi géyīn bù hǎo.","この家防音よくないです。"],
+      [4,"做好隔音处理。","zuò hǎo géyīn chǔlǐ.","しっかり防音処理をします。"],
+      [5,"我要去投诉噪音。","wǒ yào qù tóusù zàoyīn.","騒音を訴えに行きます。"],
+      [5,"投诉噪音电话是多少?","tóusù zàoyīn diànhuà shì duōshao?","騒音苦情の電話番号は何番ですか?"],
+      [6,"楼上噪音扰民很严重。","lóushàng zàoyīn rǎomín hěn yánzhòng.","上の階の騒音による近隣迷惑がすごく深刻です。"],
+      [6,"举报噪音扰民行为。","jǔbào zàoyīn rǎomín xíngwéi.","騒音による近隣迷惑行為を通報します。"],
+      [7,"遵守宁静时段规定。","zūnshǒu níngjìng shíduàn guīdìng.","静かにすべき時間帯の規定を守ります。"],
+      [7,"宁静时段是晚上十点后。","níngjìng shíduàn shì wǎnshang shí diǎn hòu.","静かにすべき時間帯は夜10時以降です。"],
+      [8,"敲墙提醒邻居小声点。","qiāo qiáng tíxǐng línjū xiǎo shēng diǎn.","壁を叩いて隣人に静かにするよう伝えます。"],
+      [8,"被敲墙提醒了。","bèi qiāo qiáng tíxǐng le.","壁を叩かれて注意されました。"],
+      [9,"双方协商解决吧。","shuāngfāng xiéshāng jiějué ba.","双方で話し合って解決しましょう。"],
+      [9,"协商解决噪音问题。","xiéshāng jiějué zàoyīn wèntí.","話し合いで騒音問題を解決します。"],
+      [10,"超过了噪音标准。","chāoguò le zàoyīn biāozhǔn.","騒音基準を超えました。"],
+      [10,"噪音标准是多少分贝?","zàoyīn biāozhǔn shì duōshao fēnbèi?","騒音基準は何デシベルですか?"],
+    ],
+    dialogues: [
+      [1,[["A","楼上很吵吧?","lóushàng hěn chǎo ba?","上の階うるさいでしょ?"],["B","是啊,噪音很大。","shì a, zàoyīn hěn dà.","そうだね、騒音すごく大きい。"]]],
+      [2,[["A","邻居在装修吗?","línjū zài zhuāngxiū ma?","隣人リフォームしてる?"],["B","是,装修噪音很扰民。","shì, zhuāngxiū zàoyīn hěn rǎomín.","うん、リフォームの騒音がすごく迷惑だよ。"]]],
+      [3,[["A","半夜还有声音?","bànyè hái yǒu shēngyīn?","真夜中まだ音するの?"],["B","是啊,深夜扰民太过分了。","shì a, shēnyè rǎomín tài guòfèn le.","そうだね、深夜の迷惑ひどすぎるよ。"]]],
+      [4,[["A","这个房子隔音怎么样?","zhège fángzi géyīn zěnmeyàng?","この家防音どう?"],["B","不太好,能听到隔壁声音。","bú tài hǎo, néng tīngdào gébì shēngyīn.","あんまりよくないよ、隣の音聞こえる。"]]],
+      [5,[["A","太吵了怎么办?","tài chǎo le zěnme bàn?","うるさすぎるどうしよう?"],["B","可以去投诉噪音。","kěyǐ qù tóusù zàoyīn.","騒音を訴えに行けるよ。"]]],
+      [6,[["A","楼上老是很吵。","lóushàng lǎoshi hěn chǎo.","上の階いつもうるさい。"],["B","确实噪音扰民,得管管。","quèshí zàoyīn rǎomín, děi guǎnguan.","確かに騒音迷惑だね、対処しないと。"]]],
+      [7,[["A","什么时候不能吵?","shénme shíhou bù néng chǎo?","いつ騒いじゃいけないの?"],["B","宁静时段是晚上十点以后。","níngjìng shíduàn shì wǎnshang shí diǎn yǐhòu.","静かにすべき時間帯は夜10時以降だよ。"]]],
+      [8,[["A","楼上还是很吵怎么办?","lóushàng háishi hěn chǎo zěnme bàn?","上の階まだうるさいどうしよう?"],["B","先敲墙提醒一下试试。","xiān qiāo qiáng tíxǐng yíxià shìshi.","まず壁を叩いて注意してみよう。"]]],
+      [9,[["A","投诉有用吗?","tóusù yǒu yòng ma?","苦情言うの効果ある?"],["B","先试试协商解决。","xiān shìshi xiéshāng jiějué.","まず話し合いで解決してみよう。"]]],
+      [10,[["A","怎么判断超标?","zěnme pànduàn chāobiāo?","どう基準超えたか判断するの?"],["B","可以对照噪音标准检测。","kěyǐ duìzhào zàoyīn biāozhǔn jiǎncè.","騒音基準に照らして検査できるよ。"]]],
+    ]
+  },
+  187: {
+    words: [
+      {no:1, jp:"犬の散歩でリードをつなぐ", cn:"遛狗牵绳", py:"liù gǒu qiānshéng", pos:"フレーズ", freq:5, scene:"第179課「遛狗」の応用、飼育ルールとしての話", meaning:"犬の散歩でリードをつなぐ", collocate:"遛狗要牵绳、必须遛狗牵绳", synonym:"—", mistake:"遛狗(犬の散歩をする)+牵绳(リードをつなぐ)の組み合わせ。"},
+      {no:2, jp:"排泄物を片付ける", cn:"清理粪便", py:"qīnglǐ fènbiàn", pos:"動詞フレーズ", freq:5, scene:"ペットの排泄物処理のマナーについて話す", meaning:"排泄物を片付ける", collocate:"及时清理粪便、清理粪便工具", synonym:"—", mistake:"清理(片付ける)+粪便(排泄物)の組み合わせ。"},
+      {no:3, jp:"飼育禁止", cn:"禁止饲养", py:"jìnzhǐ sìyǎng", pos:"動詞フレーズ", freq:4, scene:"特定の動物の飼育が禁止されている話", meaning:"飼育禁止", collocate:"禁止饲养大型犬、小区禁止饲养", synonym:"—", mistake:"禁止(禁止する)+饲养(飼育する)の組み合わせ。"},
+      {no:4, jp:"ペットによる近隣迷惑", cn:"宠物扰民", py:"chǒngwù rǎomín", pos:"フレーズ", freq:4, scene:"鳴き声などでペットが近所迷惑をかける話", meaning:"ペットによる近隣迷惑", collocate:"宠物扰民行为、投诉宠物扰民", synonym:"—", mistake:"宠物(ペット)+扰民(住民を騒がせる)の組み合わせ。"},
+      {no:5, jp:"ペットが人を傷つける", cn:"宠物伤人", py:"chǒngwù shāngrén", pos:"フレーズ", freq:4, scene:"ペットによる事故について話す", meaning:"ペットが人を傷つける", collocate:"宠物伤人事件、防止宠物伤人", synonym:"—", mistake:"宠物(ペット)+伤人(人を傷つける)の組み合わせ。"},
+      {no:6, jp:"登録・届出をする", cn:"登记备案", py:"dēngjì bèi'àn", pos:"動詞フレーズ", freq:4, scene:"ペットの正式な登録手続きについて話す", meaning:"登録・届出をする", collocate:"宠物登记备案、去登记备案", synonym:"—", mistake:"登记(登録する)+备案(届け出る)の組み合わせ。"},
+      {no:7, jp:"管理会社の規定", cn:"物业规定", py:"wùyè guīdìng", pos:"名詞フレーズ", freq:5, scene:"第182課「物业」の応用、マンションのルールの話", meaning:"管理会社の規定", collocate:"遵守物业规定、物业规定内容", synonym:"—", mistake:"物业(管理会社)+规定(規定)の組み合わせ。"},
+      {no:8, jp:"隣人が苦情を言う", cn:"邻居投诉", py:"línjū tóusù", pos:"動詞フレーズ", freq:5, scene:"ペットのことで近所から苦情が来る話", meaning:"隣人が苦情を言う", collocate:"被邻居投诉、收到邻居投诉", synonym:"—", mistake:"邻居(隣人)+投诉(苦情を言う)の組み合わせ。"},
+      {no:9, jp:"ペットの鳴き声(騒音)", cn:"宠物噪音", py:"chǒngwù zàoyīn", pos:"名詞フレーズ", freq:4, scene:"ペットの吠え声などの騒音について話す", meaning:"ペットの鳴き声(騒音)", collocate:"宠物噪音扰民、忍受宠物噪音", synonym:"—", mistake:"宠物(ペット)+噪音(騒音)の組み合わせ。"},
+      {no:10, jp:"マナーを守ってペットを飼う", cn:"文明养宠", py:"wénmíng yǎng chǒng", pos:"フレーズ", freq:4, scene:"責任あるペット飼育について話す", meaning:"マナーを守ってペットを飼う", collocate:"提倡文明养宠、文明养宠倡议", synonym:"—", mistake:"文明(文明的な、マナーある)+养宠(ペットを飼う)の組み合わせ。"},
+    ],
+    examples: [
+      [1,"遛狗要牵绳。","liù gǒu yào qiānshéng.","犬の散歩はリードをつながないといけません。"],
+      [1,"必须遛狗牵绳。","bìxū liù gǒu qiānshéng.","必ず犬の散歩はリードをつながないとね。"],
+      [2,"及时清理粪便。","jíshí qīnglǐ fènbiàn.","すぐに排泄物を片付けます。"],
+      [2,"带上清理粪便的袋子。","dài shàng qīnglǐ fènbiàn de dàizi.","排泄物処理用の袋を持っていきます。"],
+      [3,"小区禁止饲养大型犬。","xiǎoqū jìnzhǐ sìyǎng dàxíng quǎn.","団地は大型犬の飼育が禁止されています。"],
+      [3,"这里禁止饲养宠物。","zhèlǐ jìnzhǐ sìyǎng chǒngwù.","ここはペットの飼育が禁止されています。"],
+      [4,"宠物扰民要注意。","chǒngwù rǎomín yào zhùyì.","ペットによる近隣迷惑には気をつけないとね。"],
+      [4,"投诉宠物扰民行为。","tóusù chǒngwù rǎomín xíngwéi.","ペットによる近隣迷惑行為を訴えます。"],
+      [5,"要防止宠物伤人。","yào fángzhǐ chǒngwù shāngrén.","ペットが人を傷つけるのを防がないとね。"],
+      [5,"发生了宠物伤人事件。","fāshēng le chǒngwù shāngrén shìjiàn.","ペットが人を傷つける事件が起きました。"],
+      [6,"给宠物登记备案。","gěi chǒngwù dēngjì bèi'àn.","ペットの登録手続きをします。"],
+      [6,"去哪里登记备案?","qù nǎlǐ dēngjì bèi'àn?","どこで登録手続きできますか?"],
+      [7,"要遵守物业规定。","yào zūnshǒu wùyè guīdìng.","管理会社の規定を守らないとね。"],
+      [7,"看看物业规定内容。","kànkan wùyè guīdìng nèiróng.","管理会社の規定内容を見てみて。"],
+      [8,"被邻居投诉了。","bèi línjū tóusù le.","隣人に苦情を言われました。"],
+      [8,"收到了邻居投诉。","shōu dào le línjū tóusù.","隣人からの苦情を受け取りました。"],
+      [9,"宠物噪音扰民。","chǒngwù zàoyīn rǎomín.","ペットの鳴き声が近隣迷惑になっています。"],
+      [9,"忍受不了宠物噪音。","rěnshòu bu liǎo chǒngwù zàoyīn.","ペットの鳴き声我慢できません。"],
+      [10,"提倡文明养宠。","tíchàng wénmíng yǎng chǒng.","マナーを守ったペット飼育を提唱します。"],
+      [10,"文明养宠很重要。","wénmíng yǎng chǒng hěn zhòngyào.","マナーを守ってペットを飼うのはとても重要です。"],
+    ],
+    dialogues: [
+      [1,[["A","遛狗要注意什么?","liù gǒu yào zhùyì shénme?","犬の散歩何に気をつける?"],["B","要牵绳,别让狗乱跑。","yào qiānshéng, bié ràng gǒu luàn pǎo.","リードつないで、犬を勝手に走らせないでね。"]]],
+      [2,[["A","狗上厕所了怎么办?","gǒu shàng cèsuǒ le zěnme bàn?","犬がトイレしたらどうする?"],["B","要及时清理粪便。","yào jíshí qīnglǐ fènbiàn.","すぐに排泄物片付けないとね。"]]],
+      [3,[["A","能养大狗吗?","néng yǎng dà gǒu ma?","大型犬飼える?"],["B","不行,小区禁止饲养大型犬。","bù xíng, xiǎoqū jìnzhǐ sìyǎng dàxíng quǎn.","無理だよ、団地は大型犬の飼育禁止だから。"]]],
+      [4,[["A","狗老是叫怎么办?","gǒu lǎoshi jiào zěnme bàn?","犬がいつも吠えるどうしよう?"],["B","小心宠物扰民,得管一管。","xiǎoxīn chǒngwù rǎomín, děi guǎn yi guǎn.","ペットによる迷惑に気をつけて、対処しないと。"]]],
+      [5,[["A","狗咬人了怎么办?","gǒu yǎo rén le zěnme bàn?","犬が人噛んだらどうする?"],["B","这是宠物伤人,要负责任。","zhè shì chǒngwù shāngrén, yào fùzé rèn.","これはペットが人を傷つけたことだから、責任取らないと。"]]],
+      [6,[["A","养宠物需要登记吗?","yǎng chǒngwù xūyào dēngjì ma?","ペット飼うのに登録必要?"],["B","需要,去物业登记备案。","xūyào, qù wùyè dēngjì bèi'àn.","必要だよ、管理会社に登録手続きしに行って。"]]],
+      [7,[["A","养宠物有规定吗?","yǎng chǒngwù yǒu guīdìng ma?","ペット飼うのに規定ある?"],["B","有,要遵守物业规定。","yǒu, yào zūnshǒu wùyè guīdìng.","あるよ、管理会社の規定を守らないと。"]]],
+      [8,[["A","为什么被投诉了?","wèishénme bèi tóusù le?","なんで苦情言われたの?"],["B","可能是邻居投诉宠物扰民。","kěnéng shì línjū tóusù chǒngwù rǎomín.","隣人がペットの迷惑を訴えたのかも。"]]],
+      [9,[["A","猫叫声很吵怎么办?","māo jiàoshēng hěn chǎo zěnme bàn?","猫の鳴き声うるさいどうしよう?"],["B","确实是宠物噪音,想想办法。","quèshí shì chǒngwù zàoyīn, xiǎngxiang bànfǎ.","確かにペットの騒音だね、対策考えよう。"]]],
+      [10,[["A","怎么做个负责任的主人?","zěnme zuò ge fùzé rèn de zhǔrén?","どう責任ある飼い主になる?"],["B","要做到文明养宠。","yào zuò dào wénmíng yǎng chǒng.","マナーを守ってペットを飼うようにしないとね。"]]],
+    ]
+  },
+  188: {
+    words: [
+      {no:1, jp:"駐車スペース", cn:"停车位", py:"tíngchēwèi", pos:"名詞", freq:5, scene:"駐車場の区画について話す", meaning:"駐車スペース", collocate:"占用停车位、租个停车位", synonym:"—", mistake:"停车(駐車する)+位(位置)の組み合わせ。"},
+      {no:2, jp:"無秩序に駐車する", cn:"乱停车", py:"luàn tíngchē", pos:"動詞フレーズ", freq:5, scene:"ルールを守らない駐車について話す", meaning:"無秩序に駐車する", collocate:"禁止乱停车、乱停车被罚款", synonym:"—", mistake:"乱(乱れた)+停车(駐車する)の組み合わせ。"},
+      {no:3, jp:"駐車スペースを占領する", cn:"占用车位", py:"zhànyòng chēwèi", pos:"動詞フレーズ", freq:5, scene:"他人の駐車スペースを勝手に使う話", meaning:"駐車スペースを占領する", collocate:"占用别人车位、被占用车位", synonym:"—", mistake:"占用(占有する)+车位(駐車スペース)の組み合わせ。"},
+      {no:4, jp:"車止め(地面設置式ロック)", cn:"地锁", py:"dìsuǒ", pos:"名詞", freq:4, scene:"駐車スペースを確保する器具について話す", meaning:"車止め(地面設置式ロック)", collocate:"装地锁、拆地锁", synonym:"—", mistake:"地(地面)+锁(錠)の組み合わせ。"},
+      {no:5, jp:"駐車スペースを巡るトラブル", cn:"车位纠纷", py:"chēwèi jiūfēn", pos:"名詞フレーズ", freq:4, scene:"駐車問題によるいざこざの話", meaning:"駐車スペースを巡るトラブル", collocate:"发生车位纠纷、解决车位纠纷", synonym:"—", mistake:"车位(駐車スペース)+纠纷(紛争)の組み合わせ。"},
+      {no:6, jp:"一時駐車する", cn:"临时停车", py:"línshí tíngchē", pos:"動詞フレーズ", freq:5, scene:"短時間の駐車について話す", meaning:"一時駐車する", collocate:"临时停车区、只是临时停车", synonym:"—", mistake:"临时(臨時の)+停车(駐車する)の組み合わせ。"},
+      {no:7, jp:"来客用駐車スペース", cn:"访客车位", py:"fǎngkè chēwèi", pos:"名詞フレーズ", freq:4, scene:"訪問者用の駐車区画について話す", meaning:"来客用駐車スペース", collocate:"使用访客车位、访客车位有限", synonym:"—", mistake:"访客(訪問者)+车位(駐車スペース)の組み合わせ。"},
+      {no:8, jp:"車移動依頼の連絡先", cn:"挪车电话", py:"nuóchē diànhuà", pos:"名詞フレーズ", freq:4, scene:"駐車の妨げになった際に連絡する電話番号の話", meaning:"車移動依頼の連絡先", collocate:"留挪车电话、打挪车电话", synonym:"—", mistake:"挪车(車を移動する)+电话(電話)の組み合わせ。"},
+      {no:9, jp:"違反ステッカーを貼る", cn:"贴条", py:"tiētiáo", pos:"動詞", freq:4, scene:"違法駐車への取り締まりについて話す", meaning:"違反ステッカーを貼る", collocate:"被贴条、贴条罚款", synonym:"—", mistake:"贴(貼る)+条(紙片、ステッカー)の組み合わせ。"},
+      {no:10, jp:"駐車スペースの賃貸", cn:"车位租赁", py:"chēwèi zūlìn", pos:"名詞フレーズ", freq:4, scene:"駐車場を借りる契約について話す", meaning:"駐車スペースの賃貸", collocate:"办理车位租赁、车位租赁费用", synonym:"—", mistake:"车位(駐車スペース)+租赁(賃貸する)の組み合わせ。"},
+    ],
+    examples: [
+      [1,"找不到停车位。","zhǎo bu dào tíngchēwèi.","駐車スペースが見つかりません。"],
+      [1,"这是我的停车位。","zhè shì wǒ de tíngchēwèi.","これは私の駐車スペースです。"],
+      [2,"禁止乱停车。","jìnzhǐ luàn tíngchē.","無秩序な駐車は禁止です。"],
+      [2,"乱停车会被罚款。","luàn tíngchē huì bèi fákuǎn.","無秩序に駐車すると罰金を取られます。"],
+      [3,"有人占用了我的车位。","yǒu rén zhànyòng le wǒ de chēwèi.","誰かが私の駐車スペースを占領しました。"],
+      [3,"不要占用别人车位。","bú yào zhànyòng biéren chēwèi.","他人の駐車スペースを占領しないでください。"],
+      [4,"装了个地锁。","zhuāng le ge dìsuǒ.","車止めを設置しました。"],
+      [4,"请拆掉地锁。","qǐng chāi diào dìsuǒ.","車止めを撤去してください。"],
+      [5,"发生了车位纠纷。","fāshēng le chēwèi jiūfēn.","駐車スペースを巡るトラブルが起きました。"],
+      [5,"解决车位纠纷吧。","jiějué chēwèi jiūfēn ba.","駐車スペースのトラブルを解決しましょう。"],
+      [6,"只是临时停车。","zhǐshì línshí tíngchē.","ちょっと一時駐車しただけです。"],
+      [6,"临时停车区在哪里?","línshí tíngchē qū zài nǎlǐ?","一時駐車エリアはどこですか?"],
+      [7,"使用访客车位吧。","shǐyòng fǎngkè chēwèi ba.","来客用駐車スペースを使いましょう。"],
+      [7,"访客车位有限。","fǎngkè chēwèi yǒuxiàn.","来客用駐車スペースは限られています。"],
+      [8,"留个挪车电话吧。","liú ge nuóchē diànhuà ba.","車移動依頼の連絡先を残しておきましょう。"],
+      [8,"打挪车电话联系车主。","dǎ nuóchē diànhuà liánxì chēzhǔ.","車移動依頼の電話で車の持ち主に連絡します。"],
+      [9,"车被贴条了。","chē bèi tiētiáo le.","車に違反ステッカーを貼られました。"],
+      [9,"贴条要交罚款。","tiētiáo yào jiāo fákuǎn.","違反ステッカーを貼られたら罰金を払わないと。"],
+      [10,"办理车位租赁吧。","bànlǐ chēwèi zūlìn ba.","駐車スペースの賃貸手続きをしましょう。"],
+      [10,"车位租赁费用是多少?","chēwèi zūlìn fèiyòng shì duōshao?","駐車スペースの賃貸費用はいくらですか?"],
+    ],
+    dialogues: [
+      [1,[["A","找到停车位了吗?","zhǎodào tíngchēwèi le ma?","駐車スペース見つかった?"],["B","没有,车位不够。","méiyǒu, chēwèi bú gòu.","見つからない、スペース足りないんだ。"]]],
+      [2,[["A","那辆车怎么回事?","nà liàng chē zěnme huí shì?","あの車どうしたの?"],["B","乱停车,挡住路了。","luàn tíngchē, dǎngzhù lù le.","無秩序に停めてて、道塞いでるんだ。"]]],
+      [3,[["A","为什么不能停这里?","wèishénme bù néng tíng zhèlǐ?","なんでここに停められないの?"],["B","这被人占用车位了。","zhè bèi rén zhànyòng chēwèi le.","ここ誰かに占領されてるんだ。"]]],
+      [4,[["A","地上这个是什么?","dìshàng zhège shì shénme?","地面のこれ何?"],["B","是地锁,占位用的。","shì dìsuǒ, zhànwèi yòng de.","車止めだよ、場所取り用の。"]]],
+      [5,[["A","和邻居吵起来了。","hé línjū chǎo qǐlái le.","隣人と喧嘩になっちゃった。"],["B","是不是车位纠纷?","shì bu shì chēwèi jiūfēn?","駐車スペースのトラブル?"]]],
+      [6,[["A","能在这里停一下吗?","néng zài zhèlǐ tíng yíxià ma?","ここにちょっと停められる?"],["B","可以,这里是临时停车区。","kěyǐ, zhèlǐ shì línshí tíngchē qū.","できるよ、ここ一時駐車エリアだから。"]]],
+      [7,[["A","朋友来了停哪里?","péngyou lái le tíng nǎlǐ?","友達来たらどこに停める?"],["B","停访客车位吧。","tíng fǎngkè chēwèi ba.","来客用駐車スペースに停めよう。"]]],
+      [8,[["A","挡着路了怎么联系?","dǎng zhe lù le zěnme liánxì?","道塞いでたらどう連絡する?"],["B","打挪车电话就行。","dǎ nuóchē diànhuà jiù xíng.","車移動依頼の電話すればいいよ。"]]],
+      [9,[["A","车怎么被贴条了?","chē zěnme bèi tiētiáo le?","なんで車違反ステッカー貼られたの?"],["B","可能是违规停车了。","kěnéng shì wéiguī tíngchē le.","違法駐車したのかもしれない。"]]],
+      [10,[["A","想固定停车位怎么办?","xiǎng gùdìng tíngchēwèi zěnme bàn?","固定の駐車スペース欲しいどうすればいい?"],["B","可以办理车位租赁。","kěyǐ bànlǐ chēwèi zūlìn.","駐車スペースの賃貸手続きできるよ。"]]],
+    ]
+  },
+  189: {
+    words: [
+      {no:1, jp:"フィットネスジム", cn:"健身房", py:"jiànshēnfáng", pos:"名詞", freq:5, scene:"マンション共用のジムについて話す", meaning:"フィットネスジム", collocate:"去健身房、健身房设施", synonym:"—", mistake:"健身(体を鍛える)+房(部屋)の組み合わせ。"},
+      {no:2, jp:"プール", cn:"游泳池", py:"yóuyǒngchí", pos:"名詞", freq:5, scene:"共用プールについて話す", meaning:"プール", collocate:"小区游泳池、游泳池开放", synonym:"—", mistake:"游泳(泳ぐ)+池(プール)の組み合わせ。"},
+      {no:3, jp:"子供の遊び場", cn:"儿童乐园", py:"értóng lèyuán", pos:"名詞", freq:5, scene:"マンション内の子供用遊具エリアについて話す", meaning:"子供の遊び場", collocate:"带孩子去儿童乐园、儿童乐园设施", synonym:"—", mistake:"儿童(子供)+乐园(楽園、遊び場)の組み合わせ。"},
+      {no:4, jp:"共用休憩スペース", cn:"公共休息区", py:"gōnggòng xiūxiqū", pos:"名詞フレーズ", freq:4, scene:"マンション共用のくつろぎスペースについて話す", meaning:"共用休憩スペース", collocate:"公共休息区座位、去公共休息区", synonym:"—", mistake:"公共(公共の)+休息区(休憩エリア)の組み合わせ。"},
+      {no:5, jp:"予約して利用する", cn:"预约使用", py:"yùyuē shǐyòng", pos:"動詞フレーズ", freq:5, scene:"共用施設の予約制について話す", meaning:"予約して利用する", collocate:"需要预约使用、预约使用系统", synonym:"—", mistake:"预约(予約する)+使用(使用する)の組み合わせ。"},
+      {no:6, jp:"利用規則", cn:"使用规则", py:"shǐyòng guīzé", pos:"名詞フレーズ", freq:5, scene:"施設利用のルールについて話す", meaning:"利用規則", collocate:"遵守使用规则、查看使用规则", synonym:"—", mistake:"使用(使用する)+规则(規則)の組み合わせ。"},
+      {no:7, jp:"公共の物を大切にする", cn:"爱护公物", py:"àihù gōngwù", pos:"フレーズ", freq:4, scene:"共用施設を大切に使うことについて話す", meaning:"公共の物を大切にする", collocate:"爱护公物意识、请爱护公物", synonym:"—", mistake:"爱护(大切にする)+公物(公共の物)の組み合わせ。"},
+      {no:8, jp:"開放時間", cn:"开放时间", py:"kāifàng shíjiān", pos:"名詞フレーズ", freq:5, scene:"第110課で既出、共用施設利用時間の文脈で再登場", meaning:"開放時間", collocate:"开放时间是、查看开放时间", synonym:"—", mistake:"これまでも頻出。"},
+      {no:9, jp:"設備の破損", cn:"设施损坏", py:"shèshī sǔnhuài", pos:"名詞フレーズ", freq:4, scene:"共用施設が壊れたことについて話す", meaning:"設備の破損", collocate:"报告设施损坏、设施损坏赔偿", synonym:"—", mistake:"设施(設備)+损坏(破損する)の組み合わせ。"},
+      {no:10, jp:"公共衛生", cn:"公共卫生", py:"gōnggòng wèishēng", pos:"名詞フレーズ", freq:5, scene:"共用スペースの衛生管理について話す", meaning:"公共衛生", collocate:"注意公共卫生、维护公共卫生", synonym:"—", mistake:"公共(公共の)+卫生(衛生)の組み合わせ。"},
+    ],
+    examples: [
+      [1,"我们去健身房吧。","wǒmen qù jiànshēnfáng ba.","ジムに行きましょう。"],
+      [1,"健身房设施很齐全。","jiànshēnfáng shèshī hěn qíquán.","ジムの設備すごく揃っています。"],
+      [2,"小区有游泳池。","xiǎoqū yǒu yóuyǒngchí.","団地にプールがあります。"],
+      [2,"游泳池什么时候开放?","yóuyǒngchí shénme shíhou kāifàng?","プールはいつ開放されますか?"],
+      [3,"带孩子去儿童乐园吧。","dài háizi qù értóng lèyuán ba.","子供を子供の遊び場に連れて行きましょう。"],
+      [3,"儿童乐园设施很安全。","értóng lèyuán shèshī hěn ānquán.","子供の遊び場の設備すごく安全です。"],
+      [4,"坐在公共休息区。","zuò zài gōnggòng xiūxiqū.","共用休憩スペースに座ります。"],
+      [4,"公共休息区座位不多。","gōnggòng xiūxiqū zuòwèi bù duō.","共用休憩スペースの席あまり多くないです。"],
+      [5,"需要预约使用。","xūyào yùyuē shǐyòng.","予約して利用する必要があります。"],
+      [5,"通过预约使用系统。","tōngguò yùyuē shǐyòng xìtǒng.","予約利用システムを通します。"],
+      [6,"请遵守使用规则。","qǐng zūnshǒu shǐyòng guīzé.","利用規則を守ってください。"],
+      [6,"看看使用规则吧。","kànkan shǐyòng guīzé ba.","利用規則を見てみましょう。"],
+      [7,"请爱护公物。","qǐng àihù gōngwù.","公共の物を大切にしてください。"],
+      [7,"要有爱护公物意识。","yào yǒu àihù gōngwù yìshí.","公共の物を大切にする意識を持たないとね。"],
+      [8,"开放时间是几点?","kāifàng shíjiān shì jǐ diǎn?","開放時間は何時ですか?"],
+      [8,"查看一下开放时间。","chákàn yíxià kāifàng shíjiān.","開放時間を確認してみて。"],
+      [9,"报告设施损坏。","bàogào shèshī sǔnhuài.","設備の破損を報告します。"],
+      [9,"设施损坏要赔偿吗?","shèshī sǔnhuài yào péicháng ma?","設備の破損は賠償しないといけませんか?"],
+      [10,"注意公共卫生。","zhùyì gōnggòng wèishēng.","公共衛生に注意してください。"],
+      [10,"维护公共卫生很重要。","wéihù gōnggòng wèishēng hěn zhòngyào.","公共衛生を維持することはとても重要です。"],
+    ],
+    dialogues: [
+      [1,[["A","小区有健身房吗?","xiǎoqū yǒu jiànshēnfáng ma?","団地にジムある?"],["B","有,在一楼。","yǒu, zài yī lóu.","あるよ、1階だよ。"]]],
+      [2,[["A","夏天能游泳吗?","xiàtiān néng yóuyǒng ma?","夏泳げる?"],["B","能,小区有游泳池。","néng, xiǎoqū yǒu yóuyǒngchí.","泳げるよ、団地にプールあるから。"]]],
+      [3,[["A","孩子去哪里玩?","háizi qù nǎlǐ wán?","子供どこで遊ぶ?"],["B","带他去儿童乐园吧。","dài tā qù értóng lèyuán ba.","子供の遊び場に連れていこう。"]]],
+      [4,[["A","哪里能休息一下?","nǎlǐ néng xiūxi yíxià?","どこでちょっと休める?"],["B","去公共休息区坐坐。","qù gōnggòng xiūxiqū zuòzuo.","共用休憩スペースに座ろう。"]]],
+      [5,[["A","健身房要预约吗?","jiànshēnfáng yào yùyuē ma?","ジム予約必要?"],["B","要,需要预约使用。","yào, xūyào yùyuē shǐyòng.","必要だよ、予約して利用しないと。"]]],
+      [6,[["A","游泳池有什么规定?","yóuyǒngchí yǒu shénme guīdìng?","プールにどんな規定ある?"],["B","要遵守使用规则。","yào zūnshǒu shǐyòng guīzé.","利用規則を守らないとね。"]]],
+      [7,[["A","用完设施要注意什么?","yòng wán shèshī yào zhùyì shénme?","設備使い終わったら何に気をつける?"],["B","请爱护公物。","qǐng àihù gōngwù.","公共の物を大切にしてください。"]]],
+      [8,[["A","健身房开放时间是几点?","jiànshēnfáng kāifàng shíjiān shì jǐ diǎn?","ジムの開放時間何時?"],["B","早上六点到晚上十点。","zǎoshang liù diǎn dào wǎnshang shí diǎn.","朝6時から夜10時までだよ。"]]],
+      [9,[["A","器材坏了怎么办?","qìcái huài le zěnme bàn?","器材壊れたらどうする?"],["B","报告设施损坏给物业。","bàogào shèshī sǔnhuài gěi wùyè.","管理会社に設備の破損を報告しよう。"]]],
+      [10,[["A","大家都很自觉吗?","dàjiā dōu hěn zìjué ma?","みんな意識高い?"],["B","是的,都很注意公共卫生。","shì de, dōu hěn zhùyì gōnggòng wèishēng.","うん、みんな公共衛生に気をつけてるよ。"]]],
+    ]
+  },
+  190: {
+    words: [
+      {no:1, jp:"コミュニケーションを取って話し合う", cn:"沟通协商", py:"gōutōng xiéshāng", pos:"フレーズ", freq:5, scene:"トラブル解決のための基本姿勢の話", meaning:"コミュニケーションを取って話し合う", collocate:"主动沟通协商、沟通协商解决", synonym:"—", mistake:"沟通(コミュニケーションする)+协商(話し合う)の組み合わせ。"},
+      {no:2, jp:"相手の立場で考える", cn:"换位思考", py:"huànwèi sīkǎo", pos:"フレーズ", freq:4, scene:"トラブル時の心構えについて話す", meaning:"相手の立場で考える", collocate:"多换位思考、学会换位思考", synonym:"—", mistake:"换位(立場を変える)+思考(考える)の組み合わせ。"},
+      {no:3, jp:"冷静さを保つ", cn:"保持冷静", py:"bǎochí lěngjìng", pos:"フレーズ", freq:5, scene:"感情的にならないよう自制する話", meaning:"冷静さを保つ", collocate:"保持冷静沟通、要保持冷静", synonym:"—", mistake:"保持(保つ)+冷静(冷静)の組み合わせ。"},
+      {no:4, jp:"仲裁を求める", cn:"寻求调解", py:"xúnqiú tiáojiě", pos:"動詞フレーズ", freq:4, scene:"第三者に間に入ってもらう話", meaning:"仲裁を求める", collocate:"寻求调解帮助、向居委会寻求调解", synonym:"—", mistake:"寻求(求める)+调解(調停する)の組み合わせ。"},
+      {no:5, jp:"管理会社が介入する", cn:"物业介入", py:"wùyè jièrù", pos:"動詞フレーズ", freq:4, scene:"第182課「物业」の応用、トラブル解決への関与の話", meaning:"管理会社が介入する", collocate:"请物业介入、物业介入调解", synonym:"—", mistake:"物业(管理会社)+介入(介入する)の組み合わせ。"},
+      {no:6, jp:"法的手段", cn:"法律途径", py:"fǎlǜ tújìng", pos:"名詞フレーズ", freq:4, scene:"法律を通じた解決方法について話す", meaning:"法的手段", collocate:"通过法律途径、走法律途径解决", synonym:"—", mistake:"法律(法律)+途径(手段、ルート)の組み合わせ。"},
+      {no:7, jp:"近隣トラブル", cn:"邻里纠纷", py:"línlǐ jiūfēn", pos:"名詞フレーズ", freq:5, scene:"第181課「邻里」の応用、住民間のトラブル全般の話", meaning:"近隣トラブル", collocate:"处理邻里纠纷、常见邻里纠纷", synonym:"—", mistake:"邻里(近所)+纠纷(紛争)の組み合わせ。"},
+      {no:8, jp:"心穏やかに", cn:"心平气和", py:"xīnpíngqìhé", pos:"フレーズ", freq:4, scene:"落ち着いた態度で話す様子を表す(四字熟語)", meaning:"心穏やかに", collocate:"心平气和地说、保持心平气和", synonym:"—", mistake:"心平(心が平静な)+气和(気が穏やかな)の組み合わせ、四字熟語。"},
+      {no:9, jp:"合意に達する", cn:"达成共识", py:"dáchéng gòngshí", pos:"動詞フレーズ", freq:5, scene:"双方が納得する結論に至る話", meaning:"合意に達する", collocate:"双方达成共识、最终达成共识", synonym:"—", mistake:"达成(達成する)+共识(共通認識)の組み合わせ。"},
+      {no:10, jp:"和解する", cn:"和解", py:"héjiě", pos:"動詞", freq:5, scene:"トラブルが解決して仲直りする話", meaning:"和解する", collocate:"双方和解了、达成和解", synonym:"—", mistake:"和(和やか)+解(解く)の組み合わせ。"},
+    ],
+    examples: [
+      [1,"主动沟通协商吧。","zhǔdòng gōutōng xiéshāng ba.","積極的にコミュニケーションを取って話し合いましょう。"],
+      [1,"沟通协商解决问题。","gōutōng xiéshāng jiějué wèntí.","コミュニケーションを取って話し合って問題を解決します。"],
+      [2,"多换位思考一下。","duō huànwèi sīkǎo yíxià.","もっと相手の立場で考えてみて。"],
+      [2,"学会换位思考很重要。","xuéhuì huànwèi sīkǎo hěn zhòngyào.","相手の立場で考えることを学ぶのはとても重要です。"],
+      [3,"要保持冷静。","yào bǎochí lěngjìng.","冷静さを保たないとね。"],
+      [3,"保持冷静沟通吧。","bǎochí lěngjìng gōutōng ba.","冷静さを保ってコミュニケーションを取りましょう。"],
+      [4,"我们去寻求调解吧。","wǒmen qù xúnqiú tiáojiě ba.","仲裁を求めに行きましょう。"],
+      [4,"向居委会寻求调解。","xiàng jūwěihuì xúnqiú tiáojiě.","住民委員会に仲裁を求めます。"],
+      [5,"请物业介入吧。","qǐng wùyè jièrù ba.","管理会社に介入してもらいましょう。"],
+      [5,"物业介入调解纠纷。","wùyè jièrù tiáojiě jiūfēn.","管理会社がトラブルの調停に介入します。"],
+      [6,"通过法律途径解决。","tōngguò fǎlǜ tújìng jiějué.","法的手段で解決します。"],
+      [6,"走法律途径解决吧。","zǒu fǎlǜ tújìng jiějué ba.","法的手段で解決しましょう。"],
+      [7,"发生了邻里纠纷。","fāshēng le línlǐ jiūfēn.","近隣トラブルが発生しました。"],
+      [7,"处理邻里纠纷需要耐心。","chǔlǐ línlǐ jiūfēn xūyào nàixīn.","近隣トラブルの対処には忍耐が必要です。"],
+      [8,"心平气和地说。","xīnpíngqìhé de shuō.","心穏やかに話します。"],
+      [8,"保持心平气和。","bǎochí xīnpíngqìhé.","心穏やかさを保ちます。"],
+      [9,"双方达成共识了。","shuāngfāng dáchéng gòngshí le.","双方合意に達しました。"],
+      [9,"最终达成共识。","zuìzhōng dáchéng gòngshí.","最終的に合意に達しました。"],
+      [10,"双方和解了。","shuāngfāng héjiě le.","双方和解しました。"],
+      [10,"达成了和解。","dáchéng le héjiě.","和解に達しました。"],
+    ],
+    dialogues: [
+      [1,[["A","和邻居有矛盾怎么办?","hé línjū yǒu máodùn zěnme bàn?","隣人と揉め事あったらどうする?"],["B","先主动沟通协商吧。","xiān zhǔdòng gōutōng xiéshāng ba.","まず積極的にコミュニケーション取って話し合おう。"]]],
+      [2,[["A","总是想不通怎么办?","zǒngshì xiǎng bu tōng zěnme bàn?","いつも理解できないどうしよう?"],["B","多换位思考一下。","duō huànwèi sīkǎo yíxià.","もっと相手の立場で考えてみて。"]]],
+      [3,[["A","吵起来了怎么办?","chǎo qǐlái le zěnme bàn?","喧嘩になったらどうする?"],["B","先保持冷静。","xiān bǎochí lěngjìng.","まず冷静さを保って。"]]],
+      [4,[["A","自己解决不了怎么办?","zìjǐ jiějué bu liǎo zěnme bàn?","自分で解決できないどうしよう?"],["B","可以寻求调解。","kěyǐ xúnqiú tiáojiě.","仲裁を求められるよ。"]]],
+      [5,[["A","调解需要谁帮忙?","tiáojiě xūyào shéi bāngmáng?","調停に誰の助け必要?"],["B","可以请物业介入。","kěyǐ qǐng wùyè jièrù.","管理会社に介入してもらえるよ。"]]],
+      [6,[["A","调解也没用怎么办?","tiáojiě yě méi yòng zěnme bàn?","調停も効果ないどうしよう?"],["B","那就走法律途径解决。","nà jiù zǒu fǎlǜ tújìng jiějué.","じゃあ法的手段で解決しよう。"]]],
+      [7,[["A","邻里纠纷常见吗?","línlǐ jiūfēn chángjiàn ma?","近隣トラブルよくある?"],["B","挺常见的,处理方法很重要。","tǐng chángjiàn de, chǔlǐ fāngfǎ hěn zhòngyào.","結構よくあるよ、対処法がすごく重要だね。"]]],
+      [8,[["A","吵架时该怎么做?","chǎojià shí gāi zěnme zuò?","喧嘩の時どうすべき?"],["B","尽量心平气和地说。","jǐnliàng xīnpíngqìhé de shuō.","できるだけ心穏やかに話すべきだよ。"]]],
+      [9,[["A","最后怎么解决的?","zuìhòu zěnme jiějué de?","最後どう解決したの?"],["B","双方达成共识了。","shuāngfāng dáchéng gòngshí le.","双方合意に達したよ。"]]],
+      [10,[["A","关系恢复了吗?","guānxi huīfù le ma?","関係修復した?"],["B","恢复了,已经和解了。","huīfù le, yǐjīng héjiě le.","修復したよ、もう和解したから。"]]],
+    ]
+  }
+,
+  191: {
+    words: [
+      {no:1, jp:"四川料理", cn:"川菜", py:"chuāncài", pos:"名詞", freq:5, scene:"中国八大料理系統の一つについて話す", meaning:"四川料理", collocate:"吃川菜、川菜很辣", synonym:"—", mistake:"川(四川)+菜(料理)の組み合わせ、辛くて痺れる味付けが特徴。"},
+      {no:2, jp:"広東料理", cn:"粤菜", py:"yuècài", pos:"名詞", freq:5, scene:"広東系の料理について話す", meaning:"広東料理", collocate:"吃粤菜、粤菜清淡", synonym:"—", mistake:"粤(広東)+菜(料理)の組み合わせ、素材の味を生かした薄味が特徴。"},
+      {no:3, jp:"山東料理", cn:"鲁菜", py:"lǔcài", pos:"名詞", freq:3, scene:"山東系の料理について話す", meaning:"山東料理", collocate:"鲁菜代表菜、正宗鲁菜", synonym:"—", mistake:"鲁(山東)+菜(料理)の組み合わせ、八大料理系統の一つで北方料理の基礎。"},
+      {no:4, jp:"江蘇料理", cn:"苏菜", py:"sūcài", pos:"名詞", freq:3, scene:"江蘇系の料理について話す", meaning:"江蘇料理", collocate:"苏菜特色、正宗苏菜", synonym:"—", mistake:"苏(江蘇)+菜(料理)の組み合わせ、繊細な味付けと美しい盛り付けが特徴。"},
+      {no:5, jp:"湖南料理", cn:"湘菜", py:"xiāngcài", pos:"名詞", freq:4, scene:"湖南系の料理について話す", meaning:"湖南料理", collocate:"湘菜很辣、吃湘菜", synonym:"—", mistake:"湘(湖南)+菜(料理)の組み合わせ、四川料理と並ぶ辛い料理として有名。"},
+      {no:6, jp:"福建料理", cn:"闽菜", py:"mǐncài", pos:"名詞", freq:3, scene:"福建系の料理について話す", meaning:"福建料理", collocate:"闽菜特点、正宗闽菜", synonym:"—", mistake:"闽(福建)+菜(料理)の組み合わせ、海鮮とスープ料理が有名。"},
+      {no:7, jp:"浙江料理", cn:"浙菜", py:"zhècài", pos:"名詞", freq:3, scene:"浙江系の料理について話す", meaning:"浙江料理", collocate:"浙菜代表、杭州浙菜", synonym:"—", mistake:"浙(浙江)+菜(料理)の組み合わせ、江南地方の淡白で上品な味付けが特徴。"},
+      {no:8, jp:"安徽料理", cn:"徽菜", py:"huīcài", pos:"名詞", freq:3, scene:"安徽系の料理について話す", meaning:"安徽料理", collocate:"徽菜风味、正宗徽菜", synonym:"—", mistake:"徽(安徽)+菜(料理)の組み合わせ、山菜や野生食材を使う独特な料理。"},
+      {no:9, jp:"中国八大料理系統", cn:"八大菜系", py:"bā dà càixì", pos:"名詞フレーズ", freq:4, scene:"中国料理の分類全体について話す", meaning:"中国八大料理系統", collocate:"中国八大菜系、了解八大菜系", synonym:"—", mistake:"八大(八大)+菜系(料理系統)の組み合わせ、川粤鲁苏湘闽浙徽の総称。"},
+      {no:10, jp:"地方の風味", cn:"地方风味", py:"dìfāng fēngwèi", pos:"名詞フレーズ", freq:5, scene:"各地域独特の味付けについて話す", meaning:"地方の風味", collocate:"各地地方风味、有地方风味", synonym:"—", mistake:"地方(地方)+风味(風味)の組み合わせ。"},
+    ],
+    examples: [
+      [1,"我喜欢吃川菜。","wǒ xǐhuan chī chuāncài.","四川料理を食べるのが好きです。"],
+      [1,"川菜很辣很麻。","chuāncài hěn là hěn má.","四川料理はすごく辛くて痺れます。"],
+      [2,"我们去吃粤菜吧。","wǒmen qù chī yuècài ba.","広東料理を食べに行きましょう。"],
+      [2,"粤菜口味比较清淡。","yuècài kǒuwèi bǐjiào qīngdàn.","広東料理は味付けが比較的あっさりしています。"],
+      [3,"鲁菜历史悠久。","lǔcài lìshǐ yōujiǔ.","山東料理は歴史が長いです。"],
+      [3,"这是正宗鲁菜。","zhè shì zhèngzōng lǔcài.","これは本場の山東料理です。"],
+      [4,"苏菜很讲究刀工。","sūcài hěn jiǎngjiu dāogōng.","江蘇料理は包丁さばきにこだわります。"],
+      [4,"苏菜摆盘很精致。","sūcài bǎipán hěn jīngzhì.","江蘇料理は盛り付けがすごく精巧です。"],
+      [5,"湘菜也很辣。","xiāngcài yě hěn là.","湖南料理もすごく辛いです。"],
+      [5,"我们去吃湘菜吧。","wǒmen qù chī xiāngcài ba.","湖南料理を食べに行きましょう。"],
+      [6,"闽菜以海鲜闻名。","mǐncài yǐ hǎixiān wénmíng.","福建料理は海鮮で有名です。"],
+      [6,"尝尝正宗闽菜。","chángchang zhèngzōng mǐncài.","本場の福建料理を味わってみて。"],
+      [7,"浙菜口味清淡鲜美。","zhècài kǒuwèi qīngdàn xiānměi.","浙江料理はあっさりしていて美味です。"],
+      [7,"杭州的浙菜很有名。","hángzhōu de zhècài hěn yǒumíng.","杭州の浙江料理すごく有名です。"],
+      [8,"徽菜风味独特。","huīcài fēngwèi dútè.","安徽料理は風味が独特です。"],
+      [8,"尝试一下徽菜吧。","chángshì yíxià huīcài ba.","安徽料理を試してみましょう。"],
+      [9,"了解一下八大菜系。","liǎojiě yíxià bā dà càixì.","八大料理系統について理解してみて。"],
+      [9,"中国有八大菜系。","zhōngguó yǒu bā dà càixì.","中国には八大料理系統があります。"],
+      [10,"每个地方都有地方风味。","měi ge dìfang dōu yǒu dìfāng fēngwèi.","どの地域にも地方の風味があります。"],
+      [10,"尝尝当地的地方风味。","chángchang dāngdì de dìfāng fēngwèi.","現地の地方の風味を味わってみて。"],
+    ],
+    dialogues: [
+      [1,[["A","你喜欢吃辣吗?","nǐ xǐhuan chī là ma?","辛いの好き?"],["B","喜欢,特别爱吃川菜。","xǐhuan, tèbié ài chī chuāncài.","好きだよ、四川料理が特に大好き。"]]],
+      [2,[["A","粤菜好吃吗?","yuècài hǎochī ma?","広東料理美味しい?"],["B","很好吃,味道清淡鲜美。","hěn hǎochī, wèidào qīngdàn xiānměi.","すごく美味しいよ、味があっさりしてて美味。"]]],
+      [3,[["A","你吃过鲁菜吗?","nǐ chī guò lǔcài ma?","山東料理食べたことある?"],["B","吃过,是很经典的北方菜。","chī guò, shì hěn jīngdiǎn de běifāng cài.","あるよ、すごく定番の北方料理だね。"]]],
+      [4,[["A","苏菜有什么特点?","sūcài yǒu shénme tèdiǎn?","江蘇料理どんな特徴ある?"],["B","讲究刀工和摆盘。","jiǎngjiu dāogōng hé bǎipán.","包丁さばきと盛り付けにこだわるんだ。"]]],
+      [5,[["A","湘菜和川菜有什么区别?","xiāngcài hé chuāncài yǒu shénme qūbié?","湖南料理と四川料理どう違うの?"],["B","湘菜偏酸辣,川菜偏麻辣。","xiāngcài piān suānlà, chuāncài piān málà.","湖南料理は酸味と辛味、四川料理は痺れる辛さが強めだよ。"]]],
+      [6,[["A","闽菜有什么推荐?","mǐncài yǒu shénme tuījiàn?","福建料理何かおすすめある?"],["B","推荐尝尝海鲜类的。","tuījiàn chángchang hǎixiān lèi de.","海鮮系のを味わってみるのおすすめだよ。"]]],
+      [7,[["A","浙菜口味怎么样?","zhècài kǒuwèi zěnmeyàng?","浙江料理の味どう?"],["B","比较清淡,很鲜美。","bǐjiào qīngdàn, hěn xiānměi.","比較的あっさりしてて、すごく美味だよ。"]]],
+      [8,[["A","徽菜吃过吗?","huīcài chī guò ma?","安徽料理食べたことある?"],["B","没吃过,想尝尝看。","méi chī guò, xiǎng chángchang kàn.","ないよ、味わってみたいな。"]]],
+      [9,[["A","你了解八大菜系吗?","nǐ liǎojiě bā dà càixì ma?","八大料理系統知ってる?"],["B","了解一点,各有特色。","liǎojiě yìdiǎn, gè yǒu tèsè.","少し知ってるよ、それぞれ特色があるね。"]]],
+      [10,[["A","去外地要尝试什么?","qù wàidì yào chángshì shénme?","地方に行ったら何試すべき?"],["B","当然要尝尝当地的地方风味。","dāngrán yào chángchang dāngdì de dìfāng fēngwèi.","もちろん現地の地方の風味を味わうべきだよ。"]]],
+    ]
+  },
+  192: {
+    words: [
+      {no:1, jp:"火鍋", cn:"火锅", py:"huǒguō", pos:"名詞", freq:5, scene:"第38課で既出、料理ジャンルの文脈で再登場", meaning:"火鍋", collocate:"吃火锅、火锅店", synonym:"—", mistake:"これまでも頻出。"},
+      {no:2, jp:"スープのベース", cn:"锅底", py:"guōdǐ", pos:"名詞", freq:5, scene:"火鍋のスープの種類について話す", meaning:"スープのベース", collocate:"选锅底、锅底味道", synonym:"—", mistake:"锅(鍋)+底(底、ベース)の組み合わせ。"},
+      {no:3, jp:"麻辣スープベース", cn:"麻辣锅底", py:"málà guōdǐ", pos:"名詞フレーズ", freq:5, scene:"辛くて痺れる味のスープについて話す", meaning:"麻辣スープベース", collocate:"麻辣锅底很辣、选麻辣锅底", synonym:"—", mistake:"麻辣(痺れて辛い)+锅底(スープベース)の組み合わせ。"},
+      {no:4, jp:"澄んだスープベース", cn:"清汤锅底", py:"qīngtāng guōdǐ", pos:"名詞フレーズ", freq:4, scene:"辛くない味のスープについて話す", meaning:"澄んだスープベース", collocate:"清汤锅底更清淡、选清汤锅底", synonym:"—", mistake:"清汤(澄んだスープ)+锅底(スープベース)の組み合わせ、「麻辣锅底」の対になる選択肢。"},
+      {no:5, jp:"肉をしゃぶしゃぶする", cn:"涮肉", py:"shuàn ròu", pos:"動詞フレーズ", freq:4, scene:"火鍋で肉を茹でて食べる動作の話", meaning:"肉をしゃぶしゃぶする", collocate:"涮肉片、涮肉要几秒", synonym:"—", mistake:"涮(さっと湯にくぐらせる)+肉(肉)の組み合わせ。"},
+      {no:6, jp:"つけダレ", cn:"蘸料", py:"zhànliào", pos:"名詞", freq:5, scene:"火鍋の付け合わせのタレについて話す", meaning:"つけダレ", collocate:"调蘸料、蘸料很香", synonym:"—", mistake:"蘸(つける)+料(調味料)の組み合わせ。"},
+      {no:7, jp:"センマイ(牛の胃)", cn:"毛肚", py:"máodǔ", pos:"名詞", freq:4, scene:"火鍋の定番食材について話す", meaning:"センマイ(牛の胃)", collocate:"涮毛肚、毛肚很脆", synonym:"—", mistake:"毛(毛)+肚(胃)の組み合わせ、独特の食感で火鍋に人気の食材。"},
+      {no:8, jp:"二種スープ鍋(仕切り鍋)", cn:"鸳鸯锅", py:"yuānyāngguō", pos:"名詞", freq:4, scene:"2種類のスープを同時に楽しめる鍋について話す", meaning:"二種スープ鍋(仕切り鍋)", collocate:"点鸳鸯锅、鸳鸯锅两种味道", synonym:"—", mistake:"鸳鸯(おしどり、対になるもの)+锅(鍋)の組み合わせ、辛い味と辛くない味を両方楽しめる。"},
+      {no:9, jp:"火鍋で茹でる具材", cn:"涮菜", py:"shuàncài", pos:"名詞", freq:4, scene:"火鍋に入れる野菜や具材全般について話す", meaning:"火鍋で茹でる具材", collocate:"点涮菜、涮菜种类多", synonym:"—", mistake:"涮(さっと茹でる)+菜(食材)の組み合わせ。"},
+      {no:10, jp:"火鍋店", cn:"火锅店", py:"huǒguōdiàn", pos:"名詞", freq:5, scene:"火鍋を提供するレストランについて話す", meaning:"火鍋店", collocate:"去火锅店、火锅店排队", synonym:"—", mistake:"火锅(火鍋)+店(店)の組み合わせ。"},
+    ],
+    examples: [
+      [1,"我们去吃火锅吧。","wǒmen qù chī huǒguō ba.","火鍋を食べに行きましょう。"],
+      [1,"火锅很适合冬天吃。","huǒguō hěn shìhé dōngtiān chī.","火鍋は冬に食べるのにぴったりです。"],
+      [2,"选什么锅底?","xuǎn shénme guōdǐ?","どのスープベースを選びますか?"],
+      [2,"锅底味道很浓。","guōdǐ wèidào hěn nóng.","スープベースの味すごく濃厚です。"],
+      [3,"我要麻辣锅底。","wǒ yào málà guōdǐ.","麻辣スープベースにします。"],
+      [3,"麻辣锅底很过瘾。","málà guōdǐ hěn guòyǐn.","麻辣スープベースすごく満足感があります。"],
+      [4,"我要清汤锅底。","wǒ yào qīngtāng guōdǐ.","澄んだスープベースにします。"],
+      [4,"清汤锅底比较健康。","qīngtāng guōdǐ bǐjiào jiànkāng.","澄んだスープベースの方が比較的健康的です。"],
+      [5,"涮肉片很快熟。","shuàn ròu piàn hěn kuài shú.","肉をしゃぶしゃぶするとすぐ火が通ります。"],
+      [5,"涮肉要几秒?","shuàn ròu yào jǐ miǎo?","肉をしゃぶしゃぶするのに何秒かかりますか?"],
+      [6,"调一份蘸料吧。","tiáo yí fèn zhànliào ba.","つけダレを1つ作りましょう。"],
+      [6,"蘸料很香。","zhànliào hěn xiāng.","つけダレすごく香ばしいです。"],
+      [7,"点份毛肚吧。","diǎn fèn máodǔ ba.","センマイを1皿注文しましょう。"],
+      [7,"毛肚涮七秒最好吃。","máodǔ shuàn qī miǎo zuì hǎochī.","センマイは7秒しゃぶしゃぶすると一番美味しいです。"],
+      [8,"我们点鸳鸯锅吧。","wǒmen diǎn yuānyāngguō ba.","二種スープ鍋を注文しましょう。"],
+      [8,"鸳鸯锅能吃两种味道。","yuānyāngguō néng chī liǎng zhǒng wèidào.","二種スープ鍋なら2種類の味を楽しめます。"],
+      [9,"点些涮菜吧。","diǎn xiē shuàncài ba.","火鍋の具材をいくつか注文しましょう。"],
+      [9,"涮菜种类很多。","shuàncài zhǒnglèi hěn duō.","火鍋の具材の種類すごく多いです。"],
+      [10,"我们去那家火锅店吧。","wǒmen qù nà jiā huǒguōdiàn ba.","あの火鍋店に行きましょう。"],
+      [10,"火锅店排队人很多。","huǒguōdiàn páiduì rén hěn duō.","火鍋店の待ち列人すごく多いです。"],
+    ],
+    dialogues: [
+      [1,[["A","今晚吃火锅怎么样?","jīnwǎn chī huǒguō zěnmeyàng?","今夜火鍋どう?"],["B","好啊,我最喜欢吃火锅。","hǎo a, wǒ zuì xǐhuan chī huǒguō.","いいね、火鍋一番好き。"]]],
+      [2,[["A","选什么锅底?","xuǎn shénme guōdǐ?","どのスープベース選ぶ?"],["B","我要麻辣的。","wǒ yào málà de.","麻辣にするよ。"]]],
+      [3,[["A","麻辣锅底会不会太辣?","málà guōdǐ huì bu huì tài là?","麻辣スープベース辛すぎない?"],["B","还好,可以调整辣度。","hái hǎo, kěyǐ tiáozhěng làdù.","大丈夫だよ、辛さ調整できるから。"]]],
+      [4,[["A","不能吃辣怎么办?","bù néng chī là zěnme bàn?","辛いの食べられないどうする?"],["B","选清汤锅底吧。","xuǎn qīngtāng guōdǐ ba.","澄んだスープベース選ぼう。"]]],
+      [5,[["A","肉要涮多久?","ròu yào shuàn duōjiǔ?","肉どれくらいしゃぶしゃぶする?"],["B","薄片涮肉一般十秒左右。","báopiàn shuàn ròu yìbān shí miǎo zuǒyòu.","薄切り肉は通常10秒くらいだよ。"]]],
+      [6,[["A","蘸料怎么调?","zhànliào zěnme tiáo?","つけダレどう作る?"],["B","芝麻酱加点香菜就行。","zhīmajiàng jiā diǎn xiāngcài jiù xíng.","ゴマダレにパクチー加えればいいよ。"]]],
+      [7,[["A","要不要点毛肚?","yào bu yào diǎn máodǔ?","センマイ注文する?"],["B","要,毛肚很好吃。","yào, máodǔ hěn hǎochī.","注文するよ、センマイすごく美味しいから。"]]],
+      [8,[["A","两个人吃辣不一样怎么办?","liǎng ge rén chī là bù yíyàng zěnme bàn?","2人の辛さの好み違うどうする?"],["B","点个鸳鸯锅吧。","diǎn ge yuānyāngguō ba.","二種スープ鍋注文しよう。"]]],
+      [9,[["A","还要点什么涮菜?","hái yào diǎn shénme shuàncài?","他にどんな具材注文する?"],["B","再来点蔬菜和豆腐。","zài lái diǎn shūcài hé dòufu.","野菜と豆腐もう少し頼もう。"]]],
+      [10,[["A","去哪家火锅店?","qù nǎ jiā huǒguōdiàn?","どこの火鍋店行く?"],["B","去那家评价很高的。","qù nà jiā píngjià hěn gāo de.","評価すごく高いあそこに行こう。"]]],
+    ]
+  },
+  193: {
+    words: [
+      {no:1, jp:"ラーメン(手打ち麺)", cn:"拉面", py:"lāmiàn", pos:"名詞", freq:5, scene:"第79課で既出、麺類ジャンルの文脈で再登場", meaning:"ラーメン(手打ち麺)", collocate:"吃拉面、兰州拉面", synonym:"—", mistake:"これまでも頻出。"},
+      {no:2, jp:"刀削麺", cn:"刀削面", py:"dāoxiāomiàn", pos:"名詞", freq:5, scene:"山西省の名物麺について話す", meaning:"刀削麺", collocate:"吃刀削面、山西刀削面", synonym:"—", mistake:"刀削(刀で削る)+面(麺)の組み合わせ、麺を刀で削って作る技法が特徴。"},
+      {no:3, jp:"熱乾麺", cn:"热干面", py:"règānmiàn", pos:"名詞", freq:4, scene:"武漢の名物麺について話す", meaning:"熱乾麺", collocate:"武汉热干面、吃热干面", synonym:"—", mistake:"热干(温かく汁気のない)+面(麺)の組み合わせ、汁なしで胡麻ダレと和える麺料理。"},
+      {no:4, jp:"ジャージャー麺", cn:"炸酱面", py:"zhájiàngmiàn", pos:"名詞", freq:5, scene:"北京の名物麺について話す", meaning:"ジャージャー麺", collocate:"吃炸酱面、老北京炸酱面", synonym:"—", mistake:"炸酱(肉味噌炒め)+面(麺)の組み合わせ。"},
+      {no:5, jp:"冷やし麺", cn:"凉面", py:"liángmiàn", pos:"名詞", freq:5, scene:"夏に食べる冷たい麺について話す", meaning:"冷やし麺", collocate:"吃凉面、四川凉面", synonym:"—", mistake:"凉(冷たい)+面(麺)の組み合わせ。"},
+      {no:6, jp:"ビーフン", cn:"米线", py:"mǐxiàn", pos:"名詞", freq:5, scene:"雲南省の名物米麺について話す", meaning:"ビーフン", collocate:"过桥米线、吃米线", synonym:"—", mistake:"米(米)+线(糸、麺)の組み合わせ。"},
+      {no:7, jp:"河粉(平打ち米麺)", cn:"河粉", py:"héfěn", pos:"名詞", freq:4, scene:"広東の名物麺について話す", meaning:"河粉(平打ち米麺)", collocate:"干炒河粉、吃河粉", synonym:"—", mistake:"広東発祥の平たい米麺、炒め物によく使われる。"},
+      {no:8, jp:"シンプルなかけ麺", cn:"阳春面", py:"yángchūnmiàn", pos:"名詞", freq:3, scene:"江南地方の素朴な麺について話す", meaning:"シンプルなかけ麺", collocate:"一碗阳春面、简单的阳春面", synonym:"—", mistake:"阳春(陽春)+面(麺)の組み合わせ、具のないシンプルな麺料理を指す上海発祥の名称。"},
+      {no:9, jp:"汁ありの麺", cn:"汤面", py:"tāngmiàn", pos:"名詞", freq:5, scene:"スープに入った麺について話す", meaning:"汁ありの麺", collocate:"一碗汤面、汤面很暖胃", synonym:"—", mistake:"汤(スープ)+面(麺)の組み合わせ。"},
+      {no:10, jp:"汁なし和え麺", cn:"干拌面", py:"gānbànmiàn", pos:"名詞", freq:4, scene:"スープなしで和える麺について話す", meaning:"汁なし和え麺", collocate:"吃干拌面、干拌面很香", synonym:"—", mistake:"干拌(乾燥した状態で和える)+面(麺)の組み合わせ。"},
+    ],
+    examples: [
+      [1,"我们去吃拉面吧。","wǒmen qù chī lāmiàn ba.","ラーメンを食べに行きましょう。"],
+      [1,"兰州拉面很有名。","lánzhōu lāmiàn hěn yǒumíng.","蘭州ラーメンすごく有名です。"],
+      [2,"尝尝刀削面吧。","chángchang dāoxiāomiàn ba.","刀削麺を味わってみましょう。"],
+      [2,"山西刀削面很劲道。","shānxī dāoxiāomiàn hěn jìndao.","山西の刀削麺すごくコシがあります。"],
+      [3,"我们去吃热干面吧。","wǒmen qù chī règānmiàn ba.","熱乾麺を食べに行きましょう。"],
+      [3,"武汉热干面很出名。","wǔhàn règānmiàn hěn chūmíng.","武漢の熱乾麺すごく有名です。"],
+      [4,"我要一碗炸酱面。","wǒ yào yì wǎn zhájiàngmiàn.","ジャージャー麺を1杯ください。"],
+      [4,"老北京炸酱面很地道。","lǎo běijīng zhájiàngmiàn hěn dìdao.","老北京ジャージャー麺すごく本場の味です。"],
+      [5,"夏天吃凉面很爽。","xiàtiān chī liángmiàn hěn shuǎng.","夏に冷やし麺を食べるとすごくさっぱりします。"],
+      [5,"来一份四川凉面。","lái yí fèn sìchuān liángmiàn.","四川冷やし麺を1つください。"],
+      [6,"我要一碗米线。","wǒ yào yì wǎn mǐxiàn.","ビーフンを1杯ください。"],
+      [6,"过桥米线很有名。","guòqiáo mǐxiàn hěn yǒumíng.","過橋米線すごく有名です。"],
+      [7,"我要一份干炒河粉。","wǒ yào yí fèn gānchǎo héfěn.","汁なし炒め河粉を1つください。"],
+      [7,"河粉口感很滑。","héfěn kǒugǎn hěn huá.","河粉の食感すごくつるっとしています。"],
+      [8,"来一碗阳春面吧。","lái yì wǎn yángchūnmiàn ba.","シンプルなかけ麺を1杯ください。"],
+      [8,"阳春面很简单朴素。","yángchūnmiàn hěn jiǎndān pǔsù.","シンプルなかけ麺はすごくシンプルで素朴です。"],
+      [9,"我要一碗汤面。","wǒ yào yì wǎn tāngmiàn.","汁ありの麺を1杯ください。"],
+      [9,"汤面很暖胃。","tāngmiàn hěn nuǎn wèi.","汁ありの麺はお腹を温めてくれます。"],
+      [10,"我要一份干拌面。","wǒ yào yí fèn gānbànmiàn.","汁なし和え麺を1つください。"],
+      [10,"干拌面很香很好吃。","gānbànmiàn hěn xiāng hěn hǎochī.","汁なし和え麺すごく香ばしくて美味しいです。"],
+    ],
+    dialogues: [
+      [1,[["A","午饭吃什么?","wǔfàn chī shénme?","お昼何食べる?"],["B","吃拉面吧。","chī lāmiàn ba.","ラーメン食べよう。"]]],
+      [2,[["A","刀削面怎么做的?","dāoxiāomiàn zěnme zuò de?","刀削麺どうやって作るの?"],["B","是用刀削出来的面条。","shì yòng dāo xiāo chūlái de miàntiáo.","刀で削って作った麺だよ。"]]],
+      [3,[["A","热干面什么味道?","règānmiàn shénme wèidào?","熱乾麺どんな味?"],["B","是芝麻酱拌的,很香。","shì zhīmajiàng bàn de, hěn xiāng.","ゴマダレで和えてあって、すごく香ばしいよ。"]]],
+      [4,[["A","炸酱面好吃吗?","zhájiàngmiàn hǎochī ma?","ジャージャー麺美味しい?"],["B","很好吃,酱很香。","hěn hǎochī, jiàng hěn xiāng.","すごく美味しいよ、味噌がすごく香ばしい。"]]],
+      [5,[["A","天热吃什么好?","tiān rè chī shénme hǎo?","暑い時何食べるといい?"],["B","吃碗凉面很爽口。","chī wǎn liángmiàn hěn shuǎngkǒu.","冷やし麺食べるとすごくさっぱりするよ。"]]],
+      [6,[["A","米线和拉面一样吗?","mǐxiàn hé lāmiàn yíyàng ma?","ビーフンとラーメン同じ?"],["B","不一样,米线是米做的。","bù yíyàng, mǐxiàn shì mǐ zuò de.","違うよ、ビーフンは米で作られてるから。"]]],
+      [7,[["A","河粉怎么做好吃?","héfěn zěnme zuò hǎochī?","河粉どう作ると美味しい?"],["B","干炒河粉最经典。","gānchǎo héfěn zuì jīngdiǎn.","汁なし炒め河粉が一番定番だよ。"]]],
+      [8,[["A","阳春面里有什么?","yángchūnmiàn lǐ yǒu shénme?","シンプルなかけ麺に何が入ってるの?"],["B","很简单,就是面加汤。","hěn jiǎndān, jiùshì miàn jiā tāng.","すごくシンプルだよ、麺にスープを加えただけ。"]]],
+      [9,[["A","想吃点热乎的。","xiǎng chī diǎn rèhu de.","温かいもの食べたいな。"],["B","那来碗汤面吧。","nà lái wǎn tāngmiàn ba.","じゃあ汁ありの麺にしよう。"]]],
+      [10,[["A","不想喝汤怎么办?","bù xiǎng hē tāng zěnme bàn?","スープ飲みたくないどうする?"],["B","点干拌面就行。","diǎn gānbànmiàn jiù xíng.","汁なし和え麺頼めばいいよ。"]]],
+    ]
+  },
+  194: {
+    words: [
+      {no:1, jp:"蒸し餃子", cn:"蒸饺", py:"zhēngjiǎo", pos:"名詞", freq:5, scene:"蒸して作る餃子について話す", meaning:"蒸し餃子", collocate:"吃蒸饺、一笼蒸饺", synonym:"—", mistake:"蒸(蒸す)+饺(餃子)の組み合わせ。"},
+      {no:2, jp:"焼き餃子", cn:"煎饺", py:"jiānjiǎo", pos:"名詞", freq:5, scene:"焼いて作る餃子について話す", meaning:"焼き餃子", collocate:"吃煎饺、煎饺很香脆", synonym:"—", mistake:"煎(焼く)+饺(餃子)の組み合わせ。"},
+      {no:3, jp:"水餃子", cn:"水饺", py:"shuǐjiǎo", pos:"名詞", freq:5, scene:"茹でて作る餃子について話す", meaning:"水餃子", collocate:"吃水饺、包水饺", synonym:"—", mistake:"水(水)+饺(餃子)の組み合わせ、中国では最もポピュラーな餃子。"},
+      {no:4, jp:"ショーロンポー", cn:"小笼包", py:"xiǎolóngbāo", pos:"名詞", freq:5, scene:"上海の名物点心について話す", meaning:"ショーロンポー", collocate:"吃小笼包、上海小笼包", synonym:"—", mistake:"小笼(小さいセイロ)+包(包子)の組み合わせ、スープが入った点心。"},
+      {no:5, jp:"焼き小籠包", cn:"生煎包", py:"shēngjiānbāo", pos:"名詞", freq:4, scene:"底を焼いた包子について話す", meaning:"焼き小籠包", collocate:"吃生煎包、生煎包底很脆", synonym:"—", mistake:"生煎(生から焼く)+包(包子)の組み合わせ。"},
+      {no:6, jp:"ワンタン", cn:"馄饨", py:"húntun", pos:"名詞", freq:5, scene:"中国のワンタンについて話す", meaning:"ワンタン", collocate:"吃馄饨、一碗馄饨", synonym:"—", mistake:"これまでも頻出、正式な単語として定着。"},
+      {no:7, jp:"焼き餃子(細長い形)", cn:"锅贴", py:"guōtiē", pos:"名詞", freq:4, scene:"第194課「煎饺」に似た料理、細長い焼き餃子の話", meaning:"焼き餃子(細長い形)", collocate:"吃锅贴、锅贴很酥脆", synonym:"煎饺(似た料理)", mistake:"锅(鍋)+贴(貼り付ける)の組み合わせ、片面のみ焼くのが特徴。"},
+      {no:8, jp:"シュウマイ", cn:"烧卖", py:"shāomài", pos:"名詞", freq:5, scene:"中国のシュウマイについて話す", meaning:"シュウマイ", collocate:"吃烧卖、一笼烧卖", synonym:"—", mistake:"上部が開いた形が特徴の点心。"},
+      {no:9, jp:"チャーシューまん", cn:"叉烧包", py:"chāshāobāo", pos:"名詞", freq:4, scene:"広東の名物点心について話す", meaning:"チャーシューまん", collocate:"吃叉烧包、广式叉烧包", synonym:"—", mistake:"叉烧(チャーシュー)+包(包子)の組み合わせ。"},
+      {no:10, jp:"スープ入り包子", cn:"灌汤包", py:"guàntāngbāo", pos:"名詞", freq:4, scene:"第194課「小笼包」に似たスープ入り点心の話", meaning:"スープ入り包子", collocate:"吃灌汤包、灌汤包汤汁多", synonym:"小笼包(似た料理)", mistake:"灌汤(スープを注ぐ)+包(包子)の組み合わせ、開封の名物としても有名。"},
+    ],
+    examples: [
+      [1,"我要一笼蒸饺。","wǒ yào yì lóng zhēngjiǎo.","蒸し餃子を1せいろください。"],
+      [1,"蒸饺很有营养。","zhēngjiǎo hěn yǒu yíngyǎng.","蒸し餃子すごく栄養があります。"],
+      [2,"我要一份煎饺。","wǒ yào yí fèn jiānjiǎo.","焼き餃子を1皿ください。"],
+      [2,"煎饺底部很香脆。","jiānjiǎo dǐbù hěn xiāngcuì.","焼き餃子の底はすごくパリパリで香ばしいです。"],
+      [3,"我们包水饺吧。","wǒmen bāo shuǐjiǎo ba.","水餃子を包みましょう。"],
+      [3,"北方人爱吃水饺。","běifāngrén ài chī shuǐjiǎo.","北方の人は水餃子を食べるのが好きです。"],
+      [4,"我要一笼小笼包。","wǒ yào yì lóng xiǎolóngbāo.","ショーロンポーを1せいろください。"],
+      [4,"小笼包汤汁很多。","xiǎolóngbāo tāngzhī hěn duō.","ショーロンポーはスープがたくさん入っています。"],
+      [5,"我要一份生煎包。","wǒ yào yí fèn shēngjiānbāo.","焼き小籠包を1皿ください。"],
+      [5,"生煎包底很脆。","shēngjiānbāo dǐ hěn cuì.","焼き小籠包の底すごくパリパリです。"],
+      [6,"我要一碗馄饨。","wǒ yào yì wǎn húntun.","ワンタンを1杯ください。"],
+      [6,"馄饨皮很薄。","húntun pí hěn báo.","ワンタンの皮すごく薄いです。"],
+      [7,"我要一份锅贴。","wǒ yào yí fèn guōtiē.","焼き餃子(細長い形)を1皿ください。"],
+      [7,"锅贴很酥脆。","guōtiē hěn sūcuì.","焼き餃子(細長い形)すごくサクサクです。"],
+      [8,"我要一笼烧卖。","wǒ yào yì lóng shāomài.","シュウマイを1せいろください。"],
+      [8,"烧卖顶部开口。","shāomài dǐngbù kāikǒu.","シュウマイの上部は開いています。"],
+      [9,"我要一个叉烧包。","wǒ yào yí ge chāshāobāo.","チャーシューまんを1つください。"],
+      [9,"广式叉烧包很甜。","guǎngshì chāshāobāo hěn tián.","広東式チャーシューまんすごく甘いです。"],
+      [10,"我要一笼灌汤包。","wǒ yào yì lóng guàntāngbāo.","スープ入り包子を1せいろください。"],
+      [10,"灌汤包要小心烫。","guàntāngbāo yào xiǎoxīn tàng.","スープ入り包子は火傷に気をつけて。"],
+    ],
+    dialogues: [
+      [1,[["A","早餐吃什么?","zǎocān chī shénme?","朝食何食べる?"],["B","吃蒸饺吧。","chī zhēngjiǎo ba.","蒸し餃子食べよう。"]]],
+      [2,[["A","煎饺好吃吗?","jiānjiǎo hǎochī ma?","焼き餃子美味しい?"],["B","很好吃,底部特别香脆。","hěn hǎochī, dǐbù tèbié xiāngcuì.","すごく美味しいよ、底が特にパリパリで香ばしい。"]]],
+      [3,[["A","今晚吃什么?","jīnwǎn chī shénme?","今夜何食べる?"],["B","包水饺吧。","bāo shuǐjiǎo ba.","水餃子包もう。"]]],
+      [4,[["A","小笼包怎么吃?","xiǎolóngbāo zěnme chī?","ショーロンポーどう食べるの?"],["B","先咬破皮,吸汤汁再吃。","xiān yǎo pò pí, xī tāngzhī zài chī.","まず皮を噛み破って、スープを吸ってから食べるんだよ。"]]],
+      [5,[["A","生煎包和煎饺一样吗?","shēngjiānbāo hé jiānjiǎo yíyàng ma?","焼き小籠包と焼き餃子同じ?"],["B","不太一样,生煎包是发面的。","bú tài yíyàng, shēngjiānbāo shì fāmiàn de.","ちょっと違うよ、焼き小籠包は発酵生地を使ってるから。"]]],
+      [6,[["A","早上想吃点热的。","zǎoshang xiǎng chī diǎn rè de.","朝温かいもの食べたいな。"],["B","那来碗馄饨吧。","nà lái wǎn húntun ba.","じゃあワンタン食べよう。"]]],
+      [7,[["A","锅贴什么味道?","guōtiē shénme wèidào?","焼き餃子(細長い形)どんな味?"],["B","外脆里嫩,很好吃。","wài cuì lǐ nèn, hěn hǎochī.","外はパリパリ中はジューシーで、すごく美味しいよ。"]]],
+      [8,[["A","烧卖里面是什么?","shāomài lǐmiàn shì shénme?","シュウマイの中身何?"],["B","一般是糯米和肉。","yìbān shì nuòmǐ hé ròu.","通常はもち米と肉だよ。"]]],
+      [9,[["A","叉烧包好吃吗?","chāshāobāo hǎochī ma?","チャーシューまん美味しい?"],["B","很好吃,甜甜的。","hěn hǎochī, tiántián de.","すごく美味しいよ、甘めなんだ。"]]],
+      [10,[["A","灌汤包要注意什么?","guàntāngbāo yào zhùyì shénme?","スープ入り包子何に気をつける?"],["B","小心烫,慢慢吃。","xiǎoxīn tàng, mànmàn chī.","火傷に気をつけて、ゆっくり食べてね。"]]],
+    ]
+  },
+  195: {
+    words: [
+      {no:1, jp:"屋台", cn:"路边摊", py:"lùbiāntān", pos:"名詞", freq:5, scene:"道端の屋台について話す", meaning:"屋台", collocate:"去路边摊、路边摊小吃", synonym:"—", mistake:"路边(道端)+摊(屋台)の組み合わせ。"},
+      {no:2, jp:"串焼き", cn:"烤串", py:"kǎochuàn", pos:"名詞", freq:5, scene:"第26課で既出、屋台グルメの文脈で再登場", meaning:"串焼き", collocate:"吃烤串、撸串", synonym:"—", mistake:"これまでも頻出。"},
+      {no:3, jp:"ジェンビングオズ(天津風クレープ)", cn:"煎饼果子", py:"jiānbǐng guǒzi", pos:"名詞", freq:5, scene:"天津の名物屋台グルメについて話す", meaning:"ジェンビングオズ(天津風クレープ)", collocate:"吃煎饼果子、天津煎饼果子", synonym:"—", mistake:"煎饼(クレープ状の生地)+果子(揚げパン)の組み合わせ。"},
+      {no:4, jp:"臭豆腐", cn:"臭豆腐", py:"chòudòufu", pos:"名詞", freq:5, scene:"独特の匂いが特徴の屋台グルメについて話す", meaning:"臭豆腐", collocate:"吃臭豆腐、长沙臭豆腐", synonym:"—", mistake:"臭(臭い)+豆腐(豆腐)の組み合わせ、発酵させた独特な匂いの豆腐。"},
+      {no:5, jp:"揚げチキンカツ", cn:"炸鸡排", py:"zhá jīpái", pos:"名詞", freq:5, scene:"台湾式の屋台グルメについて話す", meaning:"揚げチキンカツ", collocate:"吃炸鸡排、台湾炸鸡排", synonym:"—", mistake:"炸(揚げる)+鸡排(チキンカツ)の組み合わせ。"},
+      {no:6, jp:"東北風焼きうどん", cn:"烤冷面", py:"kǎolěngmiàn", pos:"名詞", freq:4, scene:"東北地方の屋台グルメについて話す", meaning:"東北風焼きうどん", collocate:"吃烤冷面、东北烤冷面", synonym:"—", mistake:"烤(焼く)+冷面(冷やし麺)の組み合わせだが、実際は温かい焼き麺料理。"},
+      {no:7, jp:"タンフールー(飴でコーティングした串)", cn:"糖葫芦", py:"tánghúlu", pos:"名詞", freq:5, scene:"中国北方の伝統的な屋台お菓子について話す", meaning:"タンフールー(飴でコーティングした串)", collocate:"吃糖葫芦、山楂糖葫芦", synonym:"—", mistake:"糖(飴、砂糖)+葫芦(ひょうたん、形の由来)の組み合わせ。"},
+      {no:8, jp:"夜食", cn:"夜宵", py:"yèxiāo", pos:"名詞", freq:5, scene:"夜遅くに食べる軽食について話す", meaning:"夜食", collocate:"吃夜宵、夜宵摊", synonym:"—", mistake:"夜(夜)+宵(宵)の組み合わせ。"},
+      {no:9, jp:"グルメ横丁", cn:"小吃街", py:"xiǎochījiē", pos:"名詞", freq:5, scene:"屋台や軽食店が並ぶ通りについて話す", meaning:"グルメ横丁", collocate:"去小吃街、小吃街很热闹", synonym:"—", mistake:"小吃(軽食)+街(通り)の組み合わせ。"},
+      {no:10, jp:"屋台の店主", cn:"摊主", py:"tānzhǔ", pos:"名詞", freq:4, scene:"屋台を営む人について話す", meaning:"屋台の店主", collocate:"问摊主、摊主很热情", synonym:"—", mistake:"摊(屋台)+主(主人)の組み合わせ。"},
+    ],
+    examples: [
+      [1,"我们去路边摊吃点东西吧。","wǒmen qù lùbiāntān chī diǎn dōngxi ba.","屋台で何か食べに行きましょう。"],
+      [1,"路边摊小吃很便宜。","lùbiāntān xiǎochī hěn piányi.","屋台の軽食すごく安いです。"],
+      [2,"我们去吃烤串吧。","wǒmen qù chī kǎochuàn ba.","串焼きを食べに行きましょう。"],
+      [2,"撸串是夏天的乐趣。","lūchuàn shì xiàtiān de lèqù.","串焼きを食べるのは夏の楽しみです。"],
+      [3,"尝尝煎饼果子吧。","chángchang jiānbǐng guǒzi ba.","ジェンビングオズを味わってみましょう。"],
+      [3,"天津煎饼果子很有名。","tiānjīn jiānbǐng guǒzi hěn yǒumíng.","天津のジェンビングオズすごく有名です。"],
+      [4,"敢吃臭豆腐吗?","gǎn chī chòudòufu ma?","臭豆腐食べる勇気ありますか?"],
+      [4,"长沙臭豆腐很有名。","chángshā chòudòufu hěn yǒumíng.","長沙の臭豆腐すごく有名です。"],
+      [5,"我要一份炸鸡排。","wǒ yào yí fèn zhá jīpái.","揚げチキンカツを1つください。"],
+      [5,"台湾炸鸡排很大块。","táiwān zhá jīpái hěn dà kuài.","台湾の揚げチキンカツすごく大きいです。"],
+      [6,"尝尝烤冷面吧。","chángchang kǎolěngmiàn ba.","東北風焼きうどんを味わってみましょう。"],
+      [6,"东北烤冷面很受欢迎。","dōngběi kǎolěngmiàn hěn shòu huānyíng.","東北の焼きうどんすごく人気です。"],
+      [7,"买串糖葫芦吧。","mǎi chuàn tánghúlu ba.","タンフールーを1本買いましょう。"],
+      [7,"山楂糖葫芦酸酸甜甜。","shānzhā tánghúlu suānsuān tiántián.","サンザシのタンフールーは甘酸っぱいです。"],
+      [8,"我们去吃夜宵吧。","wǒmen qù chī yèxiāo ba.","夜食を食べに行きましょう。"],
+      [8,"附近有夜宵摊。","fùjìn yǒu yèxiāo tān.","近くに夜食の屋台があります。"],
+      [9,"我们去小吃街逛逛吧。","wǒmen qù xiǎochījiē guàngguang ba.","グルメ横丁をぶらぶらしに行きましょう。"],
+      [9,"小吃街很热闹。","xiǎochījiē hěn rènao.","グルメ横丁すごく賑やかです。"],
+      [10,"问问摊主吧。","wènwen tānzhǔ ba.","屋台の店主に聞いてみましょう。"],
+      [10,"摊主很热情。","tānzhǔ hěn rèqíng.","屋台の店主すごく親切です。"],
+    ],
+    dialogues: [
+      [1,[["A","晚上去哪里吃?","wǎnshang qù nǎlǐ chī?","夜どこで食べる?"],["B","去路边摊吃点小吃吧。","qù lùbiāntān chī diǎn xiǎochī ba.","屋台でちょっと軽食食べに行こう。"]]],
+      [2,[["A","夏天最爱吃什么?","xiàtiān zuì ài chī shénme?","夏一番好きな食べ物何?"],["B","当然是烤串配啤酒。","dāngrán shì kǎochuàn pèi píjiǔ.","もちろん串焼きとビールの組み合わせだよ。"]]],
+      [3,[["A","早餐吃什么好?","zǎocān chī shénme hǎo?","朝食何食べるといい?"],["B","来份煎饼果子吧。","lái fèn jiānbǐng guǒzi ba.","ジェンビングオズにしよう。"]]],
+      [4,[["A","敢尝试臭豆腐吗?","gǎn chángshì chòudòufu ma?","臭豆腐試す勇気ある?"],["B","敢,虽然闻着臭但很好吃。","gǎn, suīrán wén zhe chòu dàn hěn hǎochī.","あるよ、匂いは臭いけどすごく美味しいから。"]]],
+      [5,[["A","炸鸡排在哪里买?","zhá jīpái zài nǎlǐ mǎi?","揚げチキンカツどこで買える?"],["B","小吃街入口那家最有名。","xiǎochījiē rùkǒu nà jiā zuì yǒumíng.","グルメ横丁の入口のあの店が一番有名だよ。"]]],
+      [6,[["A","烤冷面是什么做的?","kǎolěngmiàn shì shénme zuò de?","東北風焼きうどん何で作られてるの?"],["B","是用面皮煎着做的。","shì yòng miànpí jiān zhe zuò de.","麺の皮を焼いて作られてるんだ。"]]],
+      [7,[["A","糖葫芦哪里能买到?","tánghúlu nǎlǐ néng mǎidào?","タンフールーどこで買える?"],["B","路边摊经常有卖的。","lùbiāntān jīngcháng yǒu mài de.","屋台でよく売ってるよ。"]]],
+      [8,[["A","深夜饿了怎么办?","shēnyè è le zěnme bàn?","深夜お腹すいたらどうする?"],["B","去吃点夜宵吧。","qù chī diǎn yèxiāo ba.","夜食食べに行こう。"]]],
+      [9,[["A","小吃街好玩吗?","xiǎochījiē hǎowán ma?","グルメ横丁楽しい?"],["B","很好玩,吃的东西特别多。","hěn hǎowán, chī de dōngxi tèbié duō.","すごく楽しいよ、食べ物すごく多いし。"]]],
+      [10,[["A","这个摊主怎么样?","zhège tānzhǔ zěnmeyàng?","この屋台の店主どう?"],["B","人很热情,东西也好吃。","rén hěn rèqíng, dōngxi yě hǎochī.","人がすごく親切だし、食べ物も美味しいよ。"]]],
+    ]
+  }
+,
+  196: {
+    words: [
+      {no:1, jp:"デザート", cn:"甜品", py:"tiánpǐn", pos:"名詞", freq:5, scene:"食後のスイーツについて話す", meaning:"デザート", collocate:"吃甜品、甜品店", synonym:"—", mistake:"甜(甘い)+品(製品)の組み合わせ。"},
+      {no:2, jp:"月餅", cn:"月饼", py:"yuèbǐng", pos:"名詞", freq:5, scene:"第157課で既出、お菓子の文脈で再登場", meaning:"月餅", collocate:"吃月饼、送月饼", synonym:"—", mistake:"これまでも頻出。"},
+      {no:3, jp:"緑豆餅", cn:"绿豆糕", py:"lǜdòugāo", pos:"名詞", freq:4, scene:"緑豆で作る伝統菓子について話す", meaning:"緑豆餅", collocate:"吃绿豆糕、清凉绿豆糕", synonym:"—", mistake:"绿豆(緑豆)+糕(餅、ケーキ)の組み合わせ、夏の涼を取るお菓子。"},
+      {no:4, jp:"涼粉(でんぷんゼリー)", cn:"凉粉", py:"liángfěn", pos:"名詞", freq:4, scene:"夏に食べる冷たいデザートについて話す", meaning:"涼粉(でんぷんゼリー)", collocate:"吃凉粉、四川凉粉", synonym:"—", mistake:"凉(冷たい)+粉(でんぷん)の組み合わせ。"},
+      {no:5, jp:"双皮奶(広東式ミルクプリン)", cn:"双皮奶", py:"shuāngpínǎi", pos:"名詞", freq:3, scene:"広東のミルクデザートについて話す", meaning:"双皮奶(広東式ミルクプリン)", collocate:"吃双皮奶、顺德双皮奶", synonym:"—", mistake:"双皮(二重の膜)+奶(乳)の組み合わせ、表面に膜が二層できるのが特徴。"},
+      {no:6, jp:"亀ゼリー", cn:"龟苓膏", py:"guīlínggāo", pos:"名詞", freq:3, scene:"広東の伝統的な健康デザートについて話す", meaning:"亀ゼリー", collocate:"吃龟苓膏、龟苓膏很苦", synonym:"—", mistake:"龟(亀)+苓(茯苓)+膏(ゼリー状のもの)の組み合わせ、漢方由来の苦みのあるデザート。"},
+      {no:7, jp:"タピオカミルクティー", cn:"珍珠奶茶", py:"zhēnzhū nǎichá", pos:"名詞", freq:5, scene:"第89課「奶茶」の応用、タピオカ入りの話", meaning:"タピオカミルクティー", collocate:"喝珍珠奶茶、一杯珍珠奶茶", synonym:"—", mistake:"珍珠(真珠、タピオカ)+奶茶(ミルクティー)の組み合わせ。"},
+      {no:8, jp:"タロイモ団子", cn:"芋圆", py:"yùyuán", pos:"名詞", freq:4, scene:"台湾スイーツの定番トッピングについて話す", meaning:"タロイモ団子", collocate:"加芋圆、芋圆很有嚼劲", synonym:"—", mistake:"芋(タロイモ)+圆(丸い)の組み合わせ。"},
+      {no:9, jp:"小豆スープ", cn:"红豆汤", py:"hóngdòutāng", pos:"名詞", freq:4, scene:"温かい小豆の甘いスープについて話す", meaning:"小豆スープ", collocate:"喝红豆汤、一碗红豆汤", synonym:"—", mistake:"红豆(小豆)+汤(スープ)の組み合わせ。"},
+      {no:10, jp:"シロップデザート(広東式甘いスープ)", cn:"糖水", py:"tángshuǐ", pos:"名詞", freq:5, scene:"広東式の甘いデザートスープ全般について話す", meaning:"シロップデザート(広東式甘いスープ)", collocate:"吃糖水、糖水铺", synonym:"—", mistake:"糖(砂糖)+水(水)の組み合わせ、広東地方特有の甘いスープ系デザートの総称。"},
+    ],
+    examples: [
+      [1,"饭后吃点甜品吧。","fàn hòu chī diǎn tiánpǐn ba.","食後にデザートを食べましょう。"],
+      [1,"这家甜品店很有名。","zhè jiā tiánpǐn diàn hěn yǒumíng.","この店のデザートすごく有名です。"],
+      [2,"中秋节吃月饼。","zhōngqiūjié chī yuèbǐng.","中秋節に月餅を食べます。"],
+      [2,"这个月饼很好吃。","zhège yuèbǐng hěn hǎochī.","この月餅すごく美味しいです。"],
+      [3,"夏天吃绿豆糕解暑。","xiàtiān chī lǜdòugāo jiěshǔ.","夏に緑豆餅を食べて暑さをしのぎます。"],
+      [3,"绿豆糕很清凉。","lǜdòugāo hěn qīngliáng.","緑豆餅すごく涼しげです。"],
+      [4,"来一份凉粉吧。","lái yí fèn liángfěn ba.","涼粉を1つください。"],
+      [4,"四川凉粉很辣。","sìchuān liángfěn hěn là.","四川の涼粉すごく辛いです。"],
+      [5,"尝尝双皮奶吧。","chángchang shuāngpínǎi ba.","双皮奶を味わってみましょう。"],
+      [5,"顺德双皮奶很出名。","shùndé shuāngpínǎi hěn chūmíng.","順徳の双皮奶すごく有名です。"],
+      [6,"敢吃龟苓膏吗?","gǎn chī guīlínggāo ma?","亀ゼリー食べる勇気ありますか?"],
+      [6,"龟苓膏有点苦。","guīlínggāo yǒudiǎn kǔ.","亀ゼリーちょっと苦いです。"],
+      [7,"我要一杯珍珠奶茶。","wǒ yào yì bēi zhēnzhū nǎichá.","タピオカミルクティーを1杯ください。"],
+      [7,"珍珠奶茶很好喝。","zhēnzhū nǎichá hěn hǎohē.","タピオカミルクティーすごく美味しいです。"],
+      [8,"加点芋圆吧。","jiā diǎn yùyuán ba.","タロイモ団子を加えましょう。"],
+      [8,"芋圆很有嚼劲。","yùyuán hěn yǒu jiáojìn.","タロイモ団子すごく食感があります。"],
+      [9,"喝碗红豆汤吧。","hē wǎn hóngdòutāng ba.","小豆スープを1杯飲みましょう。"],
+      [9,"红豆汤很暖胃。","hóngdòutāng hěn nuǎn wèi.","小豆スープはお腹を温めてくれます。"],
+      [10,"我们去吃糖水吧。","wǒmen qù chī tángshuǐ ba.","シロップデザートを食べに行きましょう。"],
+      [10,"附近有家糖水铺。","fùjìn yǒu jiā tángshuǐpù.","近くにシロップデザート店があります。"],
+    ],
+    dialogues: [
+      [1,[["A","吃完饭吃甜品吗?","chī wán fàn chī tiánpǐn ma?","ご飯食べた後デザート食べる?"],["B","好啊,想吃点甜的。","hǎo a, xiǎng chī diǎn tián de.","いいね、甘いもの食べたいな。"]]],
+      [2,[["A","中秋节送什么好?","zhōngqiūjié sòng shénme hǎo?","中秋節何贈るといい?"],["B","送盒月饼吧。","sòng hé yuèbǐng ba.","月餅1箱贈ろう。"]]],
+      [3,[["A","夏天吃什么解暑?","xiàtiān chī shénme jiěshǔ?","夏何食べて暑さしのぐ?"],["B","吃点绿豆糕吧。","chī diǎn lǜdòugāo ba.","緑豆餅食べよう。"]]],
+      [4,[["A","这个凉粉辣吗?","zhège liángfěn là ma?","この涼粉辛い?"],["B","有点辣,很开胃。","yǒudiǎn là, hěn kāiwèi.","ちょっと辛いよ、食欲そそるね。"]]],
+      [5,[["A","双皮奶怎么做的?","shuāngpínǎi zěnme zuò de?","双皮奶どうやって作るの?"],["B","是水牛奶做的甜品。","shì shuǐniúnǎi zuò de tiánpǐn.","水牛の乳で作るデザートだよ。"]]],
+      [6,[["A","龟苓膏什么味道?","guīlínggāo shénme wèidào?","亀ゼリーどんな味?"],["B","有点苦,但清热解毒。","yǒudiǎn kǔ, dàn qīngrè jiědú.","ちょっと苦いけど、体の熱を取ってくれるよ。"]]],
+      [7,[["A","珍珠要多加点吗?","zhēnzhū yào duō jiā diǎn ma?","タピオカ多めに入れる?"],["B","好,多加点珍珠。","hǎo, duō jiā diǎn zhēnzhū.","うん、タピオカ多めにして。"]]],
+      [8,[["A","芋圆是什么做的?","yùyuán shì shénme zuò de?","タロイモ団子何で作られてるの?"],["B","是芋头做的,QQ的。","shì yùtou zuò de, QQ de.","タロイモで作られてて、もちもちしてるよ。"]]],
+      [9,[["A","天冷喝点什么好?","tiān lěng hē diǎn shénme hǎo?","寒い時何飲むといい?"],["B","喝碗红豆汤暖暖胃。","hē wǎn hóngdòutāng nuǎnnuan wèi.","小豆スープ飲んでお腹を温めよう。"]]],
+      [10,[["A","糖水有什么推荐?","tángshuǐ yǒu shénme tuījiàn?","シロップデザート何かおすすめある?"],["B","推荐芒果西米露。","tuījiàn mángguǒ xīmǐlù.","マンゴーサゴがおすすめだよ。"]]],
+    ]
+  },
+  197: {
+    words: [
+      {no:1, jp:"ほんのり辛い", cn:"微辣", py:"wēilà", pos:"形容詞フレーズ", freq:5, scene:"辛さのレベルを伝える基本表現", meaning:"ほんのり辛い", collocate:"微辣的、要微辣", synonym:"—", mistake:"微(わずかな)+辣(辛い)の組み合わせ、注文時の辛さ選択でよく使われる。"},
+      {no:2, jp:"中辛", cn:"中辣", py:"zhōnglà", pos:"形容詞フレーズ", freq:5, scene:"辛さの中間レベルを伝える話", meaning:"中辛", collocate:"中辣的、要中辣", synonym:"—", mistake:"中(中くらいの)+辣(辛い)の組み合わせ。"},
+      {no:3, jp:"激辛", cn:"特辣", py:"tèlà", pos:"形容詞フレーズ", freq:5, scene:"かなり辛いレベルを伝える話", meaning:"激辛", collocate:"特辣的、要特辣", synonym:"—", mistake:"特(特に)+辣(辛い)の組み合わせ、店によっては「超辣」とも言う。"},
+      {no:4, jp:"辛くない", cn:"不辣", py:"bú là", pos:"フレーズ", freq:5, scene:"辛さなしを伝える話", meaning:"辛くない", collocate:"完全不辣、要不辣的", synonym:"—", mistake:"不(否定)+辣(辛い)の組み合わせ。"},
+      {no:5, jp:"塩加減がちょうどいい", cn:"咸淡适中", py:"xiándàn shìzhōng", pos:"フレーズ", freq:4, scene:"味の濃さを評価する話", meaning:"塩加減がちょうどいい", collocate:"味道咸淡适中、咸淡适中很好", synonym:"—", mistake:"咸淡(塩加減)+适中(ちょうどいい)の組み合わせ。"},
+      {no:6, jp:"やや塩辛い", cn:"偏咸", py:"piān xián", pos:"フレーズ", freq:4, scene:"味付けの傾向を伝える話", meaning:"やや塩辛い", collocate:"有点偏咸、口味偏咸", synonym:"—", mistake:"偏(〜寄りの)+咸(塩辛い)の組み合わせ。"},
+      {no:7, jp:"やや甘い", cn:"偏甜", py:"piān tián", pos:"フレーズ", freq:4, scene:"味付けの傾向を伝える話", meaning:"やや甘い", collocate:"有点偏甜、口味偏甜", synonym:"—", mistake:"偏(〜寄りの)+甜(甘い)の組み合わせ、「偏咸」と対になる表現。"},
+      {no:8, jp:"酸味と辛味がある", cn:"酸辣", py:"suānlà", pos:"形容詞", freq:5, scene:"酸っぱ辛い味付けについて話す", meaning:"酸味と辛味がある", collocate:"酸辣口味、酸辣汤", synonym:"—", mistake:"酸(酸っぱい)+辣(辛い)の組み合わせ。"},
+      {no:9, jp:"痺れて辛い", cn:"麻辣", py:"málà", pos:"形容詞", freq:5, scene:"四川風の痺れる辛さについて話す", meaning:"痺れて辛い", collocate:"麻辣口味、麻辣烫", synonym:"—", mistake:"麻(痺れる)+辣(辛い)の組み合わせ、第192課の「麻辣锅底」と同じ味の系統。"},
+      {no:10, jp:"あっさりで油少なめ", cn:"清淡少油", py:"qīngdàn shǎo yóu", pos:"フレーズ", freq:4, scene:"健康志向の味付けリクエストの話", meaning:"あっさりで油少なめ", collocate:"要清淡少油、清淡少油的做法", synonym:"—", mistake:"清淡(あっさり)+少油(油が少ない)の組み合わせ。"},
+    ],
+    examples: [
+      [1,"我要微辣的。","wǒ yào wēilà de.","ほんのり辛いのをください。"],
+      [1,"微辣不会太刺激。","wēilà bú huì tài cìjī.","ほんのり辛いのはそんなに刺激的じゃないです。"],
+      [2,"我要中辣的。","wǒ yào zhōnglà de.","中辛のをください。"],
+      [2,"中辣正好合适。","zhōnglà zhènghǎo héshì.","中辛がちょうどいいです。"],
+      [3,"我要特辣的。","wǒ yào tèlà de.","激辛のをください。"],
+      [3,"特辣很有挑战性。","tèlà hěn yǒu tiǎozhànxìng.","激辛すごくチャレンジングです。"],
+      [4,"我要不辣的。","wǒ yào bú là de.","辛くないのをください。"],
+      [4,"完全不辣可以吗?","wánquán bú là kěyǐ ma?","全く辛くないのできますか?"],
+      [5,"这道菜咸淡适中。","zhè dào cài xiándàn shìzhōng.","この料理は塩加減がちょうどいいです。"],
+      [5,"味道咸淡适中很好吃。","wèidào xiándàn shìzhōng hěn hǎochī.","味の塩加減がちょうどよくて美味しいです。"],
+      [6,"这道菜有点偏咸。","zhè dào cài yǒudiǎn piān xián.","この料理ちょっと塩辛めです。"],
+      [6,"口味偏咸能接受吗?","kǒuwèi piān xián néng jiēshòu ma?","塩辛め大丈夫ですか?"],
+      [7,"这道菜有点偏甜。","zhè dào cài yǒudiǎn piān tián.","この料理ちょっと甘めです。"],
+      [7,"口味偏甜是本地特色。","kǒuwèi piān tián shì běndì tèsè.","甘め寄りの味付けは地元の特色です。"],
+      [8,"我喜欢酸辣口味。","wǒ xǐhuan suānlà kǒuwèi.","酸っぱ辛い味付けが好きです。"],
+      [8,"来一份酸辣汤。","lái yí fèn suānlà tāng.","酸辣湯を1つください。"],
+      [9,"这道菜是麻辣口味。","zhè dào cài shì málà kǒuwèi.","この料理は痺れる辛さの味付けです。"],
+      [9,"我们去吃麻辣烫吧。","wǒmen qù chī málàtàng ba.","マーラータンを食べに行きましょう。"],
+      [10,"要清淡少油的做法。","yào qīngdàn shǎo yóu de zuòfǎ.","あっさりで油少なめの調理法にしてください。"],
+      [10,"清淡少油更健康。","qīngdàn shǎo yóu gèng jiànkāng.","あっさりで油少なめの方が健康的です。"],
+    ],
+    dialogues: [
+      [1,[["A","辣度怎么选?","làdù zěnme xuǎn?","辛さどう選びますか?"],["B","我要微辣的。","wǒ yào wēilà de.","ほんのり辛いのください。"]]],
+      [2,[["A","能吃辣吗?","néng chī là ma?","辛いもの食べられますか?"],["B","还行,来个中辣吧。","hái xíng, lái ge zhōnglà ba.","大丈夫です、中辛にしてください。"]]],
+      [3,[["A","你能吃多辣?","nǐ néng chī duō là?","どれくらい辛いもの食べられますか?"],["B","我要特辣的,不怕辣。","wǒ yào tèlà de, bú pà là.","激辛でください、辛いの平気です。"]]],
+      [4,[["A","小孩子能吃吗?","xiǎo háizi néng chī ma?","子供食べられますか?"],["B","做不辣的就行。","zuò bú là de jiù xíng.","辛くないのを作ればいいですよ。"]]],
+      [5,[["A","这道菜味道怎么样?","zhè dào cài wèidào zěnmeyàng?","この料理の味どうですか?"],["B","咸淡适中,很好吃。","xiándàn shìzhōng, hěn hǎochī.","塩加減ちょうどよくて、すごく美味しいです。"]]],
+      [6,[["A","这个汤怎么样?","zhège tāng zěnmeyàng?","このスープどうですか?"],["B","有点偏咸,少放点盐吧。","yǒudiǎn piān xián, shǎo fàng diǎn yán jiù ba.","ちょっと塩辛めなので、塩少なめにしてください。"]]],
+      [7,[["A","这里的菜什么特点?","zhèlǐ de cài shénme tèdiǎn?","ここの料理どんな特徴ありますか?"],["B","口味偏甜,是本地风格。","kǒuwèi piān tián, shì běndì fēnggé.","甘め寄りで、地元のスタイルです。"]]],
+      [8,[["A","推荐点什么? 酸辣汤怎么样? ","tuījiàn diǎn shénme? suānlà tāng zěnmeyàng?","何かおすすめありますか?酸辣湯どうですか?"],["B","好啊,我也喜欢酸辣口味。","hǎo a, wǒ yě xǐhuan suānlà kǒuwèi.","いいですね、私も酸っぱ辛い味好きです。"]]],
+      [9,[["A","四川菜都是麻辣的吗?","sìchuān cài dōu shì málà de ma?","四川料理は全部痺れて辛いんですか?"],["B","大部分是,很有特色。","dà bùfen shì, hěn yǒu tèsè.","大部分そうです、すごく特色ありますよ。"]]],
+      [10,[["A","在减肥,能推荐点什么?","zài jiǎnféi, néng tuījiàn diǎn shénme?","ダイエット中で、何かおすすめありますか?"],["B","可以要清淡少油的做法。","kěyǐ yào qīngdàn shǎo yóu de zuòfǎ.","あっさりで油少なめの調理法にできますよ。"]]],
+    ]
+  },
+  198: {
+    words: [
+      {no:1, jp:"ベジタリアン", cn:"素食主义者", py:"sùshí zhǔyìzhě", pos:"名詞", freq:5, scene:"ベジタリアンの人について話す", meaning:"ベジタリアン", collocate:"他是素食主义者、素食主义者越来越多", synonym:"—", mistake:"第200課で既出、素食(精進料理)+主义者(主義者)の組み合わせ。"},
+      {no:2, jp:"完全菜食(ヴィーガン)", cn:"全素", py:"quánsù", pos:"形容詞", freq:4, scene:"動物性食品を一切摂らない食事について話す", meaning:"完全菜食(ヴィーガン)", collocate:"全素饮食、我吃全素", synonym:"—", mistake:"全(すべて)+素(精進の)の組み合わせ、卵や乳製品も含めて避ける最も厳格な菜食。"},
+      {no:3, jp:"卵乳は可の菜食(ラクトオボベジタリアン)", cn:"蛋奶素", py:"dànnǎisù", pos:"名詞", freq:3, scene:"卵と乳製品は食べる菜食スタイルについて話す", meaning:"卵乳は可の菜食(ラクトオボベジタリアン)", collocate:"我吃蛋奶素、蛋奶素可以吗", synonym:"—", mistake:"蛋(卵)+奶(乳)+素(精進の)の組み合わせ、「全素」より緩やかな菜食スタイル。"},
+      {no:4, jp:"肉を食べない", cn:"不吃肉", py:"bù chī ròu", pos:"フレーズ", freq:5, scene:"肉類を避けることを伝える基本表現", meaning:"肉を食べない", collocate:"我不吃肉、完全不吃肉", synonym:"—", mistake:"不吃(食べない)+肉(肉)の組み合わせ。"},
+      {no:5, jp:"代替肉(プラントベース)", cn:"植物肉", py:"zhíwùròu", pos:"名詞", freq:4, scene:"植物由来の肉の代替品について話す", meaning:"代替肉(プラントベース)", collocate:"吃植物肉、植物肉汉堡", synonym:"—", mistake:"植物(植物)+肉(肉)の組み合わせ。"},
+      {no:6, jp:"精進料理、野菜料理", cn:"素菜", py:"sùcài", pos:"名詞", freq:5, scene:"肉を使わない料理について話す", meaning:"精進料理、野菜料理", collocate:"点素菜、素菜有哪些", synonym:"—", mistake:"素(精進の)+菜(料理)の組み合わせ、「荤菜」の対義語。"},
+      {no:7, jp:"肉料理", cn:"荤菜", py:"hūncài", pos:"名詞", freq:4, scene:"肉や魚を使う料理について話す", meaning:"肉料理", collocate:"点荤菜、荤菜和素菜", synonym:"—", mistake:"荤(生臭物、肉類)+菜(料理)の組み合わせ、「素菜」の反対語。"},
+      {no:8, jp:"ベジタリアンメニュー", cn:"素食选项", py:"sùshí xuǎnxiàng", pos:"名詞フレーズ", freq:5, scene:"レストランで菜食向けの選択肢を尋ねる話", meaning:"ベジタリアンメニュー", collocate:"有素食选项吗、查看素食选项", synonym:"—", mistake:"素食(精進料理)+选项(選択肢)の組み合わせ。"},
+      {no:9, jp:"植物油", cn:"素油", py:"sùyóu", pos:"名詞", freq:4, scene:"動物性油脂を使わない油について話す", meaning:"植物油", collocate:"用素油炒、素油做的", synonym:"—", mistake:"素(精進の)+油(油)の組み合わせ、ラードなど動物性油と区別する言い方。"},
+      {no:10, jp:"動物性食材", cn:"动物性食材", py:"dòngwùxìng shícái", pos:"名詞フレーズ", freq:4, scene:"菜食で避けるべき食材について話す", meaning:"動物性食材", collocate:"不含动物性食材、避开动物性食材", synonym:"—", mistake:"动物性(動物性の)+食材(食材)の組み合わせ。"},
+    ],
+    examples: [
+      [1,"我是素食主义者。","wǒ shì sùshí zhǔyìzhě.","私はベジタリアンです。"],
+      [1,"素食主义者越来越多。","sùshí zhǔyìzhě yuèláiyuè duō.","ベジタリアンの人はますます増えています。"],
+      [2,"我吃全素。","wǒ chī quánsù.","私は完全菜食です。"],
+      [2,"全素饮食不含蛋奶。","quánsù yǐnshí bù hán dàn nǎi.","完全菜食は卵や乳製品を含みません。"],
+      [3,"我吃蛋奶素。","wǒ chī dànnǎisù.","私は卵乳は可の菜食です。"],
+      [3,"蛋奶素可以吃鸡蛋。","dànnǎisù kěyǐ chī jīdàn.","卵乳は可の菜食は卵を食べられます。"],
+      [4,"我不吃肉。","wǒ bù chī ròu.","私は肉を食べません。"],
+      [4,"完全不吃肉很久了。","wánquán bù chī ròu hěn jiǔ le.","完全に肉を食べなくなって長いです。"],
+      [5,"这是植物肉做的。","zhè shì zhíwùròu zuò de.","これは代替肉で作られています。"],
+      [5,"植物肉汉堡很受欢迎。","zhíwùròu hànbǎo hěn shòu huānyíng.","代替肉バーガーすごく人気です。"],
+      [6,"点几个素菜吧。","diǎn jǐ ge sùcài ba.","精進料理をいくつか注文しましょう。"],
+      [6,"素菜有哪些选择?","sùcài yǒu nǎxiē xuǎnzé?","精進料理はどんな選択肢がありますか?"],
+      [7,"再点个荤菜吧。","zài diǎn ge hūncài ba.","肉料理もう1つ注文しましょう。"],
+      [7,"荤菜和素菜都要。","hūncài hé sùcài dōu yào.","肉料理も精進料理も両方欲しいです。"],
+      [8,"有素食选项吗?","yǒu sùshí xuǎnxiàng ma?","ベジタリアンメニューはありますか?"],
+      [8,"查看一下素食选项。","chákàn yíxià sùshí xuǎnxiàng.","ベジタリアンメニューを見てみて。"],
+      [9,"用素油炒的。","yòng sùyóu chǎo de.","植物油で炒めたものです。"],
+      [9,"这是素油做的。","zhè shì sùyóu zuò de.","これは植物油で作られています。"],
+      [10,"不含动物性食材。","bù hán dòngwùxìng shícái.","動物性食材を含みません。"],
+      [10,"要避开动物性食材。","yào bìkāi dòngwùxìng shícái.","動物性食材は避けないとね。"],
+    ],
+    dialogues: [
+      [1,[["A","你吃肉吗?","nǐ chī ròu ma?","肉食べますか?"],["B","不吃,我是素食主义者。","bù chī, wǒ shì sùshí zhǔyìzhě.","食べません、私はベジタリアンです。"]]],
+      [2,[["A","你连鸡蛋也不吃吗?","nǐ lián jīdàn yě bù chī ma?","卵も食べないんですか?"],["B","是的,我吃全素。","shì de, wǒ chī quánsù.","はい、完全菜食なので。"]]],
+      [3,[["A","你能吃奶酪吗?","nǐ néng chī nǎilào ma?","チーズ食べられますか?"],["B","能,我吃蛋奶素。","néng, wǒ chī dànnǎisù.","食べられます、卵乳は可の菜食なので。"]]],
+      [4,[["A","这道菜有肉吗?","zhè dào cài yǒu ròu ma?","この料理肉入ってますか?"],["B","有,不过我不吃肉。","yǒu, búguò wǒ bù chī ròu.","入ってますが、私は肉食べないんです。"]]],
+      [5,[["A","这个汉堡是什么肉?","zhège hànbǎo shì shénme ròu?","このハンバーガー何の肉ですか?"],["B","是植物肉做的。","shì zhíwùròu zuò de.","代替肉で作られてますよ。"]]],
+      [6,[["A","菜单上有什么素菜?","càidān shàng yǒu shénme sùcài?","メニューにどんな精進料理ありますか?"],["B","有炒时蔬和豆腐。","yǒu chǎo shíshū hé dòufu.","季節野菜炒めと豆腐がありますよ。"]]],
+      [7,[["A","要不要点个荤菜?","yào bu yào diǎn ge hūncài?","肉料理注文する?"],["B","我不用,你们点吧。","wǒ bú yòng, nǐmen diǎn ba.","私はいらないので、皆さんで注文してください。"]]],
+      [8,[["A","这家餐厅有素食选项吗?","zhè jiā cāntīng yǒu sùshí xuǎnxiàng ma?","このレストランにベジタリアンメニューありますか?"],["B","有,菜单上标注了。","yǒu, càidān shàng biāozhù le.","ありますよ、メニューに表示されてます。"]]],
+      [9,[["A","这道菜用什么油炒的?","zhè dào cài yòng shénme yóu chǎo de?","この料理何の油で炒めてますか?"],["B","用素油炒的,请放心。","yòng sùyóu chǎo de, qǐng fàngxīn.","植物油で炒めてます、ご安心ください。"]]],
+      [10,[["A","这道菜适合素食者吗?","zhè dào cài shìhé sùshízhě ma?","この料理菜食の人に向いてますか?"],["B","适合,不含动物性食材。","shìhé, bù hán dòngwùxìng shícái.","向いてますよ、動物性食材含んでないので。"]]],
+    ]
+  },
+  199: {
+    words: [
+      {no:1, jp:"北京ダック", cn:"北京烤鸭", py:"běijīng kǎoyā", pos:"名詞", freq:5, scene:"北京の代表的な名物料理について話す", meaning:"北京ダック", collocate:"吃北京烤鸭、正宗北京烤鸭", synonym:"—", mistake:"北京(北京)+烤鸭(ローストダック)の組み合わせ、中国を代表する名物料理。"},
+      {no:2, jp:"西安の肉はさみ蒸しパン", cn:"西安肉夹馍", py:"xī'ān ròujiāmó", pos:"名詞", freq:4, scene:"西安の名物軽食について話す", meaning:"西安の肉はさみ蒸しパン", collocate:"吃肉夹馍、西安肉夹馍很有名", synonym:"—", mistake:"西安(西安)+肉(肉)+夹(挟む)+馍(蒸しパン)の組み合わせ。"},
+      {no:3, jp:"広東飲茶", cn:"广东早茶", py:"guǎngdōng zǎochá", pos:"名詞フレーズ", freq:5, scene:"広東の朝の飲茶文化について話す", meaning:"広東飲茶", collocate:"喝广东早茶、早茶文化", synonym:"—", mistake:"广东(広東)+早茶(朝のお茶)の組み合わせ、点心を食べながらお茶を飲む習慣。"},
+      {no:4, jp:"四川麻婆豆腐", cn:"四川麻婆豆腐", py:"sìchuān mápó dòufu", pos:"名詞フレーズ", freq:5, scene:"四川の代表的な名物料理について話す", meaning:"四川麻婆豆腐", collocate:"吃麻婆豆腐、正宗川味麻婆豆腐", synonym:"—", mistake:"四川(四川)+麻婆豆腐(麻婆豆腐)の組み合わせ、四川料理の代表格。"},
+      {no:5, jp:"東北酸菜", cn:"东北酸菜", py:"dōngběi suāncài", pos:"名詞フレーズ", freq:4, scene:"東北地方の漬物料理について話す", meaning:"東北酸菜", collocate:"吃酸菜、东北酸菜白肉", synonym:"—", mistake:"东北(東北)+酸菜(酸っぱい漬物)の組み合わせ、白菜を発酵させた郷土料理。"},
+      {no:6, jp:"雲南過橋米線", cn:"云南过桥米线", py:"yúnnán guòqiáo mǐxiàn", pos:"名詞フレーズ", freq:4, scene:"雲南の名物麺料理について話す", meaning:"雲南過橋米線", collocate:"吃过桥米线、云南特色米线", synonym:"—", mistake:"云南(雲南)+过桥米线(過橋米線)の組み合わせ、第193課の関連語。"},
+      {no:7, jp:"上海本帮料理", cn:"上海本帮菜", py:"shànghǎi běnbāngcài", pos:"名詞フレーズ", freq:4, scene:"上海の伝統的な地元料理について話す", meaning:"上海本帮料理", collocate:"吃本帮菜、上海本帮菜偏甜", synonym:"—", mistake:"上海(上海)+本帮菜(地元料理)の組み合わせ。"},
+      {no:8, jp:"新疆大盤鶏", cn:"新疆大盘鸡", py:"xīnjiāng dàpánjī", pos:"名詞フレーズ", freq:4, scene:"新疆の名物鶏料理について話す", meaning:"新疆大盤鶏", collocate:"吃大盘鸡、新疆特色大盘鸡", synonym:"—", mistake:"新疆(新疆)+大盘鸡(大皿鶏料理)の組み合わせ。"},
+      {no:9, jp:"地方の名物料理", cn:"地方名菜", py:"dìfāng míngcài", pos:"名詞フレーズ", freq:5, scene:"各地域を代表する料理全般について話す", meaning:"地方の名物料理", collocate:"品尝地方名菜、了解地方名菜", synonym:"—", mistake:"地方(地方)+名菜(名物料理)の組み合わせ。"},
+      {no:10, jp:"必食グルメ", cn:"必吃美食", py:"bìchī měishí", pos:"フレーズ", freq:4, scene:"旅行先で絶対に食べるべきグルメについて話す", meaning:"必食グルメ", collocate:"当地必吃美食、必吃美食清单", synonym:"—", mistake:"必吃(必ず食べるべき)+美食(グルメ)の組み合わせ。"},
+    ],
+    examples: [
+      [1,"我们去吃北京烤鸭吧。","wǒmen qù chī běijīng kǎoyā ba.","北京ダックを食べに行きましょう。"],
+      [1,"正宗北京烤鸭很香脆。","zhèngzōng běijīng kǎoyā hěn xiāngcuì.","本場の北京ダックすごくパリパリで香ばしいです。"],
+      [2,"尝尝西安肉夹馍吧。","chángchang xī'ān ròujiāmó ba.","西安の肉はさみ蒸しパンを味わってみましょう。"],
+      [2,"肉夹馍很好吃。","ròujiāmó hěn hǎochī.","肉はさみ蒸しパンすごく美味しいです。"],
+      [3,"我们去喝广东早茶吧。","wǒmen qù hē guǎngdōng zǎochá ba.","広東飲茶を食べに行きましょう。"],
+      [3,"早茶文化历史悠久。","zǎochá wénhuà lìshǐ yōujiǔ.","飲茶文化は歴史が長いです。"],
+      [4,"我要一份四川麻婆豆腐。","wǒ yào yí fèn sìchuān mápó dòufu.","四川麻婆豆腐を1つください。"],
+      [4,"正宗川味麻婆豆腐很麻辣。","zhèngzōng chuānwèi mápó dòufu hěn málà.","本場四川風の麻婆豆腐すごく痺れて辛いです。"],
+      [5,"尝尝东北酸菜吧。","chángchang dōngběi suāncài ba.","東北酸菜を味わってみましょう。"],
+      [5,"东北酸菜白肉很有名。","dōngběi suāncài báiròu hěn yǒumíng.","東北酸菜白肉すごく有名です。"],
+      [6,"我要一碗云南过桥米线。","wǒ yào yì wǎn yúnnán guòqiáo mǐxiàn.","雲南過橋米線を1杯ください。"],
+      [6,"云南特色米线很鲜美。","yúnnán tèsè mǐxiàn hěn xiānměi.","雲南特色の米線すごく美味です。"],
+      [7,"我们去吃上海本帮菜吧。","wǒmen qù chī shànghǎi běnbāngcài ba.","上海本帮料理を食べに行きましょう。"],
+      [7,"上海本帮菜口味偏甜。","shànghǎi běnbāngcài kǒuwèi piān tián.","上海本帮料理は味付けが甘め寄りです。"],
+      [8,"我要一份新疆大盘鸡。","wǒ yào yí fèn xīnjiāng dàpánjī.","新疆大盤鶏を1つください。"],
+      [8,"新疆大盘鸡分量很足。","xīnjiāng dàpánjī fènliàng hěn zú.","新疆大盤鶏すごくボリュームがあります。"],
+      [9,"品尝一下当地地方名菜。","chángshí yíxià dāngdì dìfāng míngcài.","現地の地方名物料理を味わってみて。"],
+      [9,"了解一下地方名菜。","liǎojiě yíxià dìfāng míngcài.","地方の名物料理について理解してみて。"],
+      [10,"这是当地必吃美食。","zhè shì dāngdì bìchī měishí.","これは現地の必食グルメです。"],
+      [10,"看看必吃美食清单。","kànkan bìchī měishí qīngdān.","必食グルメリストを見てみて。"],
+    ],
+    dialogues: [
+      [1,[["A","来北京要吃什么?","lái běijīng yào chī shénme?","北京来たら何食べるべき?"],["B","当然要吃北京烤鸭。","dāngrán yào chī běijīng kǎoyā.","もちろん北京ダック食べないと。"]]],
+      [2,[["A","西安有什么好吃的?","xī'ān yǒu shénme hǎochī de?","西安に何か美味しいものある?"],["B","一定要试试肉夹馍。","yídìng yào shìshi ròujiāmó.","絶対肉はさみ蒸しパン試すべきだよ。"]]],
+      [3,[["A","广东人早上吃什么?","guǎngdōngrén zǎoshang chī shénme?","広東の人朝何食べるの?"],["B","很多人喝广东早茶。","hěn duō rén hē guǎngdōng zǎochá.","多くの人が広東飲茶するよ。"]]],
+      [4,[["A","四川最有名的菜是什么?","sìchuān zuì yǒumíng de cài shì shénme?","四川で一番有名な料理何?"],["B","应该是四川麻婆豆腐。","yīnggāi shì sìchuān mápó dòufu.","四川麻婆豆腐のはずだよ。"]]],
+      [5,[["A","东北菜有什么特色?","dōngběi cài yǒu shénme tèsè?","東北料理どんな特色ある?"],["B","东北酸菜很有代表性。","dōngběi suāncài hěn yǒu dàibiǎoxìng.","東北酸菜がすごく代表的だよ。"]]],
+      [6,[["A","云南有什么名菜?","yúnnán yǒu shénme míngcài?","雲南に何か名物料理ある?"],["B","云南过桥米线很有名。","yúnnán guòqiáo mǐxiàn hěn yǒumíng.","雲南過橋米線すごく有名だよ。"]]],
+      [7,[["A","上海菜什么口味?","shànghǎi cài shénme kǒuwèi?","上海料理どんな味?"],["B","上海本帮菜偏甜偏浓。","shànghǎi běnbāngcài piān tián piān nóng.","上海本帮料理は甘め濃いめだよ。"]]],
+      [8,[["A","新疆有什么特色菜?","xīnjiāng yǒu shénme tèsè cài?","新疆に何か特色料理ある?"],["B","新疆大盘鸡很出名。","xīnjiāng dàpánjī hěn chūmíng.","新疆大盤鶏すごく有名だよ。"]]],
+      [9,[["A","出去旅游要尝试什么?","chūqù lǚyóu yào chángshì shénme?","旅行に行ったら何試すべき?"],["B","当然要尝尝地方名菜。","dāngrán yào chángchang dìfāng míngcài.","もちろん地方の名物料理を味わうべきだよ。"]]],
+      [10,[["A","有什么攻略推荐吗?","yǒu shénme gōnglüè tuījiàn ma?","何かおすすめのガイドある?"],["B","可以看看必吃美食清单。","kěyǐ kànkan bìchī měishí qīngdān.","必食グルメリスト見てみるといいよ。"]]],
+    ]
+  },
+  200: {
+    words: [
+      {no:1, jp:"ファストフード店", cn:"快餐店", py:"kuàicāndiàn", pos:"名詞", freq:5, scene:"手軽に食事ができる店について話す", meaning:"ファストフード店", collocate:"去快餐店、快餐店排队", synonym:"—", mistake:"快餐(ファストフード)+店(店)の組み合わせ。"},
+      {no:2, jp:"高級レストラン", cn:"高级餐厅", py:"gāojí cāntīng", pos:"名詞フレーズ", freq:5, scene:"格式高いレストランについて話す", meaning:"高級レストラン", collocate:"去高级餐厅、高级餐厅消费高", synonym:"—", mistake:"高级(高級な)+餐厅(レストラン)の組み合わせ。"},
+      {no:3, jp:"ビュッフェ", cn:"自助餐", py:"zìzhùcān", pos:"名詞", freq:5, scene:"食べ放題形式のレストランについて話す", meaning:"ビュッフェ", collocate:"吃自助餐、自助餐厅", synonym:"—", mistake:"自助(セルフサービス)+餐(食事)の組み合わせ。"},
+      {no:4, jp:"プライベートレストラン(会員制隠れ家)", cn:"私房菜", py:"sīfángcài", pos:"名詞", freq:4, scene:"個人経営の隠れ家的なレストランについて話す", meaning:"プライベートレストラン(会員制隠れ家)", collocate:"吃私房菜、私房菜馆", synonym:"—", mistake:"私房(私邸、プライベート)+菜(料理)の組み合わせ、家庭的な雰囲気の隠れ家レストランを指す。"},
+      {no:5, jp:"チェーンレストラン", cn:"连锁餐厅", py:"liánsuǒ cāntīng", pos:"名詞フレーズ", freq:4, scene:"複数店舗を展開するレストランについて話す", meaning:"チェーンレストラン", collocate:"连锁餐厅、全国连锁餐厅", synonym:"—", mistake:"连锁(チェーン、連鎖)+餐厅(レストラン)の組み合わせ。"},
+      {no:6, jp:"老舗", cn:"老字号", py:"lǎozìhào", pos:"名詞", freq:5, scene:"長い歴史を持つ有名店について話す", meaning:"老舗", collocate:"百年老字号、老字号餐厅", synonym:"—", mistake:"老(古い)+字号(屋号)の組み合わせ、伝統ある有名店を指す。"},
+      {no:7, jp:"SNS映えレストラン(人気店)", cn:"网红餐厅", py:"wǎnghóng cāntīng", pos:"名詞フレーズ", freq:5, scene:"SNSで話題になる人気店について話す", meaning:"SNS映えレストラン(人気店)", collocate:"打卡网红餐厅、网红餐厅排队", synonym:"—", mistake:"网红(ネット上の人気者)+餐厅(レストラン)の組み合わせ。"},
+      {no:8, jp:"テーマレストラン", cn:"主题餐厅", py:"zhǔtí cāntīng", pos:"名詞フレーズ", freq:4, scene:"特定のテーマに沿った内装や体験のレストランについて話す", meaning:"テーマレストラン", collocate:"去主题餐厅、有趣的主题餐厅", synonym:"—", mistake:"主题(テーマ)+餐厅(レストラン)の組み合わせ。"},
+      {no:9, jp:"家庭料理店", cn:"家常菜馆", py:"jiācháng càiguǎn", pos:"名詞フレーズ", freq:4, scene:"家庭的な味の料理を提供する食堂について話す", meaning:"家庭料理店", collocate:"去家常菜馆、家常菜馆很实惠", synonym:"—", mistake:"家常菜(家庭料理)+馆(店)の組み合わせ。"},
+      {no:10, jp:"深夜食堂", cn:"深夜食堂", py:"shēnyè shítáng", pos:"名詞フレーズ", freq:4, scene:"夜遅くまで営業する食堂について話す", meaning:"深夜食堂", collocate:"去深夜食堂、深夜食堂开到很晚", synonym:"—", mistake:"深夜(深夜)+食堂(食堂)の組み合わせ、第157課の関連語。"},
+    ],
+    examples: [
+      [1,"我们去快餐店吃吧。","wǒmen qù kuàicāndiàn chī ba.","ファストフード店で食べましょう。"],
+      [1,"快餐店排队人很多。","kuàicāndiàn páiduì rén hěn duō.","ファストフード店の待ち列人すごく多いです。"],
+      [2,"我们去高级餐厅庆祝吧。","wǒmen qù gāojí cāntīng qìngzhù ba.","高級レストランでお祝いしましょう。"],
+      [2,"高级餐厅消费比较高。","gāojí cāntīng xiāofèi bǐjiào gāo.","高級レストランは比較的高い出費です。"],
+      [3,"我们去吃自助餐吧。","wǒmen qù chī zìzhùcān ba.","ビュッフェを食べに行きましょう。"],
+      [3,"这家自助餐种类很多。","zhè jiā zìzhùcān zhǒnglèi hěn duō.","このビュッフェ種類すごく多いです。"],
+      [4,"我们去尝尝私房菜吧。","wǒmen qù chángchang sīfángcài ba.","プライベートレストランを味わってみましょう。"],
+      [4,"这家私房菜馆很有特色。","zhè jiā sīfángcài guǎn hěn yǒu tèsè.","このプライベートレストランすごく特色があります。"],
+      [5,"这是一家连锁餐厅。","zhè shì yì jiā liánsuǒ cāntīng.","これはチェーンレストランです。"],
+      [5,"全国连锁餐厅很方便。","quánguó liánsuǒ cāntīng hěn fāngbiàn.","全国チェーンレストランすごく便利です。"],
+      [6,"这是百年老字号。","zhè shì bǎinián lǎozìhào.","これは百年の老舗です。"],
+      [6,"老字号餐厅很有历史。","lǎozìhào cāntīng hěn yǒu lìshǐ.","老舗レストランすごく歴史があります。"],
+      [7,"我们去打卡网红餐厅吧。","wǒmen qù dǎkǎ wǎnghóng cāntīng ba.","SNS映えレストランに記念撮影しに行きましょう。"],
+      [7,"网红餐厅排队要很久。","wǎnghóng cāntīng páiduì yào hěn jiǔ.","人気店は並ぶのにすごく時間がかかります。"],
+      [8,"我们去主题餐厅吧。","wǒmen qù zhǔtí cāntīng ba.","テーマレストランに行きましょう。"],
+      [8,"这是个很有趣的主题餐厅。","zhè shì ge hěn yǒuqù de zhǔtí cāntīng.","これはすごく面白いテーマレストランです。"],
+      [9,"我们去家常菜馆吃吧。","wǒmen qù jiācháng càiguǎn chī ba.","家庭料理店で食べましょう。"],
+      [9,"家常菜馆很实惠。","jiācháng càiguǎn hěn shíhuì.","家庭料理店すごくお得です。"],
+      [10,"我们去深夜食堂吧。","wǒmen qù shēnyè shítáng ba.","深夜食堂に行きましょう。"],
+      [10,"深夜食堂开到很晚。","shēnyè shítáng kāi dào hěn wǎn.","深夜食堂はすごく遅くまで営業しています。"],
+    ],
+    dialogues: [
+      [1,[["A","时间不多,去哪吃?","shíjiān bù duō, qù nǎ chī?","時間あんまりない、どこで食べる?"],["B","去快餐店吧,比较快。","qù kuàicāndiàn ba, bǐjiào kuài.","ファストフード店に行こう、比較的速いから。"]]],
+      [2,[["A","庆祝生日去哪里好?","qìngzhù shēngrì qù nǎlǐ hǎo?","誕生日祝うのにどこがいい?"],["B","去高级餐厅吧。","qù gāojí cāntīng ba.","高級レストランに行こう。"]]],
+      [3,[["A","想吃很多种类的怎么办?","xiǎng chī hěn duō zhǒnglèi de zěnme bàn?","たくさんの種類食べたいどうする?"],["B","去吃自助餐就行。","qù chī zìzhùcān jiù xíng.","ビュッフェ食べに行けばいいよ。"]]],
+      [4,[["A","这家店怎么找到的?","zhè jiā diàn zěnme zhǎodào de?","この店どうやって見つけたの?"],["B","朋友推荐的私房菜馆。","péngyou tuījiàn de sīfángcài guǎn.","友達がおすすめしてくれたプライベートレストランだよ。"]]],
+      [5,[["A","这家店有其他分店吗?","zhè jiā diàn yǒu qítā fēndiàn ma?","この店他に支店ある?"],["B","有,是连锁餐厅。","yǒu, shì liánsuǒ cāntīng.","あるよ、チェーンレストランなんだ。"]]],
+      [6,[["A","这家店开了多久了?","zhè jiā diàn kāi le duōjiǔ le?","この店開店してどれくらい?"],["B","很久了,是老字号。","hěn jiǔ le, shì lǎozìhào.","すごく長いよ、老舗なんだ。"]]],
+      [7,[["A","这里为什么排这么多人?","zhèlǐ wèishénme pái zhème duō rén?","ここなんでこんなに並んでるの?"],["B","是网红餐厅,很火。","shì wǎnghóng cāntīng, hěn huǒ.","人気店なんだ、すごく流行ってる。"]]],
+      [8,[["A","这家店装修好特别。","zhè jiā diàn zhuāngxiū hǎo tèbié.","この店内装すごく特別。"],["B","是啊,是主题餐厅。","shì a, shì zhǔtí cāntīng.","そうだね、テーマレストランなんだ。"]]],
+      [9,[["A","想吃家里的味道怎么办?","xiǎng chī jiā lǐ de wèidào zěnme bàn?","家の味食べたいどうする?"],["B","去家常菜馆吧。","qù jiācháng càiguǎn ba.","家庭料理店に行こう。"]]],
+      [10,[["A","半夜饿了去哪吃?","bànyè è le qù nǎ chī?","真夜中にお腹すいたらどこで食べる?"],["B","去深夜食堂看看。","qù shēnyè shítáng kànkan.","深夜食堂見てみよう。"]]],
+    ]
+  },
+  156: {
+    words: [
+      {no:1, jp:"乗り継ぐ", cn:"转机", py:"zhuǎnjī", pos:"動詞", freq:5, scene:"飛行機を乗り継ぐ話", meaning:"乗り継ぐ", collocate:"转机去、需要转机", synonym:"—", mistake:"转(乗り換える)+机(飛行機)の組み合わせ。"},
+      {no:2, jp:"経由する、中継", cn:"中转", py:"zhōngzhuǎn", pos:"動詞/名詞", freq:5, scene:"経由地について話す", meaning:"経由する、中継", collocate:"中转航班、在这里中转", synonym:"—", mistake:"中(途中)+转(転じる)の組み合わせ。"},
+      {no:3, jp:"連続便", cn:"联程航班", py:"liánchéng hángbān", pos:"名詞フレーズ", freq:4, scene:"通しで予約された乗継便の話", meaning:"連続便", collocate:"预订联程航班、联程航班更方便", synonym:"—", mistake:"联程(連続する行程)+航班(便)の組み合わせ。"},
+      {no:4, jp:"乗り継ぎ時間", cn:"转机时间", py:"zhuǎnjī shíjiān", pos:"名詞フレーズ", freq:5, scene:"乗り継ぎにかかる時間の話", meaning:"乗り継ぎ時間", collocate:"转机时间多长、转机时间紧张", synonym:"—", mistake:"转机(乗り継ぐ)+时间(時間)の組み合わせ。"},
+      {no:5, jp:"乗り継ぎ口", cn:"转机口", py:"zhuǎnjīkǒu", pos:"名詞", freq:3, scene:"乗り継ぎ専用の入口の話", meaning:"乗り継ぎ口", collocate:"去转机口、转机口在哪", synonym:"—", mistake:"转机(乗り継ぐ)+口(入口)の組み合わせ。"},
+      {no:6, jp:"ビザなし通過", cn:"免签过境", py:"miǎnqiān guòjìng", pos:"動詞フレーズ", freq:3, scene:"トランジット中のビザ免除制度の話", meaning:"ビザなし通過", collocate:"免签过境政策、符合免签过境条件", synonym:"—", mistake:"免签(ビザ免除)+过境(国境を通過する)の組み合わせ。"},
+      {no:7, jp:"乗り継ぎ通路", cn:"转机通道", py:"zhuǎnjī tōngdào", pos:"名詞フレーズ", freq:3, scene:"乗り継ぎ客専用の通路の話", meaning:"乗り継ぎ通路", collocate:"走转机通道、转机通道指示", synonym:"—", mistake:"转机(乗り継ぐ)+通道(通路)の組み合わせ。"},
+      {no:8, jp:"接続便", cn:"衔接航班", py:"xiánjiē hángbān", pos:"名詞フレーズ", freq:3, scene:"次の便へのつながりの話", meaning:"接続便", collocate:"衔接航班顺利、错过衔接航班", synonym:"—", mistake:"衔接(繋ぐ)+航班(便)の組み合わせ。"},
+      {no:9, jp:"乗り継ぎ待合エリア", cn:"转机等候区", py:"zhuǎnjī děnghòuqū", pos:"名詞フレーズ", freq:3, scene:"乗り継ぎの待ち時間を過ごす場所の話", meaning:"乗り継ぎ待合エリア", collocate:"在转机等候区、转机等候区设施", synonym:"—", mistake:"转机(乗り継ぐ)+等候区(待合エリア)の組み合わせ。"},
+      {no:10, jp:"最短乗り継ぎ時間", cn:"最短转机时间", py:"zuìduǎn zhuǎnjī shíjiān", pos:"名詞フレーズ", freq:3, scene:"安全に乗り継げる最低限の時間の話", meaning:"最短乗り継ぎ時間", collocate:"符合最短转机时间、低于最短转机时间", synonym:"—", mistake:"最短(最短)+转机时间(乗り継ぎ時間)の組み合わせ。"},
+    ],
+    examples: [
+      [1,"需要在香港转机。","xūyào zài xiānggǎng zhuǎnjī.","香港で乗り継ぐ必要があります。"],
+      [1,"转机去东京吧。","zhuǎnjī qù dōngjīng ba.","東京へ乗り継ぎましょう。"],
+      [2,"这是中转航班。","zhè shì zhōngzhuǎn hángbān.","これは経由便です。"],
+      [2,"在新加坡中转。","zài xīnjiāpō zhōngzhuǎn.","シンガポールで経由します。"],
+      [3,"预订了联程航班。","yùdìng le liánchéng hángbān.","連続便を予約しました。"],
+      [3,"联程航班更方便。","liánchéng hángbān gèng fāngbiàn.","連続便の方が便利です。"],
+      [4,"转机时间多长?","zhuǎnjī shíjiān duō cháng?","乗り継ぎ時間はどれくらいですか?"],
+      [4,"转机时间比较紧张。","zhuǎnjī shíjiān bǐjiào jǐnzhāng.","乗り継ぎ時間が結構ぎりぎりです。"],
+      [5,"转机口在哪里?","zhuǎnjīkǒu zài nǎlǐ?","乗り継ぎ口はどこですか?"],
+      [5,"去转机口办理手续。","qù zhuǎnjīkǒu bànlǐ shǒuxù.","乗り継ぎ口で手続きします。"],
+      [6,"符合免签过境条件。","fúhé miǎnqiān guòjìng tiáojiàn.","ビザなし通過の条件に合っています。"],
+      [6,"了解一下免签过境政策。","liǎojiě yíxià miǎnqiān guòjìng zhèngcè.","ビザなし通過の政策を理解しておこう。"],
+      [7,"走转机通道就行。","zǒu zhuǎnjī tōngdào jiù xíng.","乗り継ぎ通路を歩けばいいです。"],
+      [7,"跟着转机通道指示走。","gēn zhe zhuǎnjī tōngdào zhǐshì zǒu.","乗り継ぎ通路の指示に従って進んでください。"],
+      [8,"衔接航班很顺利。","xiánjiē hángbān hěn shùnlì.","接続便すごくスムーズです。"],
+      [8,"担心错过衔接航班。","dānxīn cuòguò xiánjiē hángbān.","接続便に乗り遅れないか心配です。"],
+      [9,"在转机等候区休息。","zài zhuǎnjī děnghòuqū xiūxi.","乗り継ぎ待合エリアで休みます。"],
+      [9,"转机等候区有免费网络。","zhuǎnjī děnghòuqū yǒu miǎnfèi wǎngluò.","乗り継ぎ待合エリアに無料Wi-Fiがあります。"],
+      [10,"符合最短转机时间。","fúhé zuìduǎn zhuǎnjī shíjiān.","最短乗り継ぎ時間の条件を満たしています。"],
+      [10,"低于最短转机时间会误机。","dīyú zuìduǎn zhuǎnjī shíjiān huì wùjī.","最短乗り継ぎ時間を下回ると乗り遅れます。"],
+    ],
+    dialogues: [
+      [1,[["A","这趟航班需要转机吗?","zhè tàng hángbān xūyào zhuǎnjī ma?","この便乗り継ぎ必要ですか?"],["B","需要,在上海转机。","xūyào, zài shànghǎi zhuǎnjī.","必要です、上海で乗り継ぎます。"]]],
+      [2,[["A","这是直飞还是中转?","zhè shì zhífēi háishi zhōngzhuǎn?","これ直行便それとも経由便ですか?"],["B","是中转航班。","shì zhōngzhuǎn hángbān.","経由便です。"]]],
+      [3,[["A","买联程航班有什么好处?","mǎi liánchéng hángbān yǒu shénme hǎochù?","連続便買うメリット何ですか?"],["B","行李可以直挂,更方便。","xínglǐ kěyǐ zhí guà, gèng fāngbiàn.","荷物を直接目的地まで通せて、もっと便利です。"]]],
+      [4,[["A","转机时间够吗?","zhuǎnjī shíjiān gòu ma?","乗り継ぎ時間足りますか?"],["B","够,有两个小时。","gòu, yǒu liǎng ge xiǎoshí.","足りますよ、2時間あります。"]]],
+      [5,[["A","转机口怎么走?","zhuǎnjīkǒu zěnme zǒu?","乗り継ぎ口どう行けばいいですか?"],["B","跟着指示牌走就行。","gēn zhe zhǐshìpái zǒu jiù xíng.","案内板に従って歩けばいいですよ。"]]],
+      [6,[["A","能免签过境吗?","néng miǎnqiān guòjìng ma?","ビザなし通過できますか?"],["B","可以,不超过72小时。","kěyǐ, bù chāoguò qīshí'èr xiǎoshí.","できますよ、72時間を超えなければ。"]]],
+      [7,[["A","走哪条通道?","zǒu nǎ tiáo tōngdào?","どの通路を歩きますか?"],["B","走转机通道就对了。","zǒu zhuǎnjī tōngdào jiù duì le.","乗り継ぎ通路を歩けば正解です。"]]],
+      [8,[["A","衔接航班会延误吗?","xiánjiē hángbān huì yánwù ma?","接続便遅延しますか?"],["B","目前看正常。","mùqián kàn zhèngcháng.","今のところ正常です。"]]],
+      [9,[["A","候机时间长怎么办?","hòujī shíjiān cháng zěnme bàn?","待ち時間長いどうしよう?"],["B","可以去转机等候区休息。","kěyǐ qù zhuǎnjī děnghòuqū xiūxi.","乗り継ぎ待合エリアで休めますよ。"]]],
+      [10,[["A","一小时够转机吗?","yì xiǎoshí gòu zhuǎnjī ma?","1時間で乗り継ぎ足りますか?"],["B","不够,低于最短转机时间。","bú gòu, dīyú zuìduǎn zhuǎnjī shíjiān.","足りません、最短乗り継ぎ時間を下回ってます。"]]],
+    ]
+  },
+  157: {
+    words: [
+      {no:1, jp:"入国審査", cn:"入境检查", py:"rùjìng jiǎnchá", pos:"名詞フレーズ", freq:5, scene:"入国時の検査手続きの話", meaning:"入国審査", collocate:"通过入境检查、排队入境检查", synonym:"—", mistake:"入境(入国する)+检查(検査)の組み合わせ。"},
+      {no:2, jp:"入国カード", cn:"入境卡", py:"rùjìngkǎ", pos:"名詞", freq:5, scene:"入国時に記入する用紙の話", meaning:"入国カード", collocate:"填写入境卡、领取入境卡", synonym:"—", mistake:"入境(入国する)+卡(カード)の組み合わせ。"},
+      {no:3, jp:"税関申告する", cn:"海关申报", py:"hǎiguān shēnbào", pos:"動詞フレーズ", freq:5, scene:"持ち込み品の申告手続きの話", meaning:"税関申告する", collocate:"海关申报单、需要海关申报", synonym:"—", mistake:"海关(税関)+申报(申告する)の組み合わせ。"},
+      {no:4, jp:"パスポート検査", cn:"护照检查", py:"hùzhào jiǎnchá", pos:"名詞フレーズ", freq:5, scene:"第151課「护照」の応用、検査時の話", meaning:"パスポート検査", collocate:"护照检查处、通过护照检查", synonym:"—", mistake:"护照(パスポート)+检查(検査)の組み合わせ。"},
+      {no:5, jp:"指紋採取", cn:"指纹采集", py:"zhǐwén cǎijí", pos:"名詞フレーズ", freq:4, scene:"入国審査での生体認証の話", meaning:"指紋採取", collocate:"进行指纹采集、指纹采集设备", synonym:"—", mistake:"指纹(指紋)+采集(採取する)の組み合わせ。"},
+      {no:6, jp:"アライバルビザ", cn:"落地签", py:"luòdìqiān", pos:"名詞", freq:4, scene:"到着後に取得するビザの話", meaning:"アライバルビザ", collocate:"办理落地签、落地签费用", synonym:"—", mistake:"落地(着陸する)+签(ビザ)の組み合わせ。"},
+      {no:7, jp:"入国レーン", cn:"入境通道", py:"rùjìng tōngdào", pos:"名詞フレーズ", freq:4, scene:"入国審査場のレーンの話", meaning:"入国レーン", collocate:"外国人入境通道、走入境通道", synonym:"—", mistake:"入境(入国する)+通道(通路)の組み合わせ。"},
+      {no:8, jp:"出入国検査", cn:"边检", py:"biānjiǎn", pos:"名詞", freq:5, scene:"国境警備隊による検査の話", meaning:"出入国検査", collocate:"边检人员、通过边检", synonym:"—", mistake:"边境(国境)+检查(検査)の略。"},
+      {no:9, jp:"申告品", cn:"申报物品", py:"shēnbào wùpǐn", pos:"名詞フレーズ", freq:4, scene:"税関に申告すべき物品の話", meaning:"申告品", collocate:"申报物品清单、有申报物品", synonym:"—", mistake:"申报(申告する)+物品(物品)の組み合わせ。"},
+      {no:10, jp:"入国スタンプ", cn:"入境章", py:"rùjìngzhāng", pos:"名詞", freq:4, scene:"パスポートに押される印の話", meaning:"入国スタンプ", collocate:"盖入境章、入境章日期", synonym:"—", mistake:"入境(入国する)+章(印)の組み合わせ。"},
+    ],
+    examples: [
+      [1,"排队做入境检查。","páiduì zuò rùjìng jiǎnchá.","並んで入国審査を受けます。"],
+      [1,"入境检查需要多久?","rùjìng jiǎnchá xūyào duōjiǔ?","入国審査どれくらいかかりますか?"],
+      [2,"请填写入境卡。","qǐng tiánxiě rùjìngkǎ.","入国カードにご記入ください。"],
+      [2,"入境卡在哪里领取?","rùjìngkǎ zài nǎlǐ lǐngqǔ?","入国カードはどこで受け取れますか?"],
+      [3,"需要海关申报吗?","xūyào hǎiguān shēnbào ma?","税関申告必要ですか?"],
+      [3,"填写海关申报单。","tiánxiě hǎiguān shēnbàodān.","税関申告書に記入します。"],
+      [4,"通过护照检查了。","tōngguò hùzhào jiǎnchá le.","パスポート検査を通過しました。"],
+      [4,"护照检查处在哪里?","hùzhào jiǎnchá chù zài nǎlǐ?","パスポート検査場はどこですか?"],
+      [5,"进行指纹采集。","jìnxíng zhǐwén cǎijí.","指紋採取を行います。"],
+      [5,"指纹采集很快。","zhǐwén cǎijí hěn kuài.","指紋採取はすごく速いです。"],
+      [6,"可以办理落地签。","kěyǐ bànlǐ luòdìqiān.","アライバルビザを取得できます。"],
+      [6,"落地签费用是多少?","luòdìqiān fèiyòng shì duōshao?","アライバルビザの費用はいくらですか?"],
+      [7,"走外国人入境通道。","zǒu wàiguórén rùjìng tōngdào.","外国人用の入国レーンを進みます。"],
+      [7,"入境通道分好几条。","rùjìng tōngdào fēn hǎojǐ tiáo.","入国レーンはいくつかに分かれています。"],
+      [8,"边检人员很严格。","biānjiǎn rényuán hěn yángé.","出入国検査官すごく厳格です。"],
+      [8,"顺利通过了边检。","shùnlì tōngguò le biānjiǎn.","スムーズに出入国検査を通過しました。"],
+      [9,"有申报物品吗?","yǒu shēnbào wùpǐn ma?","申告品はありますか?"],
+      [9,"没有申报物品。","méiyǒu shēnbào wùpǐn.","申告品はありません。"],
+      [10,"护照上盖了入境章。","hùzhào shàng gài le rùjìngzhāng.","パスポートに入国スタンプが押されました。"],
+      [10,"入境章上有日期。","rùjìngzhāng shàng yǒu rìqī.","入国スタンプには日付があります。"],
+    ],
+    dialogues: [
+      [1,[["A","入境检查排了很久吗?","rùjìng jiǎnchá pái le hěn jiǔ ma?","入国審査長く並びましたか?"],["B","还好,大概二十分钟。","hái hǎo, dàgài èrshí fēnzhōng.","まあまあです、だいたい20分でした。"]]],
+      [2,[["A","入境卡怎么填?","rùjìngkǎ zěnme tián?","入国カードどう記入しますか?"],["B","按照上面提示填就行。","ànzhào shàngmiàn tíshì tián jiù xíng.","上の指示に従って記入すればいいですよ。"]]],
+      [3,[["A","有东西要申报吗?","yǒu dōngxi yào shēnbào ma?","何か申告するものありますか?"],["B","没有,都是私人物品。","méiyǒu, dōu shì sīrén wùpǐn.","ありません、全部個人の物です。"]]],
+      [4,[["A","护照检查顺利吗?","hùzhào jiǎnchá shùnlì ma?","パスポート検査スムーズでしたか?"],["B","很顺利,没问题。","hěn shùnlì, méi wèntí.","すごくスムーズでした、問題なかったです。"]]],
+      [5,[["A","为什么要采集指纹?","wèishénme yào cǎijí zhǐwén?","なんで指紋採取するんですか?"],["B","是入境安检的一部分。","shì rùjìng ānjiǎn de yí bùfen.","入国セキュリティの一部です。"]]],
+      [6,[["A","可以现场办落地签吗?","kěyǐ xiànchǎng bàn luòdìqiān ma?","現場でアライバルビザ取得できますか?"],["B","可以,准备好照片和费用。","kěyǐ, zhǔnbèi hǎo zhàopiàn hé fèiyòng.","できますよ、写真と費用を準備してください。"]]],
+      [7,[["A","走哪条入境通道?","zǒu nǎ tiáo rùjìng tōngdào?","どの入国レーンを進みますか?"],["B","外国人走这边。","wàiguórén zǒu zhèbiān.","外国人はこちらを進んでください。"]]],
+      [8,[["A","边检会问什么问题?","biānjiǎn huì wèn shénme wèntí?","出入国検査で何聞かれますか?"],["B","一般问来意和停留时间。","yìbān wèn láiyì hé tíngliú shíjiān.","通常訪問目的と滞在期間を聞かれます。"]]],
+      [9,[["A","需要申报什么物品?","xūyào shēnbào shénme wùpǐn?","何を申告する必要ありますか?"],["B","超额现金和特殊物品。","chāo'é xiànjīn hé tèshū wùpǐn.","超過分の現金と特殊な物品です。"]]],
+      [10,[["A","护照上盖章了吗?","hùzhào shàng gàizhāng le ma?","パスポートにスタンプ押されましたか?"],["B","盖了,入境章很清楚。","gài le, rùjìngzhāng hěn qīngchu.","押されました、入国スタンプすごくはっきりしています。"]]],
+    ]
+  },
+  158: {
+    words: [
+      {no:1, jp:"フライト遅延", cn:"航班延误", py:"hángbān yánwù", pos:"名詞フレーズ", freq:5, scene:"第154課「延误登机」の関連、便自体の遅延の話", meaning:"フライト遅延", collocate:"航班延误了、航班延误通知", synonym:"—", mistake:"航班(便)+延误(遅延する)の組み合わせ。"},
+      {no:2, jp:"便を欠航する", cn:"取消航班", py:"qǔxiāo hángbān", pos:"動詞フレーズ", freq:5, scene:"フライトがキャンセルされる話", meaning:"便を欠航する", collocate:"航班被取消、通知取消航班", synonym:"—", mistake:"取消(キャンセルする)+航班(便)の組み合わせ。"},
+      {no:3, jp:"便を変更する", cn:"改签", py:"gǎiqiān", pos:"動詞", freq:5, scene:"別の便に振り替える手続きの話", meaning:"便を変更する", collocate:"办理改签、改签手续费", synonym:"—", mistake:"改(変更する)+签(チケット)の組み合わせ。"},
+      {no:4, jp:"遅延の理由", cn:"延误原因", py:"yánwù yuányīn", pos:"名詞フレーズ", freq:4, scene:"遅延の原因を尋ねる話", meaning:"遅延の理由", collocate:"延误原因是、询问延误原因", synonym:"—", mistake:"延误(遅延する)+原因(原因)の組み合わせ。"},
+      {no:5, jp:"天候不良", cn:"天气原因", py:"tiānqì yuányīn", pos:"名詞フレーズ", freq:5, scene:"遅延・欠航の代表的な理由の話", meaning:"天候不良", collocate:"因天气原因、天气原因取消", synonym:"—", mistake:"天气(天気)+原因(原因)の組み合わせ。"},
+      {no:6, jp:"機械の故障", cn:"机械故障", py:"jīxiè gùzhàng", pos:"名詞フレーズ", freq:4, scene:"整備上の問題による遅延の話", meaning:"機械の故障", collocate:"机械故障延误、检查机械故障", synonym:"—", mistake:"机械(機械)+故障(故障)の組み合わせ。"},
+      {no:7, jp:"補償する", cn:"赔偿", py:"péicháng", pos:"動詞", freq:5, scene:"第144課で既出、航空会社の補償対応の話", meaning:"補償する", collocate:"航班延误赔偿、申请赔偿", synonym:"—", mistake:"これまでも頻出、事故・遅延両方の文脈で使われる。"},
+      {no:8, jp:"チケットを払い戻す", cn:"退票", py:"tuìpiào", pos:"動詞", freq:5, scene:"欠航時の返金手続きの話", meaning:"チケットを払い戻す", collocate:"申请退票、退票手续", synonym:"—", mistake:"退(返す)+票(チケット)の組み合わせ。"},
+      {no:9, jp:"通知を待つ", cn:"等待通知", py:"děngdài tōngzhī", pos:"動詞フレーズ", freq:4, scene:"遅延・欠航時の対応待ちの話", meaning:"通知を待つ", collocate:"请等待通知、耐心等待通知", synonym:"—", mistake:"等待(待つ)+通知(通知)の組み合わせ。"},
+      {no:10, jp:"代替空港に着陸する", cn:"备降", py:"bèijiàng", pos:"動詞", freq:3, scene:"悪天候等で予定外の空港に降りる話", meaning:"代替空港に着陸する", collocate:"飞机备降、备降机场", synonym:"—", mistake:"备(予備の)+降(着陸する)の組み合わせ、緊急時の対応を指す専門語。"},
+    ],
+    examples: [
+      [1,"航班延误了。","hángbān yánwù le.","便が遅延しました。"],
+      [1,"收到航班延误通知。","shōu dào hángbān yánwù tōngzhī.","便の遅延通知を受け取りました。"],
+      [2,"航班被取消了。","hángbān bèi qǔxiāo le.","便が欠航になりました。"],
+      [2,"通知取消航班了。","tōngzhī qǔxiāo hángbān le.","便の欠航が通知されました。"],
+      [3,"我要办理改签。","wǒ yào bànlǐ gǎiqiān.","便を変更したいです。"],
+      [3,"改签需要手续费吗?","gǎiqiān xūyào shǒuxùfèi ma?","便の変更に手数料かかりますか?"],
+      [4,"延误原因是什么?","yánwù yuányīn shì shénme?","遅延の理由は何ですか?"],
+      [4,"询问一下延误原因。","xúnwèn yíxià yánwù yuányīn.","遅延の理由を聞いてみて。"],
+      [5,"因天气原因延误。","yīn tiānqì yuányīn yánwù.","天候不良のため遅延しています。"],
+      [5,"天气原因取消了航班。","tiānqì yuányīn qǔxiāo le hángbān.","天候不良のため便が欠航になりました。"],
+      [6,"机械故障导致延误。","jīxiè gùzhàng dǎozhì yánwù.","機械の故障が遅延を引き起こしました。"],
+      [6,"正在检查机械故障。","zhèngzài jiǎnchá jīxiè gùzhàng.","機械の故障を確認しているところです。"],
+      [7,"能申请赔偿吗?","néng shēnqǐng péicháng ma?","補償を申請できますか?"],
+      [7,"航班延误可以赔偿。","hángbān yánwù kěyǐ péicháng.","便の遅延は補償できます。"],
+      [8,"我要申请退票。","wǒ yào shēnqǐng tuìpiào.","払い戻しを申請したいです。"],
+      [8,"退票手续怎么办理?","tuìpiào shǒuxù zěnme bànlǐ?","払い戻し手続きはどうすればいいですか?"],
+      [9,"请等待通知。","qǐng děngdài tōngzhī.","通知をお待ちください。"],
+      [9,"耐心等待通知吧。","nàixīn děngdài tōngzhī ba.","辛抱強く通知を待ちましょう。"],
+      [10,"飞机备降了。","fēijī bèijiàng le.","飛行機が代替空港に着陸しました。"],
+      [10,"备降机场是哪里?","bèijiàng jīchǎng shì nǎlǐ?","代替空港はどこですか?"],
+    ],
+    dialogues: [
+      [1,[["A","航班延误了吗?","hángbān yánwù le ma?","便遅延しましたか?"],["B","是的,延误了两小时。","shì de, yánwù le liǎng xiǎoshí.","はい、2時間遅延しました。"]]],
+      [2,[["A","为什么取消航班?","wèishénme qǔxiāo hángbān?","なんで便が欠航になったんですか?"],["B","因为恶劣天气。","yīnwèi èliè tiānqì.","悪天候のためです。"]]],
+      [3,[["A","能改签到明天吗?","néng gǎiqiān dào míngtiān ma?","明日に変更できますか?"],["B","可以,我帮您办理。","kěyǐ, wǒ bāng nín bànlǐ.","できますよ、お手続きします。"]]],
+      [4,[["A","延误原因是什么?","yánwù yuányīn shì shénme?","遅延の理由何ですか?"],["B","是天气原因。","shì tiānqì yuányīn.","天候不良です。"]]],
+      [5,[["A","一直是天气原因吗?","yìzhí shì tiānqì yuányīn ma?","ずっと天候不良ですか?"],["B","是,暴雨影响起降。","shì, bàoyǔ yǐngxiǎng qǐjiàng.","はい、豪雨が離着陸に影響しています。"]]],
+      [6,[["A","飞机为什么不能起飞?","fēijī wèishénme bù néng qǐfēi?","なんで飛行機離陸できないんですか?"],["B","说是机械故障。","shuō shì jīxiè gùzhàng.","機械の故障だそうです。"]]],
+      [7,[["A","延误能赔偿吗?","yánwù néng péicháng ma?","遅延補償されますか?"],["B","符合条件可以申请。","fúhé tiáojiàn kěyǐ shēnqǐng.","条件に合えば申請できますよ。"]]],
+      [8,[["A","不想改签怎么办?","bù xiǎng gǎiqiān zěnme bàn?","便変更したくない場合どうすればいいですか?"],["B","可以申请退票。","kěyǐ shēnqǐng tuìpiào.","払い戻しを申請できますよ。"]]],
+      [9,[["A","现在能确定登机时间吗?","xiànzài néng quèdìng dēngjī shíjiān ma?","今搭乗時間確定できますか?"],["B","不能,请等待通知。","bù néng, qǐng děngdài tōngzhī.","できません、通知をお待ちください。"]]],
+      [10,[["A","为什么在别的机场降落?","wèishénme zài bié de jīchǎng jiàngluò?","なんで別の空港に着陸したんですか?"],["B","因为天气原因备降了。","yīnwèi tiānqì yuányīn bèijiàng le.","天候不良のため代替空港に着陸したんです。"]]],
+    ]
+  },
+  159: {
+    words: [
+      {no:1, jp:"荷物を受け取る", cn:"行李认领", py:"xínglǐ rènlǐng", pos:"動詞フレーズ", freq:5, scene:"到着後に荷物を確認して受け取る話", meaning:"荷物を受け取る", collocate:"行李认领处、去行李认领", synonym:"—", mistake:"行李(荷物)+认领(自分の物だと認めて受け取る)の組み合わせ。"},
+      {no:2, jp:"荷物紛失の届け出", cn:"行李丢失申报", py:"xínglǐ diūshī shēnbào", pos:"名詞フレーズ", freq:4, scene:"第152課「丢失」の応用、荷物が出てこない時の手続きの話", meaning:"荷物紛失の届け出", collocate:"办理行李丢失申报、填写行李丢失申报单", synonym:"—", mistake:"行李丢失(荷物紛失)+申报(申告する)の組み合わせ。"},
+      {no:3, jp:"荷物の破損", cn:"行李损坏", py:"xínglǐ sǔnhuài", pos:"名詞フレーズ", freq:4, scene:"荷物が壊れて届いた話", meaning:"荷物の破損", collocate:"行李损坏了、报告行李损坏", synonym:"—", mistake:"行李(荷物)+损坏(破損する)の組み合わせ。"},
+      {no:4, jp:"優先手荷物", cn:"优先行李", py:"yōuxiān xínglǐ", pos:"名詞フレーズ", freq:3, scene:"上級会員などの荷物が先に出てくる仕組みの話", meaning:"優先手荷物", collocate:"优先行李标签、优先行李出得快", synonym:"—", mistake:"优先(優先)+行李(荷物)の組み合わせ。"},
+      {no:5, jp:"預け入れ荷物の引換券", cn:"托运凭证", py:"tuōyùn píngzhèng", pos:"名詞フレーズ", freq:4, scene:"第152課「托运」の応用、荷物の受け取りに必要な証明の話", meaning:"預け入れ荷物の引換券", collocate:"出示托运凭证、托运凭证丢了", synonym:"—", mistake:"托运(委託輸送する)+凭证(証明書)の組み合わせ。"},
+      {no:6, jp:"荷物を照会する", cn:"行李查询", py:"xínglǐ cháxún", pos:"動詞フレーズ", freq:4, scene:"荷物の所在を確認する手続きの話", meaning:"荷物を照会する", collocate:"行李查询处、进行行李查询", synonym:"—", mistake:"行李(荷物)+查询(照会する)の組み合わせ。"},
+      {no:7, jp:"税関で荷物検査を受ける", cn:"海关检查行李", py:"hǎiguān jiǎnchá xínglǐ", pos:"フレーズ", freq:4, scene:"第157課「海关」の応用、荷物検査の話", meaning:"税関で荷物検査を受ける", collocate:"被海关检查行李、随机检查行李", synonym:"—", mistake:"海关(税関)+检查行李(荷物を検査する)の組み合わせ。"},
+      {no:8, jp:"特大荷物", cn:"超大行李", py:"chāodà xínglǐ", pos:"名詞フレーズ", freq:3, scene:"通常のサイズを超える荷物の話", meaning:"特大荷物", collocate:"超大行李领取处、托运超大行李", synonym:"—", mistake:"超大(特大)+行李(荷物)の組み合わせ。"},
+      {no:9, jp:"ペットの輸送", cn:"宠物托运", py:"chǒngwù tuōyùn", pos:"名詞フレーズ", freq:3, scene:"ペットを飛行機で運ぶ話", meaning:"ペットの輸送", collocate:"办理宠物托运、宠物托运费用", synonym:"—", mistake:"宠物(ペット)+托运(委託輸送する)の組み合わせ。"},
+      {no:10, jp:"荷物カート", cn:"行李手推车", py:"xínglǐ shǒutuīchē", pos:"名詞フレーズ", freq:4, scene:"荷物を運ぶ台車の話", meaning:"荷物カート", collocate:"借行李手推车、推行李手推车", synonym:"—", mistake:"行李(荷物)+手推车(手押し車)の組み合わせ。"},
+    ],
+    examples: [
+      [1,"去行李认领处吧。","qù xínglǐ rènlǐng chù ba.","荷物受取所に行きましょう。"],
+      [1,"行李认领需要多久?","xínglǐ rènlǐng xūyào duōjiǔ?","荷物受取どれくらいかかりますか?"],
+      [2,"需要办理行李丢失申报。","xūyào bànlǐ xínglǐ diūshī shēnbào.","荷物紛失の届け出をする必要があります。"],
+      [2,"填写行李丢失申报单。","tiánxiě xínglǐ diūshī shēnbàodān.","荷物紛失届出書に記入します。"],
+      [3,"行李损坏了。","xínglǐ sǔnhuài le.","荷物が破損しました。"],
+      [3,"报告一下行李损坏。","bàogào yíxià xínglǐ sǔnhuài.","荷物の破損を報告してみて。"],
+      [4,"这是优先行李。","zhè shì yōuxiān xínglǐ.","これは優先手荷物です。"],
+      [4,"优先行李出得快。","yōuxiān xínglǐ chū de kuài.","優先手荷物は出てくるのが速いです。"],
+      [5,"出示托运凭证。","chūshì tuōyùn píngzhèng.","預け入れ荷物の引換券を提示してください。"],
+      [5,"托运凭证丢了怎么办?","tuōyùn píngzhèng diū le zěnme bàn?","引換券をなくしたらどうすればいいですか?"],
+      [6,"去行李查询处问问。","qù xínglǐ cháxún chù wènwen.","荷物照会窓口に聞いてみましょう。"],
+      [6,"进行行李查询吧。","jìnxíng xínglǐ cháxún ba.","荷物照会をしましょう。"],
+      [7,"被海关检查行李了。","bèi hǎiguān jiǎnchá xínglǐ le.","税関で荷物検査を受けました。"],
+      [7,"随机被海关检查行李。","suíjī bèi hǎiguān jiǎnchá xínglǐ.","ランダムに税関の荷物検査を受けました。"],
+      [8,"这是超大行李领取处。","zhè shì chāodà xínglǐ lǐngqǔ chù.","これは特大荷物受取所です。"],
+      [8,"托运了超大行李。","tuōyùn le chāodà xínglǐ.","特大荷物を預け入れました。"],
+      [9,"办理宠物托运。","bànlǐ chǒngwù tuōyùn.","ペットの輸送手続きをします。"],
+      [9,"宠物托运费用是多少?","chǒngwù tuōyùn fèiyòng shì duōshao?","ペット輸送の費用はいくらですか?"],
+      [10,"借个行李手推车吧。","jiè ge xínglǐ shǒutuīchē ba.","荷物カートを借りましょう。"],
+      [10,"推着行李手推车走。","tuī zhe xínglǐ shǒutuīchē zǒu.","荷物カートを押して歩きます。"],
+    ],
+    dialogues: [
+      [1,[["A","去哪里拿行李?","qù nǎlǐ ná xínglǐ?","どこで荷物取りますか?"],["B","去行李认领处。","qù xínglǐ rènlǐng chù.","荷物受取所に行きます。"]]],
+      [2,[["A","行李找不到了。","xínglǐ zhǎo bu dào le.","荷物見つかりません。"],["B","去办理行李丢失申报吧。","qù bànlǐ xínglǐ diūshī shēnbào ba.","荷物紛失の届け出をしに行きましょう。"]]],
+      [3,[["A","箱子怎么裂开了?","xiāngzi zěnme lièkāi le?","箱どうして裂けてるんですか?"],["B","好像是行李损坏了。","hǎoxiàng shì xínglǐ sǔnhuài le.","荷物が破損したっぽいです。"]]],
+      [4,[["A","为什么她的行李先出来?","wèishénme tā de xínglǐ xiān chūlái?","なんで彼女の荷物先に出てきたんですか?"],["B","她的是优先行李。","tā de shì yōuxiān xínglǐ.","彼女のは優先手荷物なんです。"]]],
+      [5,[["A","领行李需要什么?","lǐng xínglǐ xūyào shénme?","荷物受け取るのに何必要ですか?"],["B","需要出示托运凭证。","xūyào chūshì tuōyùn píngzhèng.","引換券を提示する必要があります。"]]],
+      [6,[["A","行李一直没出来怎么办?","xínglǐ yìzhí méi chūlái zěnme bàn?","荷物ずっと出てこないどうしよう?"],["B","去行李查询处问问。","qù xínglǐ cháxún chù wènwen.","荷物照会窓口に聞きに行きましょう。"]]],
+      [7,[["A","为什么被拦下来了?","wèishénme bèi lán xiàlái le?","なんで止められたんですか?"],["B","海关要检查行李。","hǎiguān yào jiǎnchá xínglǐ.","税関が荷物検査をするんです。"]]],
+      [8,[["A","这个箱子太大了。","zhège xiāngzi tài dà le.","この箱大きすぎます。"],["B","去超大行李领取处拿。","qù chāodà xínglǐ lǐngqǔ chù ná.","特大荷物受取所で取ってください。"]]],
+      [9,[["A","带宠物坐飞机怎么办?","dài chǒngwù zuò fēijī zěnme bàn?","ペット連れて飛行機乗るどうすればいい?"],["B","需要办理宠物托运。","xūyào bànlǐ chǒngwù tuōyùn.","ペットの輸送手続きが必要です。"]]],
+      [10,[["A","行李太重拿不动。","xínglǐ tài zhòng ná bu dòng.","荷物重すぎて持てません。"],["B","用行李手推车吧。","yòng xínglǐ shǒutuīchē ba.","荷物カート使いましょう。"]]],
+    ]
+  },
+  160: {
+    words: [
+      {no:1, jp:"VIPラウンジ", cn:"贵宾室", py:"guìbīnshì", pos:"名詞", freq:4, scene:"上級会員が利用できる休憩室の話", meaning:"VIPラウンジ", collocate:"使用贵宾室、贵宾室服务", synonym:"—", mistake:"贵宾(貴賓)+室(部屋)の組み合わせ。"},
+      {no:2, jp:"免税店", cn:"免税店", py:"miǎnshuìdiàn", pos:"名詞", freq:5, scene:"空港内の買い物施設の話", meaning:"免税店", collocate:"逛免税店、免税店购物", synonym:"—", mistake:"免税(免税の)+店(店)の組み合わせ。"},
+      {no:3, jp:"休憩エリア", cn:"休息区", py:"xiūxiqū", pos:"名詞", freq:5, scene:"一般の休憩スペースの話", meaning:"休憩エリア", collocate:"去休息区、休息区座位", synonym:"—", mistake:"休息(休む)+区(エリア)の組み合わせ。"},
+      {no:4, jp:"充電ステーション", cn:"充电站", py:"chōngdiànzhàn", pos:"名詞", freq:5, scene:"第125課「充电」の応用、空港内の充電設備の話", meaning:"充電ステーション", collocate:"找充电站、免费充电站", synonym:"—", mistake:"充电(充電する)+站(ステーション)の組み合わせ。"},
+      {no:5, jp:"授乳室", cn:"母婴室", py:"mǔyīngshì", pos:"名詞", freq:4, scene:"赤ちゃん連れの利用者向け設備の話", meaning:"授乳室", collocate:"使用母婴室、母婴室设施", synonym:"—", mistake:"母(母親)+婴(赤ちゃん)+室(部屋)の組み合わせ。"},
+      {no:6, jp:"案内所", cn:"问询处", py:"wènxúnchù", pos:"名詞", freq:5, scene:"空港の案内窓口について話す", meaning:"案内所", collocate:"去问询处、问询处工作人员", synonym:"—", mistake:"问询(問い合わせる)+处(場所)の組み合わせ。"},
+      {no:7, jp:"荷物預かり", cn:"行李寄存", py:"xínglǐ jìcún", pos:"名詞フレーズ", freq:4, scene:"第110課「寄存处」の応用、空港での荷物一時預かりの話", meaning:"荷物預かり", collocate:"行李寄存服务、行李寄存费用", synonym:"—", mistake:"行李(荷物)+寄存(預ける)の組み合わせ。"},
+      {no:8, jp:"飲食エリア", cn:"餐饮区", py:"cānyǐnqū", pos:"名詞", freq:5, scene:"空港内の食事スペースの話", meaning:"飲食エリア", collocate:"去餐饮区、餐饮区选择多", synonym:"—", mistake:"餐饮(飲食)+区(エリア)の組み合わせ。"},
+      {no:9, jp:"両替", cn:"货币兑换", py:"huòbì duìhuàn", pos:"名詞フレーズ", freq:5, scene:"外貨両替について話す", meaning:"両替", collocate:"货币兑换处、货币兑换汇率", synonym:"—", mistake:"货币(通貨)+兑换(交換する)の組み合わせ。"},
+      {no:10, jp:"空港バス", cn:"机场巴士", py:"jīchǎng bāshì", pos:"名詞", freq:5, scene:"空港と市内を結ぶバスの話", meaning:"空港バス", collocate:"坐机场巴士、机场巴士时刻表", synonym:"—", mistake:"机场(空港)+巴士(バス)の組み合わせ。"},
+    ],
+    examples: [
+      [1,"可以用贵宾室吗?","kěyǐ yòng guìbīnshì ma?","VIPラウンジ使えますか?"],
+      [1,"贵宾室服务很好。","guìbīnshì fúwù hěn hǎo.","VIPラウンジのサービスすごくいいです。"],
+      [2,"我们去逛免税店吧。","wǒmen qù guàng miǎnshuìdiàn ba.","免税店をぶらぶらしに行きましょう。"],
+      [2,"免税店购物很划算。","miǎnshuìdiàn gòuwù hěn huásuàn.","免税店でのお買い物すごくお得です。"],
+      [3,"去休息区坐一下吧。","qù xiūxiqū zuò yíxià ba.","休憩エリアで座りましょう。"],
+      [3,"休息区座位很多。","xiūxiqū zuòwèi hěn duō.","休憩エリアの席すごく多いです。"],
+      [4,"找个充电站吧。","zhǎo ge chōngdiànzhàn ba.","充電ステーションを探しましょう。"],
+      [4,"这里有免费充电站。","zhèlǐ yǒu miǎnfèi chōngdiànzhàn.","ここに無料充電ステーションがあります。"],
+      [5,"去母婴室喂奶吧。","qù mǔyīngshì wèi nǎi ba.","授乳室で授乳しましょう。"],
+      [5,"母婴室设施很齐全。","mǔyīngshì shèshī hěn qíquán.","授乳室の設備すごく揃っています。"],
+      [6,"去问询处问问吧。","qù wènxúnchù wènwen ba.","案内所に聞いてみましょう。"],
+      [6,"问询处工作人员很热情。","wènxúnchù gōngzuò rényuán hěn rèqíng.","案内所のスタッフすごく親切です。"],
+      [7,"有行李寄存服务吗?","yǒu xínglǐ jìcún fúwù ma?","荷物預かりサービスありますか?"],
+      [7,"行李寄存费用是多少?","xínglǐ jìcún fèiyòng shì duōshao?","荷物預かりの費用はいくらですか?"],
+      [8,"去餐饮区吃点东西吧。","qù cānyǐnqū chī diǎn dōngxi ba.","飲食エリアで何か食べましょう。"],
+      [8,"餐饮区选择很多。","cānyǐnqū xuǎnzé hěn duō.","飲食エリアの選択肢すごく多いです。"],
+      [9,"需要货币兑换吗?","xūyào huòbì duìhuàn ma?","両替必要ですか?"],
+      [9,"货币兑换处在哪里?","huòbì duìhuàn chù zài nǎlǐ?","両替所どこですか?"],
+      [10,"坐机场巴士去市区吧。","zuò jīchǎng bāshì qù shìqū ba.","空港バスで市街地に行きましょう。"],
+      [10,"机场巴士时刻表在哪?","jīchǎng bāshì shíkèbiǎo zài nǎ?","空港バスの時刻表どこですか?"],
+    ],
+    dialogues: [
+      [1,[["A","能进贵宾室休息吗?","néng jìn guìbīnshì xiūxi ma?","VIPラウンジで休めますか?"],["B","可以,凭贵宾卡进入。","kěyǐ, píng guìbīnkǎ jìnrù.","できますよ、VIPカードで入場できます。"]]],
+      [2,[["A","免税店有什么好买的?","miǎnshuìdiàn yǒu shénme hǎo mǎi de?","免税店何かいい買い物ありますか?"],["B","化妆品和香水比较划算。","huàzhuāngpǐn hé xiāngshuǐ bǐjiào huásuàn.","化粧品と香水が比較的お得ですよ。"]]],
+      [3,[["A","哪里能休息一下?","nǎlǐ néng xiūxi yíxià?","どこでちょっと休めますか?"],["B","去休息区坐一会儿。","qù xiūxiqū zuò yíhuìr.","休憩エリアでちょっと座りましょう。"]]],
+      [4,[["A","手机没电了怎么办?","shǒujī méi diàn le zěnme bàn?","スマホ充電切れたどうしよう?"],["B","去找充电站充一下。","qù zhǎo chōngdiànzhàn chōng yíxià.","充電ステーション探して充電しましょう。"]]],
+      [5,[["A","哪里能给孩子喂奶?","nǎlǐ néng gěi háizi wèi nǎi?","どこで子供に授乳できますか?"],["B","去母婴室吧。","qù mǔyīngshì ba.","授乳室に行きましょう。"]]],
+      [6,[["A","不知道去哪里,怎么办?","bù zhīdào qù nǎlǐ, zěnme bàn?","どこ行けばいいか分からない、どうしよう?"],["B","去问询处问问。","qù wènxúnchù wènwen.","案内所に聞きに行きましょう。"]]],
+      [7,[["A","能寄存行李吗?","néng jìcún xínglǐ ma?","荷物預けられますか?"],["B","可以,去行李寄存处。","kěyǐ, qù xínglǐ jìcún chù.","できますよ、荷物預かり所に行ってください。"]]],
+      [8,[["A","饿了去哪里吃饭?","è le qù nǎlǐ chī fàn?","お腹すいたどこでご飯食べます?"],["B","去餐饮区看看。","qù cānyǐnqū kànkan.","飲食エリア見てみましょう。"]]],
+      [9,[["A","需要换点当地货币吗?","xūyào huàn diǎn dāngdì huòbì ma?","現地通貨に両替必要ですか?"],["B","需要,去货币兑换处。","xūyào, qù huòbì duìhuàn chù.","必要です、両替所に行きましょう。"]]],
+      [10,[["A","怎么去市区?","zěnme qù shìqū?","市街地どう行きますか?"],["B","坐机场巴士很方便。","zuò jīchǎng bāshì hěn fāngbiàn.","空港バス乗るのが便利ですよ。"]]],
+    ]
+  }
 };
 
 /* word id lookup: "sectionId-no" -> word (merged with cn/py for display) */
@@ -9118,7 +10838,7 @@ function recordAssessment(id, isKnown){
   saveState(); updateReviewBadge();
 }
 
-let appState = { progress: {}, review: {} };
+let appState = { progress: {}, review: {}, speechRate: 0.78 };
 const STORAGE_KEY = 'chinese500-app-state';
 async function loadState(){
   try{
@@ -9126,6 +10846,7 @@ async function loadState(){
     if(raw){
       const loaded = JSON.parse(raw);
       appState.progress = loaded.progress || {};
+      appState.speechRate = typeof loaded.speechRate === 'number' ? loaded.speechRate : 0.78;
       if(loaded.review){
         appState.review = loaded.review;
       } else if(loaded.missCounts){
@@ -9173,7 +10894,7 @@ function speak(text, btn){
   if(!('speechSynthesis' in window)) return;
   window.speechSynthesis.cancel();
   const u = new SpeechSynthesisUtterance(text);
-  u.lang = 'zh-CN'; if(zhVoice) u.voice = zhVoice; u.rate = 0.85;
+  u.lang = 'zh-CN'; if(zhVoice) u.voice = zhVoice; u.rate = appState.speechRate || 0.78;
   if(btn){
     document.querySelectorAll('.speak-btn.playing').forEach(b=>b.classList.remove('playing'));
     btn.classList.add('playing');
@@ -9187,6 +10908,19 @@ document.addEventListener('click', (e)=>{
   if(!btn) return;
   e.stopPropagation();
   speak(btn.dataset.text, btn);
+});
+
+function updateSpeedButtons(){
+  document.querySelectorAll('.speed-btn').forEach(b=>{
+    b.classList.toggle('active', Math.abs(parseFloat(b.dataset.rate) - (appState.speechRate || 0.78)) < 0.001);
+  });
+}
+document.querySelectorAll('.speed-btn').forEach(b=>{
+  b.addEventListener('click', ()=>{
+    appState.speechRate = parseFloat(b.dataset.rate);
+    saveState();
+    updateSpeedButtons();
+  });
 });
 
 /* ===================== 汎用スワイプデッキ ===================== */
@@ -9250,8 +10984,8 @@ function createDeck(opts){
       card.dataset.stage = 'question';
       card.innerHTML = bodyHTML(w, false) +
         `<div class="deck-footer">
-          <button class="deck-foot-btn know">分かる</button>
           <button class="deck-foot-btn dontknow">分からない</button>
+          <button class="deck-foot-btn know">分かる</button>
         </div>`;
       stageEl.appendChild(card);
 
@@ -9280,8 +11014,8 @@ function createDeck(opts){
       card.innerHTML = bodyHTML(w, true) +
         `<div class="prog-hint">タップして漢字を確認</div>
          <div class="deck-footer" style="visibility:hidden;">
-           <button class="deck-foot-btn know">知っている</button>
            <button class="deck-foot-btn dontknow">知らない</button>
+           <button class="deck-foot-btn know">知っている</button>
          </div>`;
       stageEl.appendChild(card);
 
@@ -9323,24 +11057,27 @@ function createDeck(opts){
       card.querySelector('.dontknow').onclick = ()=> commit(w, false);
 
       // スワイプ判定(意味が出た後だけ有効)
+      // 右スワイプ = 知っている、左スワイプ = 知らない(ボタンも同じ並びに揃える)
       let startX=0, startY=0, dx=0, dragging=false;
       card.style.touchAction = 'pan-y';
       card.addEventListener('pointerdown', (e)=>{
         if(!dragEnabled || e.target.closest('.speak-btn') || e.target.closest('.deck-foot-btn')) return;
         dragging = true; startX = e.clientX; startY = e.clientY; dx = 0;
         card.setPointerCapture(e.pointerId); card.style.transition = 'none';
+        card.style.touchAction = 'none'; // ドラッグ中はページの縦スクロールと競合させない(揺れ・伸び防止)
       });
       card.addEventListener('pointermove', (e)=>{
         if(!dragging) return;
-        dx = e.clientX - startX; const dy = e.clientY - startY;
-        card.style.transform = `translate(${dx}px, ${dy*0.15}px) rotate(${dx/18}deg)`;
+        dx = e.clientX - startX;
+        card.style.transform = `translate(${dx}px, 0px) rotate(${dx/18}deg)`; // 縦方向には動かさない
       });
       function endDrag(){
         if(!dragging) return; dragging = false;
+        card.style.touchAction = 'pan-y';
         card.style.transition = 'transform .3s cubic-bezier(.4,0,.2,1)';
         const threshold = 90;
-        if(dx > threshold){ card.style.transform = `translate(500px, ${dx*0.1}px) rotate(24deg)`; setTimeout(()=>commit(w,true), 200); }
-        else if(dx < -threshold){ card.style.transform = `translate(-500px, ${-dx*0.1}px) rotate(-24deg)`; setTimeout(()=>commit(w,false), 200); }
+        if(dx > threshold){ card.style.transform = `translate(500px, 0px) rotate(24deg)`; setTimeout(()=>commit(w,true), 200); }
+        else if(dx < -threshold){ card.style.transform = `translate(-500px, 0px) rotate(-24deg)`; setTimeout(()=>commit(w,false), 200); }
         else { card.style.transform = 'translate(0,0) rotate(0deg)'; }
       }
       card.addEventListener('pointerup', endDrag);
@@ -9351,8 +11088,8 @@ function createDeck(opts){
       card.dataset.stage = 'question';
       card.innerHTML = bodyHTML(w) +
         `<div class="deck-footer">
-          <button class="deck-foot-btn reveal">意味確認</button>
           <button class="deck-foot-btn dontknow">知らない</button>
+          <button class="deck-foot-btn reveal">意味確認</button>
         </div>`;
       stageEl.appendChild(card);
 
@@ -9485,12 +11222,15 @@ function renderHome(){
   if(specialCats.length){
     const header = document.createElement('div');
     header.className = 'special-header';
-    header.textContent = '特別教材(レベルの番号とは別枠のボーナスコンテンツ)';
+    header.innerHTML = '<span>特別教材(レベルの番号とは別枠のボーナスコンテンツ)</span><span class="special-caret">▾</span>';
     specialEl.appendChild(header);
+    const bodyWrap = document.createElement('div');
+    bodyWrap.className = 'special-body';
+    bodyWrap.id = 'specialBody';
     const note = document.createElement('p');
     note.className = 'special-note';
     note.textContent = '通常のレベル進行とは独立して、いつでも追加・利用できます。';
-    specialEl.appendChild(note);
+    bodyWrap.appendChild(note);
     specialCats.forEach(cat=>{
       const catBlock = document.createElement('div');
       catBlock.className = 'cat-block';
@@ -9509,12 +11249,17 @@ function renderHome(){
           ${has ? '<span class="sec-chevron">›</span>' : '<span class="sec-tag">準備中</span>'}
         </div>`;
       }).join('');
-      const header = catSections.length > 1 ? `<div class="cat-title">${cat}</div>` : '';
-      catBlock.innerHTML = header + rows;
-      specialEl.appendChild(catBlock);
+      const catHeader = catSections.length > 1 ? `<div class="cat-title">${cat}</div>` : '';
+      catBlock.innerHTML = catHeader + rows;
+      bodyWrap.appendChild(catBlock);
     });
+    specialEl.appendChild(bodyWrap);
     specialEl.querySelectorAll('.sec-row:not(.locked)').forEach(row=>{
       row.addEventListener('click', ()=> openSection(Number(row.dataset.id)));
+    });
+    header.addEventListener('click', ()=>{
+      bodyWrap.classList.toggle('hidden');
+      header.classList.toggle('collapsed');
     });
   }
 
@@ -9536,6 +11281,18 @@ function openSection(id){
   document.getElementById('secCat').textContent = `${meta.cat} ・ 第${id}課`;
   document.getElementById('secTitle').textContent = meta.title;
   switchView('view-section');
+
+  // 次の課へボタン:データがある課の中で、現在より後ろにある最初のものへ進む
+  const availableIds = sectionsMeta.filter(s=>!!sectionsData[s.id]).map(s=>s.id).sort((a,b)=>a-b);
+  const nextId = availableIds.find(x=>x>id);
+  const nextBtn = document.getElementById('nextSectionBtn');
+  if(nextId !== undefined){
+    nextBtn.style.display = 'block';
+    nextBtn.onclick = ()=> openSection(nextId);
+  } else {
+    nextBtn.style.display = 'none';
+    nextBtn.onclick = null;
+  }
 
   if(!data){
     document.getElementById('secLocked').style.display = 'block';
@@ -9669,10 +11426,21 @@ function openReview(){
 }
 
 /* ===================== 画面切り替え ===================== */
+let savedHomeScrollY = 0;
 function switchView(id){
+  const current = document.querySelector('.view.active');
+  if(current && current.id === 'view-home'){
+    savedHomeScrollY = window.scrollY; // ホームを離れる時だけ位置を記録
+  }
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   document.getElementById('appHeader').style.display = (id === 'view-home') ? '' : 'none';
+  if(id === 'view-home'){
+    // ホーム再表示直後は一瞬レイアウトが未確定なため、次フレームで復元する
+    requestAnimationFrame(()=> window.scrollTo(0, savedHomeScrollY));
+  } else {
+    window.scrollTo(0, 0);
+  }
 }
 document.getElementById('reviewCard').addEventListener('click', ()=>{
   openReview();
@@ -9692,6 +11460,7 @@ document.querySelectorAll('#secBody .tab-btn').forEach(btn=>{
 /* ===================== 起動 ===================== */
 (async function init(){
   await loadState();
+  updateSpeedButtons();
   renderHome();
 })();
 </script>
