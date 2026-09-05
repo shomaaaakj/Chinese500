@@ -323,9 +323,27 @@
     <button class="back-btn" id="backFromReview">← 課の一覧</button>
     <div class="sec-header"><div class="cat">苦手単語だけを10個区切りで</div><h2>復習</h2></div>
     <div id="reviewBody">
-      <div class="deck-progress-wrap"><span id="reviewCount"></span><div class="deck-progress-track"><div class="deck-progress-fill" id="reviewFill"></div></div></div>
-      <div class="deck-sub" id="reviewSub2"></div>
-      <div class="deck-stage" id="reviewStage"></div>
+      <nav class="tabs">
+        <button class="tab-btn active" data-tab="review-vocab">単語カード</button>
+        <button class="tab-btn" data-tab="review-examples">例文</button>
+        <button class="tab-btn" data-tab="review-dialogue">会話</button>
+        <button class="tab-btn" data-tab="review-quiz">テスト</button>
+      </nav>
+
+      <section class="panel active" id="panel-review-vocab">
+        <div class="deck-progress-wrap"><span id="reviewCount"></span><div class="deck-progress-track"><div class="deck-progress-fill" id="reviewFill"></div></div></div>
+        <div class="deck-sub" id="reviewSub2"></div>
+        <div class="deck-stage" id="reviewStage"></div>
+      </section>
+
+      <section class="panel" id="panel-review-examples"><div id="reviewExampleList"></div></section>
+      <section class="panel" id="panel-review-dialogue"><div id="reviewDialogueList"></div></section>
+
+      <section class="panel" id="panel-review-quiz">
+        <div class="deck-progress-wrap"><span id="reviewQuizCount"></span><div class="deck-progress-track"><div class="deck-progress-fill" id="reviewQuizFill"></div></div></div>
+        <div class="deck-sub" id="reviewQuizSub"></div>
+        <div class="deck-stage" id="reviewQuizStage"></div>
+      </section>
     </div>
   </div>
 
@@ -11404,25 +11422,84 @@ function updateReviewBadge(){
 }
 
 /* ===================== 復習画面(今日が期限の単語だけを10個区切りで) ===================== */
+/* 課の詳細ページと同じ構成(単語カード→例文→会話→テスト)。例文・会話は
+   各単語の出身課(w.section)のsectionsDataから該当する項目だけを抜き出して表示する。 */
 function openReview(){
   const { due, all, today } = dueReviewList();
   const chunk = due.slice(0,10);
   const nearest = all.length>0 ? all.map(w=>w.due).sort().find(d=>d>today) : null;
+  const emptyMsg = all.length>0
+    ? `今日の分は終わりです。次は${nearest || '数日後'}に出てきます。`
+    : '苦手単語はありません。';
   switchView('view-review');
+
+  // 単語カード
   createDeck({
     stageEl: document.getElementById('reviewStage'),
     countEl: document.getElementById('reviewCount'),
     fillEl: document.getElementById('reviewFill'),
     subEl: document.getElementById('reviewSub2'),
     items: chunk, richBack: true, autoSpeak: false,
-    emptyMessage: all.length>0
-      ? `今日の分は終わりです。次は${nearest || '数日後'}に出てきます。`
-      : '苦手単語はありません。',
+    emptyMessage: emptyMsg,
     onCommit: (w, isKnown)=> recordAssessment(w.id, isKnown),
     onComplete: ()=>{
       if(dueReviewList().due.length > 0){ setTimeout(openReview, 300); } // 今日の分の続きへ
     }
   });
+
+  // テスト
+  createDeck({
+    stageEl: document.getElementById('reviewQuizStage'),
+    countEl: document.getElementById('reviewQuizCount'),
+    fillEl: document.getElementById('reviewQuizFill'),
+    subEl: document.getElementById('reviewQuizSub'),
+    items: chunk, richBack: false, autoSpeak: false, direct: true,
+    emptyMessage: emptyMsg,
+    onCommit: (w, isKnown)=> recordAssessment(w.id, isKnown)
+  });
+
+  // 例文(各単語の出身課から該当分だけ抽出)
+  const reviewExampleList = document.getElementById('reviewExampleList');
+  reviewExampleList.innerHTML = '';
+  chunk.forEach(w=>{
+    const secData = sectionsData[w.section];
+    if(!secData) return;
+    const its = secData.examples.filter(e=>e[0]===w.no);
+    if(its.length===0) return;
+    const group = document.createElement('div');
+    group.className = 'ex-group';
+    group.innerHTML = `<div class="ex-head"><span class="idx">${w.no}</span>${w.cn} <span style="font-size:12px;color:var(--ink-soft);font-weight:400;">(${w.jp})</span></div>` +
+      its.map(e=>`<div class="ex-item"><div class="ex-cn-row"><div class="ex-cn">${e[1]}</div><button class="speak-btn" data-text="${e[1]}" aria-label="発音を聞く">▶</button></div><div class="ex-py">${e[2]}</div><div class="ex-jp">${e[3]}</div></div>`).join('');
+    reviewExampleList.appendChild(group);
+  });
+  if(reviewExampleList.children.length===0){
+    reviewExampleList.innerHTML = `<div class="deck-done"><div class="emoji">✨</div><p>${emptyMsg}</p></div>`;
+  }
+
+  // 会話(各単語の出身課から該当分だけ抽出)
+  const reviewDialogueList = document.getElementById('reviewDialogueList');
+  reviewDialogueList.innerHTML = '';
+  chunk.forEach(w=>{
+    const secData = sectionsData[w.section];
+    if(!secData) return;
+    const entry = secData.dialogues.find(d=>d[0]===w.no);
+    if(!entry) return;
+    const [no, lines] = entry;
+    const group = document.createElement('div');
+    group.className = 'dia-group';
+    group.innerHTML = `<div class="dia-title">${no}. ${w.cn}(${w.jp})</div>` +
+      lines.map(l=>`<div class="bubble ${l[0]}"><div class="cn-row"><div class="cn">${l[1]}</div><button class="speak-btn" data-text="${l[1]}" aria-label="発音を聞く">▶</button></div><div class="py">${l[2]}</div><div class="jp">${l[3]}</div></div>`).join('');
+    reviewDialogueList.appendChild(group);
+  });
+  if(reviewDialogueList.children.length===0){
+    reviewDialogueList.innerHTML = `<div class="deck-done"><div class="emoji">✨</div><p>${emptyMsg}</p></div>`;
+  }
+
+  // タブを単語カードにリセット
+  document.querySelectorAll('#reviewBody .tab-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelector('#reviewBody .tab-btn[data-tab="review-vocab"]').classList.add('active');
+  document.querySelectorAll('#reviewBody .panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel-review-vocab').classList.add('active');
 }
 
 /* ===================== 画面切り替え ===================== */
@@ -11452,6 +11529,15 @@ document.querySelectorAll('#secBody .tab-btn').forEach(btn=>{
   btn.addEventListener('click', ()=>{
     document.querySelectorAll('#secBody .tab-btn').forEach(b=>b.classList.remove('active'));
     document.querySelectorAll('#secBody .panel').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-'+btn.dataset.tab).classList.add('active');
+  });
+});
+
+document.querySelectorAll('#reviewBody .tab-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('#reviewBody .tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('#reviewBody .panel').forEach(p=>p.classList.remove('active'));
     btn.classList.add('active');
     document.getElementById('panel-'+btn.dataset.tab).classList.add('active');
   });
