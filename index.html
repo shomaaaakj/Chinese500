@@ -11445,7 +11445,7 @@ function openReview(){
     countEl: document.getElementById('reviewCount'),
     fillEl: document.getElementById('reviewFill'),
     subEl: document.getElementById('reviewSub2'),
-    items: chunk, richBack: true, autoSpeak: false,
+    items: chunk, richBack: true, autoSpeak: false, progressive: true,
     emptyMessage: emptyMsg,
     onCommit: (w, isKnown)=> recordAssessment(w.id, isKnown),
     onComplete: ()=>{
